@@ -1,7 +1,11 @@
-CREATE database fundamental;
+create database fundamental;
 
-CREATE ROLE fundamental_admin with login superuser password '12345678';
-GRANT ALL PRIVILEGES ON DATABASE fundamental TO fundamental_admin;
+create extension if not exists "plpgsql";
+create extension if not exists "pgcrypto";
+create extension if not exists "uuid-ossp";
 
-CREATE ROLE fundamental_visitor with login superuser password '12345678';
-GRANT ALL PRIVILEGES ON DATABASE fundamental TO fundamental_visitor;
+create role fundamental_admin with login superuser password '12345678';
+grant all PRIVILEGES on DATABASE fundamental to fundamental_admin;
+
+create role fundamental_visitor with login superuser password '12345678';
+grant all PRIVILEGES on DATABASE fundamental to fundamental_visitor;

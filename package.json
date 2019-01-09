@@ -11,6 +11,10 @@
     "start": "node ./server/index.js",
     "prod": "npm run build:client && npm run start"
   },
+  "nodemonConfig": {
+    "ignore": ["data/*", "client/*", "db/*"],
+    "delay": "2500"
+  },
   "dependencies": {
     "@graphile-contrib/pg-simplify-inflector": "^4.0.0-alpha.0",
     "body-parser": "^1.18.3",
