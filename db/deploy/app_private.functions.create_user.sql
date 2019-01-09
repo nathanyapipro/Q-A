@@ -12,7 +12,7 @@ declare
   v_username text;
 begin
   -- Crypt username if anonymous user
-  if is_anonymous is null then
+  if is_anonymous is true then
     v_username = crypt(username, gen_salt('bf'));
   else
     v_username = username;
