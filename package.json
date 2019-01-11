@@ -12,7 +12,11 @@
     "prod": "npm run build:client && npm run start"
   },
   "nodemonConfig": {
-    "ignore": ["data/*", "client/*", "db/*"],
+    "ignore": [
+      "data/*",
+      "client/*",
+      "db/*"
+    ],
     "delay": "2500"
   },
   "dependencies": {

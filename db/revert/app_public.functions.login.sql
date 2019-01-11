@@ -4,8 +4,7 @@ BEGIN;
 
 drop function app_public.login(
   username text,
-  password text,
-  is_anonymous boolean
+  password text
 );
 
 COMMIT;
