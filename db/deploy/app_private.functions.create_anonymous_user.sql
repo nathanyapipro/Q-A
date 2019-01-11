@@ -13,8 +13,8 @@ begin
   v_username = crypt(username, gen_salt('bf'));
 
   -- Insert the new user
-  insert into app_public.user (username) values
-    (v_username)
+  insert into app_public.user (username, role_id) values
+    (v_username, 3)
     returning * into v_user;
 
   return v_user;

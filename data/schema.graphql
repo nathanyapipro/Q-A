@@ -1,30 +1,66 @@
-"""All input for the create `User` mutation."""
-input CreateUserInput {
+"""All input for the create `Role` mutation."""
+input CreateRoleInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
 
-  """The `User` to be created by this mutation."""
-  user: UserInput!
+  """The `Role` to be created by this mutation."""
+  role: RoleInput!
 }
 
-"""The output of our create `User` mutation."""
-type CreateUserPayload {
+"""The output of our create `Role` mutation."""
+type CreateRolePayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
 
-  """The `User` that was created by this mutation."""
+  """The `Role` that was created by this mutation."""
+  role: Role
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Role`. May be used by Relay 1."""
+  roleEdge(
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = PRIMARY_KEY_ASC
+  ): RolesEdge
+}
+
+"""All input for the `createUser` mutation."""
+input CreateUserInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  username: String
+  password: String
+  roleId: Int
+}
+
+"""The output of our `createUser` mutation."""
+type CreateUserPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
   user: User
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
+
+  """Reads a single `Role` that is related to this `User`."""
+  role: Role
 
   """An edge for our `User`. May be used by Relay 1."""
   userEdge(
@@ -42,6 +78,68 @@ A point in time as described by the [ISO
 """
 scalar Datetime
 
+"""All input for the `deleteRoleById` mutation."""
+input DeleteRoleByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """unique identifier for the role."""
+  id: Int!
+}
+
+"""All input for the `deleteRoleByName` mutation."""
+input DeleteRoleByNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """name of the role."""
+  name: String!
+}
+
+"""All input for the `deleteRole` mutation."""
+input DeleteRoleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Role` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Role` mutation."""
+type DeleteRolePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Role` that was deleted by this mutation."""
+  role: Role
+  deletedRoleId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Role`. May be used by Relay 1."""
+  roleEdge(
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = PRIMARY_KEY_ASC
+  ): RolesEdge
+}
+
 """All input for the `deleteUserById` mutation."""
 input DeleteUserByIdInput {
   """
@@ -50,7 +148,7 @@ input DeleteUserByIdInput {
   """
   clientMutationId: String
 
-  """Unique identifier for the user."""
+  """unique identifier for the user."""
   id: Int!
 }
 
@@ -62,7 +160,7 @@ input DeleteUserByUsernameInput {
   """
   clientMutationId: String
 
-  """Public-facing username (or 'handle') of the user."""
+  """public-facing username (or 'handle') of the user."""
   username: String!
 }
 
@@ -97,6 +195,85 @@ type DeleteUserPayload {
   """
   query: Query
 
+  """Reads a single `Role` that is related to this `User`."""
+  role: Role
+
+  """An edge for our `User`. May be used by Relay 1."""
+  userEdge(
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = PRIMARY_KEY_ASC
+  ): UsersEdge
+}
+
+"""
+A filter to be used against Int fields. All fields are combined with a logical ‘and.’
+"""
+input IntFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Int
+
+  """Not equal to the specified value."""
+  notEqualTo: Int
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Int
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Int
+
+  """Included in the specified list."""
+  in: [Int!]
+
+  """Not included in the specified list."""
+  notIn: [Int!]
+
+  """Less than the specified value."""
+  lessThan: Int
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Int
+
+  """Greater than the specified value."""
+  greaterThan: Int
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Int
+}
+
+"""All input for the `loginAnonymous` mutation."""
+input LoginAnonymousInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  username: String!
+}
+
+"""The output of our `loginAnonymous` mutation."""
+type LoginAnonymousPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  user: User
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Role` that is related to this `User`."""
+  role: Role
+
   """An edge for our `User`. May be used by Relay 1."""
   userEdge(
     """The method to use when ordering `User`."""
@@ -113,7 +290,6 @@ input LoginInput {
   clientMutationId: String
   username: String!
   password: String
-  isAnonymous: Boolean
 }
 
 """The output of our `login` mutation."""
@@ -130,6 +306,9 @@ type LoginPayload {
   """
   query: Query
 
+  """Reads a single `Role` that is related to this `User`."""
+  role: Role
+
   """An edge for our `User`. May be used by Relay 1."""
   userEdge(
     """The method to use when ordering `User`."""
@@ -141,13 +320,37 @@ type LoginPayload {
 The root mutation type which contains root level fields which mutate data.
 """
 type Mutation {
-  """Creates a single `User`."""
-  createUser(
+  """Creates a single `Role`."""
+  createRole(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: CreateUserInput!
-  ): CreateUserPayload
+    input: CreateRoleInput!
+  ): CreateRolePayload
+
+  """Updates a single `Role` using its globally unique id and a patch."""
+  updateRole(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoleInput!
+  ): UpdateRolePayload
+
+  """Updates a single `Role` using a unique key and a patch."""
+  updateRoleById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoleByIdInput!
+  ): UpdateRolePayload
+
+  """Updates a single `Role` using a unique key and a patch."""
+  updateRoleByName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateRoleByNameInput!
+  ): UpdateRolePayload
 
   """Updates a single `User` using its globally unique id and a patch."""
   updateUser(
@@ -173,6 +376,30 @@ type Mutation {
     input: UpdateUserByUsernameInput!
   ): UpdateUserPayload
 
+  """Deletes a single `Role` using its globally unique id."""
+  deleteRole(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoleInput!
+  ): DeleteRolePayload
+
+  """Deletes a single `Role` using a unique key."""
+  deleteRoleById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoleByIdInput!
+  ): DeleteRolePayload
+
+  """Deletes a single `Role` using a unique key."""
+  deleteRoleByName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteRoleByNameInput!
+  ): DeleteRolePayload
+
   """Deletes a single `User` using its globally unique id."""
   deleteUser(
     """
@@ -197,6 +424,14 @@ type Mutation {
     input: DeleteUserByUsernameInput!
   ): DeleteUserPayload
 
+  """Creates a user account."""
+  createUser(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateUserInput!
+  ): CreateUserPayload
+
   """
   Returns a user that matches the username/password combo, or null on failure.
   """
@@ -206,6 +441,14 @@ type Mutation {
     """
     input: LoginInput!
   ): LoginPayload
+
+  """Returns a user that matches the crypt username, or null on failure."""
+  loginAnonymous(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: LoginAnonymousInput!
+  ): LoginAnonymousPayload
 }
 
 """An object with a globally unique `ID`."""
@@ -214,6 +457,21 @@ interface Node {
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
   """
   nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
 }
 
 """The root query type which gives access points into the data universe."""
@@ -234,14 +492,388 @@ type Query implements Node {
     """The globally unique `ID`."""
     nodeId: ID!
   ): Node
+
+  """Reads and enables pagination through a set of `Role`."""
+  roles(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: RoleCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: RoleFilter
+  ): RolesConnection
+  roleById(id: Int!): Role
+  roleByName(name: String!): Role
   userById(id: Int!): User
   userByUsername(username: String!): User
+
+  """Reads a single `Role` using its globally unique `ID`."""
+  role(
+    """The globally unique `ID` to be used in selecting a single `Role`."""
+    nodeId: ID!
+  ): Role
 
   """Reads a single `User` using its globally unique `ID`."""
   user(
     """The globally unique `ID` to be used in selecting a single `User`."""
     nodeId: ID!
   ): User
+}
+
+"""role in the application."""
+type Role implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """unique identifier for the role."""
+  id: Int!
+
+  """name of the role."""
+  name: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+
+  """Reads and enables pagination through a set of `User`."""
+  users(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `User`."""
+    orderBy: [UsersOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: UserCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: UserFilter
+  ): UsersConnection!
+}
+
+"""
+A condition to be used against `Role` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input RoleCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""
+A filter to be used against `Role` object types. All fields are combined with a logical ‘and.’
+"""
+input RoleFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [RoleFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [RoleFilter!]
+
+  """Negates the expression."""
+  not: RoleFilter
+}
+
+"""An input for mutations affecting `Role`"""
+input RoleInput {
+  """unique identifier for the role."""
+  id: Int
+
+  """name of the role."""
+  name: String!
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+"""
+Represents an update to a `Role`. Fields that are set will be updated.
+"""
+input RolePatch {
+  """unique identifier for the role."""
+  id: Int
+
+  """name of the role."""
+  name: String
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+"""A connection to a list of `Role` values."""
+type RolesConnection {
+  """A list of `Role` objects."""
+  nodes: [Role!]!
+
+  """
+  A list of edges which contains the `Role` and cursor to aid in pagination.
+  """
+  edges: [RolesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Role` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Role` edge in the connection."""
+type RolesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Role` at the end of the edge."""
+  node: Role!
+}
+
+"""Methods to use when ordering `Role`."""
+enum RolesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A filter to be used against String fields. All fields are combined with a logical ‘and.’
+"""
+input StringFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: String
+
+  """Not equal to the specified value."""
+  notEqualTo: String
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: String
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: String
+
+  """Included in the specified list."""
+  in: [String!]
+
+  """Not included in the specified list."""
+  notIn: [String!]
+
+  """Less than the specified value."""
+  lessThan: String
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: String
+
+  """Greater than the specified value."""
+  greaterThan: String
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: String
+
+  """Contains the specified string (case-sensitive)."""
+  includes: String
+
+  """Does not contain the specified string (case-sensitive)."""
+  notIncludes: String
+
+  """Contains the specified string (case-insensitive)."""
+  includesInsensitive: String
+
+  """Does not contain the specified string (case-insensitive)."""
+  notIncludesInsensitive: String
+
+  """Starts with the specified string (case-sensitive)."""
+  startsWith: String
+
+  """Does not start with the specified string (case-sensitive)."""
+  notStartsWith: String
+
+  """Starts with the specified string (case-insensitive)."""
+  startsWithInsensitive: String
+
+  """Does not start with the specified string (case-insensitive)."""
+  notStartsWithInsensitive: String
+
+  """Ends with the specified string (case-sensitive)."""
+  endsWith: String
+
+  """Does not end with the specified string (case-sensitive)."""
+  notEndsWith: String
+
+  """Ends with the specified string (case-insensitive)."""
+  endsWithInsensitive: String
+
+  """Does not end with the specified string (case-insensitive)."""
+  notEndsWithInsensitive: String
+
+  """
+  Matches the specified pattern (case-sensitive). An underscore (_) matches any
+  single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  like: String
+
+  """
+  Does not match the specified pattern (case-sensitive). An underscore (_)
+  matches any single character; a percent sign (%) matches any sequence of zero
+  or more characters.
+  """
+  notLike: String
+
+  """
+  Matches the specified pattern (case-insensitive). An underscore (_) matches
+  any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  likeInsensitive: String
+
+  """
+  Does not match the specified pattern (case-insensitive). An underscore (_)
+  matches any single character; a percent sign (%) matches any sequence of zero
+  or more characters.
+  """
+  notLikeInsensitive: String
+
+  """
+  Matches the specified pattern using the SQL standard's definition of a regular expression.
+  """
+  similarTo: String
+
+  """
+  Does not match the specified pattern using the SQL standard's definition of a regular expression.
+  """
+  notSimilarTo: String
+}
+
+"""All input for the `updateRoleById` mutation."""
+input UpdateRoleByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Role` being updated.
+  """
+  patch: RolePatch!
+
+  """unique identifier for the role."""
+  id: Int!
+}
+
+"""All input for the `updateRoleByName` mutation."""
+input UpdateRoleByNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Role` being updated.
+  """
+  patch: RolePatch!
+
+  """name of the role."""
+  name: String!
+}
+
+"""All input for the `updateRole` mutation."""
+input UpdateRoleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Role` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Role` being updated.
+  """
+  patch: RolePatch!
+}
+
+"""The output of our update `Role` mutation."""
+type UpdateRolePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Role` that was updated by this mutation."""
+  role: Role
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Role`. May be used by Relay 1."""
+  roleEdge(
+    """The method to use when ordering `Role`."""
+    orderBy: [RolesOrderBy!] = PRIMARY_KEY_ASC
+  ): RolesEdge
 }
 
 """All input for the `updateUserById` mutation."""
@@ -257,7 +889,7 @@ input UpdateUserByIdInput {
   """
   patch: UserPatch!
 
-  """Unique identifier for the user."""
+  """unique identifier for the user."""
   id: Int!
 }
 
@@ -274,7 +906,7 @@ input UpdateUserByUsernameInput {
   """
   patch: UserPatch!
 
-  """Public-facing username (or 'handle') of the user."""
+  """public-facing username (or 'handle') of the user."""
   username: String!
 }
 
@@ -313,6 +945,9 @@ type UpdateUserPayload {
   """
   query: Query
 
+  """Reads a single `Role` that is related to this `User`."""
+  role: Role
+
   """An edge for our `User`. May be used by Relay 1."""
   userEdge(
     """The method to use when ordering `User`."""
@@ -327,37 +962,89 @@ type User implements Node {
   """
   nodeId: ID!
 
-  """Unique identifier for the user."""
+  """unique identifier for the user."""
   id: Int!
 
-  """Public-facing username (or 'handle') of the user."""
+  """public-facing username (or 'handle') of the user."""
   username: String!
+
+  """role of the user."""
+  roleId: Int!
   createdAt: Datetime!
   updatedAt: Datetime!
+
+  """Reads a single `Role` that is related to this `User`."""
+  role: Role
 }
 
-"""An input for mutations affecting `User`"""
-input UserInput {
-  """Unique identifier for the user."""
+"""
+A condition to be used against `User` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input UserCondition {
+  """Checks for equality with the object’s `id` field."""
   id: Int
 
-  """Public-facing username (or 'handle') of the user."""
-  username: String!
-  createdAt: Datetime
-  updatedAt: Datetime
+  """Checks for equality with the object’s `username` field."""
+  username: String
+
+  """Checks for equality with the object’s `roleId` field."""
+  roleId: Int
+}
+
+"""
+A filter to be used against `User` object types. All fields are combined with a logical ‘and.’
+"""
+input UserFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `username` field."""
+  username: StringFilter
+
+  """Filter by the object’s `roleId` field."""
+  roleId: IntFilter
+
+  """Checks for all expressions in this list."""
+  and: [UserFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [UserFilter!]
+
+  """Negates the expression."""
+  not: UserFilter
 }
 
 """
 Represents an update to a `User`. Fields that are set will be updated.
 """
 input UserPatch {
-  """Unique identifier for the user."""
+  """unique identifier for the user."""
   id: Int
 
-  """Public-facing username (or 'handle') of the user."""
+  """public-facing username (or 'handle') of the user."""
   username: String
+
+  """role of the user."""
+  roleId: Int
   createdAt: Datetime
   updatedAt: Datetime
+}
+
+"""A connection to a list of `User` values."""
+type UsersConnection {
+  """A list of `User` objects."""
+  nodes: [User!]!
+
+  """
+  A list of edges which contains the `User` and cursor to aid in pagination.
+  """
+  edges: [UsersEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `User` you could get from the connection."""
+  totalCount: Int
 }
 
 """A `User` edge in the connection."""
@@ -376,6 +1063,8 @@ enum UsersOrderBy {
   ID_DESC
   USERNAME_ASC
   USERNAME_DESC
+  ROLE_ID_ASC
+  ROLE_ID_DESC
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
 }

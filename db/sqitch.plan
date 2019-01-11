@@ -6,6 +6,7 @@ app_hidden.schema 2019-01-06T17:04:14Z Nathan Yapi <nathanyapi.pro@gmail.com> # 
 app_private.schema 2019-01-06T17:04:32Z Nathan Yapi <nathanyapi.pro@gmail.com> # schema private
 app_private.functions.tg__timestamps 2019-01-06T20:20:53Z Nathan Yapi <nathanyapi.pro@gmail.com> # trigger timestamps
 app_public.functions.current_user_id 2019-01-06T20:22:28Z Nathan Yapi <nathanyapi.pro@gmail.com> # function current_user_id
+app_public.tables.role.sql 2019-01-08T23:59:52Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # table role
 app_public.tables.user 2019-01-08T23:59:54Z Nathan Yapi <nathanyapi.pro@gmail.com> # table user
 app_private.tables.user_secret 2019-01-09T00:19:17Z Nathan Yapi <nathanyapi.pro@gmail.com> # table user secret
 app_private.functions.create_anonymous_user 2019-01-09T03:40:58Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_anonymous_user

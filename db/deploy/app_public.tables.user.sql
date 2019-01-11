@@ -5,10 +5,13 @@ BEGIN;
 create table app_public.user (
   id serial primary key,
   username text not null unique,
+  role_id int not null references app_public.role(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 alter table app_public.user enable row level security;
+
+create index on "app_public"."user"("role_id");
 
 create policy select_all on app_public.user for select using (true);
 create policy update_self on app_public.user for update using (id = app_public.current_user_id());
@@ -23,12 +26,15 @@ grant delete on app_public.user to fundamental_visitor;
 -- the data, but it makes it harder for people to receive a `totalCount` of
 -- user, or enumerate them fully.
 comment on table app_public.user is
-  E'@omit all\nA user who can log in to the application.';
+  E'@omit all,create\nA user who can log in to the application.';
 
 comment on column app_public.user.id is
-  E'Unique identifier for the user.';
+  E'unique identifier for the user.';
 comment on column app_public.user.username is
-  E'Public-facing username (or ''handle'') of the user.';
+  E'public-facing username (or ''handle'') of the user.';
+
+comment on column app_public.user.role_id is
+  E'role of the user.';
 
 create trigger _100_timestamps
   after insert or update on app_public.user

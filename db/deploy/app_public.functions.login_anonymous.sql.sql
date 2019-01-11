@@ -8,23 +8,22 @@ declare
   v_username text;
 begin
 
-  -- Crypt username
-  v_username = crypt(username, gen_salt('bf'));
+  v_username = username;
 
   select * into v_user
-  from app_public.user
+  from app_public.user as u
   where
     -- Match username against user username
     (
-      users.username = v_username
+      u.username = crypt(v_username, u.username)
     );
 
-  if not (v_user is null) then
-    return v_user;
-  else
-    -- No user with that username was found
-    return null;
+  if(v_user is null) then
+    v_user = app_private.create_anonymous_user(v_username);
+      
   end if;
+
+  return v_user;
 end;
 $$ language plpgsql strict security definer volatile set search_path from current;
 
