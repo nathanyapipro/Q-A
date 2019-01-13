@@ -11,7 +11,7 @@
     "start": "node ./server/index.js",
     "prod": "npm run build:client && npm run start",
     "precommit": "pretty-quick --staged",
-    "cz": "npm run precommit && git cz",
+    "cz": "npm run precommit && git cz"
   },
   "config": {
     "commitizen": {
