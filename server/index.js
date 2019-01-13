@@ -1,4 +1,4 @@
-const express =require('express');
+const express = require("express");
 const { createServer } = require("http");
 const chalk = require("chalk");
 const middleware = require("./middleware");
@@ -7,8 +7,8 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").load();
 }
 
-const PORT = process.env.PORT || 5000
-const isDev = process.env.NODE_ENV === "development"
+const PORT = process.env.PORT || 5000;
+const isDev = process.env.NODE_ENV === "development";
 
 async function main() {
   /*
@@ -22,7 +22,6 @@ async function main() {
    */
   const httpServer = createServer(app);
   app.set("httpServer", httpServer);
-
 
   /*
    * Middleware is installed from the /server/middleware directory. These
@@ -38,21 +37,10 @@ async function main() {
     await middleware.installDatabaseWatchFixtures(app);
   }
 
-  // await middleware.installSession(app);
-  // await middleware.installPassport(app);
-  // await middleware.installLogging(app);
-
   // These are our assets: images/etc; served out of the /client/public folder
   // await middleware.installSharedStatic(app);
 
   await middleware.installPostGraphile(app);
-
-  // if (isDev) {
-  //   // In development, the client runs its own server
-  //   await middleware.installClientServerProxy(app);
-  // } else {
-  //   throw new Error("SSR not yet implemented!");
-  // }
 
   // And finally, we open the listen port
   httpServer.listen(PORT, () => {
