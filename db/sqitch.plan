@@ -16,3 +16,6 @@ app_public.functions.login_anonymous 2019-01-11T15:21:37Z Nathan Yapi <nathanyap
 app_public.tables.status 2019-01-13T20:45:43Z Nathan Yapi <nathanyapi.pro@gmail.com> # table status
 app_public.tables.tag 2019-01-13T21:05:38Z Nathan Yapi <nathanyapi.pro@gmail.com> # table tag
 app_public.tables.question 2019-01-13T21:12:48Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question
+app_public.tables.vote 2019-01-13T21:39:37Z Nathan Yapi <nathanyapi.pro@gmail.com> # table vote
+app_public.tables.question_tag 2019-01-13T21:53:00Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question_tag
+app_public.tables.answer 2019-01-13T21:58:53Z Nathan Yapi <nathanyapi.pro@gmail.com> # table answer

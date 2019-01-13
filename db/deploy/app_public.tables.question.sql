@@ -28,7 +28,7 @@ grant update(content, meta, status_id) on app_public.question to fundamental_vis
 grant delete on app_public.question to fundamental_visitor;
 
 comment on table app_public.question is
-  E'question of a question in the application.';
+  E'question in the application.';
 
 comment on column app_public.question.id is
   E'unique identifier for the question.';
