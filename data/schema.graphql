@@ -789,6 +789,11 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 """
 scalar JSON
 
+type JwtToken {
+  userId: Int
+  roleId: Int
+}
+
 """All input for the `loginAnonymous` mutation."""
 input LoginAnonymousInput {
   """
@@ -806,21 +811,12 @@ type LoginAnonymousPayload {
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
-  user: User
+  jwtToken: JwtToken
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
-
-  """Reads a single `Role` that is related to this `User`."""
-  role: Role
-
-  """An edge for our `User`. May be used by Relay 1."""
-  userEdge(
-    """The method to use when ordering `User`."""
-    orderBy: [UsersOrderBy!] = PRIMARY_KEY_ASC
-  ): UsersEdge
 }
 
 """All input for the `login` mutation."""
@@ -841,21 +837,12 @@ type LoginPayload {
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
-  user: User
+  jwtToken: JwtToken
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
-
-  """Reads a single `Role` that is related to this `User`."""
-  role: Role
-
-  """An edge for our `User`. May be used by Relay 1."""
-  userEdge(
-    """The method to use when ordering `User`."""
-    orderBy: [UsersOrderBy!] = PRIMARY_KEY_ASC
-  ): UsersEdge
 }
 
 """

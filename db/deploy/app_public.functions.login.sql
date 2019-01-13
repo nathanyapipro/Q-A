@@ -2,7 +2,7 @@
 
 BEGIN;
 
-create function app_public.login(username text, password text default null) returns app_public.user as $$
+create function app_public.login(username text, password text default null) returns app_private.jwt_token as $$
 declare
   v_user app_public.user;
   v_user_secret app_private.user_secret;
@@ -21,7 +21,7 @@ begin
     where user_secret.user_id = v_user.id;
 
     if v_user_secret.password_hash = crypt(password, v_user_secret.password_hash) then
-      return v_user;
+      return (v_user.user_id, v_user.role_id)::app_private.jwt_token;
     else
       return null;
     end if;

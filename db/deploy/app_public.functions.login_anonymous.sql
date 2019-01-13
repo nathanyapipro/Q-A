@@ -2,7 +2,7 @@
 
 BEGIN;
 
-create function app_public.login_anonymous(username text) returns app_public.user as $$
+create function app_public.login_anonymous(username text) returns app_private.jwt_token as $$
 declare
   v_user app_public.user;
   v_username text;
@@ -20,10 +20,9 @@ begin
 
   if(v_user is null) then
     v_user = app_private.create_anonymous_user(v_username);
-      
   end if;
 
-  return v_user;
+  return (v_user.user_id, v_user.role_id)::app_private.jwt_token;
 end;
 $$ language plpgsql strict security definer volatile set search_path from current;
 
