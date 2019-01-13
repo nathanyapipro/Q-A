@@ -15,7 +15,7 @@ create policy select_all on app_public.role for select using (true);
 grant select on app_public.role to fundamental_visitor;
 
 comment on table app_public.role is
-  E'role in the application.';
+  E'@omit create,update,delete\nA role in the application.';
 
 comment on column app_public.role.id is
   E'unique identifier for the role.';

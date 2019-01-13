@@ -1,36 +1,77 @@
-"""All input for the create `Role` mutation."""
-input CreateRoleInput {
+"""All input for the create `Question` mutation."""
+input CreateQuestionInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
 
-  """The `Role` to be created by this mutation."""
-  role: RoleInput!
+  """The `Question` to be created by this mutation."""
+  question: QuestionInput!
 }
 
-"""The output of our create `Role` mutation."""
-type CreateRolePayload {
+"""The output of our create `Question` mutation."""
+type CreateQuestionPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
 
-  """The `Role` that was created by this mutation."""
-  role: Role
+  """The `Question` that was created by this mutation."""
+  question: Question
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
 
-  """An edge for our `Role`. May be used by Relay 1."""
-  roleEdge(
-    """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = PRIMARY_KEY_ASC
-  ): RolesEdge
+  """Reads a single `User` that is related to this `Question`."""
+  user: User
+
+  """Reads a single `Status` that is related to this `Question`."""
+  status: Status
+
+  """An edge for our `Question`. May be used by Relay 1."""
+  questionEdge(
+    """The method to use when ordering `Question`."""
+    orderBy: [QuestionsOrderBy!] = PRIMARY_KEY_ASC
+  ): QuestionsEdge
+}
+
+"""All input for the create `Tag` mutation."""
+input CreateTagInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Tag` to be created by this mutation."""
+  tag: TagInput!
+}
+
+"""The output of our create `Tag` mutation."""
+type CreateTagPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Tag` that was created by this mutation."""
+  tag: Tag
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Tag`. May be used by Relay 1."""
+  tagEdge(
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = PRIMARY_KEY_ASC
+  ): TagsEdge
 }
 
 """All input for the `createUser` mutation."""
@@ -78,32 +119,20 @@ A point in time as described by the [ISO
 """
 scalar Datetime
 
-"""All input for the `deleteRoleById` mutation."""
-input DeleteRoleByIdInput {
+"""All input for the `deleteQuestionById` mutation."""
+input DeleteQuestionByIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
 
-  """unique identifier for the role."""
+  """unique identifier for the question."""
   id: Int!
 }
 
-"""All input for the `deleteRoleByName` mutation."""
-input DeleteRoleByNameInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """name of the role."""
-  name: String!
-}
-
-"""All input for the `deleteRole` mutation."""
-input DeleteRoleInput {
+"""All input for the `deleteQuestion` mutation."""
+input DeleteQuestionInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
@@ -111,33 +140,101 @@ input DeleteRoleInput {
   clientMutationId: String
 
   """
-  The globally unique `ID` which will identify a single `Role` to be deleted.
+  The globally unique `ID` which will identify a single `Question` to be deleted.
   """
   nodeId: ID!
 }
 
-"""The output of our delete `Role` mutation."""
-type DeleteRolePayload {
+"""The output of our delete `Question` mutation."""
+type DeleteQuestionPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
 
-  """The `Role` that was deleted by this mutation."""
-  role: Role
-  deletedRoleId: ID
+  """The `Question` that was deleted by this mutation."""
+  question: Question
+  deletedQuestionId: ID
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
 
-  """An edge for our `Role`. May be used by Relay 1."""
-  roleEdge(
-    """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = PRIMARY_KEY_ASC
-  ): RolesEdge
+  """Reads a single `User` that is related to this `Question`."""
+  user: User
+
+  """Reads a single `Status` that is related to this `Question`."""
+  status: Status
+
+  """An edge for our `Question`. May be used by Relay 1."""
+  questionEdge(
+    """The method to use when ordering `Question`."""
+    orderBy: [QuestionsOrderBy!] = PRIMARY_KEY_ASC
+  ): QuestionsEdge
+}
+
+"""All input for the `deleteTagById` mutation."""
+input DeleteTagByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """unique identifier for the tag."""
+  id: Int!
+}
+
+"""All input for the `deleteTagByName` mutation."""
+input DeleteTagByNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """name of the tag."""
+  name: String!
+}
+
+"""All input for the `deleteTag` mutation."""
+input DeleteTagInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Tag` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Tag` mutation."""
+type DeleteTagPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Tag` that was deleted by this mutation."""
+  tag: Tag
+  deletedTagId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Tag`. May be used by Relay 1."""
+  tagEdge(
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = PRIMARY_KEY_ASC
+  ): TagsEdge
 }
 
 """All input for the `deleteUserById` mutation."""
@@ -247,6 +344,11 @@ input IntFilter {
   greaterThanOrEqualTo: Int
 }
 
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
 """All input for the `loginAnonymous` mutation."""
 input LoginAnonymousInput {
   """
@@ -320,37 +422,61 @@ type LoginPayload {
 The root mutation type which contains root level fields which mutate data.
 """
 type Mutation {
-  """Creates a single `Role`."""
-  createRole(
+  """Creates a single `Question`."""
+  createQuestion(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: CreateRoleInput!
-  ): CreateRolePayload
+    input: CreateQuestionInput!
+  ): CreateQuestionPayload
 
-  """Updates a single `Role` using its globally unique id and a patch."""
-  updateRole(
+  """Creates a single `Tag`."""
+  createTag(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpdateRoleInput!
-  ): UpdateRolePayload
+    input: CreateTagInput!
+  ): CreateTagPayload
 
-  """Updates a single `Role` using a unique key and a patch."""
-  updateRoleById(
+  """Updates a single `Question` using its globally unique id and a patch."""
+  updateQuestion(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpdateRoleByIdInput!
-  ): UpdateRolePayload
+    input: UpdateQuestionInput!
+  ): UpdateQuestionPayload
 
-  """Updates a single `Role` using a unique key and a patch."""
-  updateRoleByName(
+  """Updates a single `Question` using a unique key and a patch."""
+  updateQuestionById(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpdateRoleByNameInput!
-  ): UpdateRolePayload
+    input: UpdateQuestionByIdInput!
+  ): UpdateQuestionPayload
+
+  """Updates a single `Tag` using its globally unique id and a patch."""
+  updateTag(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagInput!
+  ): UpdateTagPayload
+
+  """Updates a single `Tag` using a unique key and a patch."""
+  updateTagById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagByIdInput!
+  ): UpdateTagPayload
+
+  """Updates a single `Tag` using a unique key and a patch."""
+  updateTagByName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateTagByNameInput!
+  ): UpdateTagPayload
 
   """Updates a single `User` using its globally unique id and a patch."""
   updateUser(
@@ -376,29 +502,45 @@ type Mutation {
     input: UpdateUserByUsernameInput!
   ): UpdateUserPayload
 
-  """Deletes a single `Role` using its globally unique id."""
-  deleteRole(
+  """Deletes a single `Question` using its globally unique id."""
+  deleteQuestion(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: DeleteRoleInput!
-  ): DeleteRolePayload
+    input: DeleteQuestionInput!
+  ): DeleteQuestionPayload
 
-  """Deletes a single `Role` using a unique key."""
-  deleteRoleById(
+  """Deletes a single `Question` using a unique key."""
+  deleteQuestionById(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: DeleteRoleByIdInput!
-  ): DeleteRolePayload
+    input: DeleteQuestionByIdInput!
+  ): DeleteQuestionPayload
 
-  """Deletes a single `Role` using a unique key."""
-  deleteRoleByName(
+  """Deletes a single `Tag` using its globally unique id."""
+  deleteTag(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: DeleteRoleByNameInput!
-  ): DeleteRolePayload
+    input: DeleteTagInput!
+  ): DeleteTagPayload
+
+  """Deletes a single `Tag` using a unique key."""
+  deleteTagById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTagByIdInput!
+  ): DeleteTagPayload
+
+  """Deletes a single `Tag` using a unique key."""
+  deleteTagByName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteTagByNameInput!
+  ): DeleteTagPayload
 
   """Deletes a single `User` using its globally unique id."""
   deleteUser(
@@ -493,6 +635,40 @@ type Query implements Node {
     nodeId: ID!
   ): Node
 
+  """Reads and enables pagination through a set of `Question`."""
+  questions(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Question`."""
+    orderBy: [QuestionsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: QuestionCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: QuestionFilter
+  ): QuestionsConnection
+
   """Reads and enables pagination through a set of `Role`."""
   roles(
     """Only read the first `n` values of the set."""
@@ -526,16 +702,107 @@ type Query implements Node {
     """
     filter: RoleFilter
   ): RolesConnection
+
+  """Reads and enables pagination through a set of `Status`."""
+  statuses(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Status`."""
+    orderBy: [StatusesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: StatusCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: StatusFilter
+  ): StatusesConnection
+
+  """Reads and enables pagination through a set of `Tag`."""
+  tags(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: TagCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: TagFilter
+  ): TagsConnection
+  questionById(id: Int!): Question
   roleById(id: Int!): Role
   roleByName(name: String!): Role
+  statusById(id: Int!): Status
+  statusByName(name: String!): Status
+  tagById(id: Int!): Tag
+  tagByName(name: String!): Tag
   userById(id: Int!): User
   userByUsername(username: String!): User
+
+  """Reads a single `Question` using its globally unique `ID`."""
+  question(
+    """The globally unique `ID` to be used in selecting a single `Question`."""
+    nodeId: ID!
+  ): Question
 
   """Reads a single `Role` using its globally unique `ID`."""
   role(
     """The globally unique `ID` to be used in selecting a single `Role`."""
     nodeId: ID!
   ): Role
+
+  """Reads a single `Status` using its globally unique `ID`."""
+  status(
+    """The globally unique `ID` to be used in selecting a single `Status`."""
+    nodeId: ID!
+  ): Status
+
+  """Reads a single `Tag` using its globally unique `ID`."""
+  tag(
+    """The globally unique `ID` to be used in selecting a single `Tag`."""
+    nodeId: ID!
+  ): Tag
 
   """Reads a single `User` using its globally unique `ID`."""
   user(
@@ -544,7 +811,157 @@ type Query implements Node {
   ): User
 }
 
-"""role in the application."""
+"""question of a question in the application."""
+type Question implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """unique identifier for the question."""
+  id: Int!
+
+  """content of the question."""
+  content: String!
+
+  """owner of the question."""
+  userId: Int!
+
+  """metadata of the question"""
+  meta: JSON!
+
+  """status of the question"""
+  statusId: Int!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+
+  """Reads a single `User` that is related to this `Question`."""
+  user: User
+
+  """Reads a single `Status` that is related to this `Question`."""
+  status: Status
+}
+
+"""
+A condition to be used against `Question` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input QuestionCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: Int
+
+  """Checks for equality with the object’s `statusId` field."""
+  statusId: Int
+}
+
+"""
+A filter to be used against `Question` object types. All fields are combined with a logical ‘and.’
+"""
+input QuestionFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `userId` field."""
+  userId: IntFilter
+
+  """Filter by the object’s `statusId` field."""
+  statusId: IntFilter
+
+  """Checks for all expressions in this list."""
+  and: [QuestionFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [QuestionFilter!]
+
+  """Negates the expression."""
+  not: QuestionFilter
+}
+
+"""An input for mutations affecting `Question`"""
+input QuestionInput {
+  """unique identifier for the question."""
+  id: Int
+
+  """content of the question."""
+  content: String!
+
+  """owner of the question."""
+  userId: Int!
+
+  """metadata of the question"""
+  meta: JSON
+
+  """status of the question"""
+  statusId: Int!
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+"""
+Represents an update to a `Question`. Fields that are set will be updated.
+"""
+input QuestionPatch {
+  """unique identifier for the question."""
+  id: Int
+
+  """content of the question."""
+  content: String
+
+  """owner of the question."""
+  userId: Int
+
+  """metadata of the question"""
+  meta: JSON
+
+  """status of the question"""
+  statusId: Int
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+"""A connection to a list of `Question` values."""
+type QuestionsConnection {
+  """A list of `Question` objects."""
+  nodes: [Question!]!
+
+  """
+  A list of edges which contains the `Question` and cursor to aid in pagination.
+  """
+  edges: [QuestionsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Question` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Question` edge in the connection."""
+type QuestionsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Question` at the end of the edge."""
+  node: Question!
+}
+
+"""Methods to use when ordering `Question`."""
+enum QuestionsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  STATUS_ID_ASC
+  STATUS_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""A role in the application."""
 type Role implements Node {
   """
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
@@ -625,30 +1042,6 @@ input RoleFilter {
   not: RoleFilter
 }
 
-"""An input for mutations affecting `Role`"""
-input RoleInput {
-  """unique identifier for the role."""
-  id: Int
-
-  """name of the role."""
-  name: String!
-  createdAt: Datetime
-  updatedAt: Datetime
-}
-
-"""
-Represents an update to a `Role`. Fields that are set will be updated.
-"""
-input RolePatch {
-  """unique identifier for the role."""
-  id: Int
-
-  """name of the role."""
-  name: String
-  createdAt: Datetime
-  updatedAt: Datetime
-}
-
 """A connection to a list of `Role` values."""
 type RolesConnection {
   """A list of `Role` objects."""
@@ -684,6 +1077,124 @@ enum RolesOrderBy {
   NAME_DESC
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
+}
+
+"""A status of a question in the application."""
+type Status implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """unique identifier for the status."""
+  id: Int!
+
+  """name of the status."""
+  name: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+
+  """Reads and enables pagination through a set of `Question`."""
+  questions(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Question`."""
+    orderBy: [QuestionsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: QuestionCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: QuestionFilter
+  ): QuestionsConnection!
+}
+
+"""
+A condition to be used against `Status` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input StatusCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""A connection to a list of `Status` values."""
+type StatusesConnection {
+  """A list of `Status` objects."""
+  nodes: [Status!]!
+
+  """
+  A list of edges which contains the `Status` and cursor to aid in pagination.
+  """
+  edges: [StatusesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Status` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Status` edge in the connection."""
+type StatusesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Status` at the end of the edge."""
+  node: Status!
+}
+
+"""Methods to use when ordering `Status`."""
+enum StatusesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A filter to be used against `Status` object types. All fields are combined with a logical ‘and.’
+"""
+input StatusFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [StatusFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [StatusFilter!]
+
+  """Negates the expression."""
+  not: StatusFilter
 }
 
 """
@@ -800,8 +1311,132 @@ input StringFilter {
   notSimilarTo: String
 }
 
-"""All input for the `updateRoleById` mutation."""
-input UpdateRoleByIdInput {
+"""tag of a question in the application."""
+type Tag implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+
+  """unique identifier for the tag."""
+  id: Int!
+
+  """name of the tag."""
+  name: String!
+
+  """color of the tag."""
+  color: String!
+
+  """determines if the tag is available."""
+  isEnabled: Boolean!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+}
+
+"""
+A condition to be used against `Tag` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input TagCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+}
+
+"""
+A filter to be used against `Tag` object types. All fields are combined with a logical ‘and.’
+"""
+input TagFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [TagFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [TagFilter!]
+
+  """Negates the expression."""
+  not: TagFilter
+}
+
+"""An input for mutations affecting `Tag`"""
+input TagInput {
+  """unique identifier for the tag."""
+  id: Int
+
+  """name of the tag."""
+  name: String!
+
+  """color of the tag."""
+  color: String!
+
+  """determines if the tag is available."""
+  isEnabled: Boolean
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+"""Represents an update to a `Tag`. Fields that are set will be updated."""
+input TagPatch {
+  """unique identifier for the tag."""
+  id: Int
+
+  """name of the tag."""
+  name: String
+
+  """color of the tag."""
+  color: String
+
+  """determines if the tag is available."""
+  isEnabled: Boolean
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+"""A connection to a list of `Tag` values."""
+type TagsConnection {
+  """A list of `Tag` objects."""
+  nodes: [Tag!]!
+
+  """
+  A list of edges which contains the `Tag` and cursor to aid in pagination.
+  """
+  edges: [TagsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Tag` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Tag` edge in the connection."""
+type TagsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Tag` at the end of the edge."""
+  node: Tag!
+}
+
+"""Methods to use when ordering `Tag`."""
+enum TagsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""All input for the `updateQuestionById` mutation."""
+input UpdateQuestionByIdInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
@@ -809,16 +1444,16 @@ input UpdateRoleByIdInput {
   clientMutationId: String
 
   """
-  An object where the defined keys will be set on the `Role` being updated.
+  An object where the defined keys will be set on the `Question` being updated.
   """
-  patch: RolePatch!
+  patch: QuestionPatch!
 
-  """unique identifier for the role."""
+  """unique identifier for the question."""
   id: Int!
 }
 
-"""All input for the `updateRoleByName` mutation."""
-input UpdateRoleByNameInput {
+"""All input for the `updateQuestion` mutation."""
+input UpdateQuestionInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
@@ -826,54 +1461,119 @@ input UpdateRoleByNameInput {
   clientMutationId: String
 
   """
-  An object where the defined keys will be set on the `Role` being updated.
-  """
-  patch: RolePatch!
-
-  """name of the role."""
-  name: String!
-}
-
-"""All input for the `updateRole` mutation."""
-input UpdateRoleInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Role` to be updated.
+  The globally unique `ID` which will identify a single `Question` to be updated.
   """
   nodeId: ID!
 
   """
-  An object where the defined keys will be set on the `Role` being updated.
+  An object where the defined keys will be set on the `Question` being updated.
   """
-  patch: RolePatch!
+  patch: QuestionPatch!
 }
 
-"""The output of our update `Role` mutation."""
-type UpdateRolePayload {
+"""The output of our update `Question` mutation."""
+type UpdateQuestionPayload {
   """
   The exact same `clientMutationId` that was provided in the mutation input,
   unchanged and unused. May be used by a client to track mutations.
   """
   clientMutationId: String
 
-  """The `Role` that was updated by this mutation."""
-  role: Role
+  """The `Question` that was updated by this mutation."""
+  question: Question
 
   """
   Our root query field type. Allows us to run any query from our mutation payload.
   """
   query: Query
 
-  """An edge for our `Role`. May be used by Relay 1."""
-  roleEdge(
-    """The method to use when ordering `Role`."""
-    orderBy: [RolesOrderBy!] = PRIMARY_KEY_ASC
-  ): RolesEdge
+  """Reads a single `User` that is related to this `Question`."""
+  user: User
+
+  """Reads a single `Status` that is related to this `Question`."""
+  status: Status
+
+  """An edge for our `Question`. May be used by Relay 1."""
+  questionEdge(
+    """The method to use when ordering `Question`."""
+    orderBy: [QuestionsOrderBy!] = PRIMARY_KEY_ASC
+  ): QuestionsEdge
+}
+
+"""All input for the `updateTagById` mutation."""
+input UpdateTagByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Tag` being updated.
+  """
+  patch: TagPatch!
+
+  """unique identifier for the tag."""
+  id: Int!
+}
+
+"""All input for the `updateTagByName` mutation."""
+input UpdateTagByNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Tag` being updated.
+  """
+  patch: TagPatch!
+
+  """name of the tag."""
+  name: String!
+}
+
+"""All input for the `updateTag` mutation."""
+input UpdateTagInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Tag` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Tag` being updated.
+  """
+  patch: TagPatch!
+}
+
+"""The output of our update `Tag` mutation."""
+type UpdateTagPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Tag` that was updated by this mutation."""
+  tag: Tag
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Tag`. May be used by Relay 1."""
+  tagEdge(
+    """The method to use when ordering `Tag`."""
+    orderBy: [TagsOrderBy!] = PRIMARY_KEY_ASC
+  ): TagsEdge
 }
 
 """All input for the `updateUserById` mutation."""
@@ -975,6 +1675,40 @@ type User implements Node {
 
   """Reads a single `Role` that is related to this `User`."""
   role: Role
+
+  """Reads and enables pagination through a set of `Question`."""
+  questions(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Question`."""
+    orderBy: [QuestionsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: QuestionCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: QuestionFilter
+  ): QuestionsConnection!
 }
 
 """
