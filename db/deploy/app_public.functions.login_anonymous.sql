@@ -22,7 +22,7 @@ begin
     v_user = app_private.create_anonymous_user(v_username);
   end if;
 
-  return (v_user.user_id, v_user.role_id)::app_private.jwt_token;
+  return (v_user.id, v_user.role_id)::app_private.jwt_token;
 end;
 $$ language plpgsql strict security definer volatile set search_path from current;
 

@@ -4,9 +4,16 @@ const PgSimplifyInflectorPlugin = require("@graphile-contrib/pg-simplify-inflect
 
 const isDev = process.env.NODE_ENV === "development";
 const isTest = process.env.NODE_ENV === "test";
+const secret = process.env.SECRET;
 
 function postgraphileOptions() {
-  return ({
+  return {
+    // JWT token type
+    jwtPgTypeIdentifier: "app_private.jwt_token",
+
+    // Secret used for jwt verification
+    jwtSecret: secret,
+
     // enableQueryBatching: On the client side, use something like apollo-link-batch-http to make use of this
     enableQueryBatching: true,
 
@@ -49,7 +56,7 @@ function postgraphileOptions() {
             "constraint",
             "file",
             "line",
-            "routine",
+            "routine"
           ]
         : ["errcode"],
 
@@ -57,7 +64,7 @@ function postgraphileOptions() {
 
     // Automatically update GraphQL schema when database changes
     watchPg: isDev,
-    
+
     // Keep data/schema.graphql and data/schema.json up to date
     exportGqlSchemaPath: isDev
       ? `${__dirname}/../../data/schema.graphql`
@@ -70,9 +77,8 @@ function postgraphileOptions() {
 
       // We install our own watch fixtures manually because we run PostGraphile
       // with non-database-owner privileges.
-      pgSkipInstallingWatchFixtures: true,
+      pgSkipInstallingWatchFixtures: true
     },
-
 
     /*
      * Plugins to enhance the GraphQL schema, see:
@@ -83,8 +89,8 @@ function postgraphileOptions() {
       PgSimplifyInflectorPlugin,
       // Add addition filter options on connections
       ConnectionFilterPlugin
-    ],
-  })
+    ]
+  };
 }
 
 module.exports = app => {
