@@ -8,6 +8,9 @@ const secret = process.env.SECRET;
 
 function postgraphileOptions() {
   return {
+    // Default pg role to used
+    pgDefaultRole: "fundamental_visitor",
+
     // JWT token type
     jwtPgTypeIdentifier: "app_private.jwt_token",
 
