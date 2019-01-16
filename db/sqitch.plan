@@ -20,3 +20,5 @@ app_public.tables.question 2019-01-13T21:12:48Z Nathan Yapi <nathanyapi.pro@gmai
 app_public.tables.vote 2019-01-13T21:39:37Z Nathan Yapi <nathanyapi.pro@gmail.com> # table vote
 app_public.tables.question_tag 2019-01-13T21:53:00Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question_tag
 app_public.tables.answer 2019-01-13T21:58:53Z Nathan Yapi <nathanyapi.pro@gmail.com> # table answer
+app_private.tables.word 2019-01-16T01:30:56Z Nathan Yapi <nathanyapi.pro@gmail.com> # table word
+app_private.tables.question_word_idf 2019-01-16T01:17:08Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question_word_idf
