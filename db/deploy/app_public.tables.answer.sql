@@ -7,7 +7,6 @@ create table app_public.answer (
   content text not null,
   user_id int not null references app_public.user(id),
   question_id int not null references app_public.question(id),
-  meta jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -24,7 +23,7 @@ create policy delete_all on app_public.answer for delete using (true);
 
 grant select on app_public.answer to fundamental_visitor;
 grant insert on app_public.answer to fundamental_visitor;
-grant update(content, meta) on app_public.answer to fundamental_visitor;
+grant update(content) on app_public.answer to fundamental_visitor;
 grant delete on app_public.answer to fundamental_visitor;
 
 comment on table app_public.answer is
@@ -38,8 +37,6 @@ comment on column app_public.answer.user_id is
   E'owner of the answer.';
   comment on column app_public.answer.question_id is
   E'question being answered';
-comment on column app_public.answer.meta is
-  E'metadata of the answer';
 
 
 create trigger _100_timestamps

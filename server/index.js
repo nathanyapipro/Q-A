@@ -2,6 +2,7 @@ const express = require("express");
 const { createServer } = require("http");
 const chalk = require("chalk");
 const middleware = require("./middleware");
+const cors = require("cors");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").load();
@@ -15,6 +16,8 @@ async function main() {
    * Our Express server
    */
   const app = express();
+
+  app.use(cors());
 
   /*
    * Getting access to the HTTP server directly means that we can do things

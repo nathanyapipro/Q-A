@@ -6,7 +6,6 @@ create table app_public.question (
   id serial primary key,
   content text not null,
   user_id int not null references app_public.user(id),
-  meta jsonb not null default '{}'::jsonb,
   status_id int not null references app_public.status(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -24,7 +23,7 @@ create policy delete_all on app_public.question for delete using (true);
 
 grant select on app_public.question to fundamental_visitor;
 grant insert on app_public.question to fundamental_visitor;
-grant update(content, meta, status_id) on app_public.question to fundamental_visitor;
+grant update(content, status_id) on app_public.question to fundamental_visitor;
 grant delete on app_public.question to fundamental_visitor;
 
 comment on table app_public.question is
@@ -36,8 +35,6 @@ comment on column app_public.question.content is
   E'content of the question.';
 comment on column app_public.question.user_id is
   E'owner of the question.';
-comment on column app_public.question.meta is
-  E'metadata of the question';
 comment on column app_public.question.status_id is
   E'status of the question';
 

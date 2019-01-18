@@ -16,22 +16,6 @@
     "jsx-no-multiline-js": false,
     "jsx-boolean-value": false,
     "label-position": true,
-    "member-ordering": [
-      true,
-      {
-        "order": [
-          "public-static-field",
-          "public-instance-field",
-          "private-static-field",
-          "private-instance-field",
-          "public-constructor",
-          "private-constructor",
-          "public-instance-method",
-          "protected-instance-method",
-          "private-instance-method"
-        ]
-      }
-    ],
     "no-arg": true,
     "no-bitwise": true,
     "no-construct": true,
@@ -48,17 +32,8 @@
     "no-use-before-declare": true,
     "one-variable-per-declaration": true,
     "prefer-template": true,
-    "radix": true,
     "switch-default": false,
     "triple-equals": [true, "allow-null-check"],
-    "typedef": [true, "parameter", "property-declaration"],
-    "import-blacklist": [true, "@material-ui/core"],
-    "variable-name": [
-      true,
-      "ban-keywords",
-      "check-format",
-      "allow-leading-underscore",
-      "allow-pascal-case"
-    ]
+    "typedef": [true, "parameter", "property-declaration"]
   }
 }
