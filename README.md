@@ -1,3 +1,5 @@
+## Setup
+
 ## Available Scripts
 
 ## Server
@@ -200,4 +202,4 @@ Variables
 }
 ```
 
-## CLient
+## Client
