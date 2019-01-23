@@ -32,6 +32,10 @@ export interface Question_questionById_status {
 export interface Question_questionById_questionTags_nodes_tag {
   __typename: "Tag";
   /**
+   * unique identifier for the tag.
+   */
+  id: number;
+  /**
    * name of the tag.
    */
   name: string;
@@ -43,10 +47,6 @@ export interface Question_questionById_questionTags_nodes_tag {
 
 export interface Question_questionById_questionTags_nodes {
   __typename: "QuestionTag";
-  /**
-   * unique identifier for the question_tag.
-   */
-  id: number;
   /**
    * Reads a single `Tag` that is related to this `QuestionTag`.
    */

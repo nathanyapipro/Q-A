@@ -60,8 +60,8 @@ export const QUESTION = gql`
       }
       questionTags {
         nodes {
-          id
           tag {
+            id
             name
             color
           }
