@@ -1,4 +1,4 @@
-import { GLOBAL_MENU_GET } from "./queries";
+import { MENU_GET } from "./queries";
 
 export const defaults = {
   global: {
@@ -10,14 +10,14 @@ export const defaults = {
 const resolvers = {
   Mutation: {
     globalMenuToggle: (_: any, __: {}, { cache }: any) => {
-      const previousState = cache.readQuery({ query: GLOBAL_MENU_GET });
+      const previousState = cache.readQuery({ query: MENU_GET });
       const data = {
         global: {
           ...previousState.global,
           menu: !previousState.global.menu
         }
       };
-      cache.writeQuery({ query: GLOBAL_MENU_GET, data });
+      cache.writeQuery({ query: MENU_GET, data });
       return null;
     }
   }

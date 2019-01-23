@@ -3,10 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/styles";
 import { Query, Mutation } from "react-apollo";
-import {
-  GLOBAL_MENU_GET,
-  GLOBAL_MENU_TOGGLE
-} from "../../states/global/queries";
+import { MENU_GET, MENU_TOGGLE } from "../../states/global/queries";
 
 export const SIDEBAR_WIDTH = 260;
 
@@ -37,13 +34,13 @@ function SidebarBase(props: Props) {
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Hidden smUp implementation="css">
-        <Query query={GLOBAL_MENU_GET}>
+        <Query query={MENU_GET}>
           {({
             data: {
               global: { menu }
             }
           }) => (
-            <Mutation mutation={GLOBAL_MENU_TOGGLE}>
+            <Mutation mutation={MENU_TOGGLE}>
               {toggleMenu => (
                 <Drawer
                   variant="temporary"

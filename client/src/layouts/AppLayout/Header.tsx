@@ -6,8 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
 import { Mutation } from "react-apollo";
-import { GLOBAL_MENU_TOGGLE } from "../../states/global/queries";
-
+import { MENU_TOGGLE } from "../../states/global/queries";
 interface HeaderProps {}
 
 type Props = HeaderProps;
@@ -34,7 +33,7 @@ function HeaderBase(_: Props) {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Mutation mutation={GLOBAL_MENU_TOGGLE}>
+        <Mutation mutation={MENU_TOGGLE}>
           {toggleMenu => (
             <IconButton
               color="inherit"
