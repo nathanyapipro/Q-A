@@ -11,16 +11,13 @@ const resolvers = {
   Mutation: {
     globalMenuToggle: (_: any, __: any, { cache }: any) => {
       const previousState = cache.readQuery({ query: GLOBAL_MENU_GET });
-
       const data = {
         global: {
           ...previousState.global,
           menu: !previousState.global.menu
         }
       };
-
       cache.writeQuery({ query: GLOBAL_MENU_GET, data });
-
       return null;
     }
   }
