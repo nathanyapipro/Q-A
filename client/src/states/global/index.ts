@@ -1,6 +1,6 @@
 import { GLOBAL_MENU_GET } from "./queries";
 
-const defaults = {
+export const defaults = {
   global: {
     __typename: "Global",
     menu: false
@@ -23,9 +23,4 @@ const resolvers = {
   }
 };
 
-const globalResolver = {
-  defaults,
-  resolvers
-};
-
-export default globalResolver;
+export default resolvers;

@@ -1,8 +1,9 @@
-import globalResolver from "./global/resolvers";
+import merge from "lodash.merge";
+import globalResolvers, { defaults as globalDefaults } from "./global";
 
 const clientState = {
-  defaults: globalResolver.defaults,
-  resolvers: globalResolver.resolvers
+  defaults: merge(globalDefaults),
+  resolvers: merge(globalResolvers)
 };
 
 export default clientState;
