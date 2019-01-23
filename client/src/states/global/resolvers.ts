@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { GLOBAL_MENU_GET } from "./queries";
 
 const defaults = {
   global: {
@@ -9,16 +9,8 @@ const defaults = {
 
 const resolvers = {
   Mutation: {
-    toogleMenu: (_: any, __: any, { cache }: any) => {
-      const query = gql`
-        query GetGlobalMenu {
-          global @client {
-            menu
-          }
-        }
-      `;
-
-      const previousState = cache.readQuery({ query });
+    globalMenuToggle: (_: any, __: any, { cache }: any) => {
+      const previousState = cache.readQuery({ query: GLOBAL_MENU_GET });
 
       const data = {
         global: {
@@ -27,7 +19,7 @@ const resolvers = {
         }
       };
 
-      cache.writeQuery({ query, data });
+      cache.writeQuery({ query: GLOBAL_MENU_GET, data });
 
       return null;
     }

@@ -1,5 +1,5 @@
 import ApolloClient from "apollo-boost";
-import globalResolver from "./resolvers/global";
+import globalResolver from "../states/global/resolvers";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_GRAPHQL_URI,
