@@ -1,12 +1,8 @@
 import * as React from "react";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { makeStyles } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
-import { Query, Mutation } from "react-apollo";
-import {
-  GLOBAL_MENU_TOGGLE,
-  GLOBAL_MENU_GET
-} from "../../states/global/queries";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 interface AppLayoutProps {
   children: React.ReactChild;
 }
@@ -38,19 +34,8 @@ function AppLayoutBase(props: Props) {
     <div className={classes.container}>
       <div className={classes.content}>
         <ErrorBoundary>
-          <Mutation mutation={GLOBAL_MENU_TOGGLE}>
-            {toggleMenu => (
-              <Button onClick={_ => toggleMenu()}>
-                <Query query={GLOBAL_MENU_GET}>
-                  {({
-                    data: {
-                      global: { menu }
-                    }
-                  }) => (menu === true ? "OPEN" : "CLOSED")}
-                </Query>
-              </Button>
-            )}
-          </Mutation>
+          <Header />
+          <Sidebar>Items</Sidebar>
           <main className={classes.main}>{children}</main>
         </ErrorBoundary>
       </div>

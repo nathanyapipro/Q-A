@@ -9,7 +9,7 @@ const defaults = {
 
 const resolvers = {
   Mutation: {
-    globalMenuToggle: (_: any, __: any, { cache }: any) => {
+    globalMenuToggle: (_: any, __: {}, { cache }: any) => {
       const previousState = cache.readQuery({ query: GLOBAL_MENU_GET });
       const data = {
         global: {
