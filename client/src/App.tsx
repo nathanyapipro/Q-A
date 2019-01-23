@@ -1,29 +1,21 @@
 import * as React from "react";
 import { ApolloProvider } from "react-apollo";
+import { BrowserRouter as Router } from "react-router-dom";
 import client from "./services/apollo";
+import AuthGate from "./routers/AuthGate";
+import Loading from "./components/Loading";
+import withTheme from "./components/withTheme";
 
-class App extends React.Component {
-  render() {
-    return (
-      <ApolloProvider client={client}>
-        <div className="App">
-          <header className="App-header">
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-        </div>
-      </ApolloProvider>
-    );
-  }
+function App() {
+  return (
+    <ApolloProvider client={client}>
+      <React.Suspense fallback={<Loading />}>
+        <Router>
+          <AuthGate />
+        </Router>
+      </React.Suspense>
+    </ApolloProvider>
+  );
 }
 
-export default App;
+export default withTheme(App);
