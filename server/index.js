@@ -40,6 +40,8 @@ async function main() {
     await middleware.installDatabaseWatchFixtures(app);
   }
 
+  await middleware.installLogging(app);
+
   // These are our assets: images/etc; served out of the /client/public folder
   // await middleware.installSharedStatic(app);
 
