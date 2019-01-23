@@ -8,7 +8,7 @@ import {
   GLOBAL_MENU_TOGGLE
 } from "../../states/global/queries";
 
-export const SIDEBAR_WIDTH = 300;
+export const SIDEBAR_WIDTH = 260;
 
 interface SidebarProps {
   children: React.ReactChild;
