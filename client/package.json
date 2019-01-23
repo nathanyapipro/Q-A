@@ -31,7 +31,7 @@
     "precommit": "pretty-quick --staged",
     "cz": "npm run precommit && git cz",
     "schema": "apollo schema:download schema.json --endpoint=http://localhost:5000/graphql",
-    "types": "apollo codegen:generate --localSchemaFile=schema.json --target=typescript --mergeInFieldsFromFragmentSpreads  --includes=src/**/*.ts --tagName=gql --addTypename --globalTypesFile=src/types/index.ts types"
+    "types": "apollo codegen:generate --localSchemaFile=schema.json --target=typescript  --includes=src/**/*.ts --tagName=gql --addTypename --globalTypesFile=src/types/index.ts types"
   },
   "eslintConfig": {
     "extends": "react-app"
