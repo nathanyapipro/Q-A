@@ -1,15 +1,14 @@
 import gql from "graphql-tag";
 
-export const MENU_GET = gql`
-  query MenuGet {
+export const menu = gql`
+  query GlobalMenu {
     global @client {
       menu
     }
   }
 `;
-
-export const MENU_TOGGLE = gql`
-  mutation MenuToggle {
-    menuToggle @client
+export const toggleMenu = gql`
+  mutation GlobalToggleMenu {
+    globalToggleMenu @client
   }
 `;

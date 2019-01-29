@@ -4,9 +4,10 @@ export interface MenuGet_Global {
 }
 
 export interface MenuGet {
-  global: MenuGet_Global | null;
+  global: MenuGet_Global;
 }
 
-export interface MenuToggleInput {}
+export interface MenuGetVariables {}
 
 export interface MenuToggle {}
+export interface MenuToggleVariables {}

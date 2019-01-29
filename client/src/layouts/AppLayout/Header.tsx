@@ -6,7 +6,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
 import { Mutation } from "react-apollo";
-import { MENU_TOGGLE } from "../../states/global/queries";
+import * as lsGlobalQueries from "../../states/global/queries";
+import { MenuToggle, MenuToggleVariables } from "../../states/global/types";
+
+class LSGlobalMenuToggleMutation extends Mutation<
+  MenuToggle,
+  MenuToggleVariables
+> {}
+
 interface HeaderProps {}
 
 type Props = HeaderProps;
@@ -33,7 +40,7 @@ function HeaderBase(_: Props) {
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
-        <Mutation mutation={MENU_TOGGLE}>
+        <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
           {toggleMenu => (
             <IconButton
               color="inherit"
@@ -44,7 +51,7 @@ function HeaderBase(_: Props) {
               <MenuIcon />
             </IconButton>
           )}
-        </Mutation>
+        </LSGlobalMenuToggleMutation>
       </Toolbar>
     </AppBar>
   );

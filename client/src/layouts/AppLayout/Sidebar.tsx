@@ -3,7 +3,19 @@ import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/styles";
 import { Query, Mutation } from "react-apollo";
-import { MENU_GET, MENU_TOGGLE } from "../../states/global/queries";
+import * as lsGlobalQueries from "../../states/global/queries";
+import {
+  MenuGet,
+  MenuGetVariables,
+  MenuToggle,
+  MenuToggleVariables
+} from "../../states/global/types";
+
+class LSGlobalMenuQuery extends Query<MenuGet, MenuGetVariables> {}
+class LSGlobalMenuToggleMutation extends Mutation<
+  MenuToggle,
+  MenuToggleVariables
+> {}
 
 export const SIDEBAR_WIDTH = 260;
 
@@ -34,31 +46,33 @@ function SidebarBase(props: Props) {
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Hidden smUp implementation="css">
-        <Query query={MENU_GET}>
-          {({
-            data: {
-              global: { menu }
+        <LSGlobalMenuQuery query={lsGlobalQueries.menu}>
+          {({ data }) => {
+            if (!data || !data.global) {
+              return <noscript />;
             }
-          }) => (
-            <Mutation mutation={MENU_TOGGLE}>
-              {toggleMenu => (
-                <Drawer
-                  variant="temporary"
-                  open={menu}
-                  onClose={_ => toggleMenu()}
-                  classes={{
-                    paper: classes.drawerPaper
-                  }}
-                  ModalProps={{
-                    keepMounted: true
-                  }}
-                >
-                  {children}
-                </Drawer>
-              )}
-            </Mutation>
-          )}
-        </Query>
+
+            return (
+              <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
+                {toggleMenu => (
+                  <Drawer
+                    variant="temporary"
+                    open={data.global.menu}
+                    onClose={_ => toggleMenu()}
+                    classes={{
+                      paper: classes.drawerPaper
+                    }}
+                    ModalProps={{
+                      keepMounted: true
+                    }}
+                  >
+                    {children}
+                  </Drawer>
+                )}
+              </LSGlobalMenuToggleMutation>
+            );
+          }}
+        </LSGlobalMenuQuery>
       </Hidden>
       <Hidden xsDown implementation="css">
         <Drawer

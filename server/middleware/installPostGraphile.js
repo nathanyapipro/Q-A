@@ -68,12 +68,6 @@ function postgraphileOptions() {
     // Automatically update GraphQL schema when database changes
     watchPg: isDev,
 
-    // Keep data/schema.graphql and data/schema.json up to date
-    exportGqlSchemaPath: isDev
-      ? `${__dirname}/../../data/schema.graphql`
-      : null,
-    exportJsonSchemaPath: isDev ? `${__dirname}/../../data/schema.json` : null,
-
     graphileBuildOptions: {
       // Any properties here are merged into the settings passed to each Graphile
       // Engine plugin - useful for configuring how the plugins operate.
