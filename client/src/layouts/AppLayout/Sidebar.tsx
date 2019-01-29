@@ -33,7 +33,13 @@ const useStyles = makeStyles(theme => ({
     }
   },
   drawerPaper: {
-    width: SIDEBAR_WIDTH
+    width: SIDEBAR_WIDTH,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText
+  },
+  content: {
+    display: "flex",
+    flexDirection: "column"
   }
 }));
 
@@ -66,7 +72,7 @@ function SidebarBase(props: Props) {
                       keepMounted: true
                     }}
                   >
-                    {children}
+                    <div className={classes.content}>{children}</div>
                   </Drawer>
                 )}
               </LSGlobalMenuToggleMutation>

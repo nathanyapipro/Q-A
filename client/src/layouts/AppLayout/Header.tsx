@@ -8,6 +8,7 @@ import { SIDEBAR_WIDTH } from "./Sidebar";
 import { Mutation } from "react-apollo";
 import * as lsGlobalQueries from "../../states/global/queries";
 import { MenuToggle, MenuToggleVariables } from "../../states/global/types";
+import Typography from "@material-ui/core/Typography";
 
 class LSGlobalMenuToggleMutation extends Mutation<
   MenuToggle,
@@ -31,25 +32,35 @@ const useStyles = makeStyles(theme => ({
       display: "none"
     }
   },
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
+  }
 }));
 
 function HeaderBase(_: Props) {
   const classes = useStyles({});
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar position="fixed" color="default" className={classes.appBar}>
       <Toolbar>
         <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
           {toggleMenu => (
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={_ => toggleMenu()}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
+            <div className={classes.container}>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={_ => toggleMenu()}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" color="inherit">
+                Page Title
+              </Typography>
+            </div>
           )}
         </LSGlobalMenuToggleMutation>
       </Toolbar>

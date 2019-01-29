@@ -3,6 +3,9 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import logo from "../../assets/logo.svg";
 interface AppLayoutProps {
   children: React.ReactChild;
 }
@@ -23,6 +26,16 @@ const useStyles = makeStyles(theme => ({
   main: {
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    padding: `0px ${theme.spacing.unit * 3}px`,
+    ...theme.mixins.toolbar
+  },
+  logo: {
+    height: theme.spacing.unit * 4
   }
 }));
 
@@ -35,7 +48,15 @@ function AppLayoutBase(props: Props) {
       <div className={classes.content}>
         <ErrorBoundary>
           <Header />
-          <Sidebar>Items</Sidebar>
+          <Sidebar>
+            <React.Fragment>
+              <div className={classes.header}>
+                <img className={classes.logo} src={logo} alt="Logo" />
+              </div>
+              <Divider />
+              <List>Items</List>
+            </React.Fragment>
+          </Sidebar>
           <main className={classes.main}>{children}</main>
         </ErrorBoundary>
       </div>

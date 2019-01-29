@@ -20,11 +20,10 @@ const theme = createMuiTheme({
   },
   overrides: {
     MuiAppBar: {
-      root: {
-        boxShadow: "unset"
-      },
+      root: {},
       colorDefault: {
-        backgroundColor: "transparent"
+        backgroundColor: grey[900],
+        color: "white"
       }
     },
     MuiAvatar: {
