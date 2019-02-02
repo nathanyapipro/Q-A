@@ -1,5 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
+import classNames from "classnames";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +10,9 @@ import {
 } from "../../types/Questions";
 import Tag from "../../components/Tag";
 import Status from "../../components/Status";
+import Button from "@material-ui/core/Button";
+import VoteIcon from "@material-ui/icons/ThumbUp";
+import CommentIcon from "@material-ui/icons/Comment";
 
 interface RowProps {
   data: Questions_questions_nodes;
@@ -22,20 +26,42 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.grey[50]
     }
   },
-  tags: {
-    display: "flex",
-    flexFlow: "row wrap"
-  },
   tableCell: {
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2
   },
-  content: {
+  description: {
     display: "flex",
     flexDirection: "row"
   },
-  contentText: {
+  content: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  footer: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  bold: {
     fontWeight: 600
+  },
+  footerButton: {
+    "&:not(:first-child)": {
+      marginLeft: theme.spacing.unit
+    }
+  },
+  buttonIcon: {
+    marginRight: theme.spacing.unit * 1.5,
+    height: "0.8em",
+    width: "0.8em"
+  },
+  vAlignTop: {
+    verticalAlign: "top"
+  },
+  tags: {
+    display: "flex",
+    flexFlow: "row wrap",
+    alignItems: "flex-start"
   }
 }));
 
@@ -46,25 +72,60 @@ function RowBase(props: Props) {
   const { content, votes, questionTags, status } = data;
 
   const voteCount = votes.totalCount;
-  console.log(voteCount);
 
   const tags = questionTags.nodes;
 
   return (
     <TableRow className={classes.container}>
-      <TableCell colSpan={3} className={classes.tableCell}>
-        <div className={classes.content}>
+      <TableCell padding="checkbox" colSpan={3} className={classes.tableCell}>
+        <div className={classes.description}>
           <Status status={status} />
-          <Typography
-            className={classes.contentText}
-            variant="subheading"
-            color="secondary"
-          >
-            {content}
-          </Typography>
+          <div className={classes.content}>
+            <Typography
+              className={classes.bold}
+              gutterBottom
+              variant="subheading"
+              color="secondary"
+            >
+              {content}
+            </Typography>
+            <div className={classes.footer}>
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.footerButton}
+              >
+                <VoteIcon className={classes.buttonIcon} color="inherit" />
+                <Typography
+                  className={classes.bold}
+                  color="inherit"
+                  variant="body1"
+                >
+                  {voteCount}
+                </Typography>
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                className={classes.footerButton}
+              >
+                <CommentIcon className={classes.buttonIcon} color="inherit" />
+                <Typography
+                  className={classes.bold}
+                  color="inherit"
+                  variant="body1"
+                >
+                  {10}
+                </Typography>
+              </Button>
+            </div>
+          </div>
         </div>
       </TableCell>
-      <TableCell colSpan={1} className={classes.tableCell}>
+      <TableCell
+        colSpan={1}
+        className={classNames(classes.tableCell, classes.vAlignTop)}
+      >
         <div className={classes.tags}>
           {tags.map(
             (questionTag: Questions_questions_nodes_questionTags_nodes) =>

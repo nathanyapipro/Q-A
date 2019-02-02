@@ -13,7 +13,8 @@ type Props = StatusProps;
 
 const useStyles = makeStyles(theme => ({
   container: {
-    padding: theme.spacing.unit
+    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px ${theme
+      .spacing.unit / 2}px ${theme.spacing.unit}px`
   }
 }));
 
