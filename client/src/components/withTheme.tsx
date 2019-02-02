@@ -12,9 +12,9 @@ const theme = createMuiTheme({
   palette: {
     primary: deepPurple,
     secondary: {
-      light: grey[500],
-      main: grey[600],
-      dark: grey[700],
+      light: grey[900],
+      main: grey[700],
+      dark: grey[800],
       contrastText: "white"
     }
   },

@@ -15,11 +15,19 @@ interface RowProps {
 
 type Props = RowProps;
 
-const useStyles = makeStyles(_ => ({
-  container: {},
+const useStyles = makeStyles(theme => ({
+  container: {
+    "&:nth-of-type(even)": {
+      backgroundColor: theme.palette.grey[50]
+    }
+  },
   tags: {
     display: "flex",
     flexFlow: "row wrap"
+  },
+  tableCell: {
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2
   }
 }));
 
@@ -35,10 +43,12 @@ function RowBase(props: Props) {
 
   return (
     <TableRow className={classes.container}>
-      <TableCell colSpan={3}>
-        <Typography component="p">{content}</Typography>
+      <TableCell colSpan={3} className={classes.tableCell}>
+        <Typography variant="subheading" color="secondary">
+          {content}
+        </Typography>
       </TableCell>
-      <TableCell colSpan={1}>
+      <TableCell colSpan={1} className={classes.tableCell}>
         <div className={classes.tags}>
           {tags.map(
             (questionTag: Questions_questions_nodes_questionTags_nodes) =>
@@ -51,8 +61,10 @@ function RowBase(props: Props) {
           )}
         </div>
       </TableCell>
-      <TableCell colSpan={1}>
-        <Typography>{voteCount}</Typography>
+      <TableCell colSpan={1} className={classes.tableCell}>
+        <Typography variant="subheading" color="secondary">
+          {voteCount}
+        </Typography>
       </TableCell>
     </TableRow>
   );
