@@ -22,6 +22,7 @@ type Props = RowProps;
 
 const useStyles = makeStyles(theme => ({
   container: {
+    cursor: "pointer",
     "&:nth-of-type(even)": {
       backgroundColor: theme.palette.grey[50]
     }
@@ -52,8 +53,8 @@ const useStyles = makeStyles(theme => ({
   },
   buttonIcon: {
     marginRight: theme.spacing.unit * 1.5,
-    height: "0.8em",
-    width: "0.8em"
+    height: "0.75em",
+    width: "0.75em"
   },
   vAlignTop: {
     verticalAlign: "top"
@@ -76,7 +77,7 @@ function RowBase(props: Props) {
   const tags = questionTags.nodes;
 
   return (
-    <TableRow className={classes.container}>
+    <TableRow className={classes.container} hover>
       <TableCell padding="checkbox" colSpan={3} className={classes.tableCell}>
         <div className={classes.description}>
           <Status status={status} />

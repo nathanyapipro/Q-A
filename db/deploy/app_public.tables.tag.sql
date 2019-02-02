@@ -40,9 +40,9 @@ create trigger _100_timestamps
   execute procedure app_private.tg__timestamps();
 
 insert into app_public.tag (id, name, color) values
-  (1,'Fusion', 'purple'),
-  (2, 'HR', 'blue'),
-  (3, '@JF', 'green');
+  (1,'Fusion', '#7D55D7'),
+  (2, 'HR', '#3A79E2'),
+  (3, '@JF', '#FF7F41');
 
 alter sequence app_public.role_id_seq restart with 4;
 

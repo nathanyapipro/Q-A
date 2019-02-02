@@ -11,7 +11,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-// import Header from "./Header";
 import Row from "./Row";
 
 class QuestionsQuery extends Query<QuestionQueryData, QuestionsVariables> {}
@@ -36,7 +35,7 @@ function TableQuestionBase(_: Props) {
   const classes = useStyles({});
 
   return (
-    <Paper className={classes.container}>
+    <Paper elevation={1} className={classes.container}>
       <Table className={classes.table}>
         <TableBody>
           <QuestionsQuery

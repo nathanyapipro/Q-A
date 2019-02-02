@@ -4,6 +4,7 @@ import { ThemeProvider, makeStyles } from "@material-ui/styles";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import grey from "@material-ui/core/colors/grey";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import spacing from "@material-ui/core/styles/spacing";
 
 const theme = createMuiTheme({
   typography: {
@@ -41,6 +42,21 @@ const theme = createMuiTheme({
     MuiAvatar: {
       root: {
         borderRadius: 0
+      }
+    },
+    MuiTable: {
+      root: {
+        tableLayout: "fixed",
+        position: "relative"
+      }
+    },
+    MuiTableRow: {
+      root: {}
+    },
+    MuiTableCell: {
+      root: {
+        paddingTop: spacing.unit,
+        paddingBottom: spacing.unit
       }
     }
   }
