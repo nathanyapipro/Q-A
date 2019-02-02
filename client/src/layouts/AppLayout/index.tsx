@@ -6,6 +6,7 @@ import Sidebar from "./Sidebar";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import logo from "../../assets/logo.svg";
+import { SIDEBAR_WIDTH } from "./Sidebar";
 
 interface AppLayoutProps {
   children: React.ReactChild;
@@ -34,7 +35,11 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    padding: theme.spacing.unit * 3
+    width: "100vw",
+    padding: theme.spacing.unit * 3,
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100vw - ${SIDEBAR_WIDTH}px)`
+    }
   }
 }));
 

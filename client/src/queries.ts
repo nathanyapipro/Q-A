@@ -113,7 +113,7 @@ export const questions = gql`
           id
           name
         }
-        questionTags(first: 2) {
+        questionTags(first: 3) {
           nodes {
             id
             tag {

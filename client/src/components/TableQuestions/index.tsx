@@ -25,7 +25,9 @@ const useStyles = makeStyles(_ => ({
     display: "flex",
     flexDirection: "column"
   },
-  table: {},
+  table: {
+    tableLayout: "fixed"
+  },
   emptyRow: {}
 }));
 
@@ -55,7 +57,9 @@ function TableQuestionBase(_: Props) {
 
               const rows = data.questions.nodes;
 
-              return rows.map(data => <Row key={data.id} data={data} />);
+              return rows.map(data => (
+                <Row key={`row-${data.id}`} data={data} />
+              ));
             }}
           </QuestionsQuery>
         </TableBody>

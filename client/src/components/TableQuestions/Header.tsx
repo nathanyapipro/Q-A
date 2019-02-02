@@ -9,18 +9,18 @@ interface HeaderProps {}
 type Props = HeaderProps;
 
 const useStyles = makeStyles(_ => ({
-  tableHead: {}
+  container: {}
 }));
 
 function HeaderBase(_: Props) {
   const classes = useStyles({});
 
   return (
-    <TableHead className={classes.tableHead}>
+    <TableHead className={classes.container}>
       <TableRow>
-        <TableCell>CONTENT</TableCell>
-        <TableCell>TAGS</TableCell>
-        <TableCell>VOTES</TableCell>
+        <TableCell colSpan={3} />
+        <TableCell colSpan={1}>TAGS</TableCell>
+        <TableCell colSpan={1}>VOTES</TableCell>
       </TableRow>
     </TableHead>
   );
