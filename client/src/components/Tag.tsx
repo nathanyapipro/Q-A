@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing.unit / 2,
     padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
     color: theme.palette.common.white
+  },
+  text: {
+    fontWeight: theme.typography.fontWeightMedium
   }
 }));
 
@@ -24,7 +27,7 @@ function TagBase(props: Props) {
 
   return (
     <Paper style={{ backgroundColor: color }} className={classes.container}>
-      <Typography color="inherit" noWrap>
+      <Typography className={classes.text} color="inherit" noWrap>
         {name}
       </Typography>
     </Paper>

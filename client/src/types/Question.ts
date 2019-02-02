@@ -1,6 +1,8 @@
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
+import { QuestionStatus } from "./index";
+
 // ====================================================
 // GraphQL query operation: Question
 // ====================================================
@@ -15,18 +17,6 @@ export interface Question_questionById_user {
    * public-facing username (or 'handle') of the user.
    */
   username: string;
-}
-
-export interface Question_questionById_status {
-  __typename: "Status";
-  /**
-   * unique identifier for the status.
-   */
-  id: number;
-  /**
-   * name of the status.
-   */
-  name: string;
 }
 
 export interface Question_questionById_questionTags_nodes_tag {
@@ -138,9 +128,9 @@ export interface Question_questionById {
    */
   user: Question_questionById_user | null;
   /**
-   * Reads a single `Status` that is related to this `Question`.
+   * status of the question
    */
-  status: Question_questionById_status | null;
+  status: QuestionStatus;
   /**
    * Reads and enables pagination through a set of `QuestionTag`.
    */

@@ -5,6 +5,12 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum QuestionStatus {
+  ANSWERED = "ANSWERED",
+  NEW = "NEW",
+  UNDER_REVIEW = "UNDER_REVIEW"
+}
+
 /**
  * Methods to use when ordering `Question`.
  */
@@ -14,8 +20,6 @@ export enum QuestionsOrderBy {
   NATURAL = "NATURAL",
   PRIMARY_KEY_ASC = "PRIMARY_KEY_ASC",
   PRIMARY_KEY_DESC = "PRIMARY_KEY_DESC",
-  STATUS_ID_ASC = "STATUS_ID_ASC",
-  STATUS_ID_DESC = "STATUS_ID_DESC",
   USER_ID_ASC = "USER_ID_ASC",
   USER_ID_DESC = "USER_ID_DESC"
 }
@@ -52,7 +56,6 @@ export interface LoginInput {
 export interface QuestionFilter {
   id?: IntFilter | null;
   userId?: IntFilter | null;
-  statusId?: IntFilter | null;
   and?: QuestionFilter[] | null;
   or?: QuestionFilter[] | null;
   not?: QuestionFilter | null;

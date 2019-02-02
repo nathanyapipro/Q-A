@@ -8,6 +8,7 @@ import {
   Questions_questions_nodes_questionTags_nodes
 } from "../../types/Questions";
 import Tag from "../../components/Tag";
+import Status from "../../components/Status";
 
 interface RowProps {
   data: Questions_questions_nodes;
@@ -28,6 +29,13 @@ const useStyles = makeStyles(theme => ({
   tableCell: {
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2
+  },
+  content: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  contentText: {
+    fontWeight: 600
   }
 }));
 
@@ -35,18 +43,26 @@ function RowBase(props: Props) {
   const classes = useStyles({});
   const { data } = props;
 
-  const { content, votes, questionTags } = data;
+  const { content, votes, questionTags, status } = data;
 
   const voteCount = votes.totalCount;
+  console.log(voteCount);
 
   const tags = questionTags.nodes;
 
   return (
     <TableRow className={classes.container}>
       <TableCell colSpan={3} className={classes.tableCell}>
-        <Typography variant="subheading" color="secondary">
-          {content}
-        </Typography>
+        <div className={classes.content}>
+          <Status status={status} />
+          <Typography
+            className={classes.contentText}
+            variant="subheading"
+            color="secondary"
+          >
+            {content}
+          </Typography>
+        </div>
       </TableCell>
       <TableCell colSpan={1} className={classes.tableCell}>
         <div className={classes.tags}>
@@ -60,11 +76,6 @@ function RowBase(props: Props) {
               )
           )}
         </div>
-      </TableCell>
-      <TableCell colSpan={1} className={classes.tableCell}>
-        <Typography variant="subheading" color="secondary">
-          {voteCount}
-        </Typography>
       </TableCell>
     </TableRow>
   );

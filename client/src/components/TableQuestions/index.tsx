@@ -38,7 +38,6 @@ function TableQuestionBase(_: Props) {
   return (
     <Paper className={classes.container}>
       <Table className={classes.table}>
-        {/* <Header /> */}
         <TableBody>
           <QuestionsQuery
             query={questions}

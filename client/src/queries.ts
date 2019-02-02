@@ -21,17 +21,6 @@ export const currentUser = gql`
   }
 `;
 
-export const statuses = gql`
-  query Statuses {
-    statuses {
-      nodes {
-        id
-        name
-      }
-    }
-  }
-`;
-
 export const tags = gql`
   query Tags {
     tags {
@@ -54,10 +43,7 @@ export const question = gql`
         id
         username
       }
-      status {
-        id
-        name
-      }
+      status
       questionTags {
         nodes {
           tag {
@@ -109,10 +95,7 @@ export const questions = gql`
         id
         content
         userId
-        status {
-          id
-          name
-        }
+        status
         questionTags(first: 3) {
           nodes {
             id

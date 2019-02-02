@@ -14,7 +14,6 @@ app_private.functions.create_anonymous_user 2019-01-09T03:40:58Z Nathan Yapi <na
 app_public.functions.login 2019-01-09T04:07:11Z Nathan Yapi <nathanyapi.pro@gmail.com> # function login
 app_public.functions.create_user 2019-01-11T15:11:40Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # function create_user
 app_public.functions.login_anonymous 2019-01-11T15:21:37Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # function login_anonymous
-app_public.tables.status 2019-01-13T20:45:43Z Nathan Yapi <nathanyapi.pro@gmail.com> # table status
 app_public.tables.tag 2019-01-13T21:05:38Z Nathan Yapi <nathanyapi.pro@gmail.com> # table tag
 app_public.tables.question 2019-01-13T21:12:48Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question
 app_public.tables.vote 2019-01-13T21:39:37Z Nathan Yapi <nathanyapi.pro@gmail.com> # table vote
