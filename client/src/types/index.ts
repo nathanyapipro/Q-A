@@ -44,6 +44,30 @@ export interface IntFilter {
 }
 
 /**
+ * A filter to be used against Int List fields. All fields are combined with a logical ‘and.’
+ */
+export interface IntListFilter {
+  isNull?: boolean | null;
+  equalTo?: (number | null)[] | null;
+  notEqualTo?: (number | null)[] | null;
+  distinctFrom?: (number | null)[] | null;
+  notDistinctFrom?: (number | null)[] | null;
+  anyEqualTo?: number | null;
+  anyNotEqualTo?: number | null;
+  lessThan?: (number | null)[] | null;
+  lessThanOrEqualTo?: (number | null)[] | null;
+  greaterThan?: (number | null)[] | null;
+  greaterThanOrEqualTo?: (number | null)[] | null;
+  contains?: (number | null)[] | null;
+  containedBy?: (number | null)[] | null;
+  overlaps?: (number | null)[] | null;
+  anyLessThan?: number | null;
+  anyLessThanOrEqualTo?: number | null;
+  anyGreaterThan?: number | null;
+  anyGreaterThanOrEqualTo?: number | null;
+}
+
+/**
  * All input for the `login` mutation.
  */
 export interface LoginInput {
@@ -59,80 +83,10 @@ export interface QuestionFilter {
   id?: IntFilter | null;
   userId?: IntFilter | null;
   statusId?: IntFilter | null;
-  user?: UserFilter | null;
-  status?: StatusFilter | null;
+  tagIds?: IntListFilter | null;
   and?: QuestionFilter[] | null;
   or?: QuestionFilter[] | null;
   not?: QuestionFilter | null;
-}
-
-/**
- * A filter to be used against `Role` object types. All fields are combined with a logical ‘and.’
- */
-export interface RoleFilter {
-  id?: IntFilter | null;
-  name?: StringFilter | null;
-  and?: RoleFilter[] | null;
-  or?: RoleFilter[] | null;
-  not?: RoleFilter | null;
-}
-
-/**
- * A filter to be used against `Status` object types. All fields are combined with a logical ‘and.’
- */
-export interface StatusFilter {
-  id?: IntFilter | null;
-  and?: StatusFilter[] | null;
-  or?: StatusFilter[] | null;
-  not?: StatusFilter | null;
-}
-
-/**
- * A filter to be used against String fields. All fields are combined with a logical ‘and.’
- */
-export interface StringFilter {
-  isNull?: boolean | null;
-  equalTo?: string | null;
-  notEqualTo?: string | null;
-  distinctFrom?: string | null;
-  notDistinctFrom?: string | null;
-  in?: string[] | null;
-  notIn?: string[] | null;
-  lessThan?: string | null;
-  lessThanOrEqualTo?: string | null;
-  greaterThan?: string | null;
-  greaterThanOrEqualTo?: string | null;
-  includes?: string | null;
-  notIncludes?: string | null;
-  includesInsensitive?: string | null;
-  notIncludesInsensitive?: string | null;
-  startsWith?: string | null;
-  notStartsWith?: string | null;
-  startsWithInsensitive?: string | null;
-  notStartsWithInsensitive?: string | null;
-  endsWith?: string | null;
-  notEndsWith?: string | null;
-  endsWithInsensitive?: string | null;
-  notEndsWithInsensitive?: string | null;
-  like?: string | null;
-  notLike?: string | null;
-  likeInsensitive?: string | null;
-  notLikeInsensitive?: string | null;
-  similarTo?: string | null;
-  notSimilarTo?: string | null;
-}
-
-/**
- * A filter to be used against `User` object types. All fields are combined with a logical ‘and.’
- */
-export interface UserFilter {
-  id?: IntFilter | null;
-  username?: StringFilter | null;
-  roleId?: IntFilter | null;
-  role?: RoleFilter | null;
-  and?: UserFilter[] | null;
-  or?: UserFilter[] | null;
-  not?: UserFilter | null;
 }
 
 //==============================================================

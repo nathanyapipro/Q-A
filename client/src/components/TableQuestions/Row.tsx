@@ -13,6 +13,7 @@ import Status from "../../components/Status";
 import Button from "@material-ui/core/Button";
 import VoteIcon from "@material-ui/icons/ThumbUp";
 import CommentIcon from "@material-ui/icons/Comment";
+import { fromNow } from "../../helpers/date";
 
 interface RowProps {
   data: Questions_questions_nodes;
@@ -41,7 +42,8 @@ const useStyles = makeStyles(theme => ({
   },
   footer: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center"
   },
   bold: {
     fontWeight: 600
@@ -51,6 +53,9 @@ const useStyles = makeStyles(theme => ({
     "&:not(:first-child)": {
       marginLeft: theme.spacing.unit
     }
+  },
+  createdAt: {
+    alignSelf: "flex-end"
   },
   buttonIcon: {
     marginRight: theme.spacing.unit * 1.5,
@@ -71,7 +76,7 @@ function RowBase(props: Props) {
   const classes = useStyles({});
   const { data } = props;
 
-  const { content, votes, comments, questionTags, status } = data;
+  const { content, votes, comments, questionTags, status, createdAt } = data;
 
   if (!status) {
     return <noscript />;
@@ -90,11 +95,17 @@ function RowBase(props: Props) {
           <div className={classes.content}>
             <Typography
               className={classes.bold}
-              gutterBottom
               variant="subtitle1"
               color="secondary"
             >
               {content}
+            </Typography>
+            <Typography
+              className={classes.createdAt}
+              variant="caption"
+              gutterBottom
+            >
+              {fromNow(createdAt)}
             </Typography>
             <div className={classes.footer}>
               <Button
