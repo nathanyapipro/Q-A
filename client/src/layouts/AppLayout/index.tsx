@@ -35,11 +35,17 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
+    flexShrink: 0,
     width: "100vw",
-    padding: theme.spacing.unit * 3,
     [theme.breakpoints.up("sm")]: {
       width: `calc(100vw - ${SIDEBAR_WIDTH}px)`
     }
+  },
+  children: {
+    display: "flex",
+    flexDirection: "column",
+    flexShrink: 0,
+    padding: theme.spacing.unit * 3
   }
 }));
 
@@ -62,7 +68,7 @@ function AppLayoutBase(props: Props) {
         </Sidebar>
         <main className={classes.main}>
           <div className={classes.toolbar} />
-          {children}
+          <div className={classes.children}>{children}</div>
         </main>
       </ErrorBoundary>
     </div>
