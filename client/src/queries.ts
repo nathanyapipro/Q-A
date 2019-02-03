@@ -43,7 +43,10 @@ export const question = gql`
         id
         username
       }
-      status
+      status {
+        id
+        name
+      }
       questionTags {
         nodes {
           tag {
@@ -94,7 +97,10 @@ export const questions = gql`
         id
         content
         userId
-        status
+        status {
+          id
+          name
+        }
         questionTags(first: 3) {
           nodes {
             id

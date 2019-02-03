@@ -73,6 +73,10 @@ function RowBase(props: Props) {
 
   const { content, votes, comments, questionTags, status } = data;
 
+  if (!status) {
+    return <noscript />;
+  }
+
   const voteCount = votes.totalCount;
   const commentCount = comments.totalCount;
 
@@ -82,12 +86,12 @@ function RowBase(props: Props) {
     <TableRow className={classes.container} hover>
       <TableCell padding="checkbox" colSpan={3} className={classes.tableCell}>
         <div className={classes.description}>
-          <Status status={status} />
+          <Status name={status.name} />
           <div className={classes.content}>
             <Typography
               className={classes.bold}
               gutterBottom
-              variant="subheading"
+              variant="subtitle1"
               color="secondary"
             >
               {content}

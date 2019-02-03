@@ -1,11 +1,23 @@
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
-import { QuestionsOrderBy, QuestionFilter, QuestionStatus } from "./index";
+import { QuestionsOrderBy, QuestionFilter, StatusNameType } from "./index";
 
 // ====================================================
 // GraphQL query operation: Questions
 // ====================================================
+
+export interface Questions_questions_nodes_status {
+  __typename: "Status";
+  /**
+   * unique identifier for the status.
+   */
+  id: number;
+  /**
+   * name of the status.
+   */
+  name: StatusNameType;
+}
 
 export interface Questions_questions_nodes_questionTags_nodes_tag {
   __typename: "Tag";
@@ -74,9 +86,9 @@ export interface Questions_questions_nodes {
    */
   userId: number;
   /**
-   * status of the question
+   * Reads a single `Status` that is related to this `Question`.
    */
-  status: QuestionStatus;
+  status: Questions_questions_nodes_status | null;
   /**
    * Reads and enables pagination through a set of `QuestionTag`.
    */

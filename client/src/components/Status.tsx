@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/styles";
 import NewIcon from "@material-ui/icons/NewReleases";
 import UnderReviewIcon from "@material-ui/icons/SupervisedUserCircle";
 import AnsweredIcon from "@material-ui/icons/CheckCircle";
-import { QuestionStatus } from "../types/index";
+import { StatusNameType } from "../types";
 
 interface StatusProps {
-  status: QuestionStatus;
+  name: StatusNameType;
 }
 
 type Props = StatusProps;
@@ -24,13 +24,13 @@ const useStyles = makeStyles(theme => ({
 
 function StatusBase(props: Props) {
   const classes = useStyles({});
-  const { status } = props;
+  const { name } = props;
   let icon: React.ReactNode;
-  switch (status) {
-    case QuestionStatus.NEW:
+  switch (name) {
+    case StatusNameType.NEW:
       icon = <NewIcon className={classes.icon} style={{ color: "#7D55D7" }} />;
       break;
-    case QuestionStatus.UNDER_REVIEW:
+    case StatusNameType.UNDER_REVIEW:
       icon = (
         <UnderReviewIcon
           className={classes.icon}
@@ -38,7 +38,7 @@ function StatusBase(props: Props) {
         />
       );
       break;
-    case QuestionStatus.ANSWERED:
+    case StatusNameType.ANSWERED:
       icon = (
         <AnsweredIcon className={classes.icon} style={{ color: "#3CBB53" }} />
       );
