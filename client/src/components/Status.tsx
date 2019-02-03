@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import NewIcon from "@material-ui/icons/NewReleases";
 import UnderReviewIcon from "@material-ui/icons/SupervisedUserCircle";
 import AnsweredIcon from "@material-ui/icons/CheckCircle";
-import { StatusNameType } from "../types";
+import { StatusNameType } from "../types/queries";
 
 interface StatusProps {
   name: StatusNameType;

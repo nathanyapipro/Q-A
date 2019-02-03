@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import {
   Questions_questions_nodes,
   Questions_questions_nodes_questionTags_nodes
-} from "../../types/Questions";
+} from "../../types/queries/Questions";
 import Tag from "../../components/Tag";
 import Status from "../../components/Status";
 import Button from "@material-ui/core/Button";

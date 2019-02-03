@@ -34,6 +34,17 @@ export const tags = gql`
   }
 `;
 
+export const statuses = gql`
+  query Statuses {
+    statuses {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+`;
+
 export const question = gql`
   query Question($questionId: Int!) {
     questionById(id: $questionId) {

@@ -13,6 +13,7 @@
     "@types/react": "^16.7.20",
     "@types/react-dom": "^16.0.11",
     "@types/react-router-dom": "^4.3.1",
+    "@types/react-select": "^2.0.11",
     "apollo": "^2.3.0",
     "apollo-boost": "^0.1.25",
     "classnames": "^2.2.6",
@@ -25,6 +26,7 @@
     "react-dom": "^16.8.0-alpha.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
+    "react-select": "^2.1.2",
     "typescript": "3.2.2"
   },
   "scripts": {
@@ -35,7 +37,7 @@
     "precommit": "pretty-quick --staged",
     "cz": "npm run precommit && git cz",
     "schema": "apollo schema:download schema.json --endpoint=http://localhost:5000/graphql",
-    "types": "apollo codegen:generate --localSchemaFile=schema.json --target=typescript  --includes=src/queries.ts --outputFlat --tagName=gql --addTypename --globalTypesFile=src/types/index.ts src/types"
+    "types": "apollo codegen:generate --localSchemaFile=schema.json --target=typescript  --includes=src/queries.ts --outputFlat --tagName=gql --addTypename --globalTypesFile=src/types/queries/index.ts src/types/queries"
   },
   "eslintConfig": {
     "extends": "react-app"

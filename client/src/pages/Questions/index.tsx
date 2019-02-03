@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import TableQuestions from "../../components/TableQuestions";
+import Header from "./Header";
+import QuestionsTable from "../../components/QuestionsTable";
 
 interface QuestionsProps {}
 
@@ -10,14 +11,6 @@ const useStyles = makeStyles(_ => ({
   container: {
     display: "flex",
     flexDirection: "column"
-  },
-  header: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  filters: {
-    display: "flex",
-    flexDirection: "row"
   }
 }));
 
@@ -26,9 +19,8 @@ function QuestionsBase(_: Props) {
 
   return (
     <div className={classes.container}>
-      <div className={classes.header}>Desc, Search, Sort, Create</div>
-      <div className={classes.filters}>Filters</div>
-      <TableQuestions />
+      <Header />
+      <QuestionsTable />
     </div>
   );
 }

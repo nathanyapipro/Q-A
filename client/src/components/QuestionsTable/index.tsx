@@ -4,8 +4,8 @@ import { questions } from "../../queries";
 import { Query } from "react-apollo";
 import {
   QuestionsVariables,
-  Questions as QuestionQueryData
-} from "../../types/Questions";
+  Questions as QuestionsQueryData
+} from "../../types/queries/Questions";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,11 +13,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Row from "./Row";
 
-class QuestionsQuery extends Query<QuestionQueryData, QuestionsVariables> {}
+class QuestionsQuery extends Query<QuestionsQueryData, QuestionsVariables> {}
 
-interface TableQuestionProps {}
+interface QuestionsTableProps {}
 
-type Props = TableQuestionProps;
+type Props = QuestionsTableProps;
 
 const useStyles = makeStyles(_ => ({
   container: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles(_ => ({
   emptyRow: {}
 }));
 
-function TableQuestionBase(_: Props) {
+function QuestionsTableBase(_: Props) {
   const classes = useStyles({});
 
   return (
@@ -67,6 +67,6 @@ function TableQuestionBase(_: Props) {
   );
 }
 
-const TableQuestion = TableQuestionBase;
+const QuestionsTable = QuestionsTableBase;
 
-export default TableQuestion;
+export default QuestionsTable;

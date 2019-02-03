@@ -1,6 +1,8 @@
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
+import { StatusNameType } from "./index";
+
 // ====================================================
 // GraphQL query operation: Statuses
 // ====================================================
@@ -14,7 +16,7 @@ export interface Statuses_statuses_nodes {
   /**
    * name of the status.
    */
-  name: string;
+  name: StatusNameType;
 }
 
 export interface Statuses_statuses {
