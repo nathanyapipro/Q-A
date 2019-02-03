@@ -51,26 +51,18 @@ export interface Question_questionById_questionTags {
   nodes: Question_questionById_questionTags_nodes[];
 }
 
-export interface Question_questionById_votes_nodes {
-  __typename: "Vote";
-  /**
-   * unique identifier for the vote.
-   */
-  id: number;
-  /**
-   * owner of the vote.
-   */
-  userId: number;
-}
-
 export interface Question_questionById_votes {
   __typename: "VotesConnection";
   /**
-   * A list of `Vote` objects.
-   */
-  nodes: Question_questionById_votes_nodes[];
-  /**
    * The count of *all* `Vote` you could get from the connection.
+   */
+  totalCount: number | null;
+}
+
+export interface Question_questionById_comments {
+  __typename: "CommentsConnection";
+  /**
+   * The count of *all* `Comment` you could get from the connection.
    */
   totalCount: number | null;
 }
@@ -139,6 +131,10 @@ export interface Question_questionById {
    * Reads and enables pagination through a set of `Vote`.
    */
   votes: Question_questionById_votes;
+  /**
+   * Reads and enables pagination through a set of `Comment`.
+   */
+  comments: Question_questionById_comments;
   /**
    * Reads and enables pagination through a set of `Answer`.
    */

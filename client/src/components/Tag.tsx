@@ -26,7 +26,11 @@ function TagBase(props: Props) {
   const { name, color } = props;
 
   return (
-    <Paper style={{ backgroundColor: color }} className={classes.container}>
+    <Paper
+      elevation={1}
+      style={{ backgroundColor: color }}
+      className={classes.container}
+    >
       <Typography className={classes.text} color="inherit" noWrap>
         {name}
       </Typography>

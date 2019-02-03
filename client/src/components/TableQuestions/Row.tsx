@@ -47,6 +47,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 600
   },
   footerButton: {
+    padding: `${theme.spacing.unit / 4}px ${theme.spacing.unit}px`,
     "&:not(:first-child)": {
       marginLeft: theme.spacing.unit
     }
@@ -70,9 +71,10 @@ function RowBase(props: Props) {
   const classes = useStyles({});
   const { data } = props;
 
-  const { content, votes, questionTags, status } = data;
+  const { content, votes, comments, questionTags, status } = data;
 
   const voteCount = votes.totalCount;
+  const commentCount = comments.totalCount;
 
   const tags = questionTags.nodes;
 
@@ -116,7 +118,7 @@ function RowBase(props: Props) {
                   color="inherit"
                   variant="body1"
                 >
-                  {10}
+                  {commentCount}
                 </Typography>
               </Button>
             </div>

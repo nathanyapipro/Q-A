@@ -54,10 +54,9 @@ export const question = gql`
         }
       }
       votes {
-        nodes {
-          id
-          userId
-        }
+        totalCount
+      }
+      comments {
         totalCount
       }
       answers {
@@ -107,6 +106,9 @@ export const questions = gql`
           totalCount
         }
         votes {
+          totalCount
+        }
+        comments {
           totalCount
         }
         createdAt

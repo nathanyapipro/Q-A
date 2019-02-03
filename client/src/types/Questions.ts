@@ -51,6 +51,14 @@ export interface Questions_questions_nodes_votes {
   totalCount: number | null;
 }
 
+export interface Questions_questions_nodes_comments {
+  __typename: "CommentsConnection";
+  /**
+   * The count of *all* `Comment` you could get from the connection.
+   */
+  totalCount: number | null;
+}
+
 export interface Questions_questions_nodes {
   __typename: "Question";
   /**
@@ -77,6 +85,10 @@ export interface Questions_questions_nodes {
    * Reads and enables pagination through a set of `Vote`.
    */
   votes: Questions_questions_nodes_votes;
+  /**
+   * Reads and enables pagination through a set of `Comment`.
+   */
+  comments: Questions_questions_nodes_comments;
   createdAt: any;
   updatedAt: any;
 }
