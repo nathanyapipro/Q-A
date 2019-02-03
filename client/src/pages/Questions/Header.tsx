@@ -40,11 +40,11 @@ function HeaderBase(_: Props) {
   >([]);
 
   function handleStatusChange(item: any) {
-    setSelectedStatusOptions([...selectedStatusOptions, ...item]);
+    setSelectedStatusOptions(item);
   }
 
   function handleTagsChange(item: any) {
-    setSelectedTagsOptions([...selectedTagsOptions, ...item]);
+    setSelectedTagsOptions(item);
   }
 
   return (

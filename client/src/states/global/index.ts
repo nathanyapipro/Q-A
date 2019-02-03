@@ -1,6 +1,11 @@
 import * as lsGlobalQueries from "./queries";
+import { Global } from "./types";
 
-export const defaults = {
+interface Defaults {
+  global: Global;
+}
+
+export const defaults: Defaults = {
   global: {
     __typename: "Global",
     menu: false
