@@ -5,13 +5,13 @@ import { makeStyles } from "@material-ui/styles";
 import { Query, Mutation } from "react-apollo";
 import * as lsGlobalQueries from "../../states/global/queries";
 import {
-  MenuGet,
-  MenuGetVariables,
+  Menu,
+  MenuVariables,
   MenuToggle,
   MenuToggleVariables
 } from "../../states/global/types";
 
-class LSGlobalMenuQuery extends Query<MenuGet, MenuGetVariables> {}
+class LSGlobalMenuQuery extends Query<Menu, MenuVariables> {}
 class LSGlobalMenuToggleMutation extends Mutation<
   MenuToggle,
   MenuToggleVariables

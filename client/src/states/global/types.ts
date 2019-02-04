@@ -4,13 +4,13 @@ export interface Global {
   menu: boolean;
 }
 
-export type MenuGet_Global = Pick<Global, "__typename" | "menu">;
+export type Global_Menu = Pick<Global, "__typename" | "menu">;
 
-export interface MenuGet {
-  global: MenuGet_Global;
+export interface Menu {
+  global: Global_Menu;
 }
 
-export interface MenuGetVariables {}
+export interface MenuVariables {}
 
 export interface MenuToggle {}
 export interface MenuToggleVariables {}

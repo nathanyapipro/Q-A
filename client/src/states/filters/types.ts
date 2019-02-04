@@ -7,16 +7,8 @@ export interface Filters {
   sortBy: string;
 }
 
-export type MenuGet_Global = Pick<
-  Filters,
-  "__typename" | "statusIds" | "tagIds" | "sortBy"
->;
+export type Filters_StatusIds = Pick<Filters, "__typename" | "statusIds">;
 
-export interface MenuGet {
-  global: MenuGet_Global;
+export interface StatusIds {
+  filters: Filters_StatusIds;
 }
-
-export interface MenuGetVariables {}
-
-export interface MenuToggle {}
-export interface MenuToggleVariables {}
