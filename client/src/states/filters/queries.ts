@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const statusIds = gql`
-  query Filters {
+  query FiltersStatusIds {
     filters @client {
       statusIds
     }
@@ -9,7 +9,7 @@ export const statusIds = gql`
 `;
 
 export const tagIds = gql`
-  query Filters {
+  query FiltersTagIds {
     filters @client {
       tagIds
     }
@@ -17,15 +17,27 @@ export const tagIds = gql`
 `;
 
 export const sortBy = gql`
-  query Filters {
+  query FiltersSortBy {
     filters @client {
       sortBy
     }
   }
 `;
 
-export const toggleMenu = gql`
-  mutation GlobalToggleMenu {
-    globalToggleMenu @client
+export const setStatusIds = gql`
+  mutation FiltersSetStatusIds {
+    setStatusIds @client
+  }
+`;
+
+export const setTagIds = gql`
+  mutation FiltersSetTagIds {
+    setTagIds @client
+  }
+`;
+
+export const setSortBy = gql`
+  mutation FiltersSetSortBy {
+    setSortBy @client
   }
 `;

@@ -1,4 +1,10 @@
-import { Filters } from "./types";
+import {
+  Filters,
+  SetStatusIdsVariables,
+  SetTagIdsVariables,
+  SetSortByVariables
+} from "./types";
+import * as lsFilterQueries from "./queries";
 
 interface Defaults {
   filters: Filters;
@@ -15,17 +21,53 @@ export const defaults: Defaults = {
 
 const resolvers = {
   Mutation: {
-    globalToggleMenu: (_: any, __: {}, { cache }: any) => {
-      const previousState = cache.readQuery({ query: lsGlobalQueries.menu });
+    filtersSetStatusIds: (
+      _: any,
+      { statusIds }: SetStatusIdsVariables,
+      { cache }: any
+    ) => {
+      const previousState = cache.readQuery({
+        query: lsFilterQueries.statusIds
+      });
       const data = {
-        global: {
-          ...previousState.global,
-          menu: !previousState.global.menu
+        filters: {
+          ...previousState.filters,
+          statusIds
         }
       };
-      cache.writeQuery({ query: lsGlobalQueries.menu, data });
+      cache.writeQuery({ query: lsFilterQueries.statusIds, data });
       return null;
     }
+  },
+  filtersSetTagIds: (
+    _: any,
+    { tagIds }: SetTagIdsVariables,
+    { cache }: any
+  ) => {
+    const previousState = cache.readQuery({ query: lsFilterQueries.tagIds });
+    const data = {
+      filters: {
+        ...previousState.filters,
+        tagIds
+      }
+    };
+    cache.writeQuery({ query: lsFilterQueries.tagIds, data });
+    return null;
+  },
+  filtersSetSortBy: (
+    _: any,
+    { sortBy }: SetSortByVariables,
+    { cache }: any
+  ) => {
+    const previousState = cache.readQuery({ query: lsFilterQueries.sortBy });
+    const data = {
+      filters: {
+        ...previousState.filters,
+        sortBy
+      }
+    };
+    cache.writeQuery({ query: lsFilterQueries.sortBy, data });
+    return null;
   }
 };
 
