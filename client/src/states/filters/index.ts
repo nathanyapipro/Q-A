@@ -1,5 +1,5 @@
 import {
-  Filters,
+  FiltersType,
   SetStatusIdsVariables,
   SetTagIdsVariables,
   SetSortByVariables
@@ -7,7 +7,7 @@ import {
 import * as lsFilterQueries from "./queries";
 
 interface Defaults {
-  filters: Filters;
+  filters: FiltersType;
 }
 
 export const defaults: Defaults = {

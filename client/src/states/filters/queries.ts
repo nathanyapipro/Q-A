@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const all = gql`
+  query Filters {
+    filters @client {
+      statusIds
+      tagIds
+      sortBy
+    }
+  }
+`;
+
 export const statusIds = gql`
   query FiltersStatusIds {
     filters @client {
