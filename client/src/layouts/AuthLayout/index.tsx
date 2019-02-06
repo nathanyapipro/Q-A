@@ -1,11 +1,11 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 
-interface AuthLayoutProps {
+interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = AuthLayoutProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(_ => ({
   container: {

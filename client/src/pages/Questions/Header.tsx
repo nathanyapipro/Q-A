@@ -10,9 +10,9 @@ import { Tags as TagsQueryData } from "../../types/queries/Tags";
 class StatusesQuery extends Query<StatusesQueryData> {}
 class TagsQuery extends Query<TagsQueryData> {}
 
-interface HeaderProps {}
+interface OwnProps {}
 
-type Props = HeaderProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   container: {

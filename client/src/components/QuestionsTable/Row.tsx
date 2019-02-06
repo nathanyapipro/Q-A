@@ -15,11 +15,11 @@ import VoteIcon from "@material-ui/icons/ThumbUp";
 import CommentIcon from "@material-ui/icons/Comment";
 import { fromNow } from "../../helpers/date";
 
-interface RowProps {
+interface OwnProps {
   data: Questions_questions_nodes;
 }
 
-type Props = RowProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   container: {

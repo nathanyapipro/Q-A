@@ -15,9 +15,9 @@ class LSGlobalMenuToggleMutation extends Mutation<
   MenuToggleVariables
 > {}
 
-interface HeaderProps {}
+interface OwnProps {}
 
-type Props = HeaderProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   appBar: {

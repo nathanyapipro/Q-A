@@ -5,11 +5,11 @@ import UnderReviewIcon from "@material-ui/icons/SupervisedUserCircle";
 import AnsweredIcon from "@material-ui/icons/CheckCircle";
 import { StatusNameType } from "../types/queries";
 
-interface StatusProps {
+interface OwnProps {
   name: StatusNameType;
 }
 
-type Props = StatusProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   container: {

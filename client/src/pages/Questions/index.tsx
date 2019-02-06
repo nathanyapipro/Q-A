@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import QuestionsTable from "../../components/QuestionsTable";
 
-interface QuestionsProps {}
+interface OwnProps {}
 
-type Props = QuestionsProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(_ => ({
   container: {

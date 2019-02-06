@@ -3,12 +3,12 @@ import { makeStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
-interface TagProps {
+interface OwnProps {
   name: string;
   color: string;
 }
 
-type Props = TagProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   container: {

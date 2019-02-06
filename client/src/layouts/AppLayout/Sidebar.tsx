@@ -17,11 +17,11 @@ class LSGlobalMenuToggleMutation extends Mutation<
 
 export const SIDEBAR_WIDTH = 260;
 
-interface SidebarProps {
+interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = SidebarProps & WithLSGlobalMenuQuery;
+type Props = OwnProps & WithLSGlobalMenuQuery;
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -83,6 +83,8 @@ function SidebarBase(props: Props) {
   );
 }
 
-const Sidebar = compose(withLSGlobalMenuQuery)(SidebarBase);
+const Sidebar: React.ComponentType<OwnProps> = compose(withLSGlobalMenuQuery)(
+  SidebarBase
+);
 
 export default Sidebar;

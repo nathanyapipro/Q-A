@@ -15,9 +15,9 @@ import Row from "./Row";
 
 class QuestionsQuery extends Query<QuestionsQueryData, QuestionsVariables> {}
 
-interface QuestionsTableProps {}
+interface OwnProps {}
 
-type Props = QuestionsTableProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(_ => ({
   container: {

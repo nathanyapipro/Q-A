@@ -8,11 +8,11 @@ import List from "@material-ui/core/List";
 import logo from "../../assets/logo.svg";
 import { SIDEBAR_WIDTH } from "./Sidebar";
 
-interface AppLayoutProps {
+interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = AppLayoutProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   container: {
