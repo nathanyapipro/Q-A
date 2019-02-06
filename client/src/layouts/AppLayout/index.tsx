@@ -53,11 +53,17 @@ function AppLayoutBase(props: Props) {
   const { children } = props;
   const classes = useStyles({});
 
+  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
+
+  function toggleMenu() {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
   return (
     <div className={classes.container}>
       <ErrorBoundary>
-        <Header />
-        <Sidebar>
+        <Header toggleMenu={toggleMenu} />
+        <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}>
           <React.Fragment>
             <div className={classes.header}>
               <img className={classes.logo} src={logo} alt="Logo" />

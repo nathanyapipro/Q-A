@@ -5,16 +5,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
-import { compose } from "react-apollo";
 import Typography from "@material-ui/core/Typography";
-import {
-  withLSGlobalMenuToggleMutation,
-  WithLSGlobalMenuToggleMutation
-} from "../../hocs/withLSGlobalMenuToggleMutation";
 
-interface OwnProps {}
+interface OwnProps {
+  toggleMenu: () => void;
+}
 
-type Props = OwnProps & WithLSGlobalMenuToggleMutation;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -39,10 +36,10 @@ const useStyles = makeStyles(theme => ({
 
 function HeaderBase(props: Props) {
   const classes = useStyles({});
-  const { menuToggle } = props;
+  const { toggleMenu } = props;
 
   function handleClick(_: React.MouseEvent<HTMLElement, MouseEvent>) {
-    menuToggle();
+    toggleMenu();
   }
 
   return (
@@ -66,8 +63,6 @@ function HeaderBase(props: Props) {
   );
 }
 
-const Header: React.ComponentType<OwnProps> = compose(
-  withLSGlobalMenuToggleMutation
-)(HeaderBase);
+const Header = HeaderBase;
 
 export default Header;

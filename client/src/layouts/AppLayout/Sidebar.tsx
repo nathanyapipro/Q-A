@@ -2,23 +2,16 @@ import * as React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/styles";
-import { compose } from "react-apollo";
-import {
-  withLSGlobalMenuQuery,
-  WithLSGlobalMenuQuery
-} from "../../hocs/withLSGlobalMenuQuery";
-import {
-  withLSGlobalMenuToggleMutation,
-  WithLSGlobalMenuToggleMutation
-} from "../../hocs/withLSGlobalMenuToggleMutation";
 
 export const SIDEBAR_WIDTH = 260;
 
 interface OwnProps {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
   children: React.ReactChild;
 }
 
-type Props = OwnProps & WithLSGlobalMenuQuery & WithLSGlobalMenuToggleMutation;
+type Props = OwnProps;
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -39,12 +32,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SidebarBase(props: Props) {
-  const { children, menu, menuToggle } = props;
+  const { children, isMenuOpen, toggleMenu } = props;
 
   const classes = useStyles({});
 
   function handleClose(_: React.SyntheticEvent<{}, Event>) {
-    menuToggle();
+    toggleMenu();
   }
 
   return (
@@ -53,7 +46,7 @@ function SidebarBase(props: Props) {
       <Hidden smUp implementation="css">
         <Drawer
           variant="temporary"
-          open={menu}
+          open={isMenuOpen}
           onClose={handleClose}
           classes={{
             paper: classes.drawerPaper
@@ -80,9 +73,6 @@ function SidebarBase(props: Props) {
   );
 }
 
-const Sidebar: React.ComponentType<OwnProps> = compose(
-  withLSGlobalMenuQuery,
-  withLSGlobalMenuToggleMutation
-)(SidebarBase);
+const Sidebar = SidebarBase;
 
 export default Sidebar;
