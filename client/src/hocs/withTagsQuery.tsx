@@ -1,6 +1,6 @@
 import { graphql } from "react-apollo";
 import { ApolloError } from "apollo-client";
-import { STATUSES_QUERY } from "../queries";
+import { TAGS_QUERY } from "../queries";
 import { Tags, Tags_tags_nodes } from "../types/queries/Tags";
 
 type InputProps = {};
@@ -20,7 +20,7 @@ export const withTagsQuery = graphql<
   Response,
   Variables,
   ChildProps
->(STATUSES_QUERY, {
+>(TAGS_QUERY, {
   props: ({ data }) => {
     if (!data) {
       throw new Error("No data prop found");
