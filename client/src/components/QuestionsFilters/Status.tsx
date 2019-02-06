@@ -5,7 +5,7 @@ import { compose } from "react-apollo";
 import {
   withStatusesQuery,
   WithStatusesQuery
-} from "../../hocs/withStatusesQuery";
+} from "../../queries/withStatusesQuery";
 
 interface OwnProps {}
 

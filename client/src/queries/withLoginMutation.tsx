@@ -1,6 +1,14 @@
 import { graphql, MutationFn } from "react-apollo";
-import { LOGIN_MUTATION } from "../queries";
-import { Login, LoginVariables } from "../types/queries/Login";
+import { Login, LoginVariables } from "../types/apollo/Login";
+import gql from "graphql-tag";
+
+const LOGIN_MUTATION = gql`
+  mutation Login($loginInput: LoginInput!) {
+    login(input: $loginInput) {
+      jwtToken
+    }
+  }
+`;
 
 type InputProps = {};
 

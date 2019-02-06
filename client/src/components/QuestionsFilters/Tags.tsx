@@ -2,7 +2,7 @@ import * as React from "react";
 import TagsAutocomplete from "../Autocomplete/Tags";
 import { compose } from "react-apollo";
 
-import { withTagsQuery, WithTagsQuery } from "../../hocs/withTagsQuery";
+import { withTagsQuery, WithTagsQuery } from "../../queries/withTagsQuery";
 
 interface OwnProps {}
 

@@ -1,7 +1,18 @@
 import { graphql } from "react-apollo";
 import { ApolloError } from "apollo-client";
-import { STATUSES_QUERY } from "../queries";
-import { Statuses, Statuses_statuses_nodes } from "../types/queries/Statuses";
+import gql from "graphql-tag";
+import { Statuses, Statuses_statuses_nodes } from "../types/apollo/Statuses";
+
+const STATUSES_QUERY = gql`
+  query Statuses {
+    statuses {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+`;
 
 type InputProps = {};
 

@@ -1,7 +1,20 @@
 import { graphql } from "react-apollo";
 import { ApolloError } from "apollo-client";
-import { TAGS_QUERY } from "../queries";
-import { Tags, Tags_tags_nodes } from "../types/queries/Tags";
+import gql from "graphql-tag";
+import { Tags, Tags_tags_nodes } from "../types/apollo/Tags";
+
+const TAGS_QUERY = gql`
+  query Tags {
+    tags {
+      nodes {
+        id
+        name
+        color
+        isEnabled
+      }
+    }
+  }
+`;
 
 type InputProps = {};
 

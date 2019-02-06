@@ -1,11 +1,60 @@
 import { graphql } from "react-apollo";
 import { ApolloError } from "apollo-client";
-import { QUESTIONS_QUERY } from "../queries";
+import gql from "graphql-tag";
 import {
   QuestionsVariables,
   Questions,
   Questions_questions_nodes
-} from "../types/queries/Questions";
+} from "../types/apollo/Questions";
+
+const QUESTIONS_QUERY = gql`
+  query Questions(
+    $first: Int!
+    $offset: Int!
+    $orderBy: [QuestionsOrderBy!]
+    $filter: QuestionFilter
+  ) {
+    questions(
+      first: $first
+      offset: $offset
+      orderBy: $orderBy
+      filter: $filter
+    ) {
+      nodes {
+        id
+        content
+        userId
+        status {
+          id
+          name
+        }
+        questionTags(first: 3) {
+          nodes {
+            id
+            tag {
+              name
+              color
+            }
+          }
+          totalCount
+        }
+        votes {
+          totalCount
+        }
+        comments {
+          totalCount
+        }
+        createdAt
+        updatedAt
+      }
+      totalCount
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+`;
 
 type InputProps = QuestionsVariables;
 

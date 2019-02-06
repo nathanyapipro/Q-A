@@ -11,7 +11,7 @@ import Row from "./Row";
 import {
   withQuestionsQuery,
   WithQuestionsQuery
-} from "../../hocs/withQuestionsQuery";
+} from "../../queries/withQuestionsQuery";
 
 interface OwnProps {}
 
