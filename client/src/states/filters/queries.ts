@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-export const all = gql`
-  query Filters {
+export const LS_FILTERS_ALL_QUERY = gql`
+  query LSFiltersAll {
     filters @client {
       statusIds
       tagIds
@@ -10,44 +10,44 @@ export const all = gql`
   }
 `;
 
-export const statusIds = gql`
-  query FiltersStatusIds {
+export const LS_FILTERS_STATUS_IDS_QUERY = gql`
+  query LSFiltersStatusIds {
     filters @client {
       statusIds
     }
   }
 `;
 
-export const tagIds = gql`
-  query FiltersTagIds {
+export const LS_FILTERS_TAG_IDS_QUERY = gql`
+  query LSFiltersTagIds {
     filters @client {
       tagIds
     }
   }
 `;
 
-export const sortBy = gql`
-  query FiltersSortBy {
+export const LS_FILTERS_SORT_BY_QUERY = gql`
+  query LSFiltersSortBy {
     filters @client {
       sortBy
     }
   }
 `;
 
-export const setStatusIds = gql`
-  mutation FiltersSetStatusIds {
-    setStatusIds @client
+export const LS_FILTERS_STATUS_IDS_SET_MUTATION = gql`
+  mutation LSFiltersStatusIdsSet {
+    filtersStatusIdsSet @client
   }
 `;
 
-export const setTagIds = gql`
-  mutation FiltersSetTagIds {
-    setTagIds @client
+export const LS_FILTERS_TAG_IDS_SET_MUTATION = gql`
+  mutation LSFiltersTagIdsSet {
+    filtersTagIdsSet @client
   }
 `;
 
-export const setSortBy = gql`
-  mutation FiltersSetSortBy {
-    setSortBy @client
+export const LS_FILTERS_SORT_BY_SET_MUTATION = gql`
+  mutation LSFiltersSortBySet {
+    filtersSortBySet @client
   }
 `;

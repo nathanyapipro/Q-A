@@ -1,47 +1,39 @@
 import { Pick } from "../../types";
 
-export interface FiltersType {
+export interface LSFilters {
   __typename: "Filters";
   statusIds: Array<number>;
   tagIds: Array<number>;
   sortBy: string;
 }
 
-export interface Filters {
-  filters: Filters;
+export interface LSFiltersALL {
+  filters: LSFilters;
 }
 
-export interface StatusIdsVariables {}
-
-export type Filters_StatusIds = Pick<FiltersType, "__typename" | "statusIds">;
-export interface StatusIds {
-  filters: Filters_StatusIds;
+export interface LSFiltersStatusIds {
+  filters: Pick<LSFilters, "__typename" | "statusIds">;
 }
-export interface StatusIdsVariables {}
 
-export type Filters_TagIds = Pick<FiltersType, "__typename" | "tagIds">;
-export interface TagIds {
-  filters: Filters_TagIds;
+export interface LSFiltersTagIds {
+  filters: Pick<LSFilters, "__typename" | "tagIds">;
 }
-export interface TagIdsVariables {}
 
-export type Filters_SortBy = Pick<FiltersType, "__typename" | "sortBy">;
-export interface SortBy {
-  filters: Filters_SortBy;
+export interface LSFiltersSortBy {
+  filters: Pick<LSFilters, "__typename" | "sortBy">;
 }
-export interface SortByVariables {}
 
-export interface SetStatusIds {}
-export interface SetStatusIdsVariables {
+export interface LSFiltersStatusIdsSet {}
+export interface LSFiltersStatusIdsSetVariables {
   statusIds: Array<number>;
 }
 
-export interface SetTagIds {}
-export interface SetTagIdsVariables {
+export interface LSFiltersTagIdsSet {}
+export interface LSFiltersTagIdsSetVariables {
   tagIds: Array<number>;
 }
 
-export interface SetSortBy {}
-export interface SetSortByVariables {
+export interface LSFiltersSortBySet {}
+export interface LSFiltersSortBySetVariables {
   sortBy: string;
 }

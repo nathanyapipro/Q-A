@@ -1,13 +1,17 @@
 import {
-  FiltersType,
-  SetStatusIdsVariables,
-  SetTagIdsVariables,
-  SetSortByVariables
+  LSFilters,
+  LSFiltersStatusIdsSetVariables,
+  LSFiltersTagIdsSetVariables,
+  LSFiltersSortBySetVariables
 } from "./types";
-import * as lsFilterQueries from "./queries";
+import {
+  LS_FILTERS_STATUS_IDS_QUERY,
+  LS_FILTERS_TAG_IDS_QUERY,
+  LS_FILTERS_SORT_BY_QUERY
+} from "./queries";
 
 interface Defaults {
-  filters: FiltersType;
+  filters: LSFilters;
 }
 
 export const defaults: Defaults = {
@@ -21,13 +25,13 @@ export const defaults: Defaults = {
 
 const resolvers = {
   Mutation: {
-    filtersSetStatusIds: (
+    filtersStatusIdsSet: (
       _: any,
-      { statusIds }: SetStatusIdsVariables,
+      { statusIds }: LSFiltersStatusIdsSetVariables,
       { cache }: any
     ) => {
       const previousState = cache.readQuery({
-        query: lsFilterQueries.statusIds
+        query: LS_FILTERS_STATUS_IDS_QUERY
       });
       const data = {
         filters: {
@@ -35,38 +39,38 @@ const resolvers = {
           statusIds
         }
       };
-      cache.writeQuery({ query: lsFilterQueries.statusIds, data });
+      cache.writeQuery({ query: LS_FILTERS_STATUS_IDS_QUERY, data });
       return null;
     }
   },
-  filtersSetTagIds: (
+  filtersTagIdsSet: (
     _: any,
-    { tagIds }: SetTagIdsVariables,
+    { tagIds }: LSFiltersTagIdsSetVariables,
     { cache }: any
   ) => {
-    const previousState = cache.readQuery({ query: lsFilterQueries.tagIds });
+    const previousState = cache.readQuery({ query: LS_FILTERS_TAG_IDS_QUERY });
     const data = {
       filters: {
         ...previousState.filters,
         tagIds
       }
     };
-    cache.writeQuery({ query: lsFilterQueries.tagIds, data });
+    cache.writeQuery({ query: LS_FILTERS_TAG_IDS_QUERY, data });
     return null;
   },
-  filtersSetSortBy: (
+  filtersSortBySet: (
     _: any,
-    { sortBy }: SetSortByVariables,
+    { sortBy }: LSFiltersSortBySetVariables,
     { cache }: any
   ) => {
-    const previousState = cache.readQuery({ query: lsFilterQueries.sortBy });
+    const previousState = cache.readQuery({ query: LS_FILTERS_SORT_BY_QUERY });
     const data = {
       filters: {
         ...previousState.filters,
         sortBy
       }
     };
-    cache.writeQuery({ query: lsFilterQueries.sortBy, data });
+    cache.writeQuery({ query: LS_FILTERS_SORT_BY_QUERY, data });
     return null;
   }
 };
