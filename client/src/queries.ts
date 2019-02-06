@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const login = gql`
+export const LOGIN_MUTATION = gql`
   mutation Login($loginInput: LoginInput!) {
     login(input: $loginInput) {
       jwtToken
@@ -8,7 +8,7 @@ export const login = gql`
   }
 `;
 
-export const currentUser = gql`
+export const CURRENT_USER_QUERY = gql`
   query CurrentUser($userId: Int!) {
     userById(id: $userId) {
       id
@@ -21,7 +21,7 @@ export const currentUser = gql`
   }
 `;
 
-export const tags = gql`
+export const TAGS_QUERY = gql`
   query Tags {
     tags {
       nodes {
@@ -34,7 +34,7 @@ export const tags = gql`
   }
 `;
 
-export const statuses = gql`
+export const STATUSES_QUERY = gql`
   query Statuses {
     statuses {
       nodes {
@@ -45,7 +45,7 @@ export const statuses = gql`
   }
 `;
 
-export const question = gql`
+export const QUESTION_QUERY = gql`
   query Question($questionId: Int!) {
     questionById(id: $questionId) {
       id
@@ -91,7 +91,7 @@ export const question = gql`
   }
 `;
 
-export const questions = gql`
+export const QUESTIONS_QUERY = gql`
   query Questions(
     $first: Int!
     $offset: Int!

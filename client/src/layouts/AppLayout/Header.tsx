@@ -5,19 +5,16 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
-import { Mutation } from "react-apollo";
-import * as lsGlobalQueries from "../../states/global/queries";
-import { MenuToggle, MenuToggleVariables } from "../../states/global/types";
+import { compose } from "react-apollo";
 import Typography from "@material-ui/core/Typography";
-
-class LSGlobalMenuToggleMutation extends Mutation<
-  MenuToggle,
-  MenuToggleVariables
-> {}
+import {
+  withLSGlobalMenuToggleMutation,
+  WithLSGlobalMenuToggleMutation
+} from "../../hocs/withLSGlobalMenuToggleMutation";
 
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & WithLSGlobalMenuToggleMutation;
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -40,34 +37,37 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function HeaderBase(_: Props) {
+function HeaderBase(props: Props) {
   const classes = useStyles({});
+  const { menuToggle } = props;
+
+  function handleClick(_: React.MouseEvent<HTMLElement, MouseEvent>) {
+    menuToggle();
+  }
 
   return (
     <AppBar position="fixed" color="default" className={classes.appBar}>
       <Toolbar>
-        <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
-          {toggleMenu => (
-            <div className={classes.container}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={_ => toggleMenu()}
-                className={classes.menuButton}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit">
-                Page Title
-              </Typography>
-            </div>
-          )}
-        </LSGlobalMenuToggleMutation>
+        <div className={classes.container}>
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={handleClick}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+            Page Title
+          </Typography>
+        </div>
       </Toolbar>
     </AppBar>
   );
 }
 
-const Header = HeaderBase;
+const Header: React.ComponentType<OwnProps> = compose(
+  withLSGlobalMenuToggleMutation
+)(HeaderBase);
 
 export default Header;

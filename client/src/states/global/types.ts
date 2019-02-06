@@ -1,16 +1,9 @@
 import { Pick } from "../../types";
-export interface Global {
+export interface LSGlobal {
   __typename: "Global";
   menu: boolean;
 }
 
-export type Global_Menu = Pick<Global, "__typename" | "menu">;
-
-export interface Menu {
-  global: Global_Menu;
+export interface LSGlobalMenu {
+  global: Pick<LSGlobal, "__typename" | "menu">;
 }
-
-export interface MenuVariables {}
-
-export interface MenuToggle {}
-export interface MenuToggleVariables {}

@@ -2,18 +2,15 @@ import * as React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/styles";
-import { compose, Mutation } from "react-apollo";
-import * as lsGlobalQueries from "../../states/global/queries";
-import { MenuToggle, MenuToggleVariables } from "../../states/global/types";
+import { compose } from "react-apollo";
 import {
   withLSGlobalMenuQuery,
   WithLSGlobalMenuQuery
 } from "../../hocs/withLSGlobalMenuQuery";
-
-class LSGlobalMenuToggleMutation extends Mutation<
-  MenuToggle,
-  MenuToggleVariables
-> {}
+import {
+  withLSGlobalMenuToggleMutation,
+  WithLSGlobalMenuToggleMutation
+} from "../../hocs/withLSGlobalMenuToggleMutation";
 
 export const SIDEBAR_WIDTH = 260;
 
@@ -21,7 +18,7 @@ interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = OwnProps & WithLSGlobalMenuQuery;
+type Props = OwnProps & WithLSGlobalMenuQuery & WithLSGlobalMenuToggleMutation;
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -42,31 +39,31 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SidebarBase(props: Props) {
-  const { children, menu } = props;
+  const { children, menu, menuToggle } = props;
 
   const classes = useStyles({});
+
+  function handleClose(_: React.SyntheticEvent<{}, Event>) {
+    menuToggle();
+  }
 
   return (
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Hidden smUp implementation="css">
-        <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
-          {toggleMenu => (
-            <Drawer
-              variant="temporary"
-              open={menu}
-              onClose={_ => toggleMenu()}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              ModalProps={{
-                keepMounted: true
-              }}
-            >
-              <div className={classes.content}>{children}</div>
-            </Drawer>
-          )}
-        </LSGlobalMenuToggleMutation>
+        <Drawer
+          variant="temporary"
+          open={menu}
+          onClose={handleClose}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          ModalProps={{
+            keepMounted: true
+          }}
+        >
+          <div className={classes.content}>{children}</div>
+        </Drawer>
       </Hidden>
       <Hidden xsDown implementation="css">
         <Drawer
@@ -83,8 +80,9 @@ function SidebarBase(props: Props) {
   );
 }
 
-const Sidebar: React.ComponentType<OwnProps> = compose(withLSGlobalMenuQuery)(
-  SidebarBase
-);
+const Sidebar: React.ComponentType<OwnProps> = compose(
+  withLSGlobalMenuQuery,
+  withLSGlobalMenuToggleMutation
+)(SidebarBase);
 
 export default Sidebar;

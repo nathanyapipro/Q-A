@@ -1,11 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { questions } from "../../queries";
-import { Query } from "react-apollo";
-import {
-  QuestionsVariables,
-  Questions as QuestionsQueryData
-} from "../../types/queries/Questions";
+import { compose } from "react-apollo";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,11 +8,14 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Row from "./Row";
 
-class QuestionsQuery extends Query<QuestionsQueryData, QuestionsVariables> {}
+import {
+  withQuestionsQuery,
+  WithQuestionsQuery
+} from "../../hocs/withQuestionsQuery";
 
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & WithQuestionsQuery;
 
 const useStyles = makeStyles(_ => ({
   container: {
@@ -31,42 +29,33 @@ const useStyles = makeStyles(_ => ({
   emptyRow: {}
 }));
 
-function QuestionsTableBase(_: Props) {
+function QuestionsTableBase(props: Props) {
   const classes = useStyles({});
+  const { questions } = props;
+
+  function renderRows() {
+    if (questions.length === 0) {
+      return (
+        <TableRow className={classes.emptyRow}>
+          <TableCell>No Data</TableCell>
+        </TableRow>
+      );
+    } else {
+      return questions.map(data => <Row key={`row-${data.id}`} data={data} />);
+    }
+  }
 
   return (
     <Paper elevation={1} className={classes.container}>
       <Table className={classes.table}>
-        <TableBody>
-          <QuestionsQuery
-            query={questions}
-            variables={{
-              first: 10,
-              offset: 0
-            }}
-          >
-            {({ data }) => {
-              if (!data || !data.questions || !data.questions.nodes) {
-                return (
-                  <TableRow className={classes.emptyRow}>
-                    <TableCell>No Data</TableCell>
-                  </TableRow>
-                );
-              }
-
-              const rows = data.questions.nodes;
-
-              return rows.map(data => (
-                <Row key={`row-${data.id}`} data={data} />
-              ));
-            }}
-          </QuestionsQuery>
-        </TableBody>
+        <TableBody>{renderRows()}</TableBody>
       </Table>
     </Paper>
   );
 }
 
-const QuestionsTable = QuestionsTableBase;
+const QuestionsTable: React.ComponentType<OwnProps> = compose(
+  withQuestionsQuery
+)(QuestionsTableBase);
 
 export default QuestionsTable;

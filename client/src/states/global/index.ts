@@ -1,8 +1,8 @@
-import * as lsGlobalQueries from "./queries";
-import { Global } from "./types";
+import { LS_GLOBAL_MENU_QUERY } from "./queries";
+import { LSGlobal } from "./types";
 
 interface Defaults {
-  global: Global;
+  global: LSGlobal;
 }
 
 export const defaults: Defaults = {
@@ -14,15 +14,15 @@ export const defaults: Defaults = {
 
 const resolvers = {
   Mutation: {
-    globalToggleMenu: (_: any, __: {}, { cache }: any) => {
-      const previousState = cache.readQuery({ query: lsGlobalQueries.menu });
+    globalMenuToggle: (_: any, __: {}, { cache }: any) => {
+      const previousState = cache.readQuery({ query: LS_GLOBAL_MENU_QUERY });
       const data = {
         global: {
           ...previousState.global,
           menu: !previousState.global.menu
         }
       };
-      cache.writeQuery({ query: lsGlobalQueries.menu, data });
+      cache.writeQuery({ query: LS_GLOBAL_MENU_QUERY, data });
       return null;
     }
   }
