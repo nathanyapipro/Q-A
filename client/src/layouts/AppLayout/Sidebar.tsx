@@ -2,16 +2,14 @@ import * as React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/styles";
-import { Query, Mutation } from "react-apollo";
+import { compose, Mutation } from "react-apollo";
 import * as lsGlobalQueries from "../../states/global/queries";
+import { MenuToggle, MenuToggleVariables } from "../../states/global/types";
 import {
-  Menu,
-  MenuVariables,
-  MenuToggle,
-  MenuToggleVariables
-} from "../../states/global/types";
+  withLSGlobalMenuQuery,
+  WithLSGlobalMenuQuery
+} from "../../hocs/withLSGlobalMenuQuery";
 
-class LSGlobalMenuQuery extends Query<Menu, MenuVariables> {}
 class LSGlobalMenuToggleMutation extends Mutation<
   MenuToggle,
   MenuToggleVariables
@@ -23,7 +21,7 @@ interface SidebarProps {
   children: React.ReactChild;
 }
 
-type Props = SidebarProps;
+type Props = SidebarProps & WithLSGlobalMenuQuery;
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -44,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function SidebarBase(props: Props) {
-  const { children } = props;
+  const { children, menu } = props;
 
   const classes = useStyles({});
 
@@ -52,33 +50,23 @@ function SidebarBase(props: Props) {
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
       <Hidden smUp implementation="css">
-        <LSGlobalMenuQuery query={lsGlobalQueries.menu}>
-          {({ data }) => {
-            if (!data || !data.global) {
-              return <noscript />;
-            }
-
-            return (
-              <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
-                {toggleMenu => (
-                  <Drawer
-                    variant="temporary"
-                    open={data.global.menu}
-                    onClose={_ => toggleMenu()}
-                    classes={{
-                      paper: classes.drawerPaper
-                    }}
-                    ModalProps={{
-                      keepMounted: true
-                    }}
-                  >
-                    <div className={classes.content}>{children}</div>
-                  </Drawer>
-                )}
-              </LSGlobalMenuToggleMutation>
-            );
-          }}
-        </LSGlobalMenuQuery>
+        <LSGlobalMenuToggleMutation mutation={lsGlobalQueries.toggleMenu}>
+          {toggleMenu => (
+            <Drawer
+              variant="temporary"
+              open={menu}
+              onClose={_ => toggleMenu()}
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              ModalProps={{
+                keepMounted: true
+              }}
+            >
+              <div className={classes.content}>{children}</div>
+            </Drawer>
+          )}
+        </LSGlobalMenuToggleMutation>
       </Hidden>
       <Hidden xsDown implementation="css">
         <Drawer
@@ -95,6 +83,6 @@ function SidebarBase(props: Props) {
   );
 }
 
-const Sidebar = SidebarBase;
+const Sidebar = compose(withLSGlobalMenuQuery)(SidebarBase);
 
 export default Sidebar;
