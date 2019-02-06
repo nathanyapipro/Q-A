@@ -15,7 +15,7 @@ interface PrivateRouteProps extends RouteProps {
 type Props = PrivateRouteProps; // & ReduxStateProps;
 
 function PrivateRouteBase(props: Props) {
-  const { component: Component, isAuthenticated = true, ...rest } = props;
+  const { component: Component, isAuthenticated = false, ...rest } = props;
 
   return (
     <Route

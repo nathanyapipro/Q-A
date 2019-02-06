@@ -15,7 +15,7 @@ interface UnauthenticatedRouteProps extends RouteProps {
 type Props = UnauthenticatedRouteProps; //& ReduxStateProps;
 
 function UnauthenticatedRouteBase(props: Props) {
-  const { component: Component, isAuthenticated = true, ...rest } = props;
+  const { component: Component, isAuthenticated = false, ...rest } = props;
 
   return (
     <Route
