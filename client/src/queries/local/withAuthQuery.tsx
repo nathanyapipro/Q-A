@@ -11,7 +11,7 @@ type Response = AuthResponse;
 
 type Variables = {};
 
-type ChildProps = Pick<Auth, "jwt" | "userId">;
+type ChildProps = Pick<Auth, "jwtToken" | "userId">;
 
 export const withAuthQuery = graphql<
   InputProps,
@@ -26,7 +26,7 @@ export const withAuthQuery = graphql<
     const { auth } = data;
 
     return {
-      jwt: auth ? auth.jwt : null,
+      jwtToken: auth ? auth.jwtToken : null,
       userId: auth ? auth.userId : null
     };
   }

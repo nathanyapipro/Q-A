@@ -10,8 +10,8 @@ interface OwnProps extends RouteProps {
 type Props = OwnProps & WithAuthQuery;
 
 function UnauthenticatedRouteBase(props: Props) {
-  const { component: Component, jwt, userId, ...rest } = props;
-  const isAuthenticated = Boolean(jwt && userId);
+  const { component: Component, jwtToken, ...rest } = props;
+  const isAuthenticated = Boolean(jwtToken);
 
   return (
     <Route

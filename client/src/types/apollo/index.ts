@@ -68,6 +68,14 @@ export interface IntListFilter {
 }
 
 /**
+ * All input for the `loginAnonymous` mutation.
+ */
+export interface LoginAnonymousInput {
+  clientMutationId?: string | null;
+  username: string;
+}
+
+/**
  * All input for the `login` mutation.
  */
 export interface LoginInput {

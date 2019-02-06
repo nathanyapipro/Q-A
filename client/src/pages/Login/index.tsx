@@ -4,9 +4,9 @@ import { compose } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import Button from "@material-ui/core/Button";
 import {
-  withLoginMutation,
-  WithLoginMutation
-} from "../../queries/withLoginMutation";
+  withLoginAnonymousMutation,
+  WithLoginAnonymousMutation
+} from "../../queries/withLoginAnonymousMutation";
 import {
   withUpdateAuthMutation,
   WithUpdateAuthMutation
@@ -14,7 +14,7 @@ import {
 
 interface OwnProps {}
 
-type Props = OwnProps & WithUpdateAuthMutation & WithLoginMutation;
+type Props = OwnProps & WithUpdateAuthMutation & WithLoginAnonymousMutation;
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -26,21 +26,31 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginBase({ login }: Props) {
+function LoginBase({ loginAnonymous, updateAuth }: Props) {
   const classes = useStyles({});
 
-  function handleSuccess({ googleId, profileObj }: any) {
+  async function handleSuccess({ googleId, profileObj }: any) {
     if (profileObj && profileObj.email) {
       const isValid = profileObj.email.match(/@elementai.com/g).length === 1;
 
       if (isValid && googleId) {
-        login({
+        const response = await loginAnonymous({
           variables: {
-            loginInput: {
+            loginAnonymousInput: {
               username: googleId
             }
           }
         });
+
+        if (response && response.data && response.data.loginAnonymous) {
+          const { jwtToken } = response.data.loginAnonymous;
+          updateAuth({
+            variables: {
+              jwtToken,
+              userId: 1
+            }
+          });
+        }
       }
     }
   }
@@ -69,7 +79,7 @@ function LoginBase({ login }: Props) {
 
 const Login: React.ComponentType<OwnProps> = compose(
   withUpdateAuthMutation,
-  withLoginMutation
+  withLoginAnonymousMutation
 )(LoginBase);
 
 export default Login;

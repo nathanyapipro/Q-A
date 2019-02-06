@@ -2,13 +2,13 @@ import gql from "graphql-tag";
 
 export interface Auth {
   __typename: "Auth";
-  jwt: string | null;
+  jwtToken: string | null;
   userId: number | null;
 }
 
 export const INITIAL_STATE: Auth = {
   __typename: "Auth",
-  jwt: null,
+  jwtToken: null,
   userId: null
 };
 
@@ -23,30 +23,30 @@ export const defaults = {
 export const AUTH_QUERY = gql`
   query Auth {
     auth @client {
-      jwt
+      jwtToken
       userId
     }
   }
 `;
 
-export type UpdateAuthVariables = Pick<Auth, "jwt" | "userId">;
+export type UpdateAuthVariables = Pick<Auth, "jwtToken" | "userId">;
 
 export const UPDATE_AUTH_MUTATION = gql`
-  mutation UpdateAuthMutation($jwt: String!, $userId: Int!) {
-    updateAuth(jwt: $jwt, userId: $userId) @client
+  mutation UpdateAuthMutation($jwtToken: String, $userId: Int) {
+    updateAuth(jwtToken: $jwtToken, userId: $userId) @client
   }
 `;
 
-export const Mutations = {
-  updateAuth: (_: any, auth: UpdateAuthVariables, { cache }: any) => {
+export const Mutation = {
+  updateAuth: (_: any, variables: UpdateAuthVariables, { cache }: any) => {
     const previousState = cache.readQuery({ query: AUTH_QUERY });
     const data = {
+      ...previousState,
       auth: {
         ...previousState.auth,
-        ...auth
+        ...variables
       }
     };
     cache.writeQuery({ query: AUTH_QUERY, data });
-    return null;
   }
 };

@@ -5,8 +5,8 @@ const clientState = {
     ...auth.defaults
   },
   resolvers: {
-    Murations: {
-      ...auth.Mutations
+    Mutation: {
+      ...auth.Mutation
     }
   }
 };
