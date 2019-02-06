@@ -25,14 +25,12 @@ const useStyles = makeStyles(theme => ({
   header: {
     display: "flex",
     flexDirection: "column",
-    width: "80%",
+    width: "60%",
     minWidth: theme.spacing.unit * 35,
     marginBottom: theme.spacing.unit * 3
   },
   logo: {
-    display: "flex",
-    marginLeft: "calc(12%)",
-    marginRight: "calc(12%)"
+    display: "flex"
   },
   description: {
     display: "flex",
