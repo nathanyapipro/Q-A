@@ -1,11 +1,20 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
+import { compose } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import Button from "@material-ui/core/Button";
+import {
+  withLoginMutation,
+  WithLoginMutation
+} from "../../queries/withLoginMutation";
+import {
+  withUpdateAuthMutation,
+  WithUpdateAuthMutation
+} from "../../queries/local/withUpdateAuthMutation";
 
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & WithUpdateAuthMutation & WithLoginMutation;
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -17,8 +26,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginBase(_: Props) {
+function LoginBase({ login }: Props) {
   const classes = useStyles({});
+
+  function handleSuccess({ googleId, profileObj }: any) {
+    if (profileObj && profileObj.email) {
+      const isValid = profileObj.email.match(/@elementai.com/g).length === 1;
+
+      if (isValid && googleId) {
+        login({
+          variables: {
+            loginInput: {
+              username: googleId
+            }
+          }
+        });
+      }
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -35,13 +60,16 @@ function LoginBase(_: Props) {
           </Button>
         )}
         buttonText="Login"
-        onSuccess={console.log}
+        onSuccess={handleSuccess}
         onFailure={console.log}
       />
     </div>
   );
 }
 
-const Login = LoginBase;
+const Login: React.ComponentType<OwnProps> = compose(
+  withUpdateAuthMutation,
+  withLoginMutation
+)(LoginBase);
 
 export default Login;

@@ -1,14 +1,5 @@
 import gql from "graphql-tag";
 
-export const AUTH_QUERY = gql`
-  query Auth {
-    auth @client {
-      jwt
-      userId
-    }
-  }
-`;
-
 export interface Auth {
   __typename: "Auth";
   jwt: string | null;
@@ -28,6 +19,15 @@ export interface Defaults {
 export const defaults = {
   auth: INITIAL_STATE
 };
+
+export const AUTH_QUERY = gql`
+  query Auth {
+    auth @client {
+      jwt
+      userId
+    }
+  }
+`;
 
 export type UpdateAuthVariables = Pick<Auth, "jwt" | "userId">;
 

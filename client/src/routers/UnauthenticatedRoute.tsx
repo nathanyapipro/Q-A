@@ -1,21 +1,17 @@
 import * as React from "react";
-// import { connect } from "react-redux";
+import { compose } from "react-apollo";
 import { Route, Redirect, RouteProps } from "react-router-dom";
-// import { StoreState } from "../states";
+import { withAuthQuery, WithAuthQuery } from "../queries/local/withAuthQuery";
 
-interface UnauthenticatedRouteProps extends RouteProps {
+interface OwnProps extends RouteProps {
   component: React.ComponentType<any>;
-  isAuthenticated?: boolean;
 }
 
-// interface ReduxStateProps {
-//   isAuthenticated: boolean;
-// }
-
-type Props = UnauthenticatedRouteProps; //& ReduxStateProps;
+type Props = OwnProps & WithAuthQuery;
 
 function UnauthenticatedRouteBase(props: Props) {
-  const { component: Component, isAuthenticated = false, ...rest } = props;
+  const { component: Component, jwt, userId, ...rest } = props;
+  const isAuthenticated = Boolean(jwt && userId);
 
   return (
     <Route
@@ -27,16 +23,8 @@ function UnauthenticatedRouteBase(props: Props) {
   );
 }
 
-// const mapStateToProps = (state: StoreState): ReduxStateProps => {
-//   const { credentials } = state.auth;
-
-//   return {
-//     isAuthenticated: Boolean(
-//       credentials && credentials.accessToken && credentials.user
-//     )
-//   };
-// };
-
-const UnauthenticatedRoute = UnauthenticatedRouteBase; //connect(mapStateToProps)(UnauthenticatedRouteBase);
+const UnauthenticatedRoute: React.ComponentType<OwnProps> = compose(
+  withAuthQuery
+)(UnauthenticatedRouteBase);
 
 export default UnauthenticatedRoute;
