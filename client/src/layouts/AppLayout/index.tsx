@@ -4,15 +4,27 @@ import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
+// import List from "@material-ui/core/List";
+// import ListItem from '@material-ui/core/ListItem';
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { SIDEBAR_WIDTH } from "./Sidebar";
-
+import Typography from "@material-ui/core/Typography";
+import ContactSupportIcon from "@material-ui/icons/ContactSupport";
+import ListIcon from "@material-ui/icons/List";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { compose } from "react-apollo";
+import {
+  withUpdateAuthMutation,
+  WithUpdateAuthMutation
+} from "../../queries/local/withUpdateAuthMutation";
 interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = OwnProps;
+type Props = OwnProps & WithUpdateAuthMutation;
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -45,18 +57,47 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     flexShrink: 0,
-    padding: theme.spacing.unit * 3
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px`
+  },
+  navLink: {
+    cursor: "pointer",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    flexShrink: 0,
+    padding: theme.spacing.unit * 1.5,
+    backgroundColor: "transparent",
+    transition: theme.transitions.create(["background"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  linkIcon: {
+    marginRight: theme.spacing.unit * 2,
+    marginLeft: theme.spacing.unit * 2
+  },
+  linkActive: {
+    backgroundColor: theme.palette.action.selected
   }
 }));
 
 function AppLayoutBase(props: Props) {
-  const { children } = props;
+  const { children, updateAuth } = props;
   const classes = useStyles({});
 
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
   function toggleMenu() {
     setIsMenuOpen(!isMenuOpen);
+  }
+
+  function handleLogOut(_: React.MouseEvent<HTMLElement, MouseEvent>) {
+    updateAuth({
+      variables: {
+        jwtToken: null,
+        userId: null
+      }
+    });
   }
 
   return (
@@ -69,7 +110,59 @@ function AppLayoutBase(props: Props) {
               <img className={classes.logo} src={logo} alt="Logo" />
             </div>
             <Divider />
-            <List>Items</List>
+            <NavLink
+              exact
+              to="/ask-a-question"
+              className={classes.navLink}
+              activeClassName={classes.linkActive}
+            >
+              <ContactSupportIcon
+                className={classes.linkIcon}
+                color="inherit"
+              />
+              <Typography color="inherit" variant="body1">
+                Ask a Question
+              </Typography>
+            </NavLink>
+            <NavLink
+              exact
+              to="/"
+              className={classes.navLink}
+              activeClassName={classes.linkActive}
+            >
+              <ListIcon className={classes.linkIcon} color="inherit" />
+              <Typography color="inherit" variant="body1">
+                Questions
+              </Typography>
+            </NavLink>
+            <NavLink
+              exact
+              to="/profile"
+              className={classes.navLink}
+              activeClassName={classes.linkActive}
+            >
+              <AccountCircleIcon className={classes.linkIcon} color="inherit" />
+              <Typography color="inherit" variant="body1">
+                Profile
+              </Typography>
+            </NavLink>
+            <NavLink
+              exact
+              to="/settings"
+              className={classes.navLink}
+              activeClassName={classes.linkActive}
+            >
+              <SettingsIcon className={classes.linkIcon} color="inherit" />
+              <Typography color="inherit" variant="body1">
+                Settings
+              </Typography>
+            </NavLink>
+            <div className={classes.navLink} onClick={handleLogOut}>
+              <ArrowBackIcon className={classes.linkIcon} color="inherit" />
+              <Typography color="inherit" variant="body1">
+                Log Out
+              </Typography>
+            </div>
           </React.Fragment>
         </Sidebar>
         <main className={classes.main}>
@@ -81,6 +174,8 @@ function AppLayoutBase(props: Props) {
   );
 }
 
-const AppLayout = AppLayoutBase;
+const AppLayout: React.ComponentType<OwnProps> = compose(
+  withUpdateAuthMutation
+)(AppLayoutBase);
 
 export default AppLayout;

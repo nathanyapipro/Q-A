@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
 import Typography from "@material-ui/core/Typography";
+import { Switch, Route } from "react-router-dom";
 
 interface OwnProps {
   toggleMenu: () => void;
@@ -54,9 +55,44 @@ function HeaderBase(props: Props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit">
-            Page Title
-          </Typography>
+          <Switch>
+            <Route
+              path="/ask-a-question"
+              exact
+              component={() => (
+                <Typography variant="h6" color="inherit">
+                  Ask a Question
+                </Typography>
+              )}
+            />
+            <Route
+              path="/"
+              exact
+              component={() => (
+                <Typography variant="h6" color="inherit">
+                  Questions
+                </Typography>
+              )}
+            />
+            <Route
+              path="/profile"
+              exact
+              component={() => (
+                <Typography variant="h6" color="inherit">
+                  Profile
+                </Typography>
+              )}
+            />
+            <Route
+              path="/settings"
+              exact
+              component={() => (
+                <Typography variant="h6" color="inherit">
+                  Settings
+                </Typography>
+              )}
+            />
+          </Switch>
         </div>
       </Toolbar>
     </AppBar>

@@ -55,7 +55,7 @@ function SidebarBase(props: Props) {
             keepMounted: true
           }}
         >
-          <div className={classes.content}>{children}</div>
+          {children}
         </Drawer>
       </Hidden>
       <Hidden xsDown implementation="css">
