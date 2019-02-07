@@ -43,7 +43,11 @@ const useStyles = makeStyles(theme => ({
   footer: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: theme.spacing.unit
+  },
+  spacer: {
+    flexGrow: 1
   },
   bold: {
     fontWeight: 600
@@ -55,6 +59,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   createdAt: {
+    marginBottom: 0,
     alignSelf: "flex-end"
   },
   buttonIcon: {
@@ -100,13 +105,6 @@ function RowBase(props: Props) {
             >
               {content}
             </Typography>
-            <Typography
-              className={classes.createdAt}
-              variant="caption"
-              gutterBottom
-            >
-              {fromNow(createdAt)}
-            </Typography>
             <div className={classes.footer}>
               <Button
                 variant="outlined"
@@ -136,6 +134,14 @@ function RowBase(props: Props) {
                   {commentCount}
                 </Typography>
               </Button>
+              <div className={classes.spacer} />
+              <Typography
+                className={classes.createdAt}
+                variant="caption"
+                gutterBottom
+              >
+                {fromNow(createdAt)}
+              </Typography>
             </div>
           </div>
         </div>
