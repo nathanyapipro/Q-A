@@ -4,8 +4,6 @@ import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Divider from "@material-ui/core/Divider";
-// import List from "@material-ui/core/List";
-// import ListItem from '@material-ui/core/ListItem';
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { SIDEBAR_WIDTH } from "./Sidebar";
