@@ -2,16 +2,26 @@ import * as React from "react";
 import Autocomplete, { AutocompleteProps, ValueType, OptionsType } from ".";
 import { Omit } from "../../types";
 import * as autocompleteHelper from "../../helpers/autocomplete";
-
-interface Props
-  extends Omit<AutocompleteProps, "onInputChange" | "onChange" | "value"> {
+import { compose } from "react-apollo";
+import { withTagsQuery, WithTagsQuery } from "../../queries/withTagsQuery";
+interface OwnProps
+  extends Omit<
+    AutocompleteProps,
+    "onInputChange" | "onChange" | "value" | "options"
+  > {
   value?: number | Array<number>;
   onChange: (value: number | Array<number>) => void;
-  options: OptionsType;
 }
 
-function TagsAutocomplete(props: Props) {
-  const { options, onChange } = props;
+type Props = OwnProps & WithTagsQuery;
+
+function TagsAutocompleteBase(props: Props) {
+  const { onChange, tags } = props;
+
+  const options: OptionsType = tags.map(tag => ({
+    value: tag.id,
+    label: tag.name
+  }));
 
   const valueToValueType = (value?: number | Array<number>): ValueType => {
     const allValues = value instanceof Array ? value : [value];
@@ -42,5 +52,9 @@ function TagsAutocomplete(props: Props) {
     />
   );
 }
+
+const TagsAutocomplete: React.ComponentType<OwnProps> = compose(withTagsQuery)(
+  TagsAutocompleteBase
+);
 
 export default TagsAutocomplete;

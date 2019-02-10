@@ -137,18 +137,11 @@ function QuestionsBase(_: Props) {
         </Drawer>
       </Hidden>
       <Hidden className={classes.fullWidth} xsDown implementation="css">
-        <Paper className={classes.header}>
+        <Paper elevation={1} className={classes.header}>
           <Filters query={query} setQuery={setQuery} />
         </Paper>
       </Hidden>
-      {
-        //@ts-ignore
-        <QuestionsTable
-          {...queryParams}
-          //@ts-ignore
-          handleChangePage={handleChangePage}
-        />
-      }
+      {<QuestionsTable {...queryParams} handleChangePage={handleChangePage} />}
     </div>
   );
 }

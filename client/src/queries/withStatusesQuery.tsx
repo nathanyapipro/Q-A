@@ -14,7 +14,7 @@ const STATUSES_QUERY = gql`
   }
 `;
 
-type InputProps = {};
+type InputProps = any;
 
 type Response = Statuses;
 

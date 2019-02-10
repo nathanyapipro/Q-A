@@ -14,7 +14,9 @@ import {
   WithQuestionsQuery
 } from "../../queries/withQuestionsQuery";
 
-interface OwnProps {}
+interface OwnProps {
+  handleChangePage: (page: number) => void;
+}
 
 type Props = OwnProps & WithQuestionsQuery;
 

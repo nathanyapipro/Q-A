@@ -56,9 +56,7 @@ const QUESTIONS_QUERY = gql`
   }
 `;
 
-interface InputProps extends QuestionsVariables {
-  handleChangePage: (page: number) => void;
-}
+type InputProps = QuestionsVariables;
 
 type Response = Questions;
 
@@ -73,7 +71,6 @@ type ChildProps = {
   };
   loading: boolean;
   error?: ApolloError;
-  handleChangePage: (page: number) => void;
 };
 
 export const withQuestionsQuery = graphql<
@@ -89,7 +86,7 @@ export const withQuestionsQuery = graphql<
       filter
     }
   }),
-  props: ({ data, ownProps: { handleChangePage, offset, first } }) => {
+  props: ({ data, ownProps: { offset, first } }) => {
     if (!data) {
       throw new Error("No data prop found");
     }
@@ -106,8 +103,7 @@ export const withQuestionsQuery = graphql<
         first
       },
       loading: loading,
-      error: error,
-      handleChangePage
+      error: error
     };
   }
 });

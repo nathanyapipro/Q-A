@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   container: {
     cursor: "pointer",
     "&:nth-of-type(even)": {
-      backgroundColor: theme.palette.grey[50]
+      backgroundColor: theme.palette.grey[100]
     }
   },
 

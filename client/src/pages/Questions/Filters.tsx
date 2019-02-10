@@ -1,9 +1,8 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import StatusFilter from "../../components/QuestionsFilters/Status";
-import TagsFilter from "../../components/QuestionsFilters/Tags";
 import { QueryType } from ".";
-
+import StatusAutocomplete from "../../components/Autocomplete/Status";
+import TagsAutocomplete from "../../components/Autocomplete/Tags";
 interface OwnProps {
   query: QueryType;
   setQuery: React.Dispatch<React.SetStateAction<QueryType>>;
@@ -55,10 +54,20 @@ function FiltersBase(props: Props) {
   return (
     <React.Fragment>
       <div className={classes.field}>
-        <StatusFilter onChange={handleSetStatusIds} value={query.statusIds} />
+        <StatusAutocomplete
+          value={query.statusIds}
+          label="Status Filter"
+          onChange={handleSetStatusIds}
+          isMulti={true}
+        />
       </div>
       <div className={classes.field}>
-        <TagsFilter onChange={handleSetTagIds} value={query.tagIds} />
+        <TagsAutocomplete
+          value={query.tagIds}
+          label="Tags Filter"
+          onChange={handleSetTagIds}
+          isMulti={true}
+        />
       </div>
     </React.Fragment>
   );

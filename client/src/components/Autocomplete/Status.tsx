@@ -2,16 +2,30 @@ import * as React from "react";
 import Autocomplete, { AutocompleteProps, ValueType, OptionsType } from ".";
 import { Omit } from "../../types";
 import * as autocompleteHelper from "../../helpers/autocomplete";
+import { compose } from "react-apollo";
+import {
+  withStatusesQuery,
+  WithStatusesQuery
+} from "../../queries/withStatusesQuery";
 
-interface Props
-  extends Omit<AutocompleteProps, "onInputChange" | "onChange" | "value"> {
+interface OwnProps
+  extends Omit<
+    AutocompleteProps,
+    "onInputChange" | "onChange" | "value" | "options"
+  > {
   value?: number | Array<number>;
   onChange: (value: number | Array<number>) => void;
-  options: OptionsType;
 }
 
-function StatusesAutocomplete(props: Props) {
-  const { options, onChange } = props;
+type Props = OwnProps & WithStatusesQuery;
+
+function StatusAutocompleteBase(props: Props) {
+  const { statuses, onChange } = props;
+
+  const options: OptionsType = statuses.map(status => ({
+    value: status.id,
+    label: status.name
+  }));
 
   const valueToValueType = (value?: number | Array<number>): ValueType => {
     const allValues = value instanceof Array ? value : [value];
@@ -43,4 +57,8 @@ function StatusesAutocomplete(props: Props) {
   );
 }
 
-export default StatusesAutocomplete;
+const StatusAutocomplete: React.ComponentType<OwnProps> = compose(
+  withStatusesQuery
+)(StatusAutocompleteBase);
+
+export default StatusAutocomplete;
