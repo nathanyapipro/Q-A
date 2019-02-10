@@ -12,12 +12,16 @@ type Props = OwnProps & WithAuthQuery;
 function PrivateRouteBase(props: Props) {
   const { component: Component, jwtToken, ...rest } = props;
   const isAuthenticated = Boolean(jwtToken);
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   return (
     <Route
       {...rest}
       render={props =>
-        true ? <Component {...props} /> : <Redirect to="/auth/login" />
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/auth/login" />
+        )
       }
     />
   );

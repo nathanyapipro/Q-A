@@ -22,3 +22,4 @@ app_public.tables.question_tag 2019-01-13T21:53:00Z Nathan Yapi <nathanyapi.pro@
 app_public.tables.answer 2019-01-13T21:58:53Z Nathan Yapi <nathanyapi.pro@gmail.com> # table answer
 app_public.tables.comment 2019-02-02T23:38:17Z Nathan Yapi <nathanyapi.pro@gmail.com> # table comment
 app_public.functions.question_tag_ids 2019-02-03T16:20:49Z Nathan Yapi <nathanyapi.pro@gmail.com> # function question_tag_ids
+app_public.functions.create_question 2019-02-10T20:44:50Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_question

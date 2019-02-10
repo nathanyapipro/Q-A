@@ -27,7 +27,7 @@ grant update(content, status_id) on app_public.question to fundamental_visitor;
 grant delete on app_public.question to fundamental_visitor;
 
 comment on table app_public.question is
-  E'question in the application.';
+  E'@omit create\nA question in the application.';
 
 comment on column app_public.question.id is
   E'unique identifier for the question.';

@@ -8,7 +8,7 @@ export interface Auth {
 
 export const INITIAL_STATE: Auth = {
   __typename: "Auth",
-  jwtToken: null,
+  jwtToken: localStorage.getItem("jwtToken"),
   userId: null
 };
 
@@ -48,5 +48,10 @@ export const Mutation = {
       }
     };
     cache.writeQuery({ query: AUTH_QUERY, data });
+    if (variables.jwtToken) {
+      localStorage.setItem("jwtToken", variables.jwtToken);
+    } else {
+      localStorage.removeItem("jwtToken");
+    }
   }
 };

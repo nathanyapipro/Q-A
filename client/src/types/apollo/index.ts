@@ -27,6 +27,15 @@ export enum StatusNameType {
 }
 
 /**
+ * All input for the `createQuestion` mutation.
+ */
+export interface CreateQuestionInput {
+  clientMutationId?: string | null;
+  content: string;
+  tagIds: (number | null)[];
+}
+
+/**
  * A filter to be used against Int fields. All fields are combined with a logical ‘and.’
  */
 export interface IntFilter {

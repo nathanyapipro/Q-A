@@ -28,7 +28,7 @@ const QUESTIONS_QUERY = gql`
           id
           name
         }
-        questionTags(first: 3) {
+        questionTags {
           nodes {
             id
             tag {
@@ -48,10 +48,6 @@ const QUESTIONS_QUERY = gql`
         updatedAt
       }
       totalCount
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-      }
     }
   }
 `;

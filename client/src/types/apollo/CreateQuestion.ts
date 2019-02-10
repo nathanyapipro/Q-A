@@ -1,13 +1,13 @@
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
-import { QuestionsOrderBy, QuestionFilter, StatusNameType } from "./index";
+import { CreateQuestionInput, StatusNameType } from "./index";
 
 // ====================================================
-// GraphQL query operation: Questions
+// GraphQL mutation operation: CreateQuestion
 // ====================================================
 
-export interface Questions_questions_nodes_status {
+export interface CreateQuestion_createQuestion_question_status {
   __typename: "Status";
   /**
    * unique identifier for the status.
@@ -19,7 +19,7 @@ export interface Questions_questions_nodes_status {
   name: StatusNameType;
 }
 
-export interface Questions_questions_nodes_questionTags_nodes_tag {
+export interface CreateQuestion_createQuestion_question_questionTags_nodes_tag {
   __typename: "Tag";
   /**
    * name of the tag.
@@ -31,7 +31,7 @@ export interface Questions_questions_nodes_questionTags_nodes_tag {
   color: string;
 }
 
-export interface Questions_questions_nodes_questionTags_nodes {
+export interface CreateQuestion_createQuestion_question_questionTags_nodes {
   __typename: "QuestionTag";
   /**
    * unique identifier for the question_tag.
@@ -40,22 +40,22 @@ export interface Questions_questions_nodes_questionTags_nodes {
   /**
    * Reads a single `Tag` that is related to this `QuestionTag`.
    */
-  tag: Questions_questions_nodes_questionTags_nodes_tag | null;
+  tag: CreateQuestion_createQuestion_question_questionTags_nodes_tag | null;
 }
 
-export interface Questions_questions_nodes_questionTags {
+export interface CreateQuestion_createQuestion_question_questionTags {
   __typename: "QuestionTagsConnection";
   /**
    * A list of `QuestionTag` objects.
    */
-  nodes: Questions_questions_nodes_questionTags_nodes[];
+  nodes: CreateQuestion_createQuestion_question_questionTags_nodes[];
   /**
    * The count of *all* `QuestionTag` you could get from the connection.
    */
   totalCount: number | null;
 }
 
-export interface Questions_questions_nodes_votes {
+export interface CreateQuestion_createQuestion_question_votes {
   __typename: "VotesConnection";
   /**
    * The count of *all* `Vote` you could get from the connection.
@@ -63,7 +63,7 @@ export interface Questions_questions_nodes_votes {
   totalCount: number | null;
 }
 
-export interface Questions_questions_nodes_comments {
+export interface CreateQuestion_createQuestion_question_comments {
   __typename: "CommentsConnection";
   /**
    * The count of *all* `Comment` you could get from the connection.
@@ -71,7 +71,7 @@ export interface Questions_questions_nodes_comments {
   totalCount: number | null;
 }
 
-export interface Questions_questions_nodes {
+export interface CreateQuestion_createQuestion_question {
   __typename: "Question";
   /**
    * unique identifier for the question.
@@ -88,45 +88,35 @@ export interface Questions_questions_nodes {
   /**
    * Reads a single `Status` that is related to this `Question`.
    */
-  status: Questions_questions_nodes_status | null;
+  status: CreateQuestion_createQuestion_question_status | null;
   /**
    * Reads and enables pagination through a set of `QuestionTag`.
    */
-  questionTags: Questions_questions_nodes_questionTags;
+  questionTags: CreateQuestion_createQuestion_question_questionTags;
   /**
    * Reads and enables pagination through a set of `Vote`.
    */
-  votes: Questions_questions_nodes_votes;
+  votes: CreateQuestion_createQuestion_question_votes;
   /**
    * Reads and enables pagination through a set of `Comment`.
    */
-  comments: Questions_questions_nodes_comments;
+  comments: CreateQuestion_createQuestion_question_comments;
   createdAt: any;
   updatedAt: any;
 }
 
-export interface Questions_questions {
-  __typename: "QuestionsConnection";
-  /**
-   * A list of `Question` objects.
-   */
-  nodes: Questions_questions_nodes[];
-  /**
-   * The count of *all* `Question` you could get from the connection.
-   */
-  totalCount: number | null;
+export interface CreateQuestion_createQuestion {
+  __typename: "CreateQuestionPayload";
+  question: CreateQuestion_createQuestion_question | null;
 }
 
-export interface Questions {
+export interface CreateQuestion {
   /**
-   * Reads and enables pagination through a set of `Question`.
+   * Creates a question.
    */
-  questions: Questions_questions | null;
+  createQuestion: CreateQuestion_createQuestion | null;
 }
 
-export interface QuestionsVariables {
-  first: number;
-  offset: number;
-  orderBy?: QuestionsOrderBy[] | null;
-  filter?: QuestionFilter | null;
+export interface CreateQuestionVariables {
+  createQuestionInput: CreateQuestionInput;
 }

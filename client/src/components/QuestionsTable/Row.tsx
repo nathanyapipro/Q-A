@@ -40,7 +40,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   content: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    flexGrow: 1
   },
   footer: {
     display: "flex",
