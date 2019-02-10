@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import { QueryType } from ".";
 import StatusAutocomplete from "../../components/Autocomplete/Status";
 import TagsAutocomplete from "../../components/Autocomplete/Tags";
+import { Theme } from "@material-ui/core/styles";
 interface OwnProps {
   query: QueryType;
   setQuery: React.Dispatch<React.SetStateAction<QueryType>>;
@@ -10,7 +11,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   field: {
     display: "flex",
     marginLeft: 0,
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function FiltersBase(props: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
   const { query, setQuery } = props;
 
   function handleSetStatusIds(item: number | Array<number>) {

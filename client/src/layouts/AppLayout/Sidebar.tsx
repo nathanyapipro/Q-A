@@ -2,6 +2,7 @@ import * as React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import { makeStyles } from "@material-ui/styles";
+import { Theme } from "@material-ui/core/styles";
 
 export const SIDEBAR_WIDTH = 260;
 
@@ -13,7 +14,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
     [theme.breakpoints.up("sm")]: {
       width: SIDEBAR_WIDTH,
@@ -34,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 function SidebarBase(props: Props) {
   const { children, isMenuOpen, toggleMenu } = props;
 
-  const classes = useStyles({});
+  const classes = useStyles();
 
   function handleClose(_: React.SyntheticEvent<{}, Event>) {
     toggleMenu();

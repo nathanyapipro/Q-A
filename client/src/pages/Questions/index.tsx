@@ -11,12 +11,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { QuestionsVariables } from "../../types/apollo/Questions";
 import Paper from "@material-ui/core/Paper";
+import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {}
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column"
@@ -60,7 +61,7 @@ export interface QueryType {
 }
 
 function QuestionsBase(_: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const [isFiltersOpen, setIsFiltersOpen] = React.useState<boolean>(false);
   const [query, setQuery] = React.useState<QueryType>({

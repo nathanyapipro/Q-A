@@ -8,6 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
 import Row from "./Row";
+import { Theme } from "@material-ui/core/styles";
 
 import {
   withQuestionsQuery,
@@ -20,7 +21,7 @@ interface OwnProps {
 
 type Props = OwnProps & WithQuestionsQuery;
 
-const useStyles = makeStyles(_ => ({
+const useStyles = makeStyles((_: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
@@ -33,7 +34,7 @@ const useStyles = makeStyles(_ => ({
 }));
 
 function QuestionsTableBase(props: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
   const {
     data: { nodes, totalCount, offset, first },
     handleChangePage

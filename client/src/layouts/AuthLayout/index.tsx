@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import logo from "../../assets/logo-creds.svg";
+import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {
   children: React.ReactChild;
@@ -9,7 +10,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
@@ -45,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 
 function AuthLayoutBase(props: Props) {
   const { children } = props;
-  const classes = useStyles({});
+  const classes = useStyles();
 
   return (
     <div className={classes.container}>

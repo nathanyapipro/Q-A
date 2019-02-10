@@ -4,6 +4,7 @@ import NewIcon from "@material-ui/icons/NewReleases";
 import UnderReviewIcon from "@material-ui/icons/SupervisedUserCircle";
 import AnsweredIcon from "@material-ui/icons/CheckCircle";
 import { StatusNameType } from "../types/apollo";
+import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {
   name: StatusNameType;
@@ -11,7 +12,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(_ => ({
+const useStyles = makeStyles((_: Theme) => ({
   icon: {
     height: "1.1em",
     width: "1.1em"
@@ -19,7 +20,7 @@ const useStyles = makeStyles(_ => ({
 }));
 
 function StatusBase(props: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
   const { name } = props;
   switch (name) {
     case StatusNameType.NEW:

@@ -11,12 +11,13 @@ import {
   withUpdateAuthMutation,
   WithUpdateAuthMutation
 } from "../../queries/local/withUpdateAuthMutation";
+import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {}
 
 type Props = OwnProps & WithUpdateAuthMutation & WithLoginAnonymousMutation;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column"
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function LoginBase({ loginAnonymous, updateAuth }: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
 
   async function handleSuccess({ googleId, profileObj }: any) {
     if (profileObj && profileObj.email) {

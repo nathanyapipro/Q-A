@@ -90,7 +90,7 @@ function withTheme<P extends WrappedComponentProps>(
   Component: React.ComponentType<P>
 ) {
   function WithTheme(props: P) {
-    useStyles({});
+    useStyles();
 
     return (
       <MuiThemeProvider theme={theme}>

@@ -13,6 +13,7 @@ import Button from "@material-ui/core/Button";
 import VoteIcon from "@material-ui/icons/ThumbUp";
 import CommentIcon from "@material-ui/icons/Comment";
 import { fromNow } from "../../helpers/date";
+import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {
   data: Questions_questions_nodes;
@@ -20,7 +21,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     cursor: "pointer",
     "&:nth-of-type(even)": {
@@ -89,7 +90,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function RowBase(props: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
   const { data } = props;
 
   const { content, votes, comments, questionTags, status, createdAt } = data;

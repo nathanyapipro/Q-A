@@ -23,10 +23,11 @@ import { NoticeProps, MenuProps } from "react-select/lib/components/Menu";
 import { ValueContainerProps } from "react-select/lib/components/containers";
 import { OptionProps } from "react-select/lib/components/Option";
 import { debounce } from "../../helpers/functional";
+import { Theme } from "@material-ui/core/styles";
 
 const DROPDOWN_HEIGHT = 250;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flex: "1 1 auto"
   },
@@ -201,7 +202,7 @@ export interface AutocompleteProps extends ReactSelectProps {
 type Props = AutocompleteProps;
 
 const AutocompleteBase = React.memo(function AutocompleteBase(props: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
   const {
     id,
     label,

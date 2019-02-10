@@ -18,13 +18,14 @@ import {
   withUpdateAuthMutation,
   WithUpdateAuthMutation
 } from "../../queries/local/withUpdateAuthMutation";
+import { Theme } from "@material-ui/core/styles";
 interface OwnProps {
   children: React.ReactChild;
 }
 
 type Props = OwnProps & WithUpdateAuthMutation;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
@@ -81,7 +82,7 @@ const useStyles = makeStyles(theme => ({
 
 function AppLayoutBase(props: Props) {
   const { children, updateAuth } = props;
-  const classes = useStyles({});
+  const classes = useStyles();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 

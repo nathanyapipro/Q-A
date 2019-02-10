@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
 import Typography from "@material-ui/core/Typography";
 import { Switch, Route } from "react-router-dom";
+import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {
   toggleMenu: () => void;
@@ -14,7 +15,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     marginLeft: SIDEBAR_WIDTH,
     [theme.breakpoints.up("sm")]: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function HeaderBase(props: Props) {
-  const classes = useStyles({});
+  const classes = useStyles();
   const { toggleMenu } = props;
 
   function handleClick(_: React.MouseEvent<HTMLElement, MouseEvent>) {
