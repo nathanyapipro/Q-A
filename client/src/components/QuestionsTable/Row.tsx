@@ -1,6 +1,5 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import classNames from "classnames";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
@@ -26,15 +25,22 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
     "&:nth-of-type(even)": {
       backgroundColor: theme.palette.grey[50]
+    },
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    "&:last-child": {
+      borderBottom: "unset"
     }
   },
+
   tableCell: {
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
-  },
-  description: {
+    padding: `${theme.spacing.unit * 2}px !important`,
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    borderBottom: "unset"
+  },
+  status: {
+    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 1.5}px ${theme
+      .spacing.unit / 2}px ${0}px`
   },
   content: {
     display: "flex",
@@ -44,7 +50,11 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit,
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse",
+      alignItems: "unset"
+    }
   },
   spacer: {
     flexGrow: 1
@@ -52,13 +62,18 @@ const useStyles = makeStyles(theme => ({
   bold: {
     fontWeight: 600
   },
-  footerButton: {
+  actions: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  button: {
     padding: `${theme.spacing.unit / 4}px ${theme.spacing.unit}px`,
     "&:not(:first-child)": {
       marginLeft: theme.spacing.unit
     }
   },
   createdAt: {
+    display: "unset",
     marginBottom: 0,
     alignSelf: "flex-end"
   },
@@ -67,13 +82,14 @@ const useStyles = makeStyles(theme => ({
     height: "0.75em",
     width: "0.75em"
   },
-  vAlignTop: {
-    verticalAlign: "top"
-  },
   tags: {
     display: "flex",
     flexFlow: "row wrap",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    margin: -theme.spacing.unit / 2,
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: theme.spacing.unit
+    }
   }
 }));
 
@@ -92,24 +108,44 @@ function RowBase(props: Props) {
 
   const tags = questionTags.nodes;
 
+  function renderTags() {
+    return tags.map(
+      (questionTag: Questions_questions_nodes_questionTags_nodes) =>
+        questionTag.tag && (
+          <Tag key={`questionTag-${questionTag.id}`} {...questionTag.tag} />
+        )
+    );
+  }
+
   return (
     <TableRow className={classes.container} hover>
-      <TableCell padding="checkbox" colSpan={3} className={classes.tableCell}>
-        <div className={classes.description}>
+      <TableCell className={classes.tableCell}>
+        <div className={classes.status}>
           <Status name={status.name} />
-          <div className={classes.content}>
+        </div>
+        <div className={classes.content}>
+          <Typography
+            className={classes.bold}
+            variant="subtitle1"
+            component="p"
+            color="secondary"
+          >
+            {content}
             <Typography
-              className={classes.bold}
-              variant="subtitle1"
-              color="secondary"
+              className={classes.createdAt}
+              component="span"
+              variant="caption"
+              gutterBottom
             >
-              {content}
+              &nbsp;&nbsp;– &nbsp; {fromNow(createdAt)}
             </Typography>
-            <div className={classes.footer}>
+          </Typography>
+          <div className={classes.footer}>
+            <div className={classes.actions}>
               <Button
                 variant="outlined"
                 color="primary"
-                className={classes.footerButton}
+                className={classes.button}
               >
                 <VoteIcon className={classes.buttonIcon} color="inherit" />
                 <Typography
@@ -123,7 +159,7 @@ function RowBase(props: Props) {
               <Button
                 variant="outlined"
                 color="secondary"
-                className={classes.footerButton}
+                className={classes.button}
               >
                 <CommentIcon className={classes.buttonIcon} color="inherit" />
                 <Typography
@@ -134,32 +170,10 @@ function RowBase(props: Props) {
                   {commentCount}
                 </Typography>
               </Button>
-              <div className={classes.spacer} />
-              <Typography
-                className={classes.createdAt}
-                variant="caption"
-                gutterBottom
-              >
-                {fromNow(createdAt)}
-              </Typography>
             </div>
+            <div className={classes.spacer} />
+            <div className={classes.tags}>{renderTags()}</div>
           </div>
-        </div>
-      </TableCell>
-      <TableCell
-        colSpan={1}
-        className={classNames(classes.tableCell, classes.vAlignTop)}
-      >
-        <div className={classes.tags}>
-          {tags.map(
-            (questionTag: Questions_questions_nodes_questionTags_nodes) =>
-              questionTag.tag && (
-                <Tag
-                  key={`questionTag-${questionTag.id}`}
-                  {...questionTag.tag}
-                />
-              )
-          )}
         </div>
       </TableCell>
     </TableRow>

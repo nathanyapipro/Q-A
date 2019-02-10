@@ -11,11 +11,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px ${theme
-      .spacing.unit / 2}px ${theme.spacing.unit}px`
-  },
+const useStyles = makeStyles(_ => ({
   icon: {
     height: "1.1em",
     width: "1.1em"
@@ -25,27 +21,21 @@ const useStyles = makeStyles(theme => ({
 function StatusBase(props: Props) {
   const classes = useStyles({});
   const { name } = props;
-  let icon: React.ReactNode;
   switch (name) {
     case StatusNameType.NEW:
-      icon = <NewIcon className={classes.icon} style={{ color: "#7D55D7" }} />;
-      break;
+      return <NewIcon className={classes.icon} style={{ color: "#7D55D7" }} />;
     case StatusNameType.UNDER_REVIEW:
-      icon = (
+      return (
         <UnderReviewIcon
           className={classes.icon}
           style={{ color: "#3A79E2" }}
         />
       );
-      break;
     case StatusNameType.ANSWERED:
-      icon = (
+      return (
         <AnsweredIcon className={classes.icon} style={{ color: "#3CBB53" }} />
       );
-      break;
   }
-
-  return <div className={classes.container}>{icon}</div>;
 }
 
 const Status = StatusBase;
