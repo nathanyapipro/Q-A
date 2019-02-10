@@ -25,18 +25,13 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
     "&:nth-of-type(even)": {
       backgroundColor: theme.palette.grey[50]
-    },
-    borderBottom: `1px solid ${theme.palette.divider}`,
-    "&:last-child": {
-      borderBottom: "unset"
     }
   },
 
   tableCell: {
     padding: `${theme.spacing.unit * 2}px !important`,
     display: "flex",
-    flexDirection: "row",
-    borderBottom: "unset"
+    flexDirection: "row"
   },
   status: {
     padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 1.5}px ${theme

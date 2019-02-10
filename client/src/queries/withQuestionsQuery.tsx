@@ -68,6 +68,8 @@ type ChildProps = {
   data: {
     nodes: Array<Questions_questions_nodes>;
     totalCount: number;
+    offset: number;
+    first: number;
   };
   loading: boolean;
   error?: ApolloError;
@@ -87,7 +89,7 @@ export const withQuestionsQuery = graphql<
       filter
     }
   }),
-  props: ({ data, ownProps: { handleChangePage } }) => {
+  props: ({ data, ownProps: { handleChangePage, offset, first } }) => {
     if (!data) {
       throw new Error("No data prop found");
     }
@@ -99,7 +101,9 @@ export const withQuestionsQuery = graphql<
         totalCount:
           data.questions && data.questions.totalCount
             ? data.questions.totalCount
-            : 0
+            : 0,
+        offset,
+        first
       },
       loading: loading,
       error: error,

@@ -18,27 +18,22 @@ interface OwnProps {}
 
 type Props = OwnProps & WithQuestionsQuery;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(_ => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    flexShrink: 0,
-    marginBottom: theme.spacing.unit * 2
+    flexShrink: 0
   },
   table: {
     tableLayout: "fixed"
   },
-  emptyRow: {},
-  pagination: {
-    width: "max-content",
-    alignSelf: "flex-end"
-  }
+  emptyRow: {}
 }));
 
 function QuestionsTableBase(props: Props) {
   const classes = useStyles({});
   const {
-    data: { nodes, totalCount },
+    data: { nodes, totalCount, offset, first },
     handleChangePage
   } = props;
 
@@ -62,29 +57,25 @@ function QuestionsTableBase(props: Props) {
   }
 
   return (
-    <React.Fragment>
-      <Paper elevation={1} className={classes.container}>
-        <Table className={classes.table}>
-          <TableBody>{renderRows()}</TableBody>
-        </Table>
-      </Paper>
-      <Paper elevation={1} className={classes.pagination}>
-        <TablePagination
-          component="div"
-          count={totalCount}
-          rowsPerPage={10}
-          rowsPerPageOptions={[]}
-          page={Math.floor(totalCount / 10)}
-          backIconButtonProps={{
-            "aria-label": "Previous Page"
-          }}
-          nextIconButtonProps={{
-            "aria-label": "Next Page"
-          }}
-          onChangePage={_handleChangePage}
-        />
-      </Paper>
-    </React.Fragment>
+    <Paper elevation={1} className={classes.container}>
+      <Table className={classes.table}>
+        <TableBody>{renderRows()}</TableBody>
+      </Table>
+      <TablePagination
+        component="div"
+        count={totalCount}
+        rowsPerPage={first}
+        rowsPerPageOptions={[]}
+        page={Math.floor(offset / first)}
+        backIconButtonProps={{
+          "aria-label": "Previous Page"
+        }}
+        nextIconButtonProps={{
+          "aria-label": "Next Page"
+        }}
+        onChangePage={_handleChangePage}
+      />
+    </Paper>
   );
 }
 
