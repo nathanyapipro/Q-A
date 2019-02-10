@@ -124,7 +124,6 @@ function RowBase(props: Props) {
             className={classes.bold}
             variant="subtitle1"
             component="p"
-            color="secondary"
           >
             {content}
             <Typography
