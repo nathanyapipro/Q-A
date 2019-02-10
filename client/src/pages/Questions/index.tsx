@@ -67,7 +67,7 @@ function QuestionsBase(_: Props) {
     tagIds: [],
     statusIds: [],
     offset: 0,
-    first: 1
+    first: 10
   });
 
   function toggleFilters(_: React.SyntheticEvent<{}, Event>) {
