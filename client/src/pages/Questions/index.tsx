@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "row",
     flexGrow: 1,
-    padding: theme.spacing.unit,
+    padding: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 2
   },
   drawerPaper: {

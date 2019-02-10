@@ -17,7 +17,11 @@ function UnauthenticatedRouteBase(props: Props) {
     <Route
       {...rest}
       render={props =>
-        isAuthenticated ? <Redirect to="/" /> : <Component {...props} />
+        isAuthenticated ? (
+          <Redirect to="/questions" />
+        ) : (
+          <Component {...props} />
+        )
       }
     />
   );

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     flexShrink: 0,
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px`
+    padding: theme.spacing.unit * 3
   },
   navLink: {
     cursor: "pointer",
@@ -134,7 +134,7 @@ function AppLayoutBase(props: Props) {
             <NavLink
               onClick={handleNavClick}
               exact
-              to="/"
+              to="/questions"
               className={classes.navLink}
               activeClassName={classes.linkActive}
             >

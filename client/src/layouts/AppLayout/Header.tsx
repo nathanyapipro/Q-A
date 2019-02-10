@@ -59,7 +59,6 @@ function HeaderBase(props: Props) {
           <Switch>
             <Route
               path="/ask-a-question"
-              exact
               component={() => (
                 <Typography variant="h6" color="inherit">
                   Ask a Question
@@ -67,8 +66,7 @@ function HeaderBase(props: Props) {
               )}
             />
             <Route
-              path="/"
-              exact
+              path="/questions"
               component={() => (
                 <Typography variant="h6" color="inherit">
                   Questions
@@ -77,7 +75,6 @@ function HeaderBase(props: Props) {
             />
             <Route
               path="/profile"
-              exact
               component={() => (
                 <Typography variant="h6" color="inherit">
                   Profile
@@ -86,7 +83,6 @@ function HeaderBase(props: Props) {
             />
             <Route
               path="/settings"
-              exact
               component={() => (
                 <Typography variant="h6" color="inherit">
                   Settings

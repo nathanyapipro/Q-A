@@ -96,7 +96,7 @@ function Control(props: ControlProps<OptionType>) {
     <TextField
       fullWidth
       variant="outlined"
-      margin="dense"
+      margin="none"
       InputLabelProps={{
         shrink: true
       }}
