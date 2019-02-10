@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   field: {
     display: "flex",
     marginLeft: 0,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing.unit * 2,
     "&:first-child": {
-      marginBottom: 0
+      marginTop: 0
     },
     [theme.breakpoints.up("sm")]: {
       flexGrow: 1,
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       "&:first-child": {
         marginLeft: 0
       },
-      marginBottom: 0,
+      marginTop: 0,
       marginLeft: theme.spacing.unit
     }
   }
