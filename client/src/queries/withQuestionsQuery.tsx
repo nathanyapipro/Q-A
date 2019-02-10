@@ -56,16 +56,22 @@ const QUESTIONS_QUERY = gql`
   }
 `;
 
-type InputProps = QuestionsVariables;
+interface InputProps extends QuestionsVariables {
+  handleChangePage: (page: number) => void;
+}
 
 type Response = Questions;
 
 type Variables = QuestionsVariables;
 
 type ChildProps = {
-  questions: Array<Questions_questions_nodes>;
-  questionsLoading: boolean;
-  questionsError?: ApolloError;
+  data: {
+    nodes: Array<Questions_questions_nodes>;
+    totalCount: number;
+  };
+  loading: boolean;
+  error?: ApolloError;
+  handleChangePage: (page: number) => void;
 };
 
 export const withQuestionsQuery = graphql<
@@ -74,23 +80,30 @@ export const withQuestionsQuery = graphql<
   Variables,
   ChildProps
 >(QUESTIONS_QUERY, {
-  options: variables => ({
+  options: ({ offset, first, filter }) => ({
     variables: {
-      ...variables,
-      offset: 0,
-      first: 10
+      offset,
+      first,
+      filter
     }
   }),
-  props: ({ data }) => {
+  props: ({ data, ownProps: { handleChangePage } }) => {
     if (!data) {
       throw new Error("No data prop found");
     }
     const { loading, error } = data;
 
     return {
-      questions: data.questions ? data.questions.nodes : [],
-      questionsLoading: loading,
-      questionsError: error
+      data: {
+        nodes: data.questions ? data.questions.nodes : [],
+        totalCount:
+          data.questions && data.questions.totalCount
+            ? data.questions.totalCount
+            : 0
+      },
+      loading: loading,
+      error: error,
+      handleChangePage
     };
   }
 });

@@ -10,6 +10,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { QuestionsVariables } from "../../types/apollo/Questions";
+import Paper from "@material-ui/core/Paper";
 
 interface OwnProps {}
 
@@ -27,7 +28,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "row",
     flexGrow: 1,
-    marginBottom: theme.spacing.unit
+    padding: theme.spacing.unit,
+    marginBottom: theme.spacing.unit * 2
   },
   drawerPaper: {
     height: "100%"
@@ -42,41 +44,51 @@ const useStyles = makeStyles(theme => ({
     minWidth: "unset"
   },
   filterButton: {
-    flexGrow: 1,
-    marginBottom: theme.spacing.unit
+    width: "100%",
+    marginBottom: theme.spacing.unit * 2
   },
   filterButtonIcon: {
     marginRight: theme.spacing.unit * 2
   }
 }));
 
-export interface FiltersType {
+export interface QueryType {
   tagIds: Array<number>;
   statusIds: Array<number>;
+  offset: number;
+  first: number;
 }
 
 function QuestionsBase(_: Props) {
   const classes = useStyles({});
 
   const [isFiltersOpen, setIsFiltersOpen] = React.useState<boolean>(false);
-  const [filters, setFilters] = React.useState<FiltersType>({
+  const [query, setQuery] = React.useState<QueryType>({
     tagIds: [],
-    statusIds: []
+    statusIds: [],
+    offset: 0,
+    first: 10
   });
 
   function toggleFilters(_: React.SyntheticEvent<{}, Event>) {
     setIsFiltersOpen(!isFiltersOpen);
   }
 
+  const handleChangePage = (page: number) =>
+    setQuery({
+      ...query,
+      offset: page * query.first
+    });
+
   const queryParams: QuestionsVariables = {
-    first: 10,
-    offset: 0,
+    first: query.first,
+    offset: query.offset,
     filter: {
       tagIds: {
-        contains: filters.tagIds.length > 0 ? filters.tagIds : null
+        contains: query.tagIds.length > 0 ? query.tagIds : null
       },
       statusId: {
-        in: filters.statusIds.length > 0 ? filters.statusIds : null
+        in: query.statusIds.length > 0 ? query.statusIds : null
       }
     }
   };
@@ -84,54 +96,59 @@ function QuestionsBase(_: Props) {
   return (
     <div className={classes.container}>
       <Hidden smUp implementation="css">
-        <div className={classes.header}>
-          <Button
-            color="primary"
-            variant="contained"
-            className={classes.filterButton}
-            onClick={toggleFilters}
-          >
-            <FilterListIcon
-              className={classes.filterButtonIcon}
-              color="inherit"
-            />
-            <Typography color="inherit">Filters</Typography>
-          </Button>
-          <Drawer
-            variant="temporary"
-            anchor="bottom"
-            open={isFiltersOpen}
-            onClose={toggleFilters}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            ModalProps={{
-              keepMounted: true
-            }}
-          >
-            <div className={classes.drawerHeader}>
-              <Button
-                color="primary"
-                disableRipple
-                className={classes.closeButton}
-                onClick={toggleFilters}
-              >
-                <CloseIcon color="inherit" />
-              </Button>
-            </div>
-            <Divider />
-            <div className={classes.drawerContent}>
-              <Filters filters={filters} setFilters={setFilters} />
-            </div>
-          </Drawer>
-        </div>
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.filterButton}
+          onClick={toggleFilters}
+        >
+          <FilterListIcon
+            className={classes.filterButtonIcon}
+            color="inherit"
+          />
+          <Typography color="inherit">Filters</Typography>
+        </Button>
+        <Drawer
+          variant="temporary"
+          anchor="bottom"
+          open={isFiltersOpen}
+          onClose={toggleFilters}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+          ModalProps={{
+            keepMounted: true
+          }}
+        >
+          <div className={classes.drawerHeader}>
+            <Button
+              color="primary"
+              disableRipple
+              className={classes.closeButton}
+              onClick={toggleFilters}
+            >
+              <CloseIcon color="inherit" />
+            </Button>
+          </div>
+          <Divider />
+          <div className={classes.drawerContent}>
+            <Filters query={query} setQuery={setQuery} />
+          </div>
+        </Drawer>
       </Hidden>
       <Hidden className={classes.fullWidth} xsDown implementation="css">
-        <div className={classes.header}>
-          <Filters filters={filters} setFilters={setFilters} />
-        </div>
+        <Paper className={classes.header}>
+          <Filters query={query} setQuery={setQuery} />
+        </Paper>
       </Hidden>
-      <QuestionsTable {...queryParams} />
+      {
+        //@ts-ignore
+        <QuestionsTable
+          {...queryParams}
+          //@ts-ignore
+          handleChangePage={handleChangePage}
+        />
+      }
     </div>
   );
 }

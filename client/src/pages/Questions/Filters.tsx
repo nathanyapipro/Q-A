@@ -2,11 +2,11 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import StatusFilter from "../../components/QuestionsFilters/Status";
 import TagsFilter from "../../components/QuestionsFilters/Tags";
-import { FiltersType } from ".";
+import { QueryType } from ".";
 
 interface OwnProps {
-  filters: FiltersType;
-  setFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
+  query: QueryType;
+  setQuery: React.Dispatch<React.SetStateAction<QueryType>>;
 }
 
 type Props = OwnProps;
@@ -33,30 +33,32 @@ const useStyles = makeStyles(theme => ({
 
 function FiltersBase(props: Props) {
   const classes = useStyles({});
-  const { filters, setFilters } = props;
+  const { query, setQuery } = props;
 
   function handleSetStatusIds(item: number | Array<number>) {
     const value = item instanceof Array ? item : [item];
-    setFilters({
-      ...filters,
+    setQuery({
+      ...query,
+      offset: 0,
       statusIds: value
     });
   }
 
   function handleSetTagIds(item: number | Array<number>) {
     const value = item instanceof Array ? item : [item];
-    setFilters({
-      ...filters,
+    setQuery({
+      ...query,
+      offset: 0,
       tagIds: value
     });
   }
   return (
     <React.Fragment>
       <div className={classes.field}>
-        <StatusFilter onChange={handleSetStatusIds} value={filters.statusIds} />
+        <StatusFilter onChange={handleSetStatusIds} value={query.statusIds} />
       </div>
       <div className={classes.field}>
-        <TagsFilter onChange={handleSetTagIds} value={filters.tagIds} />
+        <TagsFilter onChange={handleSetTagIds} value={query.tagIds} />
       </div>
     </React.Fragment>
   );

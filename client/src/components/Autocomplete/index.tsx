@@ -228,7 +228,6 @@ const AutocompleteBase = React.memo(function AutocompleteBase(props: Props) {
       ...base,
       display: "flex",
       flex: "1 1 auto",
-      // color: theme.palette.text.primary,
       "& input": {
         font: "inherit"
       }
