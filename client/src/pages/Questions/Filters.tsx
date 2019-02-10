@@ -2,8 +2,12 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import StatusFilter from "../../components/QuestionsFilters/Status";
 import TagsFilter from "../../components/QuestionsFilters/Tags";
+import { FiltersType } from ".";
 
-interface OwnProps {}
+interface OwnProps {
+  filters: FiltersType;
+  setFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
+}
 
 type Props = OwnProps;
 
@@ -27,16 +31,32 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function FiltersBase(_: Props) {
+function FiltersBase(props: Props) {
   const classes = useStyles({});
+  const { filters, setFilters } = props;
 
+  function handleSetStatusIds(item: number | Array<number>) {
+    const value = item instanceof Array ? item : [item];
+    setFilters({
+      ...filters,
+      statusIds: value
+    });
+  }
+
+  function handleSetTagIds(item: number | Array<number>) {
+    const value = item instanceof Array ? item : [item];
+    setFilters({
+      ...filters,
+      tagIds: value
+    });
+  }
   return (
     <React.Fragment>
       <div className={classes.field}>
-        <StatusFilter />
+        <StatusFilter onChange={handleSetStatusIds} value={filters.statusIds} />
       </div>
       <div className={classes.field}>
-        <TagsFilter />
+        <TagsFilter onChange={handleSetTagIds} value={filters.tagIds} />
       </div>
     </React.Fragment>
   );

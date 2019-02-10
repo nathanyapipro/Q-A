@@ -89,7 +89,14 @@ function AppLayoutBase(props: Props) {
     setIsMenuOpen(!isMenuOpen);
   }
 
-  function handleLogOut(_: React.MouseEvent<HTMLElement, MouseEvent>) {
+  function handleNavClick(_: React.MouseEvent<HTMLElement, MouseEvent>) {
+    if (isMenuOpen) {
+      toggleMenu();
+    }
+  }
+
+  function handleLogOut(e: React.MouseEvent<HTMLElement, MouseEvent>) {
+    handleNavClick(e);
     updateAuth({
       variables: {
         jwtToken: null,
@@ -109,6 +116,7 @@ function AppLayoutBase(props: Props) {
             </div>
             <Divider />
             <NavLink
+              onClick={handleNavClick}
               exact
               to="/ask-a-question"
               className={classes.navLink}
@@ -123,6 +131,7 @@ function AppLayoutBase(props: Props) {
               </Typography>
             </NavLink>
             <NavLink
+              onClick={handleNavClick}
               exact
               to="/"
               className={classes.navLink}
@@ -134,6 +143,7 @@ function AppLayoutBase(props: Props) {
               </Typography>
             </NavLink>
             <NavLink
+              onClick={handleNavClick}
               exact
               to="/profile"
               className={classes.navLink}
@@ -145,6 +155,7 @@ function AppLayoutBase(props: Props) {
               </Typography>
             </NavLink>
             <NavLink
+              onClick={handleNavClick}
               exact
               to="/settings"
               className={classes.navLink}

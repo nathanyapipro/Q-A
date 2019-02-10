@@ -4,20 +4,15 @@ import { compose } from "react-apollo";
 
 import { withTagsQuery, WithTagsQuery } from "../../queries/withTagsQuery";
 
-interface OwnProps {}
+interface OwnProps {
+  value?: number | Array<number>;
+  onChange: (value: number | Array<number>) => void;
+}
 
 type Props = OwnProps & WithTagsQuery;
 
 function TagsBase(props: Props) {
-  const [selectedTagsOptions, setSelectedTagsOptions] = React.useState<
-    Array<any>
-  >([]);
-
-  function handleTagsChange(item: any) {
-    setSelectedTagsOptions(item);
-  }
-
-  const { tags } = props;
+  const { tags, onChange, value } = props;
   const options = tags.map(status => ({
     value: status.id,
     label: status.name
@@ -25,11 +20,11 @@ function TagsBase(props: Props) {
 
   return (
     <TagsAutocomplete
-      value={selectedTagsOptions}
+      value={value}
       label="Tags"
       placeholder="Filter by Tags"
       options={options}
-      onChange={handleTagsChange}
+      onChange={onChange}
       isMulti={true}
     />
   );

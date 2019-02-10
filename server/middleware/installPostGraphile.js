@@ -74,8 +74,8 @@ function postgraphileOptions() {
 
       // We install our own watch fixtures manually because we run PostGraphile
       // with non-database-owner privileges.
-      pgSkipInstallingWatchFixtures: true
-      // connectionFilterRelations: true,
+      pgSkipInstallingWatchFixtures: true,
+      connectionFilterAllowNullInput: true
     },
 
     /*

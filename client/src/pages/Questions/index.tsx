@@ -9,6 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
+import { QuestionsVariables } from "../../types/apollo/Questions";
 
 interface OwnProps {}
 
@@ -49,14 +50,36 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+export interface FiltersType {
+  tagIds: Array<number>;
+  statusIds: Array<number>;
+}
+
 function QuestionsBase(_: Props) {
   const classes = useStyles({});
 
   const [isFiltersOpen, setIsFiltersOpen] = React.useState<boolean>(false);
+  const [filters, setFilters] = React.useState<FiltersType>({
+    tagIds: [],
+    statusIds: []
+  });
 
   function toggleFilters(_: React.SyntheticEvent<{}, Event>) {
     setIsFiltersOpen(!isFiltersOpen);
   }
+
+  const queryParams: QuestionsVariables = {
+    first: 10,
+    offset: 0,
+    filter: {
+      tagIds: {
+        contains: filters.tagIds.length > 0 ? filters.tagIds : null
+      },
+      statusId: {
+        in: filters.statusIds.length > 0 ? filters.statusIds : null
+      }
+    }
+  };
 
   return (
     <div className={classes.container}>
@@ -98,17 +121,17 @@ function QuestionsBase(_: Props) {
             </div>
             <Divider />
             <div className={classes.drawerContent}>
-              <Filters />
+              <Filters filters={filters} setFilters={setFilters} />
             </div>
           </Drawer>
         </div>
       </Hidden>
       <Hidden className={classes.fullWidth} xsDown implementation="css">
         <div className={classes.header}>
-          <Filters />
+          <Filters filters={filters} setFilters={setFilters} />
         </div>
       </Hidden>
-      <QuestionsTable />
+      <QuestionsTable {...queryParams} />
     </div>
   );
 }

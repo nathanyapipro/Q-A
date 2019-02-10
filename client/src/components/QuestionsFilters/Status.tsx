@@ -7,20 +7,15 @@ import {
   WithStatusesQuery
 } from "../../queries/withStatusesQuery";
 
-interface OwnProps {}
+interface OwnProps {
+  value?: number | Array<number>;
+  onChange: (value: number | Array<number>) => void;
+}
 
 type Props = OwnProps & WithStatusesQuery;
 
 function StatusBase(props: Props) {
-  const [selectedStatusOptions, setSelectedStatusOptions] = React.useState<
-    Array<any>
-  >([]);
-
-  function handleStatusChange(item: any) {
-    setSelectedStatusOptions(item);
-  }
-
-  const { statuses } = props;
+  const { statuses, onChange, value } = props;
   const options = statuses.map(status => ({
     value: status.id,
     label: status.name
@@ -28,11 +23,11 @@ function StatusBase(props: Props) {
 
   return (
     <StatusesAutocomplete
-      value={selectedStatusOptions}
+      value={value}
       label="Status"
       placeholder="Filter by Status"
       options={options}
-      onChange={handleStatusChange}
+      onChange={onChange}
       isMulti={true}
     />
   );
