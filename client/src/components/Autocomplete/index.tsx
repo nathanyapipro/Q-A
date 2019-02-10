@@ -1,5 +1,5 @@
 import * as React from "react";
-// import classNames from "classnames";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
 // import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import Typography from "@material-ui/core/Typography";
@@ -20,6 +20,7 @@ import { PlaceholderProps } from "react-select/lib/components/Placeholder";
 import { ControlProps } from "react-select/lib/components/Control";
 import { NoticeProps, MenuProps } from "react-select/lib/components/Menu";
 // import { MultiValueProps } from "react-select/lib/components/MultiValue";
+import { MultiValueGenericProps } from "react-select/lib/components/MultiValue";
 import { ValueContainerProps } from "react-select/lib/components/containers";
 import { OptionProps } from "react-select/lib/components/Option";
 import { debounce } from "../../helpers/functional";
@@ -43,6 +44,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexWrap: "wrap",
     flex: "1 1 auto",
     alignItems: "center"
+  },
+  multiValueContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginRight: theme.spacing.unit
   },
   singleValue: {
     fontSize: "1rem"
@@ -161,6 +167,17 @@ function ValueContainer(props: ValueContainerProps<OptionType>) {
   );
 }
 
+const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
+  return (
+    <Paper
+      elevation={1}
+      className={classNames(props.selectProps.classes.multiValueContainer)}
+    >
+      {props.children}
+    </Paper>
+  );
+};
+
 // function MultiValue(props: MultiValueProps<OptionType>) {
 //   return (
 //     <Chip
@@ -216,6 +233,7 @@ const AutocompleteBase = React.memo(function AutocompleteBase(props: Props) {
   const components = {
     Control,
     Menu,
+    MultiValueContainer,
     // MultiValue,
     NoOptionsMessage,
     Option,
