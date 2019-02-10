@@ -6,7 +6,7 @@ create table app_public.comment (
   id serial primary key,
   content text not null,
   user_id int not null references app_public.user(id),
-  question_id int not null references app_public.question(id),
+  question_id int not null references app_public.question(id) on delete cascade,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

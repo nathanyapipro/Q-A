@@ -93,6 +93,7 @@ function Control(props: ControlProps<OptionType>) {
       InputLabelProps={{
         shrink: true
       }}
+      error={props.selectProps.error}
       InputProps={{
         inputComponent,
         inputProps: {
@@ -183,6 +184,7 @@ export type ValueType = ReactValueType<OptionType>;
 
 export interface AutocompleteProps extends ReactSelectProps {
   label: string;
+  error?: boolean;
   minInputLength?: number;
   disableDebounce?: boolean;
   debounceTimeout?: number;

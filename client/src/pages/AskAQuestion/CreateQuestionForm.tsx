@@ -48,25 +48,31 @@ function CreateQuestionFromBase(props: Props) {
 
   const [content, setContent] = React.useState<string>("");
   const [tagIds, setTagIds] = React.useState<Array<number>>([]);
+
   const [errors, setErrors] = React.useState<FormErrors>({
     content: false,
     tagIds: false
   });
+  const [isPristine, setIsPristine] = React.useState<boolean>(true);
 
-  const isValid = Object.keys(errors)
-    .map(key => errors[key])
-    .every(error => error === false);
+  const isValid =
+    !isPristine &&
+    Object.keys(errors)
+      .map(key => errors[key])
+      .every(error => error === false);
 
-  function handleContentChange(
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) {
+  function handleContentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    if (isPristine) {
+      setIsPristine(false);
+    }
     const value = e.target.value;
     setContent(value);
   }
 
   function handleSetTagIds(item: number | Array<number>) {
+    if (isPristine) {
+      setIsPristine(false);
+    }
     const value = item instanceof Array ? item : [item];
     setTagIds(value);
   }
@@ -74,7 +80,7 @@ function CreateQuestionFromBase(props: Props) {
   function validate() {
     setErrors({
       content: !(content && content !== ""),
-      tagIds: !(tagIds instanceof Array)
+      tagIds: !(tagIds instanceof Array && tagIds.length > 0)
     });
   }
 
@@ -91,8 +97,6 @@ function CreateQuestionFromBase(props: Props) {
         }
       });
       console.log(response);
-    } else {
-      console.log("ERRORS");
     }
   }
 
@@ -122,6 +126,7 @@ function CreateQuestionFromBase(props: Props) {
         <div className={classes.field}>
           <TagsAutocomplete
             value={tagIds}
+            error={errors.tagIds}
             label="Tags"
             onChange={handleSetTagIds}
             isMulti={true}
@@ -129,6 +134,7 @@ function CreateQuestionFromBase(props: Props) {
         </div>
         <Button
           className={classes.submitButton}
+          disabled={isPristine}
           type="submit"
           variant="contained"
           color="primary"
