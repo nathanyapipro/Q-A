@@ -3,10 +3,8 @@ import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
 // import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import Typography from "@material-ui/core/Typography";
-// import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
-// import CancelIcon from "@material-ui/icons/Cancel";
 import { default as ReactSelect } from "react-select";
 import TextField from "@material-ui/core/TextField";
 import { Props as ReactSelectProps } from "react-select/lib/Select";
@@ -19,7 +17,6 @@ import { SingleValueProps } from "react-select/lib/components/SingleValue";
 import { PlaceholderProps } from "react-select/lib/components/Placeholder";
 import { ControlProps } from "react-select/lib/components/Control";
 import { NoticeProps, MenuProps } from "react-select/lib/components/Menu";
-// import { MultiValueProps } from "react-select/lib/components/MultiValue";
 import { MultiValueGenericProps } from "react-select/lib/components/MultiValue";
 import { ValueContainerProps } from "react-select/lib/components/containers";
 import { OptionProps } from "react-select/lib/components/Option";
@@ -43,27 +40,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexWrap: "wrap",
     flex: "1 1 auto",
-    alignItems: "center"
+    alignItems: "center",
+    margin: -theme.spacing.unit / 2
   },
   multiValueContainer: {
     display: "flex",
     flexDirection: "row",
-    marginRight: theme.spacing.unit
+    margin: theme.spacing.unit / 2
   },
   singleValue: {
     fontSize: "1rem"
   },
-  // chip: {
-  //   margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
-  // },
-  // chipFocused: {
-  //   backgroundColor: emphasize(
-  //     theme.palette.type === "light"
-  //       ? theme.palette.grey[300]
-  //       : theme.palette.grey[700],
-  //     0.08
-  //   )
-  // },
   noOptionsMessage: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
   },
@@ -178,20 +165,6 @@ const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
   );
 };
 
-// function MultiValue(props: MultiValueProps<OptionType>) {
-//   return (
-//     <Chip
-//       tabIndex={-1}
-//       label={props.children}
-//       className={classNames(props.selectProps.classes.chip, {
-//         [props.selectProps.classes.chipFocused]: props.isFocused
-//       })}
-//       onDelete={props.removeProps.onClick}
-//       deleteIcon={<CancelIcon {...props.removeProps} />}
-//     />
-//   );
-// }
-
 function Menu(props: MenuProps<OptionType>) {
   return (
     <Paper
@@ -234,7 +207,6 @@ const AutocompleteBase = React.memo(function AutocompleteBase(props: Props) {
     Control,
     Menu,
     MultiValueContainer,
-    // MultiValue,
     NoOptionsMessage,
     Option,
     Placeholder,
