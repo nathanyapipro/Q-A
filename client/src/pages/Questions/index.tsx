@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { QuestionsVariables } from "../../types/apollo/Questions";
 import Paper from "@material-ui/core/Paper";
 import { Theme } from "@material-ui/core/styles";
+import { QuestionsOrderBy } from "../../types/apollo";
 
 interface OwnProps {}
 
@@ -56,6 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export interface QueryType {
   tagIds: Array<number>;
   statusIds: Array<number>;
+  orderBy: Array<QuestionsOrderBy>;
   offset: number;
   first: number;
 }
@@ -67,6 +69,7 @@ function QuestionsBase(_: Props) {
   const [query, setQuery] = React.useState<QueryType>({
     tagIds: [],
     statusIds: [],
+    orderBy: [QuestionsOrderBy.CREATED_AT_ASC],
     offset: 0,
     first: 10
   });
@@ -91,7 +94,8 @@ function QuestionsBase(_: Props) {
       statusId: {
         in: query.statusIds.length > 0 ? query.statusIds : null
       }
-    }
+    },
+    orderBy: query.orderBy
   };
 
   return (

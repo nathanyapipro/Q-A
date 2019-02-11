@@ -74,11 +74,12 @@ export const withQuestionsQuery = graphql<
   Variables,
   ChildProps
 >(QUESTIONS_QUERY, {
-  options: ({ offset, first, filter }) => ({
+  options: ({ offset, first, filter, orderBy }) => ({
     variables: {
       offset,
       first,
-      filter
+      filter,
+      orderBy
     }
   }),
   props: ({ data, ownProps: { offset, first } }) => {

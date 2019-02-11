@@ -3,7 +3,10 @@ import { makeStyles } from "@material-ui/styles";
 import { QueryType } from ".";
 import StatusAutocomplete from "../../components/Autocomplete/Status";
 import TagsAutocomplete from "../../components/Autocomplete/Tags";
+import OrderByAutocomplete from "../../components/Autocomplete/OrderBy";
 import { Theme } from "@material-ui/core/styles";
+import { QuestionsOrderBy } from "../../types/apollo";
+
 interface OwnProps {
   query: QueryType;
   setQuery: React.Dispatch<React.SetStateAction<QueryType>>;
@@ -52,6 +55,15 @@ function FiltersBase(props: Props) {
       tagIds: value
     });
   }
+
+  function handleSetOrderBy(item: QuestionsOrderBy | Array<QuestionsOrderBy>) {
+    const value = item instanceof Array ? item : [item];
+    setQuery({
+      ...query,
+      offset: 0,
+      orderBy: value
+    });
+  }
   return (
     <React.Fragment>
       <div className={classes.field}>
@@ -68,6 +80,13 @@ function FiltersBase(props: Props) {
           label="Tags Filter"
           onChange={handleSetTagIds}
           isMulti={true}
+        />
+      </div>
+      <div className={classes.field}>
+        <OrderByAutocomplete
+          value={query.orderBy}
+          label="Order By"
+          onChange={handleSetOrderBy}
         />
       </div>
     </React.Fragment>
