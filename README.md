@@ -30,7 +30,7 @@ Client:
   - [x] Questions Table
     - [x] Pagination
     - [x] Toggle Vote
-- [] Question Page (question, comments)
+- [ ] Question Page (question, comments)
   - [ ] Question
     - [x] Static Render
     - [ ] Inline Edit [Status, Content, Answer] (Restricted By Permissions)
