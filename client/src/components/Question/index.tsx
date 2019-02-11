@@ -1,6 +1,5 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import Paper from "@material-ui/core/Paper";
 import { Theme } from "@material-ui/core/styles";
 import Content from "../Question/Content";
 import Actions from "../Question/Actions";
@@ -21,7 +20,6 @@ type Props = OwnProps & WithQuestionByIdQuery;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    padding: `${theme.spacing.unit * 2}px !important`,
     display: "flex",
     flexDirection: "column"
   },
@@ -68,7 +66,7 @@ function QuestionBase(props: Props) {
       : undefined;
 
   return (
-    <Paper elevation={1} className={classes.container}>
+    <div className={classes.container}>
       <div className={classes.staticField}>
         <Typography color="secondary" variant="caption">
           Status
@@ -119,7 +117,7 @@ function QuestionBase(props: Props) {
           hasVoted={hasVoted}
         />
       </div>
-    </Paper>
+    </div>
   );
 }
 

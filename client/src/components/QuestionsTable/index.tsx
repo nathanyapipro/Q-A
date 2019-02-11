@@ -7,6 +7,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import TablePagination from "@material-ui/core/TablePagination";
+import Typography from "@material-ui/core/Typography";
 import Row from "./Row";
 import { Theme } from "@material-ui/core/styles";
 
@@ -30,7 +31,10 @@ const useStyles = makeStyles((_: Theme) => ({
   table: {
     tableLayout: "fixed"
   },
-  emptyRow: {}
+  emptyRow: {},
+  bold: {
+    fontWeight: 600
+  }
 }));
 
 function QuestionsTableBase(props: Props) {
@@ -44,7 +48,16 @@ function QuestionsTableBase(props: Props) {
     if (nodes.length === 0) {
       return (
         <TableRow className={classes.emptyRow}>
-          <TableCell>No Data</TableCell>
+          <TableCell>
+            <Typography
+              className={classes.bold}
+              variant="subtitle1"
+              component="p"
+              color="secondary"
+            >
+              No Questions found ...
+            </Typography>
+          </TableCell>
         </TableRow>
       );
     } else {

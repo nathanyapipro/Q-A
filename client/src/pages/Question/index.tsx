@@ -1,6 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 import { RouteComponentProps } from "react-router-dom";
 import QuestionById from "../../components/Question";
 
@@ -12,16 +13,18 @@ export type QuestionRouteProps = RouteComponentProps<{
 
 type Props = OwnProps & QuestionRouteProps;
 
-const useStyles = makeStyles((_: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
-    flexGrow: 1
+    padding: theme.spacing.unit * 2
   },
-  question: {
+  divider: {
     display: "flex",
-    flexDirection: "column",
-    flexGrow: 1
+    minHeight: "100%",
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
+    borderLeft: `1px solid ${theme.palette.divider}`
   },
   comments: {
     display: "flex",
@@ -42,12 +45,11 @@ function QuestionBase(props: Props) {
   } = props;
 
   return (
-    <div className={classes.container}>
-      <div className={classes.question}>
-        <QuestionById questionId={parseInt(id, 10)} />
-      </div>
+    <Paper elevation={1} className={classes.container}>
+      <QuestionById questionId={parseInt(id, 10)} />
+      <div className={classes.divider} />
       <div className={classes.comments}>Comments</div>
-    </div>
+    </Paper>
   );
 }
 
