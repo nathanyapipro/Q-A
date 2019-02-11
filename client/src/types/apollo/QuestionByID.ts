@@ -55,6 +55,44 @@ export interface QuestionById_questionById_questionTags {
   totalCount: number | null;
 }
 
+export interface QuestionById_questionById_answers_nodes_user {
+  __typename: "User";
+  /**
+   * unique identifier for the user.
+   */
+  id: number;
+  /**
+   * public-facing username (or 'handle') of the user.
+   */
+  username: string;
+}
+
+export interface QuestionById_questionById_answers_nodes {
+  __typename: "Answer";
+  /**
+   * unique identifier for the answer.
+   */
+  id: number;
+  /**
+   * content of the answer.
+   */
+  content: string;
+  /**
+   * Reads a single `User` that is related to this `Answer`.
+   */
+  user: QuestionById_questionById_answers_nodes_user | null;
+  createdAt: any;
+  updatedAt: any;
+}
+
+export interface QuestionById_questionById_answers {
+  __typename: "AnswersConnection";
+  /**
+   * A list of `Answer` objects.
+   */
+  nodes: QuestionById_questionById_answers_nodes[];
+}
+
 export interface QuestionById_questionById_comments {
   __typename: "CommentsConnection";
   /**
@@ -90,6 +128,10 @@ export interface QuestionById_questionById {
    * indicates if the user has voted
    */
   hasVoted: boolean | null;
+  /**
+   * Reads and enables pagination through a set of `Answer`.
+   */
+  answers: QuestionById_questionById_answers;
   /**
    * Reads and enables pagination through a set of `Comment`.
    */

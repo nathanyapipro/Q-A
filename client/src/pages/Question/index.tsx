@@ -18,13 +18,11 @@ const useStyles = makeStyles((_: Theme) => ({
     flexDirection: "row",
     flexGrow: 1
   },
-  content: {
+  question: {
     display: "flex",
     flexDirection: "column",
     flexGrow: 1
   },
-  question: {},
-  answer: {},
   comments: {
     display: "flex",
     flexDirection: "column",
@@ -45,9 +43,8 @@ function QuestionBase(props: Props) {
 
   return (
     <div className={classes.container}>
-      <div className={classes.content}>
+      <div className={classes.question}>
         <QuestionById questionId={parseInt(id, 10)} />
-        <div className={classes.answer}>Answer</div>
       </div>
       <div className={classes.comments}>Comments</div>
     </div>

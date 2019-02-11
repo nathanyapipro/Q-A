@@ -11,6 +11,7 @@ import {
   withQuestionByIdQuery,
   WithQuestionByIdQuery
 } from "../../queries/withQuestionByIdQuery";
+import { Typography } from "@material-ui/core";
 
 interface OwnProps {
   questionId: number;
@@ -24,27 +25,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column"
   },
-  status: {
-    display: "flex",
-    marginBottom: theme.spacing.unit
-  },
-  content: {
+  staticField: {
     display: "flex",
     flexDirection: "column",
-    flexGrow: 1
+    marginBottom: theme.spacing.unit * 2
   },
-  footer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: theme.spacing.unit,
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column-reverse",
-      alignItems: "unset"
-    }
+  bold: {
+    fontWeight: 600
   },
-  spacer: {
-    flexGrow: 1
+  negativeGutterButton: {
+    marginBottom: -theme.spacing.unit
   }
 }));
 
@@ -70,24 +60,64 @@ function QuestionBase(props: Props) {
   const hasVoted = questionById.hasVoted ? questionById.hasVoted : false;
   const voteCount = questionById.voteCount ? questionById.voteCount : 0;
   const questionTags = questionById.questionTags.nodes;
+  const answer =
+    questionById.answers &&
+    questionById.answers.nodes &&
+    questionById.answers.nodes[0]
+      ? questionById.answers.nodes[0]
+      : undefined;
 
   return (
     <Paper elevation={1} className={classes.container}>
-      <div className={classes.status}>
+      <div className={classes.staticField}>
+        <Typography color="secondary" variant="caption">
+          Status
+        </Typography>
         <Status status={status} />
       </div>
-      <div className={classes.content}>
+      <div className={classes.staticField}>
+        <Typography
+          className={classes.negativeGutterButton}
+          color="secondary"
+          variant="caption"
+        >
+          Question
+        </Typography>
         <Content content={content} createdAt={createdAt} />
-        <div className={classes.footer}>
-          <Actions
-            id={id}
-            voteCount={voteCount}
-            commentCount={commentCount}
-            hasVoted={hasVoted}
-          />
-          <div className={classes.spacer} />
-          <Tags questionTags={questionTags} />
-        </div>
+      </div>
+      <div className={classes.staticField}>
+        <Typography color="secondary" variant="caption">
+          Tags
+        </Typography>
+        <Tags questionTags={questionTags} />
+      </div>
+      <div className={classes.staticField}>
+        <Typography
+          className={classes.negativeGutterButton}
+          color="secondary"
+          variant="caption"
+        >
+          Answer
+        </Typography>
+        <Typography
+          className={classes.bold}
+          variant="subtitle1"
+          component="p"
+          color="secondary"
+        >
+          {answer ? answer.content : "None"}
+        </Typography>
+      </div>
+      <div>
+        <Typography color="secondary" variant="caption">
+          Votes & Comments
+        </Typography>
+        <Actions
+          id={id}
+          voteCount={voteCount}
+          commentCount={commentCount}
+          hasVoted={hasVoted}
+        />
       </div>
     </Paper>
   );

@@ -103,7 +103,7 @@ function CreateQuestionFromBase(props: Props) {
           fullWidth
           error={content.touched && content.error}
           autoFocus
-          label="Content"
+          label="Question"
           multiline
           rows="8"
           placeholder="Ask a Question ... "

@@ -29,6 +29,18 @@ export const QUESTION_BY_ID_QUERY = gql`
       }
       voteCount
       hasVoted
+      answers(first: 1) {
+        nodes {
+          id
+          content
+          user {
+            id
+            username
+          }
+          createdAt
+          updatedAt
+        }
+      }
       comments {
         totalCount
       }

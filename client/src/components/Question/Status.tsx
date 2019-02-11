@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "row",
     alignItems: "center",
     color: theme.palette.primary.contrastText,
-    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`
+    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
+    width: "min-content"
   },
   label: {
     marginLeft: theme.spacing.unit
