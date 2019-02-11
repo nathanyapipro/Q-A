@@ -7,6 +7,7 @@ create table app_public.question (
   content text not null,
   user_id int not null references app_public.user(id),
   status_id int not null references app_public.status(id) default 1,
+  vote_count int not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

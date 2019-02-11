@@ -55,14 +55,6 @@ export interface CreateQuestion_createQuestion_question_questionTags {
   totalCount: number | null;
 }
 
-export interface CreateQuestion_createQuestion_question_votes {
-  __typename: "VotesConnection";
-  /**
-   * The count of *all* `Vote` you could get from the connection.
-   */
-  totalCount: number | null;
-}
-
 export interface CreateQuestion_createQuestion_question_comments {
   __typename: "CommentsConnection";
   /**
@@ -93,10 +85,11 @@ export interface CreateQuestion_createQuestion_question {
    * Reads and enables pagination through a set of `QuestionTag`.
    */
   questionTags: CreateQuestion_createQuestion_question_questionTags;
+  voteCount: number;
   /**
-   * Reads and enables pagination through a set of `Vote`.
+   * indicates if the user has voted
    */
-  votes: CreateQuestion_createQuestion_question_votes;
+  hasVoted: boolean | null;
   /**
    * Reads and enables pagination through a set of `Comment`.
    */

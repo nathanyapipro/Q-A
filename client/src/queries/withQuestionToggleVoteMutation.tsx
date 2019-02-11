@@ -1,13 +1,15 @@
 import { graphql, MutationFn } from "react-apollo";
 import {
-  CreateQuestion,
-  CreateQuestionVariables
-} from "../types/apollo/CreateQuestion";
+  QuestionToggleVote,
+  QuestionToggleVoteVariables
+} from "../types/apollo/QuestionToggleVote";
 import gql from "graphql-tag";
 
-export const CREATE_QUESTION_MUTATION = gql`
-  mutation CreateQuestion($createQuestionInput: CreateQuestionInput!) {
-    createQuestion(input: $createQuestionInput) {
+export const QUESTION_TOGGLE_VOTE_MUTATION = gql`
+  mutation QuestionToggleVote(
+    $questionToggleVoteInput: QuestionToggleVoteInput!
+  ) {
+    questionToggleVote(input: $questionToggleVoteInput) {
       question {
         id
         content
@@ -40,29 +42,29 @@ export const CREATE_QUESTION_MUTATION = gql`
 
 type InputProps = {};
 
-type Response = CreateQuestion;
+type Response = QuestionToggleVote;
 
-type Variables = CreateQuestionVariables;
+type Variables = QuestionToggleVoteVariables;
 
 type ChildProps = {
-  createQuestion: MutationFn<Response, Variables>;
+  questionToggleVote: MutationFn<Response, Variables>;
 };
 
-export const withCreateQuestionMutation = graphql<
+export const withQuestionToggleVoteMutation = graphql<
   InputProps,
   Response,
   Variables,
   ChildProps
->(CREATE_QUESTION_MUTATION, {
+>(QUESTION_TOGGLE_VOTE_MUTATION, {
   props: ({ mutate }) => {
     if (!mutate) {
       throw new Error("No mutate prop found");
     }
 
     return {
-      createQuestion: mutate
+      questionToggleVote: mutate
     };
   }
 });
 
-export type WithCreateQuestionMutation = ChildProps;
+export type WithQuestionToggleVoteMutation = ChildProps;

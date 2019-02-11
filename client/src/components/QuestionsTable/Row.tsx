@@ -14,12 +14,17 @@ import VoteIcon from "@material-ui/icons/ThumbUp";
 import CommentIcon from "@material-ui/icons/Comment";
 import { fromNow } from "../../helpers/date";
 import { Theme } from "@material-ui/core/styles";
+import { compose } from "react-apollo";
+import {
+  withQuestionToggleVoteMutation,
+  WithQuestionToggleVoteMutation
+} from "../../queries/withQuestionToggleVoteMutation";
 
 interface OwnProps {
   data: Questions_questions_nodes;
 }
 
-type Props = OwnProps;
+type Props = OwnProps & WithQuestionToggleVoteMutation;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -92,15 +97,23 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function RowBase(props: Props) {
   const classes = useStyles();
-  const { data } = props;
+  const { data, questionToggleVote } = props;
 
-  const { content, votes, comments, questionTags, status, createdAt } = data;
+  const {
+    id,
+    content,
+    hasVoted,
+    voteCount,
+    comments,
+    questionTags,
+    status,
+    createdAt
+  } = data;
 
   if (!status) {
     return <noscript />;
   }
 
-  const voteCount = votes.totalCount;
   const commentCount = comments.totalCount;
 
   const tags = questionTags.nodes;
@@ -112,6 +125,17 @@ function RowBase(props: Props) {
           <Tag key={`questionTag-${questionTag.id}`} {...questionTag.tag} />
         )
     );
+  }
+
+  function handleVoteClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
+    e.stopPropagation();
+    questionToggleVote({
+      variables: {
+        questionToggleVoteInput: {
+          questionId: id
+        }
+      }
+    });
   }
 
   return (
@@ -141,8 +165,9 @@ function RowBase(props: Props) {
             <div className={classes.actions}>
               <Button
                 variant="outlined"
-                color="primary"
+                color={hasVoted ? "primary" : "secondary"}
                 className={classes.button}
+                onClick={handleVoteClick}
               >
                 <VoteIcon className={classes.buttonIcon} color="inherit" />
                 <Typography
@@ -177,6 +202,8 @@ function RowBase(props: Props) {
   );
 }
 
-const Row = RowBase;
+const Row: React.ComponentType<OwnProps> = compose(
+  withQuestionToggleVoteMutation
+)(RowBase);
 
 export default Row;

@@ -27,6 +27,19 @@ export enum StatusNameType {
 }
 
 /**
+ * A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
+ */
+export interface BooleanFilter {
+  isNull?: boolean | null;
+  equalTo?: boolean | null;
+  notEqualTo?: boolean | null;
+  distinctFrom?: boolean | null;
+  notDistinctFrom?: boolean | null;
+  in?: boolean[] | null;
+  notIn?: boolean[] | null;
+}
+
+/**
  * All input for the `createQuestion` mutation.
  */
 export interface CreateQuestionInput {
@@ -100,10 +113,19 @@ export interface QuestionFilter {
   id?: IntFilter | null;
   userId?: IntFilter | null;
   statusId?: IntFilter | null;
+  hasVoted?: BooleanFilter | null;
   tagIds?: IntListFilter | null;
   and?: QuestionFilter[] | null;
   or?: QuestionFilter[] | null;
   not?: QuestionFilter | null;
+}
+
+/**
+ * All input for the `questionToggleVote` mutation.
+ */
+export interface QuestionToggleVoteInput {
+  clientMutationId?: string | null;
+  questionId: number;
 }
 
 //==============================================================

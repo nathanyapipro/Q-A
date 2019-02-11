@@ -38,9 +38,8 @@ const QUESTIONS_QUERY = gql`
           }
           totalCount
         }
-        votes {
-          totalCount
-        }
+        voteCount
+        hasVoted
         comments {
           totalCount
         }
