@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { QueryType } from ".";
 import StatusAutocomplete from "../../components/Autocomplete/Status";
-import TagsAutocomplete from "../../components/Autocomplete/Tags";
+import TagAutocomplete from "../../components/Autocomplete/Tag";
 import OrderByAutocomplete from "../../components/Autocomplete/OrderBy";
 import { Theme } from "@material-ui/core/styles";
 import { QuestionsOrderBy } from "../../types/apollo";
@@ -74,9 +74,9 @@ function FiltersBase(props: Props) {
         />
       </div>
       <div className={classes.field}>
-        <TagsAutocomplete
+        <TagAutocomplete
           value={query.tagIds}
-          label="Tags Filter"
+          label="Tag Filter"
           onChange={handleSetTagIds}
         />
       </div>

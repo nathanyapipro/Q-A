@@ -15,7 +15,7 @@ interface OwnProps
 
 type Props = OwnProps & WithTagsQuery;
 
-function TagsAutocompleteBase(props: Props) {
+function TagAutocompleteBase(props: Props) {
   const { onChange, tags } = props;
 
   const options: OptionsType = tags.map(tag => ({
@@ -54,7 +54,7 @@ function TagsAutocompleteBase(props: Props) {
 }
 
 const TagsAutocomplete: React.ComponentType<OwnProps> = compose(withTagsQuery)(
-  TagsAutocompleteBase
+  TagAutocompleteBase
 );
 
 export default TagsAutocomplete;

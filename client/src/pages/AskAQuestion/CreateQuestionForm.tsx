@@ -4,7 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import TagsAutocomplete from "../../components/Autocomplete/Tags";
+import TagAutocomplete from "../../components/Autocomplete/Tag";
 import { Button } from "@material-ui/core";
 import { compose } from "react-apollo";
 import {
@@ -124,7 +124,7 @@ function CreateQuestionFormBase(props: Props) {
           variant="outlined"
         />
         <div className={classes.field}>
-          <TagsAutocomplete
+          <TagAutocomplete
             value={tagIds.value}
             error={tagIds.touched && tagIds.error}
             label="Tags"
