@@ -39,7 +39,7 @@ function FiltersBase(props: Props) {
   const { query, setQuery } = props;
 
   function handleSetStatusIds(item: number | Array<number>) {
-    const value = item instanceof Array ? item : [item];
+    const value = item ? (item instanceof Array ? item : [item]) : [];
     setQuery({
       ...query,
       offset: 0,
