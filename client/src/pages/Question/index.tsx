@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import { RouteComponentProps } from "react-router-dom";
+import QuestionById from "../../components/Question";
 
 interface OwnProps {}
 
@@ -27,7 +28,9 @@ const useStyles = makeStyles((_: Theme) => ({
   comments: {
     display: "flex",
     flexDirection: "column",
-    flexGrow: 1
+    flexGrow: 1,
+    flexShrink: 0,
+    flexBasis: "50%"
   }
 }));
 
@@ -43,7 +46,7 @@ function QuestionBase(props: Props) {
   return (
     <div className={classes.container}>
       <div className={classes.content}>
-        <div className={classes.question}>{`Question ${id}`}</div>
+        <QuestionById questionId={parseInt(id, 10)} />
         <div className={classes.answer}>Answer</div>
       </div>
       <div className={classes.comments}>Comments</div>
