@@ -11,10 +11,11 @@ import {
   withCreateQuestionMutation,
   WithCreateQuestionMutation
 } from "../../queries/withCreateQuestionMutation";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface OwnProps {}
 
-type Props = OwnProps & WithCreateQuestionMutation;
+type Props = OwnProps & WithCreateQuestionMutation & RouteComponentProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -44,8 +45,8 @@ interface FormFieldMeta<Value> {
   error: boolean;
 }
 
-function CreateQuestionFromBase(props: Props) {
-  const { createQuestion } = props;
+function CreateQuestionFormBase(props: Props) {
+  const { createQuestion, history } = props;
   const classes = useStyles();
 
   const [content, setContent] = React.useState<FormFieldMeta<string>>({
@@ -87,7 +88,15 @@ function CreateQuestionFromBase(props: Props) {
           }
         }
       });
-      console.log(response);
+      if (
+        response &&
+        response.data &&
+        response.data.createQuestion &&
+        response.data.createQuestion.question
+      ) {
+        const { id } = response.data.createQuestion.question;
+        history.push(`/questions/${id}`);
+      }
     }
   }
 
@@ -137,8 +146,10 @@ function CreateQuestionFromBase(props: Props) {
   );
 }
 
-const CreateQuestionFrom: React.ComponentType<OwnProps> = compose(
-  withCreateQuestionMutation
-)(CreateQuestionFromBase);
+const ComposedCreateQuestionForm: React.ComponentType<
+  OwnProps & RouteComponentProps
+> = compose(withCreateQuestionMutation)(CreateQuestionFormBase);
+
+const CreateQuestionFrom = withRouter(ComposedCreateQuestionForm);
 
 export default CreateQuestionFrom;
