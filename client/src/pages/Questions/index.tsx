@@ -69,7 +69,7 @@ function QuestionsBase(_: Props) {
   const [query, setQuery] = React.useState<QueryType>({
     tagIds: [],
     statusIds: [],
-    orderBy: [QuestionsOrderBy.CREATED_AT_ASC],
+    orderBy: [QuestionsOrderBy.VOTE_COUNT_DESC],
     offset: 0,
     first: 10
   });
