@@ -1,6 +1,7 @@
 import * as React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
@@ -34,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center"
+  },
+  backButton: {
+    marginRight: theme.spacing.unit
   }
 }));
 
@@ -78,14 +82,29 @@ function HeaderBase(props: Props) {
             <Route
               path="/questions/:id"
               component={({
+                history,
                 match: {
                   params: { id }
                 }
-              }: QuestionRouteProps) => (
-                <Typography variant="h6" color="inherit">
-                  {`Questions ${id}`}
-                </Typography>
-              )}
+              }: QuestionRouteProps) => {
+                function handleBack() {
+                  history.push("/questions");
+                }
+                return (
+                  <React.Fragment>
+                    <IconButton
+                      className={classes.backButton}
+                      color="inherit"
+                      onClick={handleBack}
+                    >
+                      <ChevronLeftIcon color="inherit" />
+                    </IconButton>
+                    <Typography variant="h6" color="inherit">
+                      {`Questions ${id}`}
+                    </Typography>
+                  </React.Fragment>
+                );
+              }}
             />
             <Route
               path="/profile"
