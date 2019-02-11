@@ -38,61 +38,52 @@ const useStyles = makeStyles((theme: Theme) => ({
   submitButton: {}
 }));
 
-interface FormErrors {
-  [key: string]: boolean;
+interface FormFieldMeta<Value> {
+  value: Value;
+  touched: boolean;
+  error: boolean;
 }
 
 function CreateQuestionFromBase(props: Props) {
   const { createQuestion } = props;
   const classes = useStyles();
 
-  const [content, setContent] = React.useState<string>("");
-  const [tagIds, setTagIds] = React.useState<Array<number>>([]);
-
-  const [errors, setErrors] = React.useState<FormErrors>({
-    content: false,
-    tagIds: false
+  const [content, setContent] = React.useState<FormFieldMeta<string>>({
+    value: "",
+    touched: false,
+    error: false
   });
-  const [isPristine, setIsPristine] = React.useState<boolean>(true);
-
-  const isValid =
-    !isPristine &&
-    Object.keys(errors)
-      .map(key => errors[key])
-      .every(error => error === false);
+  const [tagIds, setTagIds] = React.useState<FormFieldMeta<Array<number>>>({
+    value: [],
+    touched: false,
+    error: false
+  });
 
   function handleContentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    if (isPristine) {
-      setIsPristine(false);
-    }
     const value = e.target.value;
-    setContent(value);
-  }
-
-  function handleSetTagIds(item: number | Array<number>) {
-    if (isPristine) {
-      setIsPristine(false);
-    }
-    const value = item instanceof Array ? item : [item];
-    setTagIds(value);
-  }
-
-  function validate() {
-    setErrors({
-      content: !(content && content !== ""),
-      tagIds: !(tagIds instanceof Array && tagIds.length > 0)
+    setContent({
+      value,
+      touched: true,
+      error: !(value && value !== "")
     });
   }
 
+  function handleSetTagIds(item: number | Array<number>) {
+    const value = item instanceof Array ? item : [item];
+    setTagIds({
+      value,
+      touched: true,
+      error: !(value instanceof Array && value.length > 0)
+    });
+  }
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    validate();
-    if (isValid) {
+    if (!(content.error || tagIds.error)) {
       const response = await createQuestion({
         variables: {
           createQuestionInput: {
-            content,
-            tagIds
+            content: content.value,
+            tagIds: tagIds.value
           }
         }
       });
@@ -110,14 +101,14 @@ function CreateQuestionFromBase(props: Props) {
         </Typography>
         <TextField
           fullWidth
-          error={errors.content}
+          error={content.touched && content.error}
           autoFocus
           label="Content"
           multiline
           rows="8"
           placeholder="Ask a Question ... "
           InputLabelProps={{ shrink: true }}
-          value={content}
+          value={content.value}
           onChange={handleContentChange}
           className={classes.field}
           margin="none"
@@ -125,8 +116,8 @@ function CreateQuestionFromBase(props: Props) {
         />
         <div className={classes.field}>
           <TagsAutocomplete
-            value={tagIds}
-            error={errors.tagIds}
+            value={tagIds.value}
+            error={tagIds.touched && tagIds.error}
             label="Tags"
             onChange={handleSetTagIds}
             isMulti={true}
@@ -134,7 +125,7 @@ function CreateQuestionFromBase(props: Props) {
         </div>
         <Button
           className={classes.submitButton}
-          disabled={isPristine}
+          disabled={!(content.touched && tagIds.touched)}
           type="submit"
           variant="contained"
           color="primary"
