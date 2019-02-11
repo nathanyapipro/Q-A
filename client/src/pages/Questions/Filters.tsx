@@ -71,7 +71,6 @@ function FiltersBase(props: Props) {
           value={query.statusIds}
           label="Status Filter"
           onChange={handleSetStatusIds}
-          isMulti={true}
         />
       </div>
       <div className={classes.field}>
@@ -79,7 +78,6 @@ function FiltersBase(props: Props) {
           value={query.tagIds}
           label="Tags Filter"
           onChange={handleSetTagIds}
-          isMulti={true}
         />
       </div>
       <div className={classes.field}>

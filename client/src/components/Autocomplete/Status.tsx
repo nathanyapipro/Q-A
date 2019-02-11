@@ -52,7 +52,6 @@ function StatusAutocompleteBase(props: Props) {
       options={options}
       value={valueToValueType(value)}
       onChange={handleChange}
-      isMulti
     />
   );
 }
