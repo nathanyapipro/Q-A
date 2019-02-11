@@ -14,6 +14,8 @@ create table app_public.question (
 
 create index on "app_public"."question"("user_id");
 create index on "app_public"."question"("status_id");
+create index on "app_public"."question"("vote_count");
+create index on "app_public"."question"("created_at");
 
 alter table app_public.question enable row level security;
 

@@ -3037,16 +3037,6 @@
             "defaultValue": null
           },
           {
-            "name": "username",
-            "description": "Filter by the object’s `username` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "roleId",
             "description": "Filter by the object’s `roleId` field.",
             "type": {
@@ -3098,323 +3088,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "UserFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "StringFilter",
-        "description": "A filter to be used against String fields. All fields are combined with a logical ‘and.’",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "isNull",
-            "description": "Is null (if `true` is specified) or is not null (if `false` is specified).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "equalTo",
-            "description": "Equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEqualTo",
-            "description": "Not equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "distinctFrom",
-            "description": "Not equal to the specified value, treating null like an ordinary value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notDistinctFrom",
-            "description": "Equal to the specified value, treating null like an ordinary value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": "Included in the specified list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": "Not included in the specified list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lessThan",
-            "description": "Less than the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lessThanOrEqualTo",
-            "description": "Less than or equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "greaterThan",
-            "description": "Greater than the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "greaterThanOrEqualTo",
-            "description": "Greater than or equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "includes",
-            "description": "Contains the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIncludes",
-            "description": "Does not contain the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "includesInsensitive",
-            "description": "Contains the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIncludesInsensitive",
-            "description": "Does not contain the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWith",
-            "description": "Starts with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notStartsWith",
-            "description": "Does not start with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWithInsensitive",
-            "description": "Starts with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notStartsWithInsensitive",
-            "description": "Does not start with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWith",
-            "description": "Ends with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEndsWith",
-            "description": "Does not end with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWithInsensitive",
-            "description": "Ends with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEndsWithInsensitive",
-            "description": "Does not end with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "like",
-            "description": "Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notLike",
-            "description": "Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "likeInsensitive",
-            "description": "Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notLikeInsensitive",
-            "description": "Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "similarTo",
-            "description": "Matches the specified pattern using the SQL standard's definition of a regular expression.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notSimilarTo",
-            "description": "Does not match the specified pattern using the SQL standard's definition of a regular expression.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -3668,6 +3341,30 @@
             "deprecationReason": null
           },
           {
+            "name": "VOTE_COUNT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "VOTE_COUNT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CREATED_AT_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "CREATED_AT_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "PRIMARY_KEY_ASC",
             "description": null,
             "isDeprecated": false,
@@ -3717,6 +3414,26 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "voteCount",
+            "description": "Checks for equality with the object’s `voteCount` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": "Checks for equality with the object’s `createdAt` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Datetime",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -3760,11 +3477,11 @@
             "defaultValue": null
           },
           {
-            "name": "hasVoted",
-            "description": "Filter by the object’s `hasVoted` field.",
+            "name": "voteCount",
+            "description": "Filter by the object’s `voteCount` field.",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "BooleanFilter",
+              "name": "IntFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -3822,103 +3539,6 @@
               "kind": "INPUT_OBJECT",
               "name": "QuestionFilter",
               "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "BooleanFilter",
-        "description": "A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "isNull",
-            "description": "Is null (if `true` is specified) or is not null (if `false` is specified).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "equalTo",
-            "description": "Equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEqualTo",
-            "description": "Not equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "distinctFrom",
-            "description": "Not equal to the specified value, treating null like an ordinary value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notDistinctFrom",
-            "description": "Equal to the specified value, treating null like an ordinary value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": "Included in the specified list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": "Not included in the specified list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              }
             },
             "defaultValue": null
           }
@@ -6894,16 +6514,6 @@
             "defaultValue": null
           },
           {
-            "name": "name",
-            "description": "Filter by the object’s `name` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "and",
             "description": "Checks for all expressions in this list.",
             "type": {
@@ -7431,16 +7041,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "name",
-            "description": "Filter by the object’s `name` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null

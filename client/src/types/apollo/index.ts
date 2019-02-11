@@ -9,6 +9,8 @@
  * Methods to use when ordering `Question`.
  */
 export enum QuestionsOrderBy {
+  CREATED_AT_ASC = "CREATED_AT_ASC",
+  CREATED_AT_DESC = "CREATED_AT_DESC",
   ID_ASC = "ID_ASC",
   ID_DESC = "ID_DESC",
   NATURAL = "NATURAL",
@@ -17,26 +19,15 @@ export enum QuestionsOrderBy {
   STATUS_ID_ASC = "STATUS_ID_ASC",
   STATUS_ID_DESC = "STATUS_ID_DESC",
   USER_ID_ASC = "USER_ID_ASC",
-  USER_ID_DESC = "USER_ID_DESC"
+  USER_ID_DESC = "USER_ID_DESC",
+  VOTE_COUNT_ASC = "VOTE_COUNT_ASC",
+  VOTE_COUNT_DESC = "VOTE_COUNT_DESC"
 }
 
 export enum StatusNameType {
   ANSWERED = "ANSWERED",
   NEW = "NEW",
   UNDER_REVIEW = "UNDER_REVIEW"
-}
-
-/**
- * A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
- */
-export interface BooleanFilter {
-  isNull?: boolean | null;
-  equalTo?: boolean | null;
-  notEqualTo?: boolean | null;
-  distinctFrom?: boolean | null;
-  notDistinctFrom?: boolean | null;
-  in?: boolean[] | null;
-  notIn?: boolean[] | null;
 }
 
 /**
@@ -113,7 +104,7 @@ export interface QuestionFilter {
   id?: IntFilter | null;
   userId?: IntFilter | null;
   statusId?: IntFilter | null;
-  hasVoted?: BooleanFilter | null;
+  voteCount?: IntFilter | null;
   tagIds?: IntListFilter | null;
   and?: QuestionFilter[] | null;
   or?: QuestionFilter[] | null;
