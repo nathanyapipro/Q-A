@@ -20,9 +20,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
     color: theme.palette.primary.contrastText,
     padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
-    width: "min-content"
+    width: "max-content"
   },
   label: {
+    display: "flex",
+    flexShrink: 0,
     marginLeft: theme.spacing.unit
   }
 }));
