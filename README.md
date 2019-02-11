@@ -1,11 +1,65 @@
+# Fundamental
+
+Source code of the internal anonymous question tool [go/fundamental]
+
 # Goals
 
-- [ ]
+Database:
+
+- [x] Sqitch Migration Setup
+- [x] JWT based authentication claimed at DB Level
+- [x] Basic Schema Design
+- [ ] Query questions by content similarity
+
+Client:
+
+- [x] Typescript
+- [x] react-apollo GraphQL client setup
+- [x] App Layout
+  - [x] Header
+  - [x] Sidebar
+- [x] Anonymous Login Page
+  - [x] Google Auth Button
+- [ ] User Login Page
+  - [ ] Standard Username/Password Form
+- [x] Ask a Question Page
+  - [x] Form
+  - [ ] Related Questions
+- [x] Questions Page
+  - [x] Filters (status, tags, sortBy)
+  - [x] Questions Table
+    - [x] Pagination
+    - [x] Toggle Vote
+- [] Question Page (question, comments)
+  - [ ] Question
+    - [x] Static Render
+    - [ ] Inline Edit [Status, Content, Answer] (Restricted By Permissions)
+    - [ ] Delete (Restricted By Permissions)
+  - [ ] Comments
+    - [ ] View Past Comments
+    - [ ] Leave a Comment
+- [ ] Profile Page
+- [ ] Settings Page
+- [ ] User Permissions
+- [ ] Responsive Design
+- [ ] PWA Setup
+- [ ] Test Suite
+
+Server:
+
+- [x] PostGraphile server, with Express
+- [x] Development: GraphiQL (enhanced)
+- [x] Development: watch DB for changes, no need to restart server
+- [ ] Prodcution: Add Static Client Bundle
+- [ ] Typescript
+
+General:
+
+- [ ] CI/CD Setup
 
 # Layout
 
 - `/db` - everything related to the database: migrations, unit tests, etc
-- `/data` - generated data, such as the GraphQL and database schema dumps
 - `/client` - everything related to the web browser: the react components, routes, etc
 - `/server` - everything related to running the server: the middlewares, PostGraphile configuration, SSR, integration tests, etc
 
