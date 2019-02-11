@@ -44,7 +44,7 @@ function SidebarBase(props: Props) {
   return (
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden smUp implementation="css">
+      <Hidden smUp>
         <Drawer
           variant="temporary"
           open={isMenuOpen}
@@ -59,7 +59,7 @@ function SidebarBase(props: Props) {
           {children}
         </Drawer>
       </Hidden>
-      <Hidden xsDown implementation="css">
+      <Hidden xsDown>
         <Drawer
           classes={{
             paper: classes.drawerPaper

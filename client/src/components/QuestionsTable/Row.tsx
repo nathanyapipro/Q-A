@@ -2,29 +2,19 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import Typography from "@material-ui/core/Typography";
-import {
-  Questions_questions_nodes,
-  Questions_questions_nodes_questionTags_nodes
-} from "../../types/apollo/Questions";
-import Tag from "../../components/Tag";
-import Status from "../../components/Status";
-import Button from "@material-ui/core/Button";
-import VoteIcon from "@material-ui/icons/ThumbUp";
-import CommentIcon from "@material-ui/icons/Comment";
-import { fromNow } from "../../helpers/date";
+import { Questions_questions_nodes } from "../../types/apollo/Questions";
 import { Theme } from "@material-ui/core/styles";
-import { compose } from "react-apollo";
-import {
-  withQuestionToggleVoteMutation,
-  WithQuestionToggleVoteMutation
-} from "../../queries/withQuestionToggleVoteMutation";
+import Content from "../Question/Content";
+import Actions from "../Question/Actions";
+import Tags from "../Question/Tags";
+import Status from "../Question/Status";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface OwnProps {
   data: Questions_questions_nodes;
 }
 
-type Props = OwnProps & WithQuestionToggleVoteMutation;
+type Props = OwnProps & RouteComponentProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -33,15 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.grey[100]
     }
   },
-
   tableCell: {
     padding: `${theme.spacing.unit * 2}px !important`,
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "column"
   },
   status: {
-    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 1.5}px ${theme
-      .spacing.unit / 2}px ${0}px`
+    display: "flex",
+    marginBottom: theme.spacing.unit
   },
   content: {
     display: "flex",
@@ -60,141 +49,52 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   spacer: {
     flexGrow: 1
-  },
-  bold: {
-    fontWeight: 600
-  },
-  actions: {
-    display: "flex",
-    flexDirection: "row"
-  },
-  button: {
-    padding: `${theme.spacing.unit / 4}px ${theme.spacing.unit}px`,
-    "&:not(:first-child)": {
-      marginLeft: theme.spacing.unit
-    }
-  },
-  createdAt: {
-    display: "unset",
-    marginBottom: 0,
-    alignSelf: "flex-end"
-  },
-  buttonIcon: {
-    marginRight: theme.spacing.unit * 1.5,
-    height: "0.75em",
-    width: "0.75em"
-  },
-  tags: {
-    display: "flex",
-    flexFlow: "row wrap",
-    alignItems: "flex-start",
-    margin: -theme.spacing.unit / 2,
-    [theme.breakpoints.down("sm")]: {
-      marginBottom: theme.spacing.unit
-    }
   }
 }));
 
 function RowBase(props: Props) {
   const classes = useStyles();
-  const { data, questionToggleVote } = props;
+  const { data, history } = props;
 
   const {
     id,
     content,
-    hasVoted,
-    voteCount,
-    comments,
-    questionTags,
-    status,
+
     createdAt
   } = data;
+
+  const status = data.status && data.status.name;
 
   if (!status) {
     return <noscript />;
   }
+  const commentCount =
+    data.comments && data.comments.totalCount ? data.comments.totalCount : 0;
+  const hasVoted = data.hasVoted ? data.hasVoted : false;
+  const voteCount = data.voteCount ? data.voteCount : 0;
+  const questionTags = data.questionTags.nodes;
 
-  const commentCount = comments.totalCount;
-
-  const tags = questionTags.nodes;
-
-  function renderTags() {
-    return tags.map(
-      (questionTag: Questions_questions_nodes_questionTags_nodes) =>
-        questionTag.tag && (
-          <Tag key={`questionTag-${questionTag.id}`} {...questionTag.tag} />
-        )
-    );
-  }
-
-  function handleVoteClick(e: React.MouseEvent<HTMLElement, MouseEvent>) {
-    e.stopPropagation();
-    questionToggleVote({
-      variables: {
-        questionToggleVoteInput: {
-          questionId: id
-        }
-      }
-    });
+  function handleClick(_: React.MouseEvent<HTMLTableRowElement, MouseEvent>) {
+    history.push(`/questions/${id}`);
   }
 
   return (
-    <TableRow className={classes.container} hover>
+    <TableRow className={classes.container} hover onClick={handleClick}>
       <TableCell className={classes.tableCell}>
         <div className={classes.status}>
-          <Status name={status.name} />
+          <Status status={status} />
         </div>
         <div className={classes.content}>
-          <Typography
-            className={classes.bold}
-            variant="subtitle1"
-            component="p"
-            color="secondary"
-          >
-            {content}
-            <Typography
-              className={classes.createdAt}
-              component="span"
-              variant="caption"
-              gutterBottom
-            >
-              &nbsp;&nbsp;– &nbsp; {fromNow(createdAt)}
-            </Typography>
-          </Typography>
+          <Content content={content} createdAt={createdAt} />
           <div className={classes.footer}>
-            <div className={classes.actions}>
-              <Button
-                variant="outlined"
-                color={hasVoted ? "primary" : "secondary"}
-                className={classes.button}
-                onClick={handleVoteClick}
-              >
-                <VoteIcon className={classes.buttonIcon} color="inherit" />
-                <Typography
-                  className={classes.bold}
-                  color="inherit"
-                  variant="body1"
-                >
-                  {voteCount}
-                </Typography>
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                className={classes.button}
-              >
-                <CommentIcon className={classes.buttonIcon} color="inherit" />
-                <Typography
-                  className={classes.bold}
-                  color="inherit"
-                  variant="body1"
-                >
-                  {commentCount}
-                </Typography>
-              </Button>
-            </div>
+            <Actions
+              id={id}
+              voteCount={voteCount}
+              commentCount={commentCount}
+              hasVoted={hasVoted}
+            />
             <div className={classes.spacer} />
-            <div className={classes.tags}>{renderTags()}</div>
+            <Tags questionTags={questionTags} />
           </div>
         </div>
       </TableCell>
@@ -202,8 +102,6 @@ function RowBase(props: Props) {
   );
 }
 
-const Row: React.ComponentType<OwnProps> = compose(
-  withQuestionToggleVoteMutation
-)(RowBase);
+const Row = withRouter(RowBase);
 
 export default Row;

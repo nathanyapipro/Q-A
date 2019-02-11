@@ -8,6 +8,7 @@ import { SIDEBAR_WIDTH } from "./Sidebar";
 import Typography from "@material-ui/core/Typography";
 import { Switch, Route } from "react-router-dom";
 import { Theme } from "@material-ui/core/styles";
+import { QuestionRouteProps } from "../../pages/Question";
 
 interface OwnProps {
   toggleMenu: () => void;
@@ -67,9 +68,22 @@ function HeaderBase(props: Props) {
             />
             <Route
               path="/questions"
+              exact
               component={() => (
                 <Typography variant="h6" color="inherit">
                   Questions
+                </Typography>
+              )}
+            />
+            <Route
+              path="/questions/:id"
+              component={({
+                match: {
+                  params: { id }
+                }
+              }: QuestionRouteProps) => (
+                <Typography variant="h6" color="inherit">
+                  {`Questions ${id}`}
                 </Typography>
               )}
             />

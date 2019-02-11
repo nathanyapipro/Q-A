@@ -1,7 +1,6 @@
 import * as React from "react";
 import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
-// import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";

@@ -100,7 +100,7 @@ function QuestionsBase(_: Props) {
 
   return (
     <div className={classes.container}>
-      <Hidden smUp implementation="css">
+      <Hidden smUp>
         <Button
           color="primary"
           variant="contained"
@@ -141,12 +141,12 @@ function QuestionsBase(_: Props) {
           </div>
         </Drawer>
       </Hidden>
-      <Hidden className={classes.fullWidth} xsDown implementation="css">
+      <Hidden className={classes.fullWidth} xsDown>
         <Paper elevation={1} className={classes.header}>
           <Filters query={query} setQuery={setQuery} />
         </Paper>
       </Hidden>
-      {<QuestionsTable {...queryParams} handleChangePage={handleChangePage} />}
+      <QuestionsTable {...queryParams} handleChangePage={handleChangePage} />
     </div>
   );
 }

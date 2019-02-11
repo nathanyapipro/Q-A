@@ -7,6 +7,7 @@ import {
   withStatusesQuery,
   WithStatusesQuery
 } from "../../queries/withStatusesQuery";
+import { getStatusLabel } from "../../helpers/question";
 
 interface OwnProps
   extends Omit<
@@ -24,7 +25,7 @@ function StatusAutocompleteBase(props: Props) {
 
   const options: OptionsType = statuses.map(status => ({
     value: status.id,
-    label: status.name
+    label: getStatusLabel(status.name)
   }));
 
   const valueToValueType = (value?: number | Array<number>): ValueType => {
