@@ -11,6 +11,7 @@ import {
   WithQuestionByIdQuery
 } from "../../queries/withQuestionByIdQuery";
 import { Typography } from "@material-ui/core";
+import { fromNow } from "../../helpers/date";
 
 interface OwnProps {
   questionId: number;
@@ -28,7 +29,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   staticField: {
     display: "flex",
     flexDirection: "column",
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 2,
+    "&:last-child": {
+      marginBottom: 0
+    }
   },
   bold: {
     fontWeight: 600
@@ -46,7 +50,7 @@ function QuestionBase(props: Props) {
     return <noscript />;
   }
 
-  const { id, content, createdAt } = questionById;
+  const { id, content, createdAt, updatedAt } = questionById;
 
   const status = questionById.status && questionById.status.name;
 
@@ -83,7 +87,7 @@ function QuestionBase(props: Props) {
         >
           Question
         </Typography>
-        <Content content={content} createdAt={createdAt} />
+        <Content content={content} />
       </div>
       <div className={classes.staticField}>
         <Typography color="secondary" variant="caption">
@@ -108,7 +112,41 @@ function QuestionBase(props: Props) {
           {answer ? answer.content : "None"}
         </Typography>
       </div>
-      <div>
+      <div className={classes.staticField}>
+        <Typography
+          className={classes.negativeGutterButton}
+          color="secondary"
+          variant="caption"
+        >
+          Created
+        </Typography>
+        <Typography
+          className={classes.bold}
+          variant="subtitle1"
+          component="p"
+          color="secondary"
+        >
+          {fromNow(createdAt)}
+        </Typography>
+      </div>
+      <div className={classes.staticField}>
+        <Typography
+          className={classes.negativeGutterButton}
+          color="secondary"
+          variant="caption"
+        >
+          Updated
+        </Typography>
+        <Typography
+          className={classes.bold}
+          variant="subtitle1"
+          component="p"
+          color="secondary"
+        >
+          {fromNow(updatedAt)}
+        </Typography>
+      </div>
+      <div className={classes.staticField}>
         <Typography color="secondary" variant="caption">
           Votes & Comments
         </Typography>

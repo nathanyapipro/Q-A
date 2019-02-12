@@ -6,7 +6,7 @@ import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {
   content: string;
-  createdAt: string;
+  createdAt?: string;
 }
 
 type Props = OwnProps;
@@ -35,14 +35,16 @@ function ContentBase(props: Props) {
       color="secondary"
     >
       {content}
-      <Typography
-        className={classes.createdAt}
-        component="span"
-        variant="caption"
-        gutterBottom
-      >
-        &nbsp;&nbsp;– &nbsp; {fromNow(createdAt)}
-      </Typography>
+      {createdAt && (
+        <Typography
+          className={classes.createdAt}
+          component="span"
+          variant="caption"
+          gutterBottom
+        >
+          &nbsp;&nbsp;– &nbsp; {fromNow(createdAt)}
+        </Typography>
+      )}
     </Typography>
   );
 }
