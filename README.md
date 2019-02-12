@@ -1,6 +1,6 @@
 # Fundamental
 
-Source code of the internal anonymous question tool [go/fundamental]
+Source code of the ElementAI's anonymous Q/A Application [go/fundamental]()
 
 # Goals
 
@@ -49,8 +49,6 @@ Client:
   - [ ] CRUD Tags
 - [ ] User Roles
   - [ ] Role Inheritance Admin > Responder > Anonymous
-  - [ ] All
-    - [ ]
   - [ ] Admin
     - [ ] Can CRUD Users
     - [ ] Can CRUD Tags
@@ -75,7 +73,7 @@ Server:
 - [x] Development: GraphiQL (enhanced)
 - [x] Development: watch DB for changes, no need to restart server
 - [ ] Prodcution: Add Static Client Bundle
-- [ ] Typescript
+- [ ] Typescript ?
 
 General:
 
@@ -87,17 +85,17 @@ General:
 - `/client` - everything related to the web browser: the react components, routes, etc
 - `/server` - everything related to running the server: the middlewares, PostGraphile configuration, SSR, integration tests, etc
 
-# Tools
+# Stack & Tooling
 
-- PostGraphile (obviously) to turn our database into a GraphQL API, and to output the GraphQL schema for other tools
-- React for rendering
-- Typescript (client only for now ^^)
+- Typescript
+- React for rendering client (preferably hook based patterns)
 - Apollo Client to consume this GraphQL API and manage caching
 - Apollo CLI to autogen the clients graphql data Types
+- Express to implement server
+- PostGraphile (obviously) to turn our database into a GraphQL API, and to output the GraphQL schema for other tools
+- Sqitch for performing db migrations
 - Prettier for consistent code formatting
 - Commitizen for consistent git commits
-- Express.js to implement our server
-- Sqitch for performing migrations
 
 # Getting Started
 
@@ -109,7 +107,7 @@ General:
   brew install npm
   ```
 
-- **PostgreSQL v10**
+- **PostgreSQL 10**
 
   ```
   brew install postgresql@10
@@ -156,17 +154,27 @@ General:
   ```
 - Cope .env file to .env.local and update variables
 
-# Scripts
+# Contribute
 
-### Development
+### Development Environment
 
 In dev mode the client and backend run in 2 distict servers and therefore require two open terminal windows
 
-Start Backend: `npm run dev`
+- Start Backend: `npm run dev`
 
-Start Frontend: `cd ./client && npm run start`
+- Start Frontend: `cd ./client && npm run start`
 
-### Production
+Backend server also exposed a graphiQL interface: [http://localhost:5000/graphiql](http://localhost:5000/graphiql)
+
+### Workflow Scripts
+
+Runs prettier and Commitizen [global] (after staging files): `npm run cz`
+Pull Down Schema from server [client/ only]: `npm run schema`
+Auto Gen Client Appollo Query Types [client/ only]: `npm run types`
+
+# Production
+
+### Production Environment
 
 In prod mode the client is a static bundle served by the backend
 
@@ -174,10 +182,11 @@ Start Server: `npm run prod`
 
 # Usefull Resources
 
-- [PostgreSQL](https://www.postgresql.org/docs/10/index.html)
-- [Sqitch](https://metacpan.org/pod/sqitchtutorial)
-- [React](https://reactjs.org/docs/getting-started.html)
-- [Typescript](https://www.typescriptlang.org/docs/home.html)
-- [Postgraphile](https://www.graphile.org/postgraphile/introduction/)
-- [Apollo](https://www.apollographql.com/docs/react/)
-- [Material-UI](https://material-ui.com/)
+- [PostgreSQL (https://www.postgresql.org/docs/10/index.html)](https://www.postgresql.org/docs/10/index.html)
+- [Sqitch (https://metacpan.org/pod/sqitchtutorial)](https://metacpan.org/pod/sqitchtutorial)
+- [React (https://reactjs.org/docs/getting-started.html)](https://reactjs.org/docs/getting-started.html)
+- [Typescript (https://www.typescriptlang.org/docs/home.html)](https://www.typescriptlang.org/docs/home.html)
+- [Postgraphile (https://www.graphile.org/postgraphile/introduction/)](https://www.graphile.org/postgraphile/introduction/)
+- [Apollo (https://www.apollographql.com/docs/react/)](https://www.apollographql.com/docs/react/)
+- [Material-UI (https://material-ui.com/)](https://material-ui.com/)
+- [JSS (https://cssinjs.org/react-jss?v=v10.0.0-alpha.10)](https://cssinjs.org/react-jss?v=v10.0.0-alpha.10)
