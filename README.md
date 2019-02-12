@@ -33,11 +33,12 @@ Client:
 - [ ] Question Page (question, comments)
   - [ ] Question
     - [x] Static Render
-    - [ ] Inline Edit [Status, Content, Answer] (Restricted By Permissions)
-    - [ ] Delete (Restricted By Permissions)
+    - [ ] Inline Edit on Status, Content, Answer
+    - [ ] Delete
   - [ ] Comments
-    - [ ] View Past Comments
-    - [ ] Leave a Comment
+    - [ ] Conversation
+    - [ ] Create Comment
+    - [ ] Comment Inline Edit
 - [ ] Profile Page
   - [ ] User Info
   - [ ] Edit Username/Password
