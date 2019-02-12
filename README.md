@@ -23,7 +23,7 @@ Client:
 - [ ] User Login Page
   - [ ] Standard Username/Password Form
 - [x] Ask a Question Page
-  - [x] Form
+  - [x] Basic Form
   - [ ] Related Questions
 - [x] Questions Page
   - [x] Filters (status, tags, sortBy)
@@ -39,10 +39,33 @@ Client:
     - [ ] View Past Comments
     - [ ] Leave a Comment
 - [ ] Profile Page
+  - [ ] User Info
+  - [ ] Edit Username/Password
+  - [ ] News Feed
+    - [ ] Curated list of recent activity on questions the User is "watching" (Asked, CommentedOn, Answered)
 - [ ] Settings Page
-- [ ] User Permissions
+  - [ ] CRUD Users
+  - [ ] CRUD Tags
+- [ ] User Roles
+  - [ ] Role Inheritance Admin > Responder > Anonymous
+  - [ ] All
+    - [ ]
+  - [ ] Admin
+    - [ ] Can CRUD Users
+    - [ ] Can CRUD Tags
+  - [ ] Responder
+    - [ ] Can Update username/password
+    - [ ] Can Update Status on any question
+    - [ ] Can Update Tags on any question
+    - [ ] Can Update Answer on any question
+  - [ ] Anonymous
+    - [ ] Can ask a question
+    - [ ] Can Update/Delete his question (Update only if no Votes)
+    - [ ] Can Create/Update/Delete his comments on any question
 - [ ] Responsive Design
+  - [ ] Support small layout (phones)
 - [ ] PWA Setup
+  - [ ] Download as APP
 - [ ] Test Suite
 
 Server:
