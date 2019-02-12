@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
+import TextField from "@material-ui/core/TextField";
 
 interface OwnProps {}
 
@@ -35,9 +35,9 @@ function CommentsBase(_: Props) {
     <div className={classes.container}>
       <div className={classes.conversation}>Conversation</div>
       <div className={classes.input}>
-        <InputBase
+        <TextField
+          variant="outlined"
           fullWidth
-          autoFocus
           multiline
           rowsMax="4"
           placeholder="Write a comment ... "
