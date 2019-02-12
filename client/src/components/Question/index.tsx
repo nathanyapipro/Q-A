@@ -21,7 +21,9 @@ type Props = OwnProps & WithQuestionByIdQuery;
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    padding: theme.spacing.unit * 2,
+    flexBasis: "50%"
   },
   staticField: {
     display: "flex",
