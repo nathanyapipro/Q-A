@@ -8,6 +8,8 @@ export function getStatusLabel(status: StatusNameType): string {
       return "UNDER REVIEW";
     case StatusNameType.ANSWERED:
       return "ANSWERED";
+    case StatusNameType.DISMISSED:
+      return "DISMISSED";
   }
 }
 
@@ -19,5 +21,7 @@ export function getStatusColor(status: StatusNameType): string {
       return "#3A79E2";
     case StatusNameType.ANSWERED:
       return "#3CBB53";
+    case StatusNameType.DISMISSED:
+      return "#D50032";
   }
 }

@@ -13,6 +13,7 @@ create table app_public.comment (
 
 create index on "app_public"."comment"("user_id");
 create index on "app_public"."comment"("question_id");
+create index on "app_public"."comment"("created_at");
 
 alter table app_public.comment enable row level security;
 

@@ -26,6 +26,7 @@ export enum QuestionsOrderBy {
 
 export enum StatusNameType {
   ANSWERED = "ANSWERED",
+  DISMISSED = "DISMISSED",
   NEW = "NEW",
   UNDER_REVIEW = "UNDER_REVIEW"
 }

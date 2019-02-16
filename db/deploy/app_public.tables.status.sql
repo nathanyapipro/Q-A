@@ -2,7 +2,7 @@
 
 BEGIN;
 
-create type app_public.status_name_type as enum ('NEW', 'UNDER_REVIEW', 'ANSWERED');
+create type app_public.status_name_type as enum ('NEW', 'UNDER_REVIEW', 'ANSWERED', 'DISMISSED');
 
 create table app_public.status (
   id serial primary key,
@@ -32,8 +32,9 @@ create trigger _100_timestamps
 insert into app_public.status (id, name) values
   (1,'NEW'),
   (2, 'UNDER_REVIEW'),
-  (3, 'ANSWERED');
+  (3, 'ANSWERED'),
+  (4, 'DISMISSED');
 
-alter sequence app_public.role_id_seq restart with 4;
+alter sequence app_public.role_id_seq restart with 5;
 
 COMMIT;

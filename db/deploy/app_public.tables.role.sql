@@ -2,9 +2,11 @@
 
 BEGIN;
 
+create type app_public.role_name_type as enum ('ADMIN', 'RESPONDER', 'ANONYMOUS');
+
 create table app_public.role (
   id serial primary key,
-  name text not null unique,
+  name app_public.role_name_type not null unique,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -28,9 +30,9 @@ create trigger _100_timestamps
   execute procedure app_private.tg__timestamps();
 
 insert into app_public.role (id, name) values
-  (1,'Admin'),
-  (2, 'Responder'),
-  (3, 'Anonymous');
+  (1,'ADMIN'),
+  (2, 'RESPONDER'),
+  (3, 'ANONYMOUS');
 
 alter sequence app_public.role_id_seq restart with 4;
 
