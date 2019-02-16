@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/styles";
 import NewIcon from "@material-ui/icons/NewReleases";
 import UnderReviewIcon from "@material-ui/icons/SupervisedUserCircle";
 import AnsweredIcon from "@material-ui/icons/CheckCircle";
-import DismissedIcon from "@material-ui/icons/RemoveCircleOutline";
+import DismissedIcon from "@material-ui/icons/RemoveCircle";
 import { StatusNameType } from "../types/apollo";
 import { Theme } from "@material-ui/core/styles";
 
