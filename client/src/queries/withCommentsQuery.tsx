@@ -8,11 +8,11 @@ import {
 } from "../types/apollo/Comments";
 
 export const COMMENTS_QUERY = gql`
-  query Comments($questionId: Int!, $first: Int) {
+  query Comments($questionId: Int!, $last: Int) {
     comments(
-      first: $first
+      last: $last
       offset: 0
-      orderBy: [CREATED_AT_DESC]
+      orderBy: [CREATED_AT_ASC]
       condition: { questionId: $questionId }
     ) {
       nodes {
@@ -53,9 +53,9 @@ export type ChildProps = {
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
   COMMENTS_QUERY,
   {
-    options: ({ first, questionId }) => ({
+    options: ({ last, questionId }) => ({
       variables: {
-        first,
+        last,
         questionId
       }
     }),

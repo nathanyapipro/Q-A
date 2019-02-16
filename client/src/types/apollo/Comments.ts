@@ -78,5 +78,5 @@ export interface Comments {
 
 export interface CommentsVariables {
   questionId: number;
-  first?: number | null;
+  last?: number | null;
 }

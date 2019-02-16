@@ -57,7 +57,7 @@ function QuestionsTableBase(props: Props) {
         </TableRow>
       );
     } else {
-      return nodes.map(data => <Row key={`row-${data.id}`} data={data} />);
+      return nodes.map(data => <Row key={`question-${data.id}`} data={data} />);
     }
   }
 

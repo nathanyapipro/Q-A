@@ -1,9 +1,10 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
-// import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
 import { compose } from "react-apollo";
 import * as withCommentsQuery from "../../queries/withCommentsQuery";
+import Comment from "./Comment";
 
 interface OwnProps {}
 
@@ -15,6 +16,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     flexGrow: 1,
     padding: theme.spacing.unit * 2
+  },
+  emptyRow: {},
+  bold: {
+    fontWeight: 600
   }
 }));
 
@@ -27,7 +32,28 @@ function ConversationBase(props: Props) {
 
   console.log(nodes);
 
-  return <div className={classes.container}>Conversation</div>;
+  function renderComments() {
+    if (nodes.length === 0) {
+      return (
+        <div className={classes.emptyRow}>
+          <Typography
+            className={classes.bold}
+            variant="subtitle1"
+            component="p"
+            color="secondary"
+          >
+            No Comments found ...
+          </Typography>
+        </div>
+      );
+    } else {
+      return nodes.map(data => (
+        <Comment key={`comment-${data.id}`} data={data} />
+      ));
+    }
+  }
+
+  return <div className={classes.container}>{renderComments()}</div>;
 }
 
 const Conversation: React.ComponentType<
