@@ -2,8 +2,11 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import Conversation from "./Conversation";
 
-interface OwnProps {}
+interface OwnProps {
+  questionId: number;
+}
 
 type Props = OwnProps;
 
@@ -28,12 +31,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function CommentsBase(_: Props) {
+function CommentsBase(props: Props) {
+  const { questionId } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
-      <div className={classes.conversation}>Conversation</div>
+      <Conversation questionId={questionId} />
       <div className={classes.input}>
         <TextField
           variant="outlined"

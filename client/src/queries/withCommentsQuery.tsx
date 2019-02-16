@@ -1,17 +1,17 @@
-// import { graphql } from "react-apollo";
-// import { ApolloError } from "apollo-client";
+import { graphql } from "react-apollo";
+import { ApolloError } from "apollo-client";
 import gql from "graphql-tag";
-// import {
-//   QuestionsVariables,
-//   Questions,
-//   Questions_questions_nodes
-// } from "../types/apollo/Questions";
+import {
+  CommentsVariables,
+  Comments,
+  Comments_comments_nodes
+} from "../types/apollo/Comments";
 
 export const COMMENTS_QUERY = gql`
-  query Comments($questionId: Int!, $first: Int!, $offset: Int!) {
+  query Comments($questionId: Int!, $first: Int) {
     comments(
       first: $first
-      offset: $offset
+      offset: 0
       orderBy: [CREATED_AT_DESC]
       condition: { questionId: $questionId }
     ) {
@@ -21,6 +21,10 @@ export const COMMENTS_QUERY = gql`
         user {
           id
           username
+          role {
+            id
+            name
+          }
         }
         content
         updatedAt
@@ -31,57 +35,47 @@ export const COMMENTS_QUERY = gql`
   }
 `;
 
-// type InputProps = QuestionsVariables;
+export type InputProps = CommentsVariables;
 
-// type Response = Questions;
+type Response = Comments;
 
-// type Variables = QuestionsVariables;
+type Variables = CommentsVariables;
 
-// type ChildProps = {
-//   data: {
-//     nodes: Array<Questions_questions_nodes>;
-//     totalCount: number;
-//     offset: number;
-//     first: number;
-//   };
-//   loading: boolean;
-//   error?: ApolloError;
-// };
+export type ChildProps = {
+  data: {
+    nodes: Array<Comments_comments_nodes>;
+    totalCount: number;
+  };
+  loading: boolean;
+  error?: ApolloError;
+};
 
-// export const withQuestionsQuery = graphql<
-//   InputProps,
-//   Response,
-//   Variables,
-//   ChildProps
-// >(QUESTIONS_QUERY, {
-//   options: ({ offset, first, filter, orderBy }) => ({
-//     variables: {
-//       offset,
-//       first,
-//       filter,
-//       orderBy
-//     }
-//   }),
-//   props: ({ data, ownProps: { offset, first } }) => {
-//     if (!data) {
-//       throw new Error("No data prop found");
-//     }
-//     const { loading, error } = data;
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  COMMENTS_QUERY,
+  {
+    options: ({ first, questionId }) => ({
+      variables: {
+        first,
+        questionId
+      }
+    }),
+    props: ({ data }) => {
+      if (!data) {
+        throw new Error("No data prop found");
+      }
+      const { loading, error } = data;
 
-//     return {
-//       data: {
-//         nodes: data.questions ? data.questions.nodes : [],
-//         totalCount:
-//           data.questions && data.questions.totalCount
-//             ? data.questions.totalCount
-//             : 0,
-//         offset,
-//         first
-//       },
-//       loading: loading,
-//       error: error
-//     };
-//   }
-// });
-
-// export type WithQuestionsQuery = ChildProps;
+      return {
+        data: {
+          nodes: data.comments ? data.comments.nodes : [],
+          totalCount:
+            data.comments && data.comments.totalCount
+              ? data.comments.totalCount
+              : 0
+        },
+        loading: loading,
+        error: error
+      };
+    }
+  }
+);

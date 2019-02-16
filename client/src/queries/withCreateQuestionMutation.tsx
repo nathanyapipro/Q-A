@@ -38,31 +38,27 @@ export const CREATE_QUESTION_MUTATION = gql`
   }
 `;
 
-type InputProps = {};
+export type InputProps = {};
 
 type Response = CreateQuestion;
 
 type Variables = CreateQuestionVariables;
 
-type ChildProps = {
+export type ChildProps = {
   createQuestion: MutationFn<Response, Variables>;
 };
 
-export const withCreateQuestionMutation = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(CREATE_QUESTION_MUTATION, {
-  props: ({ mutate }) => {
-    if (!mutate) {
-      throw new Error("No mutate prop found");
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  CREATE_QUESTION_MUTATION,
+  {
+    props: ({ mutate }) => {
+      if (!mutate) {
+        throw new Error("No mutate prop found");
+      }
+
+      return {
+        createQuestion: mutate
+      };
     }
-
-    return {
-      createQuestion: mutate
-    };
   }
-});
-
-export type WithCreateQuestionMutation = ChildProps;
+);

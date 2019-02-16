@@ -50,41 +50,37 @@ export const QUESTION_BY_ID_QUERY = gql`
   }
 `;
 
-type InputProps = QuestionByIdVariables;
+export type InputProps = QuestionByIdVariables;
 
 type Response = QuestionById;
 
 type Variables = QuestionByIdVariables;
 
-type ChildProps = {
+export type ChildProps = {
   questionById: QuestionById_questionById | null;
   loading: boolean;
   error?: ApolloError;
 };
 
-export const withQuestionByIdQuery = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(QUESTION_BY_ID_QUERY, {
-  options: ({ questionId }) => ({
-    variables: {
-      questionId
-    }
-  }),
-  props: ({ data }) => {
-    if (!data) {
-      throw new Error("No data prop found");
-    }
-    const { loading, error, questionById } = data;
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  QUESTION_BY_ID_QUERY,
+  {
+    options: ({ questionId }) => ({
+      variables: {
+        questionId
+      }
+    }),
+    props: ({ data }) => {
+      if (!data) {
+        throw new Error("No data prop found");
+      }
+      const { loading, error, questionById } = data;
 
-    return {
-      questionById: questionById ? questionById : null,
-      loading: loading,
-      error: error
-    };
+      return {
+        questionById: questionById ? questionById : null,
+        loading: loading,
+        error: error
+      };
+    }
   }
-});
-
-export type WithQuestionByIdQuery = ChildProps;
+);

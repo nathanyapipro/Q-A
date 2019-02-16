@@ -35,11 +35,15 @@ function QuestionBase(props: Props) {
     }
   } = props;
 
+  if (!id) {
+    return <noscript />;
+  }
+
   return (
     <Paper elevation={1} className={classes.container}>
       <QuestionById questionId={parseInt(id, 10)} />
       <div className={classes.divider} />
-      <Comments />
+      <Comments questionId={parseInt(id, 10)} />
     </Paper>
   );
 }

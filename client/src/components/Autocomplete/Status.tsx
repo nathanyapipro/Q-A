@@ -3,10 +3,7 @@ import Autocomplete, { AutocompleteProps, ValueType, OptionsType } from ".";
 import { Omit } from "../../types";
 import * as autocompleteHelper from "../../helpers/autocomplete";
 import { compose } from "react-apollo";
-import {
-  withStatusesQuery,
-  WithStatusesQuery
-} from "../../queries/withStatusesQuery";
+import * as withStatusesQuery from "../../queries/withStatusesQuery";
 import { getStatusLabel } from "../../helpers/question";
 
 interface OwnProps
@@ -18,7 +15,7 @@ interface OwnProps
   onChange: (value: number | Array<number>) => void;
 }
 
-type Props = OwnProps & WithStatusesQuery;
+type Props = OwnProps & withStatusesQuery.ChildProps;
 
 function StatusAutocompleteBase(props: Props) {
   const { statuses, onChange } = props;
@@ -57,8 +54,8 @@ function StatusAutocompleteBase(props: Props) {
   );
 }
 
-const StatusAutocomplete: React.ComponentType<OwnProps> = compose(
-  withStatusesQuery
-)(StatusAutocompleteBase);
+const StatusAutocomplete: React.ComponentType<
+  OwnProps & withStatusesQuery.InputProps
+> = compose(withStatusesQuery.hoc)(StatusAutocompleteBase);
 
 export default StatusAutocomplete;

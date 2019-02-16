@@ -3,7 +3,7 @@ import Autocomplete, { AutocompleteProps, ValueType, OptionsType } from ".";
 import { Omit } from "../../types";
 import * as autocompleteHelper from "../../helpers/autocomplete";
 import { compose } from "react-apollo";
-import { withTagsQuery, WithTagsQuery } from "../../queries/withTagsQuery";
+import * as withTagsQuery from "../../queries/withTagsQuery";
 interface OwnProps
   extends Omit<
     AutocompleteProps,
@@ -13,7 +13,7 @@ interface OwnProps
   onChange: (value: number | Array<number>) => void;
 }
 
-type Props = OwnProps & WithTagsQuery;
+type Props = OwnProps & withTagsQuery.ChildProps;
 
 function TagAutocompleteBase(props: Props) {
   const { onChange, tags } = props;
@@ -53,8 +53,8 @@ function TagAutocompleteBase(props: Props) {
   );
 }
 
-const TagsAutocomplete: React.ComponentType<OwnProps> = compose(withTagsQuery)(
-  TagAutocompleteBase
-);
+const TagsAutocomplete: React.ComponentType<
+  OwnProps & withTagsQuery.InputProps
+> = compose(withTagsQuery.hoc)(TagAutocompleteBase);
 
 export default TagsAutocomplete;

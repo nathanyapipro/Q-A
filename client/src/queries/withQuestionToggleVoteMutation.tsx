@@ -40,31 +40,27 @@ export const QUESTION_TOGGLE_VOTE_MUTATION = gql`
   }
 `;
 
-type InputProps = {};
+export type InputProps = {};
 
 type Response = QuestionToggleVote;
 
 type Variables = QuestionToggleVoteVariables;
 
-type ChildProps = {
+export type ChildProps = {
   questionToggleVote: MutationFn<Response, Variables>;
 };
 
-export const withQuestionToggleVoteMutation = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(QUESTION_TOGGLE_VOTE_MUTATION, {
-  props: ({ mutate }) => {
-    if (!mutate) {
-      throw new Error("No mutate prop found");
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  QUESTION_TOGGLE_VOTE_MUTATION,
+  {
+    props: ({ mutate }) => {
+      if (!mutate) {
+        throw new Error("No mutate prop found");
+      }
+
+      return {
+        questionToggleVote: mutate
+      };
     }
-
-    return {
-      questionToggleVote: mutate
-    };
   }
-});
-
-export type WithQuestionToggleVoteMutation = ChildProps;
+);

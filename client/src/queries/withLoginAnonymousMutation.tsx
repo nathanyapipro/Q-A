@@ -13,31 +13,27 @@ const LOGIN_ANONYMOUS_MUTATION = gql`
   }
 `;
 
-type InputProps = {};
+export type InputProps = {};
 
 type Response = LoginAnonymous;
 
 type Variables = LoginAnonymousVariables;
 
-type ChildProps = {
+export type ChildProps = {
   loginAnonymous: MutationFn<Response, Variables>;
 };
 
-export const withLoginAnonymousMutation = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(LOGIN_ANONYMOUS_MUTATION, {
-  props: ({ mutate }) => {
-    if (!mutate) {
-      throw new Error("No mutate prop found");
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  LOGIN_ANONYMOUS_MUTATION,
+  {
+    props: ({ mutate }) => {
+      if (!mutate) {
+        throw new Error("No mutate prop found");
+      }
+
+      return {
+        loginAnonymous: mutate
+      };
     }
-
-    return {
-      loginAnonymous: mutate
-    };
   }
-});
-
-export type WithLoginAnonymousMutation = ChildProps;
+);

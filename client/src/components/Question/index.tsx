@@ -6,10 +6,7 @@ import Actions from "../Question/Actions";
 import Tags from "../Question/Tags";
 import Status from "../Question/Status";
 import { compose } from "react-apollo";
-import {
-  withQuestionByIdQuery,
-  WithQuestionByIdQuery
-} from "../../queries/withQuestionByIdQuery";
+import * as withQuestionByIdQuery from "../../queries/withQuestionByIdQuery";
 import { Typography } from "@material-ui/core";
 import { fromNow } from "../../helpers/date";
 
@@ -17,7 +14,7 @@ interface OwnProps {
   questionId: number;
 }
 
-type Props = OwnProps & WithQuestionByIdQuery;
+type Props = OwnProps & withQuestionByIdQuery.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -161,8 +158,8 @@ function QuestionBase(props: Props) {
   );
 }
 
-const Question: React.ComponentType<OwnProps> = compose(withQuestionByIdQuery)(
-  QuestionBase
-);
+const Question: React.ComponentType<
+  OwnProps & withQuestionByIdQuery.InputProps
+> = compose(withQuestionByIdQuery.hoc)(QuestionBase);
 
 export default Question;

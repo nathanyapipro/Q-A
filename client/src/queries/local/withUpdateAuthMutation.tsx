@@ -4,31 +4,27 @@ import {
   UpdateAuthVariables
 } from "../../apollo/clientState/auth";
 
-type InputProps = {};
+export type InputProps = {};
 
 type Response = {};
 
 type Variables = UpdateAuthVariables;
 
-type ChildProps = {
+export type ChildProps = {
   updateAuth: MutationFn<Response, Variables>;
 };
 
-export const withUpdateAuthMutation = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(UPDATE_AUTH_MUTATION, {
-  props: ({ mutate }) => {
-    if (!mutate) {
-      throw new Error("No mutate prop found");
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  UPDATE_AUTH_MUTATION,
+  {
+    props: ({ mutate }) => {
+      if (!mutate) {
+        throw new Error("No mutate prop found");
+      }
+
+      return {
+        updateAuth: mutate
+      };
     }
-
-    return {
-      updateAuth: mutate
-    };
   }
-});
-
-export type WithUpdateAuthMutation = ChildProps;
+);

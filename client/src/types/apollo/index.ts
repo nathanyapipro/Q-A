@@ -24,6 +24,12 @@ export enum QuestionsOrderBy {
   VOTE_COUNT_DESC = "VOTE_COUNT_DESC"
 }
 
+export enum RoleNameType {
+  ADMIN = "ADMIN",
+  ANONYMOUS = "ANONYMOUS",
+  RESPONDER = "RESPONDER"
+}
+
 export enum StatusNameType {
   ANSWERED = "ANSWERED",
   DISMISSED = "DISMISSED",

@@ -1,9 +1,23 @@
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
+import { RoleNameType } from "./index";
+
 // ====================================================
 // GraphQL query operation: Comments
 // ====================================================
+
+export interface Comments_comments_nodes_user_role {
+  __typename: "Role";
+  /**
+   * unique identifier for the role.
+   */
+  id: number;
+  /**
+   * name of the role.
+   */
+  name: RoleNameType;
+}
 
 export interface Comments_comments_nodes_user {
   __typename: "User";
@@ -15,6 +29,10 @@ export interface Comments_comments_nodes_user {
    * public-facing username (or 'handle') of the user.
    */
   username: string;
+  /**
+   * Reads a single `Role` that is related to this `User`.
+   */
+  role: Comments_comments_nodes_user_role | null;
 }
 
 export interface Comments_comments_nodes {
@@ -60,6 +78,5 @@ export interface Comments {
 
 export interface CommentsVariables {
   questionId: number;
-  first: number;
-  offset: number;
+  first?: number | null;
 }

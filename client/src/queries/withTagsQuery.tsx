@@ -16,36 +16,32 @@ const TAGS_QUERY = gql`
   }
 `;
 
-type InputProps = {};
+export type InputProps = {};
 
 type Response = Tags;
 
 type Variables = {};
 
-type ChildProps = {
+export type ChildProps = {
   tags: Array<Tags_tags_nodes>;
   tagsLoading: boolean;
   tagsError?: ApolloError;
 };
 
-export const withTagsQuery = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(TAGS_QUERY, {
-  props: ({ data }) => {
-    if (!data) {
-      throw new Error("No data prop found");
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  TAGS_QUERY,
+  {
+    props: ({ data }) => {
+      if (!data) {
+        throw new Error("No data prop found");
+      }
+      const { loading, error } = data;
+
+      return {
+        tags: data.tags ? data.tags.nodes : [],
+        tagsLoading: loading,
+        tagsError: error
+      };
     }
-    const { loading, error } = data;
-
-    return {
-      tags: data.tags ? data.tags.nodes : [],
-      tagsLoading: loading,
-      tagsError: error
-    };
   }
-});
-
-export type WithTagsQuery = ChildProps;
+);

@@ -3,19 +3,15 @@ import { makeStyles } from "@material-ui/styles";
 import { compose } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import Button from "@material-ui/core/Button";
-import {
-  withLoginAnonymousMutation,
-  WithLoginAnonymousMutation
-} from "../../queries/withLoginAnonymousMutation";
-import {
-  withUpdateAuthMutation,
-  WithUpdateAuthMutation
-} from "../../queries/local/withUpdateAuthMutation";
+import * as withLoginAnonymousMutation from "../../queries/withLoginAnonymousMutation";
+import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
 import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {}
 
-type Props = OwnProps & WithUpdateAuthMutation & WithLoginAnonymousMutation;
+type Props = OwnProps &
+  withLoginAnonymousMutation.ChildProps &
+  withUpdateAuthMutation.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -78,9 +74,13 @@ function LoginBase({ loginAnonymous, updateAuth }: Props) {
   );
 }
 
-const Login: React.ComponentType<OwnProps> = compose(
-  withUpdateAuthMutation,
-  withLoginAnonymousMutation
+const Login: React.ComponentType<
+  OwnProps &
+    withUpdateAuthMutation.InputProps &
+    withLoginAnonymousMutation.InputProps
+> = compose(
+  withUpdateAuthMutation.hoc,
+  withLoginAnonymousMutation.hoc
 )(LoginBase);
 
 export default Login;

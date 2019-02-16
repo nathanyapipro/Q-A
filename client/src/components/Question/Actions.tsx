@@ -6,10 +6,7 @@ import VoteIcon from "@material-ui/icons/ThumbUp";
 import CommentIcon from "@material-ui/icons/Comment";
 import { Theme } from "@material-ui/core/styles";
 import { compose } from "react-apollo";
-import {
-  withQuestionToggleVoteMutation,
-  WithQuestionToggleVoteMutation
-} from "../../queries/withQuestionToggleVoteMutation";
+import * as withQuestionToggleVoteMutation from "../../queries/withQuestionToggleVoteMutation";
 
 interface OwnProps {
   id: number;
@@ -18,7 +15,7 @@ interface OwnProps {
   commentCount: number;
 }
 
-type Props = OwnProps & WithQuestionToggleVoteMutation;
+type Props = OwnProps & withQuestionToggleVoteMutation.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   bold: {
@@ -80,8 +77,8 @@ function ActionsBase(props: Props) {
   );
 }
 
-const Actions: React.ComponentType<OwnProps> = compose(
-  withQuestionToggleVoteMutation
-)(ActionsBase);
+const Actions: React.ComponentType<
+  OwnProps & withQuestionToggleVoteMutation.InputProps
+> = compose(withQuestionToggleVoteMutation.hoc)(ActionsBase);
 
 export default Actions;

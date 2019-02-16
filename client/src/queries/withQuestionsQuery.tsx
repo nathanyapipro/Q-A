@@ -51,13 +51,13 @@ const QUESTIONS_QUERY = gql`
   }
 `;
 
-type InputProps = QuestionsVariables;
+export type InputProps = QuestionsVariables;
 
 type Response = Questions;
 
 type Variables = QuestionsVariables;
 
-type ChildProps = {
+export type ChildProps = {
   data: {
     nodes: Array<Questions_questions_nodes>;
     totalCount: number;
@@ -68,40 +68,36 @@ type ChildProps = {
   error?: ApolloError;
 };
 
-export const withQuestionsQuery = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(QUESTIONS_QUERY, {
-  options: ({ offset, first, filter, orderBy }) => ({
-    variables: {
-      offset,
-      first,
-      filter,
-      orderBy
-    }
-  }),
-  props: ({ data, ownProps: { offset, first } }) => {
-    if (!data) {
-      throw new Error("No data prop found");
-    }
-    const { loading, error } = data;
-
-    return {
-      data: {
-        nodes: data.questions ? data.questions.nodes : [],
-        totalCount:
-          data.questions && data.questions.totalCount
-            ? data.questions.totalCount
-            : 0,
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  QUESTIONS_QUERY,
+  {
+    options: ({ offset, first, filter, orderBy }) => ({
+      variables: {
         offset,
-        first
-      },
-      loading: loading,
-      error: error
-    };
-  }
-});
+        first,
+        filter,
+        orderBy
+      }
+    }),
+    props: ({ data, ownProps: { offset, first } }) => {
+      if (!data) {
+        throw new Error("No data prop found");
+      }
+      const { loading, error } = data;
 
-export type WithQuestionsQuery = ChildProps;
+      return {
+        data: {
+          nodes: data.questions ? data.questions.nodes : [],
+          totalCount:
+            data.questions && data.questions.totalCount
+              ? data.questions.totalCount
+              : 0,
+          offset,
+          first
+        },
+        loading: loading,
+        error: error
+      };
+    }
+  }
+);

@@ -14,16 +14,13 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { compose } from "react-apollo";
-import {
-  withUpdateAuthMutation,
-  WithUpdateAuthMutation
-} from "../../queries/local/withUpdateAuthMutation";
+import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
 import { Theme } from "@material-ui/core/styles";
 interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = OwnProps & WithUpdateAuthMutation;
+type Props = OwnProps & withUpdateAuthMutation.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -184,8 +181,8 @@ function AppLayoutBase(props: Props) {
   );
 }
 
-const AppLayout: React.ComponentType<OwnProps> = compose(
-  withUpdateAuthMutation
-)(AppLayoutBase);
+const AppLayout: React.ComponentType<
+  OwnProps & withUpdateAuthMutation.InputProps
+> = compose(withUpdateAuthMutation.hoc)(AppLayoutBase);
 
 export default AppLayout;

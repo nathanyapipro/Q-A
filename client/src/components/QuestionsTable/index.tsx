@@ -10,17 +10,13 @@ import TablePagination from "@material-ui/core/TablePagination";
 import Typography from "@material-ui/core/Typography";
 import Row from "./Row";
 import { Theme } from "@material-ui/core/styles";
-
-import {
-  withQuestionsQuery,
-  WithQuestionsQuery
-} from "../../queries/withQuestionsQuery";
+import * as withQuestionsQuery from "../../queries/withQuestionsQuery";
 
 interface OwnProps {
   handleChangePage: (page: number) => void;
 }
 
-type Props = OwnProps & WithQuestionsQuery;
+type Props = OwnProps & withQuestionsQuery.ChildProps;
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
@@ -95,8 +91,8 @@ function QuestionsTableBase(props: Props) {
   );
 }
 
-const QuestionsTable: React.ComponentType<OwnProps> = compose(
-  withQuestionsQuery
-)(QuestionsTableBase);
+const QuestionsTable: React.ComponentType<
+  OwnProps & withQuestionsQuery.InputProps
+> = compose(withQuestionsQuery.hoc)(QuestionsTableBase);
 
 export default QuestionsTable;

@@ -7,15 +7,14 @@ import TextField from "@material-ui/core/TextField";
 import TagAutocomplete from "../../components/Autocomplete/Tag";
 import { Button } from "@material-ui/core";
 import { compose } from "react-apollo";
-import {
-  withCreateQuestionMutation,
-  WithCreateQuestionMutation
-} from "../../queries/withCreateQuestionMutation";
+import * as withCreateQuestionMutation from "../../queries/withCreateQuestionMutation";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface OwnProps {}
 
-type Props = OwnProps & WithCreateQuestionMutation & RouteComponentProps;
+type Props = OwnProps &
+  withCreateQuestionMutation.ChildProps &
+  RouteComponentProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -147,8 +146,8 @@ function CreateQuestionFormBase(props: Props) {
 }
 
 const ComposedCreateQuestionForm: React.ComponentType<
-  OwnProps & RouteComponentProps
-> = compose(withCreateQuestionMutation)(CreateQuestionFormBase);
+  OwnProps & RouteComponentProps & withCreateQuestionMutation.InputProps
+> = compose(withCreateQuestionMutation.hoc)(CreateQuestionFormBase);
 
 const CreateQuestionFrom = withRouter(ComposedCreateQuestionForm);
 

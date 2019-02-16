@@ -10,31 +10,27 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-type InputProps = {};
+export type InputProps = {};
 
 type Response = Login;
 
 type Variables = LoginVariables;
 
-type ChildProps = {
+export type ChildProps = {
   login: MutationFn<Response, Variables>;
 };
 
-export const withLoginMutation = graphql<
-  InputProps,
-  Response,
-  Variables,
-  ChildProps
->(LOGIN_MUTATION, {
-  props: ({ mutate }) => {
-    if (!mutate) {
-      throw new Error("No mutate prop found");
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  LOGIN_MUTATION,
+  {
+    props: ({ mutate }) => {
+      if (!mutate) {
+        throw new Error("No mutate prop found");
+      }
+
+      return {
+        login: mutate
+      };
     }
-
-    return {
-      login: mutate
-    };
   }
-});
-
-export type WithLoginMutation = ChildProps;
+);
