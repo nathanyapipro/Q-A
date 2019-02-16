@@ -57,6 +57,7 @@ Client:
     - [ ] Can Update Status on any question
     - [ ] Can Update Tags on any question
     - [ ] Can Update Answer on any question
+    - [ ] Can Create/Update(his) Comments on any question
   - [ ] Anonymous
     - [ ] Can ask a question
     - [ ] Can Update/Delete his question (Update only if no Votes)
