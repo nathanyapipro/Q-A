@@ -22,6 +22,17 @@ const theme = createMuiTheme({
       '"Segoe UI Symbol"'
     ].join(",")
   },
+  mixins: {
+    toolbar: {
+      minHeight: 56,
+      "@media (min-width:0px) and (orientation: landscape)": {
+        minHeight: 56
+      },
+      "@media (min-width:600px)": {
+        minHeight: 56
+      }
+    }
+  },
   palette: {
     primary: deepPurple,
     secondary: {

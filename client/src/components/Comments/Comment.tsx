@@ -18,6 +18,7 @@ type Props = OwnProps;
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
+    flexShrink: 0,
     flexDirection: "column",
     padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px`
   },

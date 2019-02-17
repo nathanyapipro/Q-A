@@ -16,7 +16,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    borderTop: `1px solid ${theme.palette.divider}`
+    borderTop: `1px solid ${theme.palette.divider}`,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: theme.shape.borderRadius,
+    borderBottomRightRadius: theme.shape.borderRadius,
+    [theme.breakpoints.up("sm")]: {
+      borderBottomLeftRadius: 0
+    },
+    backgroundColor: theme.palette.common.white
   },
   field: {
     marginTop: 0,
@@ -29,7 +37,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderBottomRightRadius: theme.shape.borderRadius,
     [theme.breakpoints.up("sm")]: {
       borderBottomLeftRadius: 0
-    }
+    },
+    backgroundColor: theme.palette.common.white
   },
   button: {
     display: "none"

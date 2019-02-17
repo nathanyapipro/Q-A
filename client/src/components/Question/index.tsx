@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     padding: theme.spacing.unit * 2,
-    flexBasis: "50%"
+    [theme.breakpoints.up("sm")]: {
+      width: "50%"
+    }
   },
   staticField: {
     display: "flex",

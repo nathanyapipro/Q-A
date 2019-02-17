@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    flexGrow: 1,
-    flexBasis: "50%"
+    [theme.breakpoints.up("sm")]: {
+      width: "50%"
+    }
   },
   conversation: {
     display: "flex",
