@@ -4,11 +4,14 @@ import { Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "react-apollo";
 import * as withCommentsQuery from "../../queries/withCommentsQuery";
+import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import Comment from "./Comment";
 
 interface OwnProps {}
 
-type Props = OwnProps & withCommentsQuery.ChildProps;
+type Props = OwnProps &
+  withCommentsQuery.ChildProps &
+  withCurrentUserQuery.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -27,8 +30,15 @@ function ConversationBase(props: Props) {
   const classes = useStyles();
 
   const {
-    data: { nodes }
+    data: { nodes },
+    currentUser
   } = props;
+
+  if (!currentUser) {
+    return <noscript />;
+  }
+
+  const { id: currentUserId } = currentUser;
 
   function renderComments() {
     if (nodes.length === 0) {
@@ -46,7 +56,11 @@ function ConversationBase(props: Props) {
       );
     } else {
       return nodes.map(data => (
-        <Comment key={`comment-${data.id}`} data={data} />
+        <Comment
+          key={`comment-${data.id}`}
+          data={data}
+          currentUserId={currentUserId}
+        />
       ));
     }
   }
@@ -55,7 +69,10 @@ function ConversationBase(props: Props) {
 }
 
 const Conversation: React.ComponentType<
-  OwnProps & withCommentsQuery.InputProps
-> = compose(withCommentsQuery.hoc)(ConversationBase);
+  OwnProps & withCommentsQuery.InputProps & withCurrentUserQuery.InputProps
+> = compose(
+  withCommentsQuery.hoc,
+  withCurrentUserQuery.hoc
+)(ConversationBase);
 
 export default Conversation;

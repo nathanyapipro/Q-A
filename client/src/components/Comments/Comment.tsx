@@ -8,6 +8,7 @@ import { Comments_comments_nodes } from "../../types/apollo/Comments";
 
 interface OwnProps {
   data: Comments_comments_nodes;
+  currentUserId: number;
 }
 
 type Props = OwnProps;
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 function ConversationBase(props: Props) {
   const classes = useStyles();
 
-  const { data } = props;
+  const { data, currentUserId } = props;
 
   const { id, content, user, createdAt } = data;
 
@@ -45,7 +46,7 @@ function ConversationBase(props: Props) {
     return <noscript />;
   }
 
-  const isOwner = user.id === 2;
+  const isOwner = user.id === currentUserId;
 
   console.log(id, content, user, createdAt);
 

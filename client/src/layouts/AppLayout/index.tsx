@@ -15,6 +15,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { compose } from "react-apollo";
 import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
+import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import { Theme } from "@material-ui/core/styles";
 interface OwnProps {
   children: React.ReactChild;
@@ -182,7 +183,10 @@ function AppLayoutBase(props: Props) {
 }
 
 const AppLayout: React.ComponentType<
-  OwnProps & withUpdateAuthMutation.InputProps
-> = compose(withUpdateAuthMutation.hoc)(AppLayoutBase);
+  OwnProps & withUpdateAuthMutation.InputProps & withCurrentUserQuery.InputProps
+> = compose(
+  withUpdateAuthMutation.hoc,
+  withCurrentUserQuery.hoc
+)(AppLayoutBase);
 
 export default AppLayout;
