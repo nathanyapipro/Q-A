@@ -1205,6 +1205,18 @@
             "deprecationReason": null
           },
           {
+            "name": "currentUser",
+            "description": "Handy method to get the current user for use after authentication",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "answer",
             "description": "Reads a single `Answer` using its globally unique `ID`.",
             "args": [

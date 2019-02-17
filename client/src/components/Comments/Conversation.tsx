@@ -30,8 +30,6 @@ function ConversationBase(props: Props) {
     data: { nodes }
   } = props;
 
-  console.log(nodes);
-
   function renderComments() {
     if (nodes.length === 0) {
       return (

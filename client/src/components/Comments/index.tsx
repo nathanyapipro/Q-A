@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     borderTop: `1px solid ${theme.palette.divider}`
+  },
+  field: {
+    marginTop: 0,
+    marginBottom: 0
   }
 }));
 
@@ -40,8 +44,10 @@ function CommentsBase(props: Props) {
       <Conversation questionId={questionId} />
       <div className={classes.input}>
         <TextField
+          className={classes.field}
           variant="outlined"
           fullWidth
+          margin="dense"
           multiline
           rowsMax="4"
           placeholder="Write a comment ... "
