@@ -40,7 +40,6 @@ function ContentBase(props: Props) {
           className={classes.createdAt}
           component="span"
           variant="caption"
-          gutterBottom
         >
           &nbsp;&nbsp;– &nbsp; {fromNow(createdAt)}
         </Typography>

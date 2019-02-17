@@ -18,7 +18,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
+    marginTop: -theme.spacing.unit / 2,
+    marginBottom: -theme.spacing.unit / 2
   },
   emptyRow: {},
   bold: {
