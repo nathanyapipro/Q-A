@@ -17,12 +17,19 @@ type Props = OwnProps & QuestionRouteProps;
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "column",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row"
+    }
   },
   divider: {
     display: "flex",
     minHeight: "100%",
-    borderLeft: `1px solid ${theme.palette.divider}`
+    borderTop: `1px solid ${theme.palette.divider}`,
+    [theme.breakpoints.up("sm")]: {
+      borderTop: "unset",
+      borderLeft: `1px solid ${theme.palette.divider}`
+    }
   }
 }));
 
