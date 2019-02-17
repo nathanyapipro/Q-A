@@ -38,6 +38,15 @@ export enum StatusNameType {
 }
 
 /**
+ * All input for the `createComment` mutation.
+ */
+export interface CreateCommentInput {
+  clientMutationId?: string | null;
+  questionId: number;
+  content: string;
+}
+
+/**
  * All input for the `createQuestion` mutation.
  */
 export interface CreateQuestionInput {

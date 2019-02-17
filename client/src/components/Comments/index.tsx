@@ -1,8 +1,8 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Conversation from "./Conversation";
+import Input from "./Input";
 
 interface OwnProps {
   questionId: number;
@@ -42,19 +42,7 @@ function CommentsBase(props: Props) {
   return (
     <div className={classes.container}>
       <Conversation questionId={questionId} />
-      <div className={classes.input}>
-        <TextField
-          className={classes.field}
-          variant="outlined"
-          fullWidth
-          margin="dense"
-          multiline
-          rowsMax="4"
-          placeholder="Write a comment ... "
-          value={""}
-          onChange={console.log}
-        />
-      </div>
+      <Input questionId={questionId} />
     </div>
   );
 }

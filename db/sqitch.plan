@@ -26,3 +26,4 @@ app_public.functions.create_question 2019-02-10T20:44:50Z Nathan Yapi <nathanyap
 app_public.functions.question_toggle_vote 2019-02-10T23:18:10Z Nathan Yapi <nathanyapi.pro@gmail.com> # function question_toggle_vote
 app_public.functions.question_has_voted 2019-02-11T00:52:40Z Nathan Yapi <nathanyapi.pro@gmail.com> # function question_has_voted
 app_public.functions.current_user 2019-02-17T04:21:00Z Nathan Yapi <nathanyapi.pro@gmail.com> # function current_user
+app_public.functions.create_comment 2019-02-17T19:01:24Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_comment

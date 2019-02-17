@@ -100,12 +100,7 @@ function QuestionBase(props: Props) {
         >
           Answer
         </Typography>
-        <Typography
-          className={classes.bold}
-          variant="subtitle1"
-          component="p"
-          color="secondary"
-        >
+        <Typography className={classes.bold} variant="subtitle1" component="p">
           {answer ? answer.content : "None"}
         </Typography>
       </div>
@@ -117,12 +112,7 @@ function QuestionBase(props: Props) {
         >
           Created
         </Typography>
-        <Typography
-          className={classes.bold}
-          variant="subtitle1"
-          component="p"
-          color="secondary"
-        >
+        <Typography className={classes.bold} variant="subtitle1" component="p">
           {fromNow(createdAt)}
         </Typography>
       </div>
@@ -134,12 +124,7 @@ function QuestionBase(props: Props) {
         >
           Updated
         </Typography>
-        <Typography
-          className={classes.bold}
-          variant="subtitle1"
-          component="p"
-          color="secondary"
-        >
+        <Typography className={classes.bold} variant="subtitle1" component="p">
           {fromNow(updatedAt)}
         </Typography>
       </div>

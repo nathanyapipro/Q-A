@@ -48,7 +48,7 @@ function ConversationBase(props: Props) {
 
   const { data, currentUserId } = props;
 
-  const { id, content, user, updatedAt } = data;
+  const { content, user, updatedAt } = data;
 
   if (!user) {
     return <noscript />;
@@ -64,8 +64,6 @@ function ConversationBase(props: Props) {
   if (user.role.name === RoleNameType.ANONYMOUS) {
     username = username.slice(10, 18);
   }
-
-  console.log(id, content, user);
 
   return (
     <div className={classNames(classes.container)}>

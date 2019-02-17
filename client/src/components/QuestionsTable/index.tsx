@@ -49,7 +49,6 @@ function QuestionsTableBase(props: Props) {
               className={classes.bold}
               variant="subtitle1"
               component="p"
-              color="secondary"
             >
               No Questions found ...
             </Typography>

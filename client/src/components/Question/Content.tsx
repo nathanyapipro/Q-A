@@ -27,12 +27,7 @@ function ContentBase(props: Props) {
   const { content, createdAt } = props;
 
   return (
-    <Typography
-      className={classes.bold}
-      variant="subtitle1"
-      component="p"
-      color="secondary"
-    >
+    <Typography className={classes.bold} variant="subtitle1" component="p">
       {content}
       {createdAt && (
         <Typography

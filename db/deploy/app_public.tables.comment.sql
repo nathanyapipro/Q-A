@@ -28,7 +28,7 @@ grant update(content) on app_public.comment to fundamental_visitor;
 grant delete on app_public.comment to fundamental_visitor;
 
 comment on table app_public.comment is
-  E'comment in the application.';
+  E'@omit create\nA comment in the application.';
 
 comment on column app_public.comment.id is
   E'unique identifier for the comment.';

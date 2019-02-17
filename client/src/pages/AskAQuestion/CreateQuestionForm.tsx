@@ -9,6 +9,7 @@ import { Button } from "@material-ui/core";
 import { compose } from "react-apollo";
 import * as withCreateQuestionMutation from "../../queries/withCreateQuestionMutation";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { FormFieldMeta } from "../../types";
 
 interface OwnProps {}
 
@@ -37,12 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   submitButton: {}
 }));
-
-interface FormFieldMeta<Value> {
-  value: Value;
-  touched: boolean;
-  error: boolean;
-}
 
 function CreateQuestionFormBase(props: Props) {
   const { createQuestion, history } = props;
@@ -76,6 +71,7 @@ function CreateQuestionFormBase(props: Props) {
       error: !(value instanceof Array && value.length > 0)
     });
   }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!(content.error || tagIds.error)) {
