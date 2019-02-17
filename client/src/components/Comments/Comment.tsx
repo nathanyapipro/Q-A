@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   comment: {
     display: "flex",
     flexGrow: 1,
-    padding: theme.spacing.unit,
+    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
     backgroundColor: theme.palette.grey[200]
   },
   content: {},
