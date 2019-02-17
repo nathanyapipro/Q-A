@@ -3,7 +3,7 @@ import { ApolloError } from "apollo-client";
 import gql from "graphql-tag";
 import { Statuses, Statuses_statuses_nodes } from "../types/apollo/Statuses";
 
-const STATUSES_QUERY = gql`
+export const STATUSES_QUERY = gql`
   query Statuses {
     statuses {
       nodes {

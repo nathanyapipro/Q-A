@@ -3,7 +3,7 @@ import { ApolloError } from "apollo-client";
 import gql from "graphql-tag";
 import { Tags, Tags_tags_nodes } from "../types/apollo/Tags";
 
-const TAGS_QUERY = gql`
+export const TAGS_QUERY = gql`
   query Tags {
     tags {
       nodes {

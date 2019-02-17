@@ -7,7 +7,7 @@ import {
   Questions_questions_nodes
 } from "../types/apollo/Questions";
 
-const QUESTIONS_QUERY = gql`
+export const QUESTIONS_QUERY = gql`
   query Questions(
     $first: Int!
     $offset: Int!

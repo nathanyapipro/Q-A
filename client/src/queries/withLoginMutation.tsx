@@ -2,7 +2,7 @@ import { graphql, MutationFn } from "react-apollo";
 import { Login, LoginVariables } from "../types/apollo/Login";
 import gql from "graphql-tag";
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation Login($loginInput: LoginInput!) {
     login(input: $loginInput) {
       jwtToken

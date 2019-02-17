@@ -5,7 +5,7 @@ import {
 } from "../types/apollo/LoginAnonymous";
 import gql from "graphql-tag";
 
-const LOGIN_ANONYMOUS_MUTATION = gql`
+export const LOGIN_ANONYMOUS_MUTATION = gql`
   mutation LoginAnonymous($loginAnonymousInput: LoginAnonymousInput!) {
     loginAnonymous(input: $loginAnonymousInput) {
       jwtToken
