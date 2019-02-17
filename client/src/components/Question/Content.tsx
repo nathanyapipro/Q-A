@@ -17,7 +17,6 @@ const useStyles = makeStyles((_: Theme) => ({
   },
   createdAt: {
     display: "unset",
-    marginBottom: 0,
     alignSelf: "flex-end"
   }
 }));

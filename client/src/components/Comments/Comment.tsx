@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import classNames from "classnames";
 import { Comments_comments_nodes } from "../../types/apollo/Comments";
 import { RoleNameType } from "../../types/apollo";
+import { fromNow } from "../../helpers/date";
 
 interface OwnProps {
   data: Comments_comments_nodes;
@@ -18,11 +19,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    paddingTop: theme.spacing.unit / 2,
-    paddingBottom: theme.spacing.unit / 2,
-    width: "90%"
+    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px`
   },
   comment: {
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "85%",
+    width: "max-content"
+  },
+  paper: {
     display: "flex",
     flexGrow: 1,
     padding: theme.spacing.unit,
@@ -34,7 +39,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   author: {
     fontWeight: 600
-  }
+  },
+  updatedAt: {}
 }));
 
 function ConversationBase(props: Props) {
@@ -42,7 +48,7 @@ function ConversationBase(props: Props) {
 
   const { data, currentUserId } = props;
 
-  const { id, content, user, createdAt } = data;
+  const { id, content, user, updatedAt } = data;
 
   if (!user) {
     return <noscript />;
@@ -59,32 +65,41 @@ function ConversationBase(props: Props) {
     username = username.slice(10, 18);
   }
 
-  console.log(id, content, user, createdAt);
+  console.log(id, content, user);
 
   return (
-    <div
-      className={classNames(classes.container, {
-        [classes.isOwner]: isOwner
-      })}
-    >
-      <Paper elevation={0} className={classNames(classes.comment)}>
-        <Typography
-          color="inherit"
-          variant="body2"
-          component="p"
-          className={classes.content}
-        >
-          {content}
-        </Typography>
-      </Paper>
-      <Typography
-        variant="caption"
-        color="primary"
-        component="p"
-        className={classes.author}
+    <div className={classNames(classes.container)}>
+      <div
+        className={classNames(classes.comment, {
+          [classes.isOwner]: isOwner
+        })}
       >
-        {username}
-      </Typography>
+        <Typography
+          variant="caption"
+          color="primary"
+          component="p"
+          className={classes.author}
+        >
+          {username}
+        </Typography>
+        <Paper elevation={0} className={classNames(classes.paper)}>
+          <Typography
+            color="inherit"
+            variant="body2"
+            component="p"
+            className={classes.content}
+          >
+            {content}
+          </Typography>
+        </Paper>
+        <Typography
+          className={classes.updatedAt}
+          component="span"
+          variant="caption"
+        >
+          {fromNow(updatedAt)}
+        </Typography>
+      </div>
     </div>
   );
 }
