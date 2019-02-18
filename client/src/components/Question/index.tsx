@@ -83,7 +83,7 @@ function QuestionBase(props: Props) {
       <Field
         label="Question"
         staticComponent={<Content content={content} />}
-        editComponent={<ContentForm initialValue={content} />}
+        editComponent={<ContentForm questionId={id} initialValue={content} />}
       />
       <Field
         label="Tags"

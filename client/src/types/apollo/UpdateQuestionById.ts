@@ -169,5 +169,5 @@ export interface UpdateQuestionById {
 }
 
 export interface UpdateQuestionByIdVariables {
-  updateQuestionInput: UpdateQuestionByIdInput;
+  updateQuestionByIdInput: UpdateQuestionByIdInput;
 }

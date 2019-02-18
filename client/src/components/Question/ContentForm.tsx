@@ -3,13 +3,16 @@ import { makeStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import { Theme } from "@material-ui/core/styles";
 import { FormFieldMeta } from "../../types";
+import { compose } from "react-apollo";
+import * as withUpdateQuestionByIdMutation from "../../queries/withUpdateQuestionByIdMutation";
 
 interface OwnProps {
+  questionId: number;
   initialValue: string;
   onExit?: () => void;
 }
 
-type Props = OwnProps;
+type Props = OwnProps & withUpdateQuestionByIdMutation.ChildProps;
 
 const useStyles = makeStyles((_: Theme) => ({
   form: {
@@ -28,7 +31,7 @@ const useStyles = makeStyles((_: Theme) => ({
 function ContentFormBase(props: Props) {
   const classes = useStyles();
 
-  const { initialValue, onExit } = props;
+  const { questionId, initialValue, updateQuestion, onExit } = props;
 
   const [content, setContent] = React.useState<FormFieldMeta<string>>({
     value: initialValue,
@@ -60,25 +63,27 @@ function ContentFormBase(props: Props) {
   async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e && e.preventDefault();
     if (!content.error) {
-      console.log("submited");
-      if (onExit) {
-        onExit();
+      if (content.value !== initialValue) {
+        const response = await updateQuestion({
+          variables: {
+            updateQuestionByIdInput: {
+              id: questionId,
+              patch: {
+                content: content.value
+              }
+            }
+          }
+        });
+        if (response && response.data && response.data.updateQuestionById) {
+          if (onExit) {
+            onExit();
+          }
+        }
+      } else {
+        if (onExit) {
+          onExit();
+        }
       }
-      // const response = await createComment({
-      //   variables: {
-      //     createCommentInput: {
-      //       questionId,
-      //       content: content.value
-      //     }
-      //   }
-      // });
-      // if (response && response.data && response.data.createComment) {
-      //   setContent({
-      //     value: "",
-      //     touched: false,
-      //     error: false
-      //   });
-      // }
     }
   }
 
@@ -104,6 +109,8 @@ function ContentFormBase(props: Props) {
   );
 }
 
-const ContentForm = ContentFormBase;
+const ContentForm: React.ComponentType<
+  OwnProps & withUpdateQuestionByIdMutation.InputProps
+> = compose(withUpdateQuestionByIdMutation.hoc)(ContentFormBase);
 
 export default ContentForm;

@@ -1,15 +1,20 @@
-// import { graphql } from "react-apollo";
-// import { ApolloError } from "apollo-client";
+import { graphql, MutationFn } from "react-apollo";
 import gql from "graphql-tag";
-// import {
-//   QuestionByIdVariables,
-//   QuestionById,
-//   QuestionById_questionById
-// } from "../types/apollo/QuestionByID";
+import {
+  UpdateQuestionByIdVariables,
+  UpdateQuestionById
+} from "../types/apollo/UpdateQuestionById";
+import {
+  QuestionByIdVariables,
+  QuestionById
+} from "../types/apollo/QuestionByID";
+import { QUESTION_BY_ID_QUERY } from "./withQuestionByIdQuery";
 
 export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
-  mutation UpdateQuestionById($updateQuestionInput: UpdateQuestionByIdInput!) {
-    updateQuestionById(input: $updateQuestionInput) {
+  mutation UpdateQuestionById(
+    $updateQuestionByIdInput: UpdateQuestionByIdInput!
+  ) {
+    updateQuestionById(input: $updateQuestionByIdInput) {
       question {
         id
         content
@@ -52,37 +57,65 @@ export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
   }
 `;
 
-// export type InputProps = QuestionByIdVariables;
+export type InputProps = {
+  questionId: number;
+};
 
-// type Response = QuestionById;
+type Response = UpdateQuestionById;
 
-// type Variables = QuestionByIdVariables;
+type Variables = UpdateQuestionByIdVariables;
 
-// export type ChildProps = {
-//   questionById: QuestionById_questionById | null;
-//   loading: boolean;
-//   error?: ApolloError;
-// };
+export type ChildProps = {
+  updateQuestion: MutationFn<Response, Variables>;
+};
 
-// export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
-//   QUESTION_BY_ID_QUERY,
-//   {
-//     options: ({ questionId }) => ({
-//       variables: {
-//         questionId
-//       }
-//     }),
-//     props: ({ data }) => {
-//       if (!data) {
-//         throw new Error("No data prop found");
-//       }
-//       const { loading, error, questionById } = data;
+export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
+  UPDATE_QUESTION_BY_ID_MUTATION,
+  {
+    props: ({ mutate }) => {
+      if (!mutate) {
+        throw new Error("No mutate prop found");
+      }
 
-//       return {
-//         questionById: questionById ? questionById : null,
-//         loading: loading,
-//         error: error
-//       };
-//     }
-//   }
-// );
+      return {
+        updateQuestion: mutate
+      };
+    },
+    options: ({ questionId }) => ({
+      update: (cache, { data }) => {
+        if (
+          data &&
+          data.updateQuestionById &&
+          data.updateQuestionById.question
+        ) {
+          const updatedQuestion = data.updateQuestionById.question;
+          const previousState = cache.readQuery<
+            QuestionById,
+            QuestionByIdVariables
+          >({
+            query: QUESTION_BY_ID_QUERY,
+            variables: {
+              questionId
+            }
+          });
+          if (previousState && previousState.questionById) {
+            const newState = {
+              ...previousState,
+              questionById: {
+                ...previousState.questionById,
+                ...updatedQuestion
+              }
+            };
+            cache.writeQuery<QuestionById, QuestionByIdVariables>({
+              query: QUESTION_BY_ID_QUERY,
+              data: { ...newState },
+              variables: {
+                questionId
+              }
+            });
+          }
+        }
+      }
+    })
+  }
+);
