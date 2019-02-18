@@ -20,7 +20,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexShrink: 0,
     flexDirection: "column",
-    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px`
+    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 2}px`,
+    "&:first-child": {
+      paddingTop: 0
+    },
+    "&:last-child": {
+      paddingBottom: 0
+    }
   },
   comment: {
     display: "flex",
@@ -41,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   author: {
     fontWeight: 600
   },
-  updatedAt: {}
+  createdAt: {}
 }));
 
 function ConversationBase(props: Props) {
@@ -49,7 +55,7 @@ function ConversationBase(props: Props) {
 
   const { data, currentUserId } = props;
 
-  const { content, user, updatedAt } = data;
+  const { content, user, createdAt } = data;
 
   if (!user) {
     return <noscript />;
@@ -92,11 +98,11 @@ function ConversationBase(props: Props) {
           </Typography>
         </Paper>
         <Typography
-          className={classes.updatedAt}
+          className={classes.createdAt}
           component="span"
           variant="caption"
         >
-          {fromNow(updatedAt)}
+          {fromNow(createdAt)}
         </Typography>
       </div>
     </div>

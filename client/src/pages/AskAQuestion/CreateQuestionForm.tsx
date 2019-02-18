@@ -115,7 +115,7 @@ function CreateQuestionFormBase(props: Props) {
           value={content.value}
           onChange={handleContentChange}
           className={classes.field}
-          margin="none"
+          margin="dense"
           variant="outlined"
         />
         <div className={classes.field}>

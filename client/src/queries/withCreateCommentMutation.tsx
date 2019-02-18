@@ -64,12 +64,17 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
               questionId
             }
           });
-          if (previousState && previousState.comments) {
+          if (
+            previousState &&
+            previousState.comments &&
+            previousState.comments.totalCount
+          ) {
             const newState = {
               ...previousState,
               comments: {
                 ...previousState.comments,
-                nodes: [...previousState.comments.nodes, newComment]
+                nodes: [...previousState.comments.nodes, newComment],
+                totalCount: previousState.comments.totalCount + 1
               }
             };
             cache.writeQuery<Comments, CommentsVariables>({

@@ -20,12 +20,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     padding: `${theme.spacing.unit * 2}px 0px`,
     [theme.breakpoints.up("sm")]: {
-      height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - ${theme
-        .spacing.unit * 6}px - 57px + 8px)`,
+      maxHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - ${theme
+        .spacing.unit * 6}px - 57px)`,
       overflowY: "auto"
-    },
-    marginTop: -theme.spacing.unit / 2,
-    marginBottom: -theme.spacing.unit / 2
+    }
   },
   emptyRow: {},
   bold: {

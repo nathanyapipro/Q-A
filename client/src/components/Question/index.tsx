@@ -9,6 +9,7 @@ import { compose } from "react-apollo";
 import * as withQuestionByIdQuery from "../../queries/withQuestionByIdQuery";
 import { Typography } from "@material-ui/core";
 import { fromNow } from "../../helpers/date";
+import Field from "../Field";
 
 interface OwnProps {
   questionId: number;
@@ -22,11 +23,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     padding: theme.spacing.unit * 2,
     [theme.breakpoints.up("sm")]: {
-      width: "50%"
+      width: "50%",
+      maxHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - ${theme
+        .spacing.unit * 6}px)`,
+      overflowY: "auto"
     }
   },
   staticField: {
     display: "flex",
+    flexShrink: 0,
     flexDirection: "column",
     marginBottom: theme.spacing.unit * 2,
     "&:last-child": {
@@ -37,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 600
   },
   negativeGutterButton: {
-    marginBottom: -theme.spacing.unit
+    marginBottom: -theme.spacing.unit / 2
   }
 }));
 
@@ -78,16 +83,7 @@ function QuestionBase(props: Props) {
         </Typography>
         <Status status={status} />
       </div>
-      <div className={classes.staticField}>
-        <Typography
-          className={classes.negativeGutterButton}
-          color="secondary"
-          variant="caption"
-        >
-          Question
-        </Typography>
-        <Content content={content} />
-      </div>
+      <Field label="Question" staticField={<Content content={content} />} />
       <div className={classes.staticField}>
         <Typography color="secondary" variant="caption">
           Tags

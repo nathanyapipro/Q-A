@@ -36,9 +36,10 @@ Client:
     - [ ] Inline Edit on Status, Content, Answer
     - [ ] Delete
   - [ ] Comments
-    - [ ] Conversation
-    - [ ] Create Comment
+    - [x] Conversation
+    - [x] Create Comment
     - [ ] Comment Inline Edit
+    - [ ] Comment Delete
 - [ ] Profile Page
   - [ ] User Info
   - [ ] Edit Username/Password
