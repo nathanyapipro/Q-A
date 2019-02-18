@@ -46,7 +46,6 @@ function StatusAutocompleteBase(props: Props) {
   return (
     <Autocomplete
       {...rest}
-      isClearable
       options={options}
       value={valueToValueType(value)}
       onChange={handleChange}

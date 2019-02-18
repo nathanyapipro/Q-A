@@ -82,6 +82,7 @@ export interface Questions_questions_nodes {
    * Reads a single `Status` that is related to this `Question`.
    */
   status: Questions_questions_nodes_status | null;
+  tagIds: (number | null)[] | null;
   /**
    * Reads and enables pagination through a set of `QuestionTag`.
    */

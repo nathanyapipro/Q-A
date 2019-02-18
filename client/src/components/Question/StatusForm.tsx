@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import TextField from "@material-ui/core/TextField";
+import StatusAutocomplete from "../Autocomplete/Status";
 import { Theme } from "@material-ui/core/styles";
 import { FormFieldMeta } from "../../types";
 import { compose } from "react-apollo";
@@ -8,7 +8,7 @@ import * as withUpdateQuestionByIdMutation from "../../queries/withUpdateQuestio
 
 interface OwnProps {
   questionId: number;
-  initialValue: string;
+  initialValue: number;
   onExit?: () => void;
 }
 
@@ -28,23 +28,23 @@ const useStyles = makeStyles((_: Theme) => ({
   }
 }));
 
-function ContentFormBase(props: Props) {
+function StatusFormBase(props: Props) {
   const classes = useStyles();
 
   const { questionId, initialValue, updateQuestion, onExit } = props;
 
-  const [content, setContent] = React.useState<FormFieldMeta<string>>({
+  const [statusId, setStatusId] = React.useState<FormFieldMeta<number>>({
     value: initialValue,
     touched: false,
     error: false
   });
 
-  function handleContentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    const value = e.target.value;
-    setContent({
+  function handleSetStatusIds(item: number | Array<number>) {
+    const value = item instanceof Array ? item[0] : item;
+    setStatusId({
       value,
       touched: true,
-      error: !(value && value !== "")
+      error: !value
     });
   }
 
@@ -56,21 +56,21 @@ function ContentFormBase(props: Props) {
     }
   }
 
-  function handleBlur(e: React.FormEvent<HTMLFormElement>) {
+  function handleBlur(e: React.FormEvent) {
     e.stopPropagation();
     handleSubmit(e);
   }
 
-  async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e?: React.FormEvent) {
     e && e.preventDefault();
-    if (!content.error) {
-      if (content.value !== initialValue) {
+    if (!statusId.error) {
+      if (statusId.value !== initialValue) {
         const response = await updateQuestion({
           variables: {
             updateQuestionByIdInput: {
               id: questionId,
               patch: {
-                content: content.value
+                statusId: statusId.value
               }
             }
           }
@@ -90,28 +90,22 @@ function ContentFormBase(props: Props) {
 
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
-      <TextField
-        className={classes.field}
-        fullWidth
-        error={content.touched && content.error}
+      <StatusAutocomplete
         autoFocus
-        multiline
-        placeholder="Ask a Question ... "
-        InputLabelProps={{ shrink: true }}
-        value={content.value}
+        value={statusId.value}
+        error={statusId.touched && statusId.error}
+        onChange={handleSetStatusIds}
+        onKeyDown={handleKeyPress}
         onBlur={handleBlur}
-        onChange={handleContentChange}
-        onKeyPress={handleKeyPress}
-        margin="dense"
-        variant="outlined"
+        isMulti={false}
       />
       <button type="submit" className={classes.button} />
     </form>
   );
 }
 
-const ContentForm: React.ComponentType<
+const StatusForm: React.ComponentType<
   OwnProps & withUpdateQuestionByIdMutation.InputProps
-> = compose(withUpdateQuestionByIdMutation.hoc)(ContentFormBase);
+> = compose(withUpdateQuestionByIdMutation.hoc)(StatusFormBase);
 
-export default ContentForm;
+export default StatusForm;

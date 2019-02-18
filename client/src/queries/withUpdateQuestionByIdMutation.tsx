@@ -23,6 +23,7 @@ export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
           id
           status
         }
+        tagIds
         questionTags {
           nodes {
             id

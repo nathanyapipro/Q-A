@@ -126,6 +126,7 @@ export interface UpdateQuestionById_updateQuestionById_question {
    * Reads a single `Status` that is related to this `Question`.
    */
   status: UpdateQuestionById_updateQuestionById_question_status | null;
+  tagIds: (number | null)[] | null;
   /**
    * Reads and enables pagination through a set of `QuestionTag`.
    */

@@ -70,6 +70,7 @@ function FiltersBase(props: Props) {
         <StatusAutocomplete
           value={query.statusIds}
           label="Status Filter"
+          isClearable
           onChange={handleSetStatusIds}
         />
       </div>

@@ -5,7 +5,9 @@ import Content from "../Question/Content";
 import ContentForm from "../Question/ContentForm";
 import Actions from "../Question/Actions";
 import Tags from "../Question/Tags";
+import TagsForm from "../Question/TagsForm";
 import Status from "../Question/Status";
+import StatusForm from "../Question/StatusForm";
 import { compose } from "react-apollo";
 import * as withQuestionByIdQuery from "../../queries/withQuestionByIdQuery";
 import { Typography } from "@material-ui/core";
@@ -55,10 +57,15 @@ function QuestionBase(props: Props) {
   const { id, content, createdAt, updatedAt } = questionById;
 
   const status = questionById.status && questionById.status.status;
+  const statusId = questionById.status && questionById.status.id;
 
+  if (!statusId) {
+    return <noscript />;
+  }
   if (!status) {
     return <noscript />;
   }
+
   const commentCount =
     questionById.comments && questionById.comments.totalCount
       ? questionById.comments.totalCount
@@ -66,6 +73,15 @@ function QuestionBase(props: Props) {
   const hasVoted = questionById.hasVoted ? questionById.hasVoted : false;
   const voteCount = questionById.voteCount ? questionById.voteCount : 0;
   const questionTags = questionById.questionTags.nodes;
+  const tagIds =
+    questionById.tagIds !== null
+      ? questionById.tagIds.reduce((acc: Array<number>, id: number | null) => {
+          if (id !== null) {
+            acc = [...acc, id];
+          }
+          return acc;
+        }, [])
+      : [];
   const answer =
     questionById.answers &&
     questionById.answers.nodes &&
@@ -78,7 +94,7 @@ function QuestionBase(props: Props) {
       <Field
         label="Status"
         staticComponent={<Status status={status} />}
-        // editComponent={<ContentForm initialValue={content} />}
+        editComponent={<StatusForm questionId={id} initialValue={statusId} />}
       />
       <Field
         label="Question"
@@ -88,7 +104,7 @@ function QuestionBase(props: Props) {
       <Field
         label="Tags"
         staticComponent={<Tags questionTags={questionTags} />}
-        // editComponent={<ContentForm initialValue={content} />}
+        editComponent={<TagsForm questionId={id} initialValue={tagIds} />}
       />
       <Field
         label="Answer"

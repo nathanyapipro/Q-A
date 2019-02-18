@@ -82,6 +82,7 @@ export interface CreateQuestion_createQuestion_question {
    * Reads a single `Status` that is related to this `Question`.
    */
   status: CreateQuestion_createQuestion_question_status | null;
+  tagIds: (number | null)[] | null;
   /**
    * Reads and enables pagination through a set of `QuestionTag`.
    */

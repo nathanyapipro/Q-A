@@ -17,6 +17,7 @@ export const QUESTION_BY_ID_QUERY = gql`
         id
         status
       }
+      tagIds
       questionTags {
         nodes {
           id
