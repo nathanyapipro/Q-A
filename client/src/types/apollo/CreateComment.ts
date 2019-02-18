@@ -22,7 +22,7 @@ export interface CreateComment_createComment_comment_user_role {
 export interface CreateComment_createComment_comment_user {
   __typename: "User";
   /**
-   * unique identifier for the user.
+   *  unique identifier for the user.
    */
   id: number;
   /**
@@ -38,11 +38,11 @@ export interface CreateComment_createComment_comment_user {
 export interface CreateComment_createComment_comment {
   __typename: "Comment";
   /**
-   * unique identifier for the comment.
+   *  unique identifier for the comment.
    */
   id: number;
   /**
-   * question being commented
+   *  question being commented
    */
   questionId: number;
   /**
@@ -53,7 +53,13 @@ export interface CreateComment_createComment_comment {
    * content of the comment.
    */
   content: string;
+  /**
+   *  timestamp of last update
+   */
   updatedAt: any;
+  /**
+   *  timestamp of create
+   */
   createdAt: any;
 }
 

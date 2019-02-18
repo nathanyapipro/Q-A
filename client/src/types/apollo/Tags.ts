@@ -8,7 +8,7 @@
 export interface Tags_tags_nodes {
   __typename: "Tag";
   /**
-   * unique identifier for the tag.
+   *  unique identifier for the tag.
    */
   id: number;
   /**

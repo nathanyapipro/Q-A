@@ -81,8 +81,6 @@ export interface IntListFilter {
   notEqualTo?: (number | null)[] | null;
   distinctFrom?: (number | null)[] | null;
   notDistinctFrom?: (number | null)[] | null;
-  anyEqualTo?: number | null;
-  anyNotEqualTo?: number | null;
   lessThan?: (number | null)[] | null;
   lessThanOrEqualTo?: (number | null)[] | null;
   greaterThan?: (number | null)[] | null;
@@ -90,6 +88,8 @@ export interface IntListFilter {
   contains?: (number | null)[] | null;
   containedBy?: (number | null)[] | null;
   overlaps?: (number | null)[] | null;
+  anyEqualTo?: number | null;
+  anyNotEqualTo?: number | null;
   anyLessThan?: number | null;
   anyLessThanOrEqualTo?: number | null;
   anyGreaterThan?: number | null;
@@ -128,11 +128,28 @@ export interface QuestionFilter {
 }
 
 /**
+ * Represents an update to a `Question`. Fields that are set will be updated.
+ */
+export interface QuestionPatch {
+  content?: string | null;
+  statusId?: number | null;
+}
+
+/**
  * All input for the `questionToggleVote` mutation.
  */
 export interface QuestionToggleVoteInput {
   clientMutationId?: string | null;
   questionId: number;
+}
+
+/**
+ * All input for the `updateQuestionById` mutation.
+ */
+export interface UpdateQuestionByIdInput {
+  clientMutationId?: string | null;
+  patch: QuestionPatch;
+  id: number;
 }
 
 //==============================================================

@@ -22,7 +22,7 @@ export interface CurrentUser_currentUser_role {
 export interface CurrentUser_currentUser {
   __typename: "User";
   /**
-   * unique identifier for the user.
+   *  unique identifier for the user.
    */
   id: number;
   /**

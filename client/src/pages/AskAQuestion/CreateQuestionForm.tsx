@@ -132,30 +132,6 @@ function CreateQuestionFormBase(props: Props) {
             />
           }
         />
-        {/* <TextField
-          fullWidth
-          error={content.touched && content.error}
-          autoFocus
-          label="Question"
-          multiline
-          rows="8"
-          placeholder="Ask a Question ... "
-          InputLabelProps={{ shrink: true }}
-          value={content.value}
-          onChange={handleContentChange}
-          className={classes.field}
-          margin="dense"
-          variant="outlined"
-        />
-        <div className={classes.field}>
-          <TagAutocomplete
-            value={tagIds.value}
-            error={tagIds.touched && tagIds.error}
-            label="Tags"
-            onChange={handleSetTagIds}
-            isMulti={true}
-          />
-        </div> */}
         <Button
           className={classes.submitButton}
           disabled={!(content.touched && tagIds.touched)}

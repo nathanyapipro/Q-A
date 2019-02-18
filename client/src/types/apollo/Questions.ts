@@ -66,7 +66,7 @@ export interface Questions_questions_nodes_comments {
 export interface Questions_questions_nodes {
   __typename: "Question";
   /**
-   * unique identifier for the question.
+   *  unique identifier for the question.
    */
   id: number;
   /**
@@ -74,7 +74,7 @@ export interface Questions_questions_nodes {
    */
   content: string;
   /**
-   * owner of the question.
+   *  owner of the question.
    */
   userId: number;
   /**
@@ -85,6 +85,9 @@ export interface Questions_questions_nodes {
    * Reads and enables pagination through a set of `QuestionTag`.
    */
   questionTags: Questions_questions_nodes_questionTags;
+  /**
+   *  vote count of the question
+   */
   voteCount: number;
   /**
    * indicates if the user has voted
@@ -94,7 +97,13 @@ export interface Questions_questions_nodes {
    * Reads and enables pagination through a set of `Comment`.
    */
   comments: Questions_questions_nodes_comments;
+  /**
+   *  timestamp of create
+   */
   createdAt: any;
+  /**
+   *  timestamp of last update
+   */
   updatedAt: any;
 }
 

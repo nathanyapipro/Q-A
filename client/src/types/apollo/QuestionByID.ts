@@ -58,7 +58,7 @@ export interface QuestionById_questionById_questionTags {
 export interface QuestionById_questionById_answers_nodes_user {
   __typename: "User";
   /**
-   * unique identifier for the user.
+   *  unique identifier for the user.
    */
   id: number;
   /**
@@ -70,7 +70,7 @@ export interface QuestionById_questionById_answers_nodes_user {
 export interface QuestionById_questionById_answers_nodes {
   __typename: "Answer";
   /**
-   * unique identifier for the answer.
+   *  unique identifier for the answer.
    */
   id: number;
   /**
@@ -81,7 +81,13 @@ export interface QuestionById_questionById_answers_nodes {
    * Reads a single `User` that is related to this `Answer`.
    */
   user: QuestionById_questionById_answers_nodes_user | null;
+  /**
+   *  timestamp of create
+   */
   createdAt: any;
+  /**
+   *  timestamp of last update
+   */
   updatedAt: any;
 }
 
@@ -104,7 +110,7 @@ export interface QuestionById_questionById_comments {
 export interface QuestionById_questionById {
   __typename: "Question";
   /**
-   * unique identifier for the question.
+   *  unique identifier for the question.
    */
   id: number;
   /**
@@ -112,7 +118,7 @@ export interface QuestionById_questionById {
    */
   content: string;
   /**
-   * owner of the question.
+   *  owner of the question.
    */
   userId: number;
   /**
@@ -123,6 +129,9 @@ export interface QuestionById_questionById {
    * Reads and enables pagination through a set of `QuestionTag`.
    */
   questionTags: QuestionById_questionById_questionTags;
+  /**
+   *  vote count of the question
+   */
   voteCount: number;
   /**
    * indicates if the user has voted
@@ -136,7 +145,13 @@ export interface QuestionById_questionById {
    * Reads and enables pagination through a set of `Comment`.
    */
   comments: QuestionById_questionById_comments;
+  /**
+   *  timestamp of create
+   */
   createdAt: any;
+  /**
+   *  timestamp of last update
+   */
   updatedAt: any;
 }
 

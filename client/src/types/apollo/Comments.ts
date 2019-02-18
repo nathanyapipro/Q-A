@@ -22,7 +22,7 @@ export interface Comments_comments_nodes_user_role {
 export interface Comments_comments_nodes_user {
   __typename: "User";
   /**
-   * unique identifier for the user.
+   *  unique identifier for the user.
    */
   id: number;
   /**
@@ -38,11 +38,11 @@ export interface Comments_comments_nodes_user {
 export interface Comments_comments_nodes {
   __typename: "Comment";
   /**
-   * unique identifier for the comment.
+   *  unique identifier for the comment.
    */
   id: number;
   /**
-   * question being commented
+   *  question being commented
    */
   questionId: number;
   /**
@@ -53,7 +53,13 @@ export interface Comments_comments_nodes {
    * content of the comment.
    */
   content: string;
+  /**
+   *  timestamp of last update
+   */
   updatedAt: any;
+  /**
+   *  timestamp of create
+   */
   createdAt: any;
 }
 

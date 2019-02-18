@@ -48,12 +48,16 @@ function FieldBase(props: Props) {
   const classes = useStyles();
   const { label, staticComponent: StaticComponent, editComponent } = props;
 
-  const editable = Boolean(editComponent);
+  const editable = Boolean(editComponent && StaticComponent);
 
   const [isEditing, setIsEditing] = React.useState<boolean>(!StaticComponent);
 
   const EditComponent = editComponent ? (
-    React.cloneElement(editComponent, { onExit: toggleEdit })
+    editable ? (
+      React.cloneElement(editComponent, { onExit: toggleEdit })
+    ) : (
+      editComponent
+    )
   ) : (
     <noscript />
   );

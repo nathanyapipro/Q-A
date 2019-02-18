@@ -66,7 +66,7 @@ export interface QuestionToggleVote_questionToggleVote_question_comments {
 export interface QuestionToggleVote_questionToggleVote_question {
   __typename: "Question";
   /**
-   * unique identifier for the question.
+   *  unique identifier for the question.
    */
   id: number;
   /**
@@ -74,7 +74,7 @@ export interface QuestionToggleVote_questionToggleVote_question {
    */
   content: string;
   /**
-   * owner of the question.
+   *  owner of the question.
    */
   userId: number;
   /**
@@ -85,6 +85,9 @@ export interface QuestionToggleVote_questionToggleVote_question {
    * Reads and enables pagination through a set of `QuestionTag`.
    */
   questionTags: QuestionToggleVote_questionToggleVote_question_questionTags;
+  /**
+   *  vote count of the question
+   */
   voteCount: number;
   /**
    * indicates if the user has voted
@@ -94,7 +97,13 @@ export interface QuestionToggleVote_questionToggleVote_question {
    * Reads and enables pagination through a set of `Comment`.
    */
   comments: QuestionToggleVote_questionToggleVote_question_comments;
+  /**
+   *  timestamp of create
+   */
   createdAt: any;
+  /**
+   *  timestamp of last update
+   */
   updatedAt: any;
 }
 
