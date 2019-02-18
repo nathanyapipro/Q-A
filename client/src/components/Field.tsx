@@ -21,10 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing.unit * 2,
     "&:last-child": {
       paddingBottom: 0
-    },
-    cursor: "default",
-    "&$editable": {
-      cursor: "pointer"
     }
   },
   header: {
@@ -33,15 +29,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: "inherit"
   },
   label: {
-    flexGrow: 1
+    flexGrow: 1,
+    pointerEvents: "none"
   },
   editIcon: {
     alignSelf: "flex-start",
     height: "19px",
     width: "19px",
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
+    cursor: "pointer"
   },
-  editable: {}
+  editable: {},
+  content: {
+    display: "flex",
+    flexDirection: "column",
+    "&$editable": {
+      cursor: "pointer"
+    }
+  }
 }));
 
 function FieldBase(props: Props) {
@@ -66,19 +71,14 @@ function FieldBase(props: Props) {
     setIsEditing(!isEditing);
   }
 
-  function handleSetEdit(_: React.MouseEvent<HTMLElement, MouseEvent>) {
+  function handleSetEdit(_: React.MouseEvent) {
     if (editable && !isEditing) {
       toggleEdit();
     }
   }
 
   return (
-    <div
-      className={classNames(classes.container, {
-        [classes.editable]: !isEditing && editable
-      })}
-      onClick={handleSetEdit}
-    >
+    <div className={classes.container}>
       <div className={classes.header}>
         <Typography
           className={classes.label}
@@ -88,10 +88,21 @@ function FieldBase(props: Props) {
           {label}
         </Typography>
         {editComponent && !isEditing && (
-          <EditIcon color="secondary" className={classes.editIcon} />
+          <EditIcon
+            color="secondary"
+            className={classes.editIcon}
+            onClick={handleSetEdit}
+          />
         )}
       </div>
-      {isEditing ? EditComponent : StaticComponent}
+      <div
+        className={classNames(classes.content, {
+          [classes.editable]: !isEditing && editable
+        })}
+        onClick={handleSetEdit}
+      >
+        {isEditing ? EditComponent : StaticComponent}
+      </div>
     </div>
   );
 }
