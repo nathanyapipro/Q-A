@@ -6,6 +6,7 @@ import { compose } from "react-apollo";
 import * as withCommentsQuery from "../../queries/withCommentsQuery";
 import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import Comment from "./Comment";
+import Paper from "@material-ui/core/Paper";
 
 interface OwnProps {}
 
@@ -25,7 +26,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       overflowY: "auto"
     }
   },
-  emptyRow: {}
+  emptyRow: {
+    display: "flex",
+    margin: `0px ${theme.spacing.unit * 2}px`,
+    padding: theme.spacing.unit,
+    backgroundColor: theme.palette.grey[200]
+  }
 }));
 
 function ConversationBase(props: Props) {
@@ -45,11 +51,11 @@ function ConversationBase(props: Props) {
   function renderComments() {
     if (nodes.length === 0) {
       return (
-        <div className={classes.emptyRow}>
-          <Typography variant="subtitle1" component="p" color="secondary">
+        <Paper elevation={0} className={classes.emptyRow}>
+          <Typography variant="subtitle1" component="p">
             No Comments found ...
           </Typography>
-        </div>
+        </Paper>
       );
     } else {
       return nodes.map(data => (
