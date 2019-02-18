@@ -35,7 +35,7 @@ as $$
         qt.question_id = $1;
 
       -- Insert new tags
-      foreach tag_id in array tag_ids loop
+      foreach tag_id in array patch.tag_ids loop
         insert into app_public.question_tag(question_id, tag_id)
           values (question.id, tag_id);
       end loop;
