@@ -30,7 +30,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: 0,
     marginBottom: 0
   },
-  notchedOutline: {
+  outlinedInputRoot: {
+    position: "relative",
+    "& $outlinedInputNotchedOutline": {
+      borderColor: "transparent"
+    }
+  },
+  outlinedInputNotchedOutline: {
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: theme.shape.borderRadius,
@@ -105,7 +111,8 @@ function InputBase(props: Props) {
         rowsMax="4"
         InputProps={{
           classes: {
-            notchedOutline: classes.notchedOutline
+            root: classes.outlinedInputRoot,
+            notchedOutline: classes.outlinedInputNotchedOutline
           }
         }}
         placeholder="Write a comment ... "

@@ -158,6 +158,19 @@ General:
 
 # Contribute
 
+### DB Info
+
+Deploy db migrations: `cd ./db && sqitch deploy`
+Revert db migrations: `cd ./db && sqitch revert`
+
+If the db has changed too much since last `git pull`:
+
+- Drop database: `dropdb fundamental`
+- Drop users: `dropuser fundamental_admin && dropuser fundamental_visitor`
+- Enter psql shell as admin user (postgres): `psql postgres`
+- Initilise db: `\i db/dbInit.sql`
+- Exit shell using CRTL+D
+
 ### Development Environment
 
 In dev mode the client and backend run in 2 distict servers and therefore require two open terminal windows
