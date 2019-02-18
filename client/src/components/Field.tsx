@@ -1,4 +1,5 @@
 import * as React from "react";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -6,8 +7,8 @@ import EditIcon from "@material-ui/icons/Create";
 
 interface OwnProps {
   label: string;
-  staticField?: React.ReactChild;
-  inputField?: React.ReactChild;
+  staticComponent?: React.ReactElement<any>;
+  editComponent?: React.ReactElement<any>;
 }
 
 type Props = OwnProps;
@@ -17,17 +18,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexShrink: 0,
     flexDirection: "column",
-    marginBottom: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
     "&:last-child": {
-      marginBottom: 0
+      paddingBottom: 0
     },
-    cursor: "pointer",
-    "&:hover": {
-      "&>$header": {
-        "&>$editIcon": {
-          color: theme.palette.primary.main
-        }
-      }
+    cursor: "default",
+    "&$editable": {
+      cursor: "pointer"
     }
   },
   header: {
@@ -42,26 +39,42 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignSelf: "flex-start",
     height: "19px",
     width: "19px",
-    color: theme.palette.secondary.main
-  }
+    color: theme.palette.primary.main
+  },
+  editable: {}
 }));
 
 function FieldBase(props: Props) {
   const classes = useStyles();
-  const { label, staticField, inputField } = props;
+  const { label, staticComponent: StaticComponent, editComponent } = props;
 
-  const [isEditing, setIsEditing] = React.useState<boolean>(!staticField);
+  const editable = Boolean(editComponent);
+
+  const [isEditing, setIsEditing] = React.useState<boolean>(!StaticComponent);
+
+  const EditComponent = editComponent ? (
+    React.cloneElement(editComponent, { onExit: toggleEdit })
+  ) : (
+    <noscript />
+  );
 
   function toggleEdit() {
     setIsEditing(!isEditing);
   }
 
   function handleSetEdit(_: React.MouseEvent<HTMLElement, MouseEvent>) {
-    toggleEdit();
+    if (editable && !isEditing) {
+      toggleEdit();
+    }
   }
 
   return (
-    <div className={classes.container} onClick={handleSetEdit}>
+    <div
+      className={classNames(classes.container, {
+        [classes.editable]: !isEditing && editable
+      })}
+      onClick={handleSetEdit}
+    >
       <div className={classes.header}>
         <Typography
           className={classes.label}
@@ -70,9 +83,11 @@ function FieldBase(props: Props) {
         >
           {label}
         </Typography>
-        <EditIcon color="secondary" className={classes.editIcon} />
+        {editComponent && !isEditing && (
+          <EditIcon color="secondary" className={classes.editIcon} />
+        )}
       </div>
-      {isEditing ? inputField : staticField}
+      {isEditing ? EditComponent : StaticComponent}
     </div>
   );
 }

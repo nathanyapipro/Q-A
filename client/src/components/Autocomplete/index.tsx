@@ -28,6 +28,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flex: "1 1 auto"
   },
+  field: {
+    marginTop: 0,
+    marginBottom: 0
+  },
   input: {
     display: "flex",
     flex: "1 1 auto",
@@ -88,10 +92,11 @@ function Control(props: ControlProps<OptionType>) {
     <TextField
       fullWidth
       variant="outlined"
-      margin="none"
+      margin="dense"
       InputLabelProps={{
         shrink: true
       }}
+      className={props.selectProps.classes.field}
       error={props.selectProps.error}
       InputProps={{
         inputComponent,
@@ -182,7 +187,7 @@ export type OptionsType = ReactOptionsType<OptionType>;
 export type ValueType = ReactValueType<OptionType>;
 
 export interface AutocompleteProps extends ReactSelectProps {
-  label: string;
+  label?: string;
   error?: boolean;
   minInputLength?: number;
   disableDebounce?: boolean;

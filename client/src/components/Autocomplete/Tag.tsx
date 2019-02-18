@@ -7,8 +7,9 @@ import * as withTagsQuery from "../../queries/withTagsQuery";
 interface OwnProps
   extends Omit<
     AutocompleteProps,
-    "onInputChange" | "onChange" | "value" | "options"
+    "onInputChange" | "onChange" | "value" | "options" | "label"
   > {
+  label?: string;
   value?: number | Array<number>;
   onChange: (value: number | Array<number>) => void;
 }
@@ -39,11 +40,12 @@ function TagAutocompleteBase(props: Props) {
     }
   };
 
-  const { value, ...rest } = props;
+  const { value, label, ...rest } = props;
 
   return (
     <Autocomplete
       {...rest}
+      label={label}
       isClearable
       options={options}
       value={valueToValueType(value)}

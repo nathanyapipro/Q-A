@@ -21,14 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: `${theme.spacing.unit * 2}px 0px`,
     [theme.breakpoints.up("sm")]: {
       maxHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - ${theme
-        .spacing.unit * 6}px - 57px)`,
+        .spacing.unit * 6}px - 56px)`,
       overflowY: "auto"
     }
   },
-  emptyRow: {},
-  bold: {
-    fontWeight: 600
-  }
+  emptyRow: {}
 }));
 
 function ConversationBase(props: Props) {
@@ -49,12 +46,7 @@ function ConversationBase(props: Props) {
     if (nodes.length === 0) {
       return (
         <div className={classes.emptyRow}>
-          <Typography
-            className={classes.bold}
-            variant="subtitle1"
-            component="p"
-            color="secondary"
-          >
+          <Typography variant="subtitle1" component="p" color="secondary">
             No Comments found ...
           </Typography>
         </div>

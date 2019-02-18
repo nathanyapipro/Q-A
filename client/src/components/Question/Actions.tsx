@@ -18,9 +18,6 @@ interface OwnProps {
 type Props = OwnProps & withQuestionToggleVoteMutation.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
-  bold: {
-    fontWeight: 600
-  },
   container: {
     display: "flex",
     flexDirection: "row"
@@ -63,13 +60,13 @@ function ActionsBase(props: Props) {
         onClick={handleVoteClick}
       >
         <VoteIcon className={classes.buttonIcon} color="inherit" />
-        <Typography className={classes.bold} color="inherit" variant="body1">
+        <Typography color="inherit" variant="body1">
           {voteCount}
         </Typography>
       </Button>
       <Button variant="outlined" color="secondary" className={classes.button}>
         <CommentIcon className={classes.buttonIcon} color="inherit" />
-        <Typography className={classes.bold} color="inherit" variant="body1">
+        <Typography color="inherit" variant="body1">
           {commentCount}
         </Typography>
       </Button>

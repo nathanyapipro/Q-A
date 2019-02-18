@@ -2,6 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import Content from "../Question/Content";
+import ContentForm from "../Question/ContentForm";
 import Actions from "../Question/Actions";
 import Tags from "../Question/Tags";
 import Status from "../Question/Status";
@@ -37,9 +38,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     "&:last-child": {
       marginBottom: 0
     }
-  },
-  bold: {
-    fontWeight: 600
   },
   negativeGutterButton: {
     marginBottom: -theme.spacing.unit / 2
@@ -77,66 +75,57 @@ function QuestionBase(props: Props) {
 
   return (
     <div className={classes.container}>
-      <div className={classes.staticField}>
-        <Typography color="secondary" variant="caption">
-          Status
-        </Typography>
-        <Status status={status} />
-      </div>
-      <Field label="Question" staticField={<Content content={content} />} />
-      <div className={classes.staticField}>
-        <Typography color="secondary" variant="caption">
-          Tags
-        </Typography>
-        <Tags questionTags={questionTags} />
-      </div>
-      <div className={classes.staticField}>
-        <Typography
-          className={classes.negativeGutterButton}
-          color="secondary"
-          variant="caption"
-        >
-          Answer
-        </Typography>
-        <Typography className={classes.bold} variant="subtitle1" component="p">
-          {answer ? answer.content : "None"}
-        </Typography>
-      </div>
-      <div className={classes.staticField}>
-        <Typography
-          className={classes.negativeGutterButton}
-          color="secondary"
-          variant="caption"
-        >
-          Created
-        </Typography>
-        <Typography className={classes.bold} variant="subtitle1" component="p">
-          {fromNow(createdAt)}
-        </Typography>
-      </div>
-      <div className={classes.staticField}>
-        <Typography
-          className={classes.negativeGutterButton}
-          color="secondary"
-          variant="caption"
-        >
-          Updated
-        </Typography>
-        <Typography className={classes.bold} variant="subtitle1" component="p">
-          {fromNow(updatedAt)}
-        </Typography>
-      </div>
-      <div className={classes.staticField}>
-        <Typography color="secondary" variant="caption">
-          Votes & Comments
-        </Typography>
-        <Actions
-          id={id}
-          voteCount={voteCount}
-          commentCount={commentCount}
-          hasVoted={hasVoted}
-        />
-      </div>
+      <Field
+        label="Status"
+        staticComponent={<Status status={status} />}
+        // editComponent={<ContentForm initialValue={content} />}
+      />
+      <Field
+        label="Question"
+        staticComponent={<Content content={content} />}
+        editComponent={<ContentForm initialValue={content} />}
+      />
+      <Field
+        label="Tags"
+        staticComponent={<Tags questionTags={questionTags} />}
+        // editComponent={<ContentForm initialValue={content} />}
+      />
+      <Field
+        label="Answer"
+        staticComponent={
+          <Typography variant="subtitle1" component="p">
+            {answer ? answer.content : "None"}
+          </Typography>
+        }
+        // editComponent={<ContentForm initialValue={content} />}
+      />
+      <Field
+        label="Created"
+        staticComponent={
+          <Typography variant="subtitle1" component="p">
+            {fromNow(createdAt)}
+          </Typography>
+        }
+      />
+      <Field
+        label="Updated"
+        staticComponent={
+          <Typography variant="subtitle1" component="p">
+            {fromNow(updatedAt)}
+          </Typography>
+        }
+      />
+      <Field
+        label="Votes & Comments"
+        staticComponent={
+          <Actions
+            id={id}
+            voteCount={voteCount}
+            commentCount={commentCount}
+            hasVoted={hasVoted}
+          />
+        }
+      />
     </div>
   );
 }

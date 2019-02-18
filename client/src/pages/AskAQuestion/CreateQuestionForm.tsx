@@ -10,6 +10,7 @@ import { compose } from "react-apollo";
 import * as withCreateQuestionMutation from "../../queries/withCreateQuestionMutation";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { FormFieldMeta } from "../../types";
+import Field from "../../components/Field";
 
 interface OwnProps {}
 
@@ -31,10 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing.unit * 2
   },
   field: {
-    marginBottom: theme.spacing.unit * 2,
-    "&:last-child": {
-      marginBottom: "unset"
-    }
+    marginTop: 0,
+    marginBottom: 0
   },
   submitButton: {}
 }));
@@ -103,7 +102,37 @@ function CreateQuestionFormBase(props: Props) {
           communication for all Elementals. Please be respectful of others and
           constructive when posting questions.
         </Typography>
-        <TextField
+        <Field
+          label="Question"
+          editComponent={
+            <TextField
+              fullWidth
+              error={content.touched && content.error}
+              autoFocus
+              multiline
+              rows="8"
+              placeholder="Ask a Question ... "
+              InputLabelProps={{ shrink: true }}
+              value={content.value}
+              onChange={handleContentChange}
+              className={classes.field}
+              margin="dense"
+              variant="outlined"
+            />
+          }
+        />
+        <Field
+          label="Tags"
+          editComponent={
+            <TagAutocomplete
+              value={tagIds.value}
+              error={tagIds.touched && tagIds.error}
+              onChange={handleSetTagIds}
+              isMulti={true}
+            />
+          }
+        />
+        {/* <TextField
           fullWidth
           error={content.touched && content.error}
           autoFocus
@@ -126,7 +155,7 @@ function CreateQuestionFormBase(props: Props) {
             onChange={handleSetTagIds}
             isMulti={true}
           />
-        </div>
+        </div> */}
         <Button
           className={classes.submitButton}
           disabled={!(content.touched && tagIds.touched)}

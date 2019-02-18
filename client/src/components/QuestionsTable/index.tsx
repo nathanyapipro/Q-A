@@ -27,10 +27,7 @@ const useStyles = makeStyles((_: Theme) => ({
   table: {
     tableLayout: "fixed"
   },
-  emptyRow: {},
-  bold: {
-    fontWeight: 600
-  }
+  emptyRow: {}
 }));
 
 function QuestionsTableBase(props: Props) {
@@ -45,11 +42,7 @@ function QuestionsTableBase(props: Props) {
       return (
         <TableRow className={classes.emptyRow}>
           <TableCell>
-            <Typography
-              className={classes.bold}
-              variant="subtitle1"
-              component="p"
-            >
+            <Typography variant="subtitle1" component="p">
               No Questions found ...
             </Typography>
           </TableCell>

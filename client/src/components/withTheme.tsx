@@ -53,11 +53,6 @@ const theme = createMuiTheme({
         color: "white"
       }
     },
-    MuiAvatar: {
-      root: {
-        borderRadius: 0
-      }
-    },
     MuiTable: {
       root: {
         tableLayout: "fixed",

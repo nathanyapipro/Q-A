@@ -12,9 +12,6 @@ interface OwnProps {
 type Props = OwnProps;
 
 const useStyles = makeStyles((_: Theme) => ({
-  bold: {
-    fontWeight: 600
-  },
   createdAt: {
     display: "unset",
     alignSelf: "flex-end"
@@ -27,7 +24,7 @@ function ContentBase(props: Props) {
   const { content, createdAt } = props;
 
   return (
-    <Typography className={classes.bold} variant="subtitle1" component="p">
+    <Typography variant="subtitle1" component="p">
       {content}
       {createdAt && (
         <Typography
