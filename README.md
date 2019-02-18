@@ -33,7 +33,7 @@ Client:
 - [ ] Question Page (question, comments)
   - [ ] Question
     - [x] Static Render
-    - [ ] Inline Edit on Status, Content, Answer
+    - [x] Inline Edit on Status, Content, Answer
     - [ ] Delete
   - [ ] Comments
     - [x] Conversation
