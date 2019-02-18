@@ -67,7 +67,7 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
           if (
             previousState &&
             previousState.comments &&
-            previousState.comments.totalCount
+            previousState.comments.totalCount !== null
           ) {
             const newState = {
               ...previousState,

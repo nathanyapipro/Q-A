@@ -69,7 +69,8 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
     options: ({ questionId }) => ({
       variables: {
         questionId
-      }
+      },
+      fetchPolicy: "cache-and-network"
     }),
     props: ({ data }) => {
       if (!data) {

@@ -34,6 +34,9 @@ export type ChildProps = {
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
   CURRENT_USER_QUERY,
   {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
     props: ({ data }) => {
       if (!data) {
         throw new Error("No data prop found");
