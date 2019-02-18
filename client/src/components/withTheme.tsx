@@ -40,9 +40,6 @@ const theme = createMuiTheme({
       main: grey[700],
       dark: grey[800],
       contrastText: "white"
-    },
-    text: {
-      primary: "rgba(0, 0, 0, 0.70)"
     }
   },
   overrides: {
