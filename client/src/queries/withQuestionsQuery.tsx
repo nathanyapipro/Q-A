@@ -77,7 +77,8 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
         first,
         filter,
         orderBy
-      }
+      },
+      fetchPolicy: "cache-and-network"
     }),
     props: ({ data, ownProps: { offset, first } }) => {
       if (!data) {

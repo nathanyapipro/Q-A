@@ -12,6 +12,10 @@ interface OwnProps {
 type Props = OwnProps;
 
 const useStyles = makeStyles((_: Theme) => ({
+  container: {
+    wordWrap: "break-word",
+    whiteSpace: "pre-wrap"
+  },
   createdAt: {
     display: "unset",
     alignSelf: "flex-end"
@@ -24,7 +28,11 @@ function ContentBase(props: Props) {
   const { content, createdAt } = props;
 
   return (
-    <Typography variant="subtitle1" component="p">
+    <Typography
+      variant="subtitle1"
+      component="pre"
+      className={classes.container}
+    >
       {content}
       {createdAt && (
         <Typography
