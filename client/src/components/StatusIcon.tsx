@@ -4,11 +4,11 @@ import NewIcon from "@material-ui/icons/NewReleases";
 import UnderReviewIcon from "@material-ui/icons/SupervisedUserCircle";
 import AnsweredIcon from "@material-ui/icons/CheckCircle";
 import DismissedIcon from "@material-ui/icons/RemoveCircle";
-import { StatusNameType } from "../types/apollo";
+import { StatusType } from "../types/apollo";
 import { Theme } from "@material-ui/core/styles";
 
 interface OwnProps {
-  status: StatusNameType;
+  status: StatusType;
 }
 
 type Props = OwnProps;
@@ -24,13 +24,13 @@ function StatusBase(props: Props) {
   const classes = useStyles();
   const { status } = props;
   switch (status) {
-    case StatusNameType.NEW:
+    case StatusType.NEW:
       return <NewIcon className={classes.icon} color="inherit" />;
-    case StatusNameType.UNDER_REVIEW:
+    case StatusType.UNDER_REVIEW:
       return <UnderReviewIcon className={classes.icon} color="inherit" />;
-    case StatusNameType.ANSWERED:
+    case StatusType.ANSWERED:
       return <AnsweredIcon className={classes.icon} color="inherit" />;
-    case StatusNameType.DISMISSED:
+    case StatusType.DISMISSED:
       return <DismissedIcon className={classes.icon} color="inherit" />;
   }
 }

@@ -3,7 +3,7 @@
 BEGIN;
 
 create table app_private.user_secret (
-  user_id int not null primary key references app_public.user(id) on delete cascade,
+  user_id integer not null primary key references app_public.user(id) on delete cascade,
   password_hash text
 );
 alter table app_private.user_secret enable row level security;

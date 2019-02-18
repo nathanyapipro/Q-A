@@ -54,7 +54,7 @@ function QuestionBase(props: Props) {
 
   const { id, content, createdAt, updatedAt } = questionById;
 
-  const status = questionById.status && questionById.status.name;
+  const status = questionById.status && questionById.status.status;
 
   if (!status) {
     return <noscript />;

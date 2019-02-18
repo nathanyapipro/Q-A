@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import classNames from "classnames";
 import { Comments_comments_nodes } from "../../types/apollo/Comments";
-import { RoleNameType } from "../../types/apollo";
+import { RoleType } from "../../types/apollo";
 import { fromNow } from "../../helpers/date";
 
 interface OwnProps {
@@ -68,7 +68,7 @@ function ConversationBase(props: Props) {
 
   let username = user.username;
 
-  if (user.role.name === RoleNameType.ANONYMOUS) {
+  if (user.role.role === RoleType.ANONYMOUS) {
     username = username.slice(10, 18);
   }
 

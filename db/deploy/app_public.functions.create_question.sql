@@ -4,7 +4,7 @@ BEGIN;
 
 create function app_public.create_question(
   content text,
-  tag_ids int[]
+  tag_ids integer[]
 )
 returns app_public.question
 as $$
@@ -25,7 +25,7 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
-comment on function app_public.create_question(content text, tag_ids int[]) is
+comment on function app_public.create_question(content text, tag_ids integer[]) is
   E'Creates a question.';
 
 COMMIT;

@@ -63,7 +63,7 @@ function RowBase(props: Props) {
     createdAt
   } = data;
 
-  const status = data.status && data.status.name;
+  const status = data.status && data.status.status;
 
   if (!status) {
     return <noscript />;

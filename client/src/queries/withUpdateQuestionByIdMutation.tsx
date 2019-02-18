@@ -12,6 +12,41 @@ export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
     updateQuestionById(input: $updateQuestionInput) {
       question {
         id
+        content
+        userId
+        status {
+          id
+          status
+        }
+        questionTags {
+          nodes {
+            id
+            tag {
+              name
+              color
+            }
+          }
+          totalCount
+        }
+        voteCount
+        hasVoted
+        answers(first: 1) {
+          nodes {
+            id
+            content
+            user {
+              id
+              username
+            }
+            createdAt
+            updatedAt
+          }
+        }
+        comments {
+          totalCount
+        }
+        createdAt
+        updatedAt
       }
     }
   }

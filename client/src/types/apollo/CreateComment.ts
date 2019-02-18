@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { CreateCommentInput, RoleNameType } from "./index";
+import { CreateCommentInput, RoleType } from "./index";
 
 // ====================================================
 // GraphQL mutation operation: CreateComment
@@ -14,9 +15,9 @@ export interface CreateComment_createComment_comment_user_role {
    */
   id: number;
   /**
-   * name of the role.
+   * role of the role.
    */
-  name: RoleNameType;
+  role: RoleType;
 }
 
 export interface CreateComment_createComment_comment_user {

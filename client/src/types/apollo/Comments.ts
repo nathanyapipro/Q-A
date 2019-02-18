@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { RoleNameType } from "./index";
+import { RoleType } from "./index";
 
 // ====================================================
 // GraphQL query operation: Comments
@@ -14,9 +15,9 @@ export interface Comments_comments_nodes_user_role {
    */
   id: number;
   /**
-   * name of the role.
+   * role of the role.
    */
-  name: RoleNameType;
+  role: RoleType;
 }
 
 export interface Comments_comments_nodes_user {

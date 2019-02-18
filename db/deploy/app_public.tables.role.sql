@@ -2,11 +2,11 @@
 
 BEGIN;
 
-create type app_public.role_name_type as enum ('ADMIN', 'RESPONDER', 'ANONYMOUS');
+create type app_public.role_type as enum ('ADMIN', 'RESPONDER', 'ANONYMOUS');
 
 create table app_public.role (
   id serial primary key,
-  name app_public.role_name_type not null unique,
+  role app_public.role_type not null unique,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -21,8 +21,8 @@ comment on table app_public.role is
 
 comment on column app_public.role.id is
   E'unique identifier for the role.';
-comment on column app_public.role.name is
-  E'name of the role.';
+comment on column app_public.role.role is
+  E'role of the role.';
 comment on column app_public.role.created_at is
   E'@omit update\n timestamp of create';
 comment on column app_public.role.updated_at is
@@ -33,7 +33,7 @@ create trigger _100_timestamps
   for each row
   execute procedure app_private.tg__timestamps();
 
-insert into app_public.role (id, name) values
+insert into app_public.role (id, role) values
   (1,'ADMIN'),
   (2, 'RESPONDER'),
   (3, 'ANONYMOUS');

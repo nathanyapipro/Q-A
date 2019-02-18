@@ -18,7 +18,7 @@ export const CREATE_COMMENT_MUTATION = gql`
           username
           role {
             id
-            name
+            role
           }
         }
         content

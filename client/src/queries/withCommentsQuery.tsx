@@ -23,7 +23,7 @@ export const COMMENTS_QUERY = gql`
           username
           role {
             id
-            name
+            role
           }
         }
         content

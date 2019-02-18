@@ -4,6 +4,6 @@ BEGIN;
 
 drop table app_public.role;
 
-drop type app_public.role_name_type;
+drop type app_public.role_type;
 
 COMMIT;

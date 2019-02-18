@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { QuestionsOrderBy, QuestionFilter, StatusNameType } from "./index";
+import { QuestionsOrderBy, QuestionFilter, StatusType } from "./index";
 
 // ====================================================
 // GraphQL query operation: Questions
@@ -14,9 +15,9 @@ export interface Questions_questions_nodes_status {
    */
   id: number;
   /**
-   * name of the status.
+   * status of the status.
    */
-  name: StatusNameType;
+  status: StatusType;
 }
 
 export interface Questions_questions_nodes_questionTags_nodes_tag {

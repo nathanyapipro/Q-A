@@ -5,9 +5,9 @@ BEGIN;
 create table app_public.question (
   id serial primary key,
   content text not null,
-  user_id int not null references app_public.user(id),
-  status_id int not null references app_public.status(id) default 1,
-  vote_count int not null default 0,
+  user_id integer not null references app_public.user(id),
+  status_id integer not null references app_public.status(id) default 1,
+  vote_count integer not null default 0,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -30,7 +30,7 @@ grant update(content, status_id) on app_public.question to fundamental_visitor;
 grant delete on app_public.question to fundamental_visitor;
 
 comment on table app_public.question is
-  E'@omit create\nA question in the application.';
+  E'@omit create,update\nA question in the application.';
 
 comment on column app_public.question.id is
   E'@omit update\n unique identifier for the question.';

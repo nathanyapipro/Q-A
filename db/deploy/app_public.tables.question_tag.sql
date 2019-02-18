@@ -4,8 +4,8 @@ BEGIN;
 
 create table app_public.question_tag (
   id serial primary key,
-  question_id int not null references app_public.question(id) on delete cascade,
-  tag_id int not null references app_public.tag(id),
+  question_id integer not null references app_public.question(id) on delete cascade,
+  tag_id integer not null references app_public.tag(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

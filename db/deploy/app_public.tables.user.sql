@@ -5,7 +5,7 @@ BEGIN;
 create table app_public.user (
   id serial primary key,
   username text not null unique,
-  role_id int not null references app_public.role(id),
+  role_id integer not null references app_public.role(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

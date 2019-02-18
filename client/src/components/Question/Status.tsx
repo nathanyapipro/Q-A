@@ -1,6 +1,6 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { StatusNameType } from "../../types/apollo";
+import { StatusType } from "../../types/apollo";
 import { Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import StatusIcon from "../StatusIcon";
@@ -8,7 +8,7 @@ import { getStatusLabel, getStatusColor } from "../../helpers/question";
 import Typography from "@material-ui/core/Typography";
 
 interface OwnProps {
-  status: StatusNameType;
+  status: StatusType;
 }
 
 type Props = OwnProps;

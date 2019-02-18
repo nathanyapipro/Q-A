@@ -4,8 +4,8 @@ BEGIN;
 
 create table app_public.vote (
   id serial primary key,
-  user_id int not null references app_public.user(id),
-  question_id int not null references app_public.question(id) on delete cascade,
+  user_id integer not null references app_public.user(id),
+  question_id integer not null references app_public.question(id) on delete cascade,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

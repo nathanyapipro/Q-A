@@ -2,7 +2,7 @@
 
 BEGIN;
 
-create function app_public.current_user_id() returns int as $$
+create function app_public.current_user_id() returns integer as $$
   select nullif(current_setting('jwt.claims.user_id', true), '')::int;
 $$ language sql stable set search_path from current;
 comment on function  app_public.current_user_id() is

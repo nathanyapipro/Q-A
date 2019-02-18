@@ -4,6 +4,6 @@ BEGIN;
 
 drop table app_public.status;
 
-drop type app_public.status_name_type;
+drop type app_public.status_type;
 
 COMMIT;

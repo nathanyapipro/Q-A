@@ -26,7 +26,7 @@ export const QUESTIONS_QUERY = gql`
         userId
         status {
           id
-          name
+          status
         }
         questionTags {
           nodes {

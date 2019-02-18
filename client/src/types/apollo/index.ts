@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -24,13 +25,13 @@ export enum QuestionsOrderBy {
   VOTE_COUNT_DESC = "VOTE_COUNT_DESC"
 }
 
-export enum RoleNameType {
+export enum RoleType {
   ADMIN = "ADMIN",
   ANONYMOUS = "ANONYMOUS",
   RESPONDER = "RESPONDER"
 }
 
-export enum StatusNameType {
+export enum StatusType {
   ANSWERED = "ANSWERED",
   DISMISSED = "DISMISSED",
   NEW = "NEW",
@@ -128,11 +129,12 @@ export interface QuestionFilter {
 }
 
 /**
- * Represents an update to a `Question`. Fields that are set will be updated.
+ * An input for mutations affecting `QuestionPatchRecord`
  */
-export interface QuestionPatch {
-  content?: string | null;
+export interface QuestionPatchRecordInput {
   statusId?: number | null;
+  content?: string | null;
+  tagIds?: (number | null)[] | null;
 }
 
 /**
@@ -148,8 +150,8 @@ export interface QuestionToggleVoteInput {
  */
 export interface UpdateQuestionByIdInput {
   clientMutationId?: string | null;
-  patch: QuestionPatch;
   id: number;
+  patch: QuestionPatchRecordInput;
 }
 
 //==============================================================

@@ -2,11 +2,11 @@
 
 BEGIN;
 
-create type app_public.status_name_type as enum ('NEW', 'UNDER_REVIEW', 'ANSWERED', 'DISMISSED');
+create type app_public.status_type as enum ('NEW', 'UNDER_REVIEW', 'ANSWERED', 'DISMISSED');
 
 create table app_public.status (
   id serial primary key,
-  name app_public.status_name_type not null,
+  status app_public.status_type not null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -21,8 +21,8 @@ comment on table app_public.status is
 
 comment on column app_public.status.id is
   E'unique identifier for the status.';
-comment on column app_public.status.name is
-  E'name of the status.';
+comment on column app_public.status.status is
+  E'status of the status.';
 comment on column app_public.status.created_at is
   E'@omit update\n timestamp of create';
 comment on column app_public.status.updated_at is
@@ -33,7 +33,7 @@ create trigger _100_timestamps
   for each row
   execute procedure app_private.tg__timestamps();
 
-insert into app_public.status (id, name) values
+insert into app_public.status (id, status) values
   (1,'NEW'),
   (2, 'UNDER_REVIEW'),
   (3, 'ANSWERED'),

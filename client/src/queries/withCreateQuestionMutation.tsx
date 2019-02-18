@@ -14,7 +14,7 @@ export const CREATE_QUESTION_MUTATION = gql`
         userId
         status {
           id
-          name
+          status
         }
         questionTags {
           nodes {

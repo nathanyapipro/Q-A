@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { CreateQuestionInput, StatusNameType } from "./index";
+import { CreateQuestionInput, StatusType } from "./index";
 
 // ====================================================
 // GraphQL mutation operation: CreateQuestion
@@ -14,9 +15,9 @@ export interface CreateQuestion_createQuestion_question_status {
    */
   id: number;
   /**
-   * name of the status.
+   * status of the status.
    */
-  name: StatusNameType;
+  status: StatusType;
 }
 
 export interface CreateQuestion_createQuestion_question_questionTags_nodes_tag {

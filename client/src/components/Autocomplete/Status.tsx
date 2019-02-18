@@ -22,7 +22,7 @@ function StatusAutocompleteBase(props: Props) {
 
   const options: OptionsType = statuses.map(status => ({
     value: status.id,
-    label: getStatusLabel(status.name)
+    label: getStatusLabel(status.status)
   }));
 
   const valueToValueType = (value?: number | Array<number>): ValueType => {

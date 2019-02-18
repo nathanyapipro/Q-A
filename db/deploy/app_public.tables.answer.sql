@@ -5,8 +5,8 @@ BEGIN;
 create table app_public.answer (
   id serial primary key,
   content text not null,
-  user_id int not null references app_public.user(id),
-  question_id int not null references app_public.question(id),
+  user_id integer not null references app_public.user(id),
+  question_id integer not null references app_public.question(id),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

@@ -16,7 +16,7 @@ export const QUESTION_TOGGLE_VOTE_MUTATION = gql`
         userId
         status {
           id
-          name
+          status
         }
         questionTags {
           nodes {

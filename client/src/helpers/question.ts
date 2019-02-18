@@ -1,27 +1,27 @@
-import { StatusNameType } from "../types/apollo";
+import { StatusType } from "../types/apollo";
 
-export function getStatusLabel(status: StatusNameType): string {
+export function getStatusLabel(status: StatusType): string {
   switch (status) {
-    case StatusNameType.NEW:
+    case StatusType.NEW:
       return "NEW";
-    case StatusNameType.UNDER_REVIEW:
+    case StatusType.UNDER_REVIEW:
       return "UNDER REVIEW";
-    case StatusNameType.ANSWERED:
+    case StatusType.ANSWERED:
       return "ANSWERED";
-    case StatusNameType.DISMISSED:
+    case StatusType.DISMISSED:
       return "DISMISSED";
   }
 }
 
-export function getStatusColor(status: StatusNameType): string {
+export function getStatusColor(status: StatusType): string {
   switch (status) {
-    case StatusNameType.NEW:
+    case StatusType.NEW:
       return "#7D55D7";
-    case StatusNameType.UNDER_REVIEW:
+    case StatusType.UNDER_REVIEW:
       return "#3A79E2";
-    case StatusNameType.ANSWERED:
+    case StatusType.ANSWERED:
       return "#3CBB53";
-    case StatusNameType.DISMISSED:
+    case StatusType.DISMISSED:
       return "#D50032";
   }
 }

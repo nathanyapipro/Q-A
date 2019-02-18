@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { QuestionToggleVoteInput, StatusNameType } from "./index";
+import { QuestionToggleVoteInput, StatusType } from "./index";
 
 // ====================================================
 // GraphQL mutation operation: QuestionToggleVote
@@ -14,9 +15,9 @@ export interface QuestionToggleVote_questionToggleVote_question_status {
    */
   id: number;
   /**
-   * name of the status.
+   * status of the status.
    */
-  name: StatusNameType;
+  status: StatusType;
 }
 
 export interface QuestionToggleVote_questionToggleVote_question_questionTags_nodes_tag {

@@ -1,7 +1,8 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { StatusNameType } from "./index";
+import { StatusType } from "./index";
 
 // ====================================================
 // GraphQL query operation: QuestionById
@@ -14,9 +15,9 @@ export interface QuestionById_questionById_status {
    */
   id: number;
   /**
-   * name of the status.
+   * status of the status.
    */
-  name: StatusNameType;
+  status: StatusType;
 }
 
 export interface QuestionById_questionById_questionTags_nodes_tag {

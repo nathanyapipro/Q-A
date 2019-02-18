@@ -8,7 +8,7 @@ export const STATUSES_QUERY = gql`
     statuses {
       nodes {
         id
-        name
+        status
       }
     }
   }
