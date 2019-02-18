@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   menuButton: {
     marginRight: 20,
     [theme.breakpoints.up("sm")]: {
-      display: "dense"
+      display: "none"
     }
   },
   toolbar: theme.mixins.toolbar,
