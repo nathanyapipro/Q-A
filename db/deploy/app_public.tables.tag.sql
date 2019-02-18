@@ -26,13 +26,17 @@ comment on table app_public.tag is
   E'tag of a question in the application.';
 
 comment on column app_public.tag.id is
-  E'unique identifier for the tag.';
+  E'@omit update\n unique identifier for the tag.';
 comment on column app_public.tag.name is
   E'name of the tag.';
 comment on column app_public.tag.color is
   E'color of the tag.';
 comment on column app_public.tag.is_enabled is
   E'determines if the tag is available.';
+comment on column app_public.tag.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.tag.updated_at is
+  E'@omit update\n timestamp of last update';
 
 create trigger _100_timestamps
   after insert or update on app_public.tag

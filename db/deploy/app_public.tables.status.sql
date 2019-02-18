@@ -23,6 +23,10 @@ comment on column app_public.status.id is
   E'unique identifier for the status.';
 comment on column app_public.status.name is
   E'name of the status.';
+comment on column app_public.status.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.status.updated_at is
+  E'@omit update\n timestamp of last update';
 
 create trigger _100_timestamps
   after insert or update on app_public.status

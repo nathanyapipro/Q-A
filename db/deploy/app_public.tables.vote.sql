@@ -27,6 +27,10 @@ comment on column app_public.vote.user_id is
   E'owner of the vote.';
 comment on column app_public.vote.question_id is
   E'question being voted on.';
+comment on column app_public.vote.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.vote.updated_at is
+  E'@omit update\n timestamp of last update';
 
 create trigger _100_timestamps
   after insert or update on app_public.vote

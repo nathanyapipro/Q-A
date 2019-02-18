@@ -23,6 +23,10 @@ comment on column app_public.role.id is
   E'unique identifier for the role.';
 comment on column app_public.role.name is
   E'name of the role.';
+comment on column app_public.role.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.role.updated_at is
+  E'@omit update\n timestamp of last update';
 
 create trigger _100_timestamps
   after insert or update on app_public.role

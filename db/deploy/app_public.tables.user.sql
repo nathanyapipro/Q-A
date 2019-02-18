@@ -29,12 +29,15 @@ comment on table app_public.user is
   E'@omit all,create\nA user who can log in to the application.';
 
 comment on column app_public.user.id is
-  E'unique identifier for the user.';
+  E'@omit update\n unique identifier for the user.';
 comment on column app_public.user.username is
   E'public-facing username (or ''handle'') of the user.';
-
 comment on column app_public.user.role_id is
   E'role of the user.';
+comment on column app_public.user.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.user.updated_at is
+  E'@omit update\n timestamp of last update';
 
 create trigger _100_timestamps
   after insert or update on app_public.user

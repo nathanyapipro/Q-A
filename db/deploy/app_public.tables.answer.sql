@@ -30,13 +30,17 @@ comment on table app_public.answer is
   E'answer in the application.';
 
 comment on column app_public.answer.id is
-  E'unique identifier for the answer.';
+  E'@omit update\n unique identifier for the answer.';
 comment on column app_public.answer.content is
   E'content of the answer.';
 comment on column app_public.answer.user_id is
-  E'owner of the answer.';
-  comment on column app_public.answer.question_id is
-  E'question being answered';
+  E'@omit update\n owner of the answer.';
+comment on column app_public.answer.question_id is
+  E'@omit update\n question being answered';
+comment on column app_public.answer.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.answer.updated_at is
+  E'@omit update\n timestamp of last update';
 
 
 create trigger _100_timestamps

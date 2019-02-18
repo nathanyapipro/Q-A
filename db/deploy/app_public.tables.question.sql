@@ -33,13 +33,19 @@ comment on table app_public.question is
   E'@omit create\nA question in the application.';
 
 comment on column app_public.question.id is
-  E'unique identifier for the question.';
+  E'@omit update\n unique identifier for the question.';
 comment on column app_public.question.content is
   E'content of the question.';
 comment on column app_public.question.user_id is
-  E'owner of the question.';
+  E'@omit update\n owner of the question.';
 comment on column app_public.question.status_id is
   E'status of the question';
+comment on column app_public.question.vote_count is
+  E'@omit update\n vote count of the question';
+comment on column app_public.question.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.question.updated_at is
+  E'@omit update\n timestamp of last update';
 
 
 create trigger _100_timestamps

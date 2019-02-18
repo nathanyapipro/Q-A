@@ -31,13 +31,17 @@ comment on table app_public.comment is
   E'@omit create\nA comment in the application.';
 
 comment on column app_public.comment.id is
-  E'unique identifier for the comment.';
+  E'@omit update\n unique identifier for the comment.';
 comment on column app_public.comment.content is
   E'content of the comment.';
 comment on column app_public.comment.user_id is
-  E'owner of the comment.';
-  comment on column app_public.comment.question_id is
-  E'question being commented';
+  E'@omit update\n owner of the comment.';
+comment on column app_public.comment.question_id is
+  E'@omit update\n question being commented';
+comment on column app_public.comment.created_at is
+  E'@omit update\n timestamp of create';
+comment on column app_public.comment.updated_at is
+  E'@omit update\n timestamp of last update';
 
 
 create trigger _100_timestamps
