@@ -4,13 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import { Theme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-import TagAutocomplete from "../../components/Autocomplete/Tag";
+import TagAutocomplete from "../components/Autocomplete/Tag";
 import { Button } from "@material-ui/core";
 import { compose } from "react-apollo";
-import * as withCreateQuestionMutation from "../../queries/withCreateQuestionMutation";
+import * as withCreateQuestionMutation from "../queries/withCreateQuestionMutation";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { FormFieldMeta } from "../../types";
-import Field from "../../components/Field";
+import { FormFieldMeta } from "../types";
+import Field from "../components/Field";
 
 interface OwnProps {}
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   submitButton: {}
 }));
 
-function CreateQuestionFormBase(props: Props) {
+function CreateQuestionBase(props: Props) {
   const { createQuestion, history } = props;
   const classes = useStyles();
 
@@ -146,10 +146,10 @@ function CreateQuestionFormBase(props: Props) {
   );
 }
 
-const ComposedCreateQuestionForm: React.ComponentType<
+const ComposedCreateQuestion: React.ComponentType<
   OwnProps & RouteComponentProps & withCreateQuestionMutation.InputProps
-> = compose(withCreateQuestionMutation.hoc)(CreateQuestionFormBase);
+> = compose(withCreateQuestionMutation.hoc)(CreateQuestionBase);
 
-const CreateQuestionFrom = withRouter(ComposedCreateQuestionForm);
+const CreateQuestionFrom = withRouter(ComposedCreateQuestion);
 
 export default CreateQuestionFrom;

@@ -1,10 +1,10 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import StatusAutocomplete from "../Autocomplete/Status";
+import StatusAutocomplete from "../components/Autocomplete/Status";
 import { Theme } from "@material-ui/core/styles";
-import { FormFieldMeta } from "../../types";
+import { FormFieldMeta } from "../types";
 import { compose } from "react-apollo";
-import * as withUpdateQuestionByIdMutation from "../../queries/withUpdateQuestionByIdMutation";
+import * as withUpdateQuestionByIdMutation from "../queries/withUpdateQuestionByIdMutation";
 
 interface OwnProps {
   questionId: number;
@@ -28,7 +28,7 @@ const useStyles = makeStyles((_: Theme) => ({
   }
 }));
 
-function StatusFormBase(props: Props) {
+function UpdateQuestionStatusBase(props: Props) {
   const classes = useStyles();
 
   const { questionId, initialValue, updateQuestion, onExit } = props;
@@ -104,8 +104,8 @@ function StatusFormBase(props: Props) {
   );
 }
 
-const StatusForm: React.ComponentType<
+const UpdateQuestionStatus: React.ComponentType<
   OwnProps & withUpdateQuestionByIdMutation.InputProps
-> = compose(withUpdateQuestionByIdMutation.hoc)(StatusFormBase);
+> = compose(withUpdateQuestionByIdMutation.hoc)(UpdateQuestionStatusBase);
 
-export default StatusForm;
+export default UpdateQuestionStatus;

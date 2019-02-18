@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     pointerEvents: "none"
   },
   editIcon: {
-    alignSelf: "flex-start",
-    height: "19px",
-    width: "19px",
+    alignSelf: "flex-end",
+    height: "16px",
+    width: "16px",
     color: theme.palette.primary.main,
     cursor: "pointer"
   },

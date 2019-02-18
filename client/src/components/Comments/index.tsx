@@ -2,7 +2,7 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import Conversation from "./Conversation";
-import Input from "./Input";
+import CreateCommentForm from "../../forms/CreateComment";
 
 interface OwnProps {
   questionId: number;
@@ -43,7 +43,7 @@ function CommentsBase(props: Props) {
   return (
     <div className={classes.container}>
       <Conversation questionId={questionId} />
-      <Input questionId={questionId} />
+      <CreateCommentForm questionId={questionId} />
     </div>
   );
 }

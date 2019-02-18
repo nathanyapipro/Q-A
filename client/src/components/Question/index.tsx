@@ -2,17 +2,17 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import Content from "../Question/Content";
-import ContentForm from "../Question/ContentForm";
 import Actions from "../Question/Actions";
 import Tags from "../Question/Tags";
-import TagsForm from "../Question/TagsForm";
 import Status from "../Question/Status";
-import StatusForm from "../Question/StatusForm";
 import { compose } from "react-apollo";
 import * as withQuestionByIdQuery from "../../queries/withQuestionByIdQuery";
 import { Typography } from "@material-ui/core";
 import { fromNow } from "../../helpers/date";
 import Field from "../Field";
+import UpdateQuestionContentForm from "../../forms/UpdateQuestionContent";
+import UpdateQuestionStatusForm from "../../forms/UpdateQuestionStatus";
+import UpdateQuestionTagsForm from "../../forms/UpdateQuestionTags";
 
 interface OwnProps {
   questionId: number;
@@ -94,17 +94,23 @@ function QuestionBase(props: Props) {
       <Field
         label="Status"
         staticComponent={<Status status={status} />}
-        editComponent={<StatusForm questionId={id} initialValue={statusId} />}
+        editComponent={
+          <UpdateQuestionStatusForm questionId={id} initialValue={statusId} />
+        }
       />
       <Field
         label="Question"
         staticComponent={<Content content={content} />}
-        editComponent={<ContentForm questionId={id} initialValue={content} />}
+        editComponent={
+          <UpdateQuestionContentForm questionId={id} initialValue={content} />
+        }
       />
       <Field
         label="Tags"
         staticComponent={<Tags questionTags={questionTags} />}
-        editComponent={<TagsForm questionId={id} initialValue={tagIds} />}
+        editComponent={
+          <UpdateQuestionTagsForm questionId={id} initialValue={tagIds} />
+        }
       />
       <Field
         label="Answer"

@@ -1,14 +1,14 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import TagAutocomplete from "../Autocomplete/Tag";
+import TextField from "@material-ui/core/TextField";
 import { Theme } from "@material-ui/core/styles";
-import { FormFieldMeta } from "../../types";
+import { FormFieldMeta } from "../types";
 import { compose } from "react-apollo";
-import * as withUpdateQuestionByIdMutation from "../../queries/withUpdateQuestionByIdMutation";
+import * as withUpdateQuestionByIdMutation from "../queries/withUpdateQuestionByIdMutation";
 
 interface OwnProps {
   questionId: number;
-  initialValue: Array<number>;
+  initialValue: string;
   onExit?: () => void;
 }
 
@@ -28,23 +28,23 @@ const useStyles = makeStyles((_: Theme) => ({
   }
 }));
 
-function TagsFormBase(props: Props) {
+function UpdateQuestionContentBase(props: Props) {
   const classes = useStyles();
 
   const { questionId, initialValue, updateQuestion, onExit } = props;
 
-  const [tagIds, setTagIds] = React.useState<FormFieldMeta<Array<number>>>({
+  const [content, setContent] = React.useState<FormFieldMeta<string>>({
     value: initialValue,
     touched: false,
     error: false
   });
 
-  function handleSetTagIds(item: number | Array<number>) {
-    const value = item instanceof Array ? item : [item];
-    setTagIds({
+  function handleContentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const value = e.target.value;
+    setContent({
       value,
       touched: true,
-      error: !(value instanceof Array && value.length > 0)
+      error: !(value && value !== "")
     });
   }
 
@@ -56,21 +56,21 @@ function TagsFormBase(props: Props) {
     }
   }
 
-  function handleBlur(e: React.FormEvent) {
+  function handleBlur(e: React.FormEvent<HTMLFormElement>) {
     e.stopPropagation();
     handleSubmit(e);
   }
 
-  async function handleSubmit(e?: React.FormEvent) {
+  async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e && e.preventDefault();
-    if (!tagIds.error) {
-      if (tagIds.value !== initialValue) {
+    if (!content.error) {
+      if (content.value !== initialValue) {
         const response = await updateQuestion({
           variables: {
             updateQuestionByIdInput: {
               id: questionId,
               patch: {
-                tagIds: tagIds.value
+                content: content.value
               }
             }
           }
@@ -90,22 +90,28 @@ function TagsFormBase(props: Props) {
 
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
-      <TagAutocomplete
+      <TextField
+        className={classes.field}
+        fullWidth
+        error={content.touched && content.error}
         autoFocus
-        value={tagIds.value}
-        error={tagIds.touched && tagIds.error}
-        onChange={handleSetTagIds}
-        onKeyDown={handleKeyPress}
+        multiline
+        placeholder="Ask a Question ... "
+        InputLabelProps={{ shrink: true }}
+        value={content.value}
         onBlur={handleBlur}
-        isMulti={true}
+        onChange={handleContentChange}
+        onKeyPress={handleKeyPress}
+        margin="dense"
+        variant="outlined"
       />
       <button type="submit" className={classes.button} />
     </form>
   );
 }
 
-const TagsForm: React.ComponentType<
+const UpdateQuestionContent: React.ComponentType<
   OwnProps & withUpdateQuestionByIdMutation.InputProps
-> = compose(withUpdateQuestionByIdMutation.hoc)(TagsFormBase);
+> = compose(withUpdateQuestionByIdMutation.hoc)(UpdateQuestionContentBase);
 
-export default TagsForm;
+export default UpdateQuestionContent;

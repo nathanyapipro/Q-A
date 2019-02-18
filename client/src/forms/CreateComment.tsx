@@ -2,9 +2,9 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import * as withCreateCommentMutation from "../../queries/withCreateCommentMutation";
+import * as withCreateCommentMutation from "../queries/withCreateCommentMutation";
 import { compose } from "react-apollo";
-import { FormFieldMeta } from "../../types";
+import { FormFieldMeta } from "../types";
 
 interface OwnProps {
   questionId: number;
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function InputBase(props: Props) {
+function CreateCommentBase(props: Props) {
   const { questionId, createComment } = props;
   const classes = useStyles();
 
@@ -125,8 +125,8 @@ function InputBase(props: Props) {
   );
 }
 
-const Input: React.ComponentType<
+const CreateComment: React.ComponentType<
   OwnProps & withCreateCommentMutation.InputProps
-> = compose(withCreateCommentMutation.hoc)(InputBase);
+> = compose(withCreateCommentMutation.hoc)(CreateCommentBase);
 
-export default Input;
+export default CreateComment;

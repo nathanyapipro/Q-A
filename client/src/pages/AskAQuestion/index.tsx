@@ -1,7 +1,7 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
-import CreateQuestionForm from "./CreateQuestionForm";
+import CreateQuestionForm from "../../forms/CreateQuestion";
 
 interface OwnProps {}
 
