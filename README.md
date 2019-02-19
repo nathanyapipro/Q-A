@@ -35,11 +35,11 @@ Client:
     - [x] Static Render
     - [x] Inline Edit on Status, Content, Answer
     - [ ] Delete
-  - [ ] Comments
+  - [x] Comments
     - [x] Conversation
     - [x] Create Comment
-    - [ ] Comment Inline Edit
-    - [ ] Comment Delete
+    - [x] Comment Inline Edit
+    - [x] Comment Delete
 - [ ] Profile Page
   - [ ] User Info
   - [ ] Edit Username/Password
