@@ -5,7 +5,7 @@ import {
   QuestionByIdVariables,
   QuestionById,
   QuestionById_questionById
-} from "../types/apollo/QuestionByID";
+} from "../types/apollo/QuestionById";
 
 export const QUESTION_BY_ID_QUERY = gql`
   query QuestionById($questionId: Int!) {

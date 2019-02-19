@@ -13,6 +13,7 @@ create table app_public.answer (
 
 create index on "app_public"."answer"("user_id");
 create index on "app_public"."answer"("question_id");
+create index on "app_public"."answer"("created_at");
 
 alter table app_public.answer enable row level security;
 
@@ -27,7 +28,7 @@ grant update(content) on app_public.answer to fundamental_visitor;
 grant delete on app_public.answer to fundamental_visitor;
 
 comment on table app_public.answer is
-  E'answer in the application.';
+  E'@omit create\n answer in the application.';
 
 comment on column app_public.answer.id is
   E'@omit update\n unique identifier for the answer.';

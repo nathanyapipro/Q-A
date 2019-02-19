@@ -54,25 +54,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "row"
   },
   createdAt: {},
-  editButton: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: theme.palette.primary.main,
-    cursor: "pointer",
-    width: theme.spacing.unit * 6,
-    marginLeft: theme.spacing.unit
-  },
-  icon: {
-    height: "16px",
-    width: "16px",
-    marginRight: theme.spacing.unit
-  },
-  button: {
-    minHeight: "unset",
-    padding: 0,
-    marginLeft: theme.spacing.unit,
-    textTransform: "unset"
+  spacer: {
+    flexGrow: 1
   }
 }));
 
@@ -145,7 +128,9 @@ function CommentBase(props: Props) {
           >
             {fromNow(createdAt)}
           </Typography>
+          <div className={classes.spacer} />
           <Actions
+            isEditing={isEditing}
             commentId={commentId}
             questionId={questionId}
             onEdit={toggleEdit}

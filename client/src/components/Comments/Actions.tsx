@@ -1,4 +1,5 @@
 import * as React from "react";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -9,6 +10,7 @@ import * as withDeleteCommentByIdMutation from "../../queries/withDeleteCommentB
 
 interface OwnProps {
   commentId: number;
+  isEditing?: boolean;
   onEdit: () => void;
 }
 
@@ -17,7 +19,11 @@ type Props = OwnProps & withDeleteCommentByIdMutation.ChildProps;
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    "&$isEditing": {
+      visibility: "hidden",
+      pointerEvents: "none"
+    }
   },
   icon: {
     height: "16px",
@@ -29,13 +35,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: 0,
     marginLeft: theme.spacing.unit,
     textTransform: "unset"
-  }
+  },
+  isEditing: {}
 }));
 
 function CommentBase(props: Props) {
   const classes = useStyles();
 
-  const { commentId, deleteComment, onEdit } = props;
+  const { commentId, deleteComment, onEdit, isEditing } = props;
 
   function handleEditClick(_: React.MouseEvent) {
     onEdit();
@@ -52,7 +59,11 @@ function CommentBase(props: Props) {
   }
 
   return (
-    <div className={classes.container}>
+    <div
+      className={classNames(classes.container, {
+        [classes.isEditing]: Boolean(isEditing)
+      })}
+    >
       <Button
         variant="text"
         color="primary"

@@ -26,7 +26,8 @@ type Props = OwnProps &
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    flexFlow: "row-wrap"
   },
   button: {
     padding: `${theme.spacing.unit / 4}px ${theme.spacing.unit}px`,
@@ -102,13 +103,17 @@ function ActionsBase(props: Props) {
           className={classes.buttonIcon}
           color={hasVoted ? "primary" : "secondary"}
         />
-        <Typography color={hasVoted ? "primary" : "secondary"} variant="body1">
+        <Typography
+          noWrap
+          color={hasVoted ? "primary" : "secondary"}
+          variant="body1"
+        >
           {`${voteCount} Likes`}
         </Typography>
       </Button>
       <Button variant="text" color="secondary" className={classes.button}>
         <CommentIcon className={classes.buttonIcon} color="inherit" />
-        <Typography color="secondary" variant="body1">
+        <Typography noWrap color="secondary" variant="body1">
           {`${commentCount} Comments`}
         </Typography>
       </Button>
@@ -122,7 +127,7 @@ function ActionsBase(props: Props) {
             onClick={handleDeleteClick}
           >
             <DeleteIcon className={classes.buttonIcon} color="inherit" />
-            <Typography color="inherit" variant="body1">
+            <Typography noWrap color="inherit" variant="body1">
               Delete
             </Typography>
           </Button>

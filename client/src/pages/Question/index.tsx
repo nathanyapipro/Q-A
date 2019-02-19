@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   divider: {
     display: "flex",
-    minHeight: "100%",
     borderTop: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.up("sm")]: {
       borderTop: "unset",
+      minHeight: "100%",
       borderLeft: `1px solid ${theme.palette.divider}`
     }
   }

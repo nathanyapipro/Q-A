@@ -7,7 +7,7 @@ import {
 // import {
 //   QuestionByIdVariables,
 //   QuestionById
-// } from "../types/apollo/QuestionByID";
+// } from "../types/apollo/QuestionById";
 // import { QUESTION_BY_ID_QUERY } from "./withQuestionByIdQuery";
 
 export const UPDATE_QUESTION_BY_ID_MUTATION = gql`

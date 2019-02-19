@@ -145,7 +145,7 @@ function QuestionBase(props: Props) {
         }
       />
       <Field
-        label="Votes & Comments"
+        label="Actions"
         staticComponent={
           <Actions
             questionId={questionId}

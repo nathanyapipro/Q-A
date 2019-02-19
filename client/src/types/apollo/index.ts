@@ -39,10 +39,26 @@ export enum StatusType {
 }
 
 /**
+ * Represents an update to a `Answer`. Fields that are set will be updated.
+ */
+export interface AnswerPatch {
+  content?: string | null;
+}
+
+/**
  * Represents an update to a `Comment`. Fields that are set will be updated.
  */
 export interface CommentPatch {
   content?: string | null;
+}
+
+/**
+ * All input for the `createAnswer` mutation.
+ */
+export interface CreateAnswerInput {
+  clientMutationId?: string | null;
+  questionId: number;
+  content: string;
 }
 
 /**
@@ -61,6 +77,14 @@ export interface CreateQuestionInput {
   clientMutationId?: string | null;
   content: string;
   tagIds: (number | null)[];
+}
+
+/**
+ * All input for the `deleteAnswerById` mutation.
+ */
+export interface DeleteAnswerByIdInput {
+  clientMutationId?: string | null;
+  id: number;
 }
 
 /**
@@ -166,6 +190,15 @@ export interface QuestionPatchRecordInput {
 export interface QuestionToggleVoteInput {
   clientMutationId?: string | null;
   questionId: number;
+}
+
+/**
+ * All input for the `updateAnswerById` mutation.
+ */
+export interface UpdateAnswerByIdInput {
+  clientMutationId?: string | null;
+  patch: AnswerPatch;
+  id: number;
 }
 
 /**
