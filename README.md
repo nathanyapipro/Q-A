@@ -30,11 +30,11 @@ Client:
   - [x] Questions Table
     - [x] Pagination
     - [x] Toggle Vote
-- [ ] Question Page (question, comments)
-  - [ ] Question
+- [x] Question Page (question, comments)
+  - [x] Question
     - [x] Static Render
     - [x] Inline Edit on Status, Content, Answer
-    - [ ] Delete
+    - [x] Delete
   - [x] Comments
     - [x] Conversation
     - [x] Create Comment

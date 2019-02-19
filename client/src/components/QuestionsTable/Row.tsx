@@ -60,7 +60,7 @@ function RowBase(props: Props) {
   const { data } = props;
 
   const {
-    id,
+    id: questionId,
     content,
 
     createdAt
@@ -80,7 +80,7 @@ function RowBase(props: Props) {
   return (
     <TableRow className={classes.container} hover>
       <TableCell className={classes.tableCell}>
-        <Link className={classes.link} to={`/questions/${id}`}>
+        <Link className={classes.link} to={`/questions/${questionId}`}>
           <div className={classes.status}>
             <Status status={status} />
           </div>
@@ -88,7 +88,7 @@ function RowBase(props: Props) {
             <Content content={content} createdAt={createdAt} />
             <div className={classes.footer}>
               <Actions
-                id={id}
+                questionId={questionId}
                 voteCount={voteCount}
                 commentCount={commentCount}
                 hasVoted={hasVoted}

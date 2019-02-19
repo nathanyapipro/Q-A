@@ -52,7 +52,7 @@ function QuestionBase(props: Props) {
     return <noscript />;
   }
 
-  const { id, content, createdAt, updatedAt } = questionById;
+  const { id: questionId, content, createdAt, updatedAt } = questionById;
 
   const status = questionById.status && questionById.status.status;
   const statusId = questionById.status && questionById.status.id;
@@ -93,21 +93,30 @@ function QuestionBase(props: Props) {
         label="Status"
         staticComponent={<Status status={status} />}
         editComponent={
-          <UpdateQuestionStatusForm questionId={id} initialValue={statusId} />
+          <UpdateQuestionStatusForm
+            questionId={questionId}
+            initialValue={statusId}
+          />
         }
       />
       <Field
         label="Question"
         staticComponent={<Content content={content} />}
         editComponent={
-          <UpdateQuestionContentForm questionId={id} initialValue={content} />
+          <UpdateQuestionContentForm
+            questionId={questionId}
+            initialValue={content}
+          />
         }
       />
       <Field
         label="Tags"
         staticComponent={<Tags questionTags={questionTags} />}
         editComponent={
-          <UpdateQuestionTagsForm questionId={id} initialValue={tagIds} />
+          <UpdateQuestionTagsForm
+            questionId={questionId}
+            initialValue={tagIds}
+          />
         }
       />
       <Field
@@ -139,7 +148,7 @@ function QuestionBase(props: Props) {
         label="Votes & Comments"
         staticComponent={
           <Actions
-            id={id}
+            questionId={questionId}
             voteCount={voteCount}
             commentCount={commentCount}
             hasVoted={hasVoted}

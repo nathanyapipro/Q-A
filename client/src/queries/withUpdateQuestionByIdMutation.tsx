@@ -4,11 +4,11 @@ import {
   UpdateQuestionByIdVariables,
   UpdateQuestionById
 } from "../types/apollo/UpdateQuestionById";
-import {
-  QuestionByIdVariables,
-  QuestionById
-} from "../types/apollo/QuestionByID";
-import { QUESTION_BY_ID_QUERY } from "./withQuestionByIdQuery";
+// import {
+//   QuestionByIdVariables,
+//   QuestionById
+// } from "../types/apollo/QuestionByID";
+// import { QUESTION_BY_ID_QUERY } from "./withQuestionByIdQuery";
 
 export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
   mutation UpdateQuestionById(
@@ -81,42 +81,42 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
       return {
         updateQuestion: mutate
       };
-    },
-    options: ({ questionId }) => ({
-      update: (cache, { data }) => {
-        if (
-          data &&
-          data.updateQuestionById &&
-          data.updateQuestionById.question
-        ) {
-          const updatedQuestion = data.updateQuestionById.question;
-          const previousState = cache.readQuery<
-            QuestionById,
-            QuestionByIdVariables
-          >({
-            query: QUESTION_BY_ID_QUERY,
-            variables: {
-              questionId
-            }
-          });
-          if (previousState && previousState.questionById) {
-            const newState = {
-              ...previousState,
-              questionById: {
-                ...previousState.questionById,
-                ...updatedQuestion
-              }
-            };
-            cache.writeQuery<QuestionById, QuestionByIdVariables>({
-              query: QUESTION_BY_ID_QUERY,
-              data: { ...newState },
-              variables: {
-                questionId
-              }
-            });
-          }
-        }
-      }
-    })
+    }
+    // options: ({ questionId }) => ({
+    //   update: (cache, { data }) => {
+    //     if (
+    //       data &&
+    //       data.updateQuestionById &&
+    //       data.updateQuestionById.question
+    //     ) {
+    //       const updatedQuestion = data.updateQuestionById.question;
+    //       const previousState = cache.readQuery<
+    //         QuestionById,
+    //         QuestionByIdVariables
+    //       >({
+    //         query: QUESTION_BY_ID_QUERY,
+    //         variables: {
+    //           questionId
+    //         }
+    //       });
+    //       if (previousState && previousState.questionById) {
+    //         const newState = {
+    //           ...previousState,
+    //           questionById: {
+    //             ...previousState.questionById,
+    //             ...updatedQuestion
+    //           }
+    //         };
+    //         cache.writeQuery<QuestionById, QuestionByIdVariables>({
+    //           query: QUESTION_BY_ID_QUERY,
+    //           data: { ...newState },
+    //           variables: {
+    //             questionId
+    //           }
+    //         });
+    //       }
+    //     }
+    //   }
+    // })
   }
 );
