@@ -33,13 +33,16 @@ Client:
 - [x] Question Page (question, comments)
   - [x] Question
     - [x] Static Render
-    - [x] Inline Edit on Status, Content, Answer
-    - [x] Delete
+    - [x] Inline Edit on Status, Content, TagIds
+    - [ ] Create Answer
+    - [ ] Inline Edit Answer
+    - [ ] Delete Answer
+    - [x] Delete Question
   - [x] Comments
     - [x] Conversation
     - [x] Create Comment
-    - [x] Comment Inline Edit
-    - [x] Comment Delete
+    - [x] Inline Edit Comment
+    - [x] Delete Comment
 - [ ] Profile Page
   - [ ] User Info
   - [ ] Edit Username/Password
