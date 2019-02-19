@@ -52,7 +52,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 function AnswerBase(props: Props) {
   const classes = useStyles();
 
-  const { data, currentUserId } = props;
+  const {
+    data
+    // currentUserId
+  } = props;
 
   const { id: answerId, questionId, content, user, updatedAt } = data;
 
@@ -60,11 +63,9 @@ function AnswerBase(props: Props) {
     return <noscript />;
   }
 
-  const isOwner = user.id === currentUserId;
+  // const isOwner = user.id === currentUserId;
 
   const username = user.username;
-
-  console.log(answerId, questionId, content, username, isOwner, updatedAt);
 
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
 
