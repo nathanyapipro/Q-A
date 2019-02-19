@@ -8,7 +8,9 @@ import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import Answer from "./Answer";
 // import Paper from "@material-ui/core/Paper";
 
-interface OwnProps {}
+interface OwnProps {
+  isAdding: boolean;
+}
 
 type Props = OwnProps &
   withAnswersQuery.ChildProps &
@@ -26,7 +28,8 @@ function ResponsesBase(props: Props) {
 
   const {
     data: { nodes },
-    currentUser
+    currentUser,
+    isAdding
   } = props;
 
   if (!currentUser) {
@@ -36,7 +39,7 @@ function ResponsesBase(props: Props) {
   const { id: currentUserId } = currentUser;
 
   function renderAnswers() {
-    if (nodes.length === 0) {
+    if (nodes.length === 0 && !isAdding) {
       return (
         <Typography variant="subtitle1" component="p">
           None

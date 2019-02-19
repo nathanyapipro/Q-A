@@ -82,7 +82,7 @@ function AnswersBase(props: Props) {
           </Button>
         )}
       </div>
-      <Responses questionId={questionId} />
+      <Responses questionId={questionId} isAdding={isAdding} />
       {isAdding && (
         <CreateAnswerForm questionId={questionId} onExit={toggleAdd} />
       )}
