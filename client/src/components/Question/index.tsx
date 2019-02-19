@@ -13,6 +13,7 @@ import Field from "../Field";
 import UpdateQuestionContentForm from "../../forms/UpdateQuestionContent";
 import UpdateQuestionStatusForm from "../../forms/UpdateQuestionStatus";
 import UpdateQuestionTagsForm from "../../forms/UpdateQuestionTags";
+import Answers from "../Answers";
 
 interface OwnProps {}
 
@@ -80,12 +81,6 @@ function QuestionBase(props: Props) {
           return acc;
         }, [])
       : [];
-  const answer =
-    questionById.answers &&
-    questionById.answers.nodes &&
-    questionById.answers.nodes[0]
-      ? questionById.answers.nodes[0]
-      : undefined;
 
   return (
     <div className={classes.container}>
@@ -121,12 +116,7 @@ function QuestionBase(props: Props) {
       />
       <Field
         label="Answer"
-        staticComponent={
-          <Typography variant="subtitle1" component="p">
-            {answer ? answer.content : "None"}
-          </Typography>
-        }
-        // editComponent={<ContentForm initialValue={content} />}
+        staticComponent={<Answers questionId={questionId} />}
       />
       <Field
         label="Created"

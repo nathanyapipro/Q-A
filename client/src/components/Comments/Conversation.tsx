@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       overflowY: "auto"
     }
   },
-  emptyRow: {
+  none: {
     display: "flex",
     margin: `0px ${theme.spacing.unit * 2}px`,
     padding: theme.spacing.unit,
@@ -51,7 +51,7 @@ function ConversationBase(props: Props) {
   function renderComments() {
     if (nodes.length === 0) {
       return (
-        <Paper elevation={0} className={classes.emptyRow}>
+        <Paper elevation={0} className={classes.none}>
           <Typography variant="subtitle1" component="p">
             No Comments found ...
           </Typography>
