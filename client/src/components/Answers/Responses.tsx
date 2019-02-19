@@ -34,7 +34,6 @@ function ResponsesBase(props: Props) {
   }
 
   const { id: currentUserId } = currentUser;
-  console.log(currentUserId);
 
   function renderAnswers() {
     if (nodes.length === 0) {
