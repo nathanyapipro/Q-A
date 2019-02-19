@@ -7,6 +7,10 @@ import classNames from "classnames";
 import { Comments_comments_nodes } from "../../types/apollo/Comments";
 import { RoleType } from "../../types/apollo";
 import { fromNow } from "../../helpers/date";
+import Button from "@material-ui/core/Button";
+import EditIcon from "@material-ui/icons/Create";
+import DeleteIcon from "@material-ui/icons/Delete";
+import UpdateCommentForm from "../../forms/UpdateComment";
 
 interface OwnProps {
   data: Comments_comments_nodes;
@@ -47,7 +51,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   author: {
     fontWeight: 600
   },
-  createdAt: {}
+  footer: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  createdAt: {},
+  editButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: theme.palette.primary.main,
+    cursor: "pointer",
+    width: theme.spacing.unit * 6,
+    marginLeft: theme.spacing.unit
+  },
+  icon: {
+    height: "16px",
+    width: "16px",
+    marginRight: theme.spacing.unit
+  },
+  button: {
+    minHeight: "unset",
+    padding: 0,
+    marginLeft: theme.spacing.unit,
+    textTransform: "unset"
+  }
 }));
 
 function ConversationBase(props: Props) {
@@ -55,7 +83,7 @@ function ConversationBase(props: Props) {
 
   const { data, currentUserId } = props;
 
-  const { content, user, createdAt } = data;
+  const { id, content, user, createdAt } = data;
 
   if (!user) {
     return <noscript />;
@@ -70,6 +98,24 @@ function ConversationBase(props: Props) {
 
   if (user.role.role === RoleType.ANONYMOUS) {
     username = username.slice(10, 18);
+  }
+
+  const [isEditing, setIsEditing] = React.useState<boolean>(false);
+
+  function toggleEdit() {
+    setIsEditing(!isEditing);
+  }
+
+  function handleEditClick(_: React.MouseEvent) {
+    if (!isEditing) {
+      toggleEdit();
+    }
+  }
+
+  function handleDeleteClick(_: React.MouseEvent) {
+    // if (!isEditing) {
+    //   toggleEdit();
+    // }
   }
 
   return (
@@ -88,22 +134,54 @@ function ConversationBase(props: Props) {
           {username}
         </Typography>
         <Paper elevation={0} className={classNames(classes.paper)}>
-          <Typography
-            color="inherit"
-            variant="body2"
-            component="p"
-            className={classes.content}
-          >
-            {content}
-          </Typography>
+          {isEditing ? (
+            <UpdateCommentForm
+              commentId={id}
+              initialValue={content}
+              onExit={toggleEdit}
+            />
+          ) : (
+            <Typography
+              color="inherit"
+              variant="body2"
+              component="p"
+              className={classes.content}
+            >
+              {content}
+            </Typography>
+          )}
         </Paper>
-        <Typography
-          className={classes.createdAt}
-          component="span"
-          variant="caption"
-        >
-          {fromNow(createdAt)}
-        </Typography>
+        <div className={classes.footer}>
+          <Typography
+            className={classes.createdAt}
+            component="span"
+            variant="caption"
+          >
+            {fromNow(createdAt)}
+          </Typography>
+          <Button
+            variant="text"
+            color="primary"
+            onClick={handleEditClick}
+            className={classes.button}
+            size="small"
+            disableFocusRipple
+          >
+            <EditIcon color="inherit" className={classes.icon} />
+            Edit
+          </Button>
+          <Button
+            variant="text"
+            color="secondary"
+            onClick={handleDeleteClick}
+            className={classes.button}
+            size="small"
+            disableFocusRipple
+          >
+            <DeleteIcon color="inherit" className={classes.icon} />
+            delete
+          </Button>
+        </div>
       </div>
     </div>
   );

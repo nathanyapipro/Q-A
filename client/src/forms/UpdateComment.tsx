@@ -4,15 +4,15 @@ import TextField from "@material-ui/core/TextField";
 import { Theme } from "@material-ui/core/styles";
 import { FormFieldMeta } from "../types";
 import { compose } from "react-apollo";
-import * as withUpdateQuestionByIdMutation from "../queries/withUpdateQuestionByIdMutation";
+import * as withUpdateCommentByIdMutation from "../queries/withUpdateCommentByIdMutation";
 
 interface OwnProps {
-  questionId: number;
+  commentId: number;
   initialValue: string;
   onExit?: () => void;
 }
 
-type Props = OwnProps & withUpdateQuestionByIdMutation.ChildProps;
+type Props = OwnProps & withUpdateCommentByIdMutation.ChildProps;
 
 const useStyles = makeStyles((_: Theme) => ({
   form: {
@@ -28,10 +28,10 @@ const useStyles = makeStyles((_: Theme) => ({
   }
 }));
 
-function UpdateQuestionContentBase(props: Props) {
+function UpdateCommentBase(props: Props) {
   const classes = useStyles();
 
-  const { questionId, initialValue, updateQuestion, onExit } = props;
+  const { commentId, initialValue, updateComment, onExit } = props;
 
   const [content, setContent] = React.useState<FormFieldMeta<string>>({
     value: initialValue,
@@ -65,17 +65,17 @@ function UpdateQuestionContentBase(props: Props) {
     e && e.preventDefault();
     if (!content.error) {
       if (content.value !== initialValue) {
-        const response = await updateQuestion({
+        const response = await updateComment({
           variables: {
-            updateQuestionByIdInput: {
-              id: questionId,
+            updateCommentByIdInput: {
+              id: commentId,
               patch: {
                 content: content.value
               }
             }
           }
         });
-        if (response && response.data && response.data.updateQuestionById) {
+        if (response && response.data && response.data.updateCommentById) {
           if (onExit) {
             onExit();
           }
@@ -96,7 +96,7 @@ function UpdateQuestionContentBase(props: Props) {
         error={content.touched && content.error}
         autoFocus
         multiline
-        placeholder="Ask a Question ... "
+        placeholder="Write a Comment ... "
         value={content.value}
         onBlur={handleBlur}
         onChange={handleContentChange}
@@ -109,8 +109,8 @@ function UpdateQuestionContentBase(props: Props) {
   );
 }
 
-const UpdateQuestionContent: React.ComponentType<
-  OwnProps & withUpdateQuestionByIdMutation.InputProps
-> = compose(withUpdateQuestionByIdMutation.hoc)(UpdateQuestionContentBase);
+const UpdateComment: React.ComponentType<
+  OwnProps & withUpdateCommentByIdMutation.InputProps
+> = compose(withUpdateCommentByIdMutation.hoc)(UpdateCommentBase);
 
-export default UpdateQuestionContent;
+export default UpdateComment;

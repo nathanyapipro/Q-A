@@ -112,7 +112,6 @@ function CreateQuestionBase(props: Props) {
               multiline
               rows="8"
               placeholder="Ask a Question ... "
-              InputLabelProps={{ shrink: true }}
               value={content.value}
               onChange={handleContentChange}
               className={classes.field}

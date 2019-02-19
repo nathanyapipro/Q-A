@@ -1,9 +1,9 @@
 import * as React from "react";
-import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Create";
+import Button from "@material-ui/core/Button";
 
 interface OwnProps {
   label: string;
@@ -32,20 +32,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     pointerEvents: "none"
   },
-  editIcon: {
-    alignSelf: "flex-end",
+  icon: {
     height: "16px",
     width: "16px",
-    color: theme.palette.primary.main,
-    cursor: "pointer"
+    marginRight: theme.spacing.unit
   },
-  editable: {},
+  button: {
+    minHeight: "unset",
+    padding: 0,
+    marginLeft: theme.spacing.unit,
+    textTransform: "unset"
+  },
   content: {
     display: "flex",
-    flexDirection: "column",
-    "&$editable": {
-      cursor: "pointer"
-    }
+    flexDirection: "column"
   }
 }));
 
@@ -71,7 +71,7 @@ function FieldBase(props: Props) {
     setIsEditing(!isEditing);
   }
 
-  function handleSetEdit(_: React.MouseEvent) {
+  function handleEditClick(_: React.MouseEvent) {
     if (editable && !isEditing) {
       toggleEdit();
     }
@@ -88,19 +88,20 @@ function FieldBase(props: Props) {
           {label}
         </Typography>
         {editComponent && !isEditing && (
-          <EditIcon
-            color="secondary"
-            className={classes.editIcon}
-            onClick={handleSetEdit}
-          />
+          <Button
+            variant="text"
+            color="primary"
+            onClick={handleEditClick}
+            className={classes.button}
+            size="small"
+            disableFocusRipple
+          >
+            <EditIcon color="inherit" className={classes.icon} />
+            Edit
+          </Button>
         )}
       </div>
-      <div
-        className={classNames(classes.content, {
-          [classes.editable]: !isEditing && editable
-        })}
-        onClick={handleSetEdit}
-      >
+      <div className={classes.content}>
         {isEditing ? EditComponent : StaticComponent}
       </div>
     </div>

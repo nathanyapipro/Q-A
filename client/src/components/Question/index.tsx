@@ -14,9 +14,7 @@ import UpdateQuestionContentForm from "../../forms/UpdateQuestionContent";
 import UpdateQuestionStatusForm from "../../forms/UpdateQuestionStatus";
 import UpdateQuestionTagsForm from "../../forms/UpdateQuestionTags";
 
-interface OwnProps {
-  questionId: number;
-}
+interface OwnProps {}
 
 type Props = OwnProps & withQuestionByIdQuery.ChildProps;
 

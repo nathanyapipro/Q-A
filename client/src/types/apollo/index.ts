@@ -39,6 +39,13 @@ export enum StatusType {
 }
 
 /**
+ * Represents an update to a `Comment`. Fields that are set will be updated.
+ */
+export interface CommentPatch {
+  content?: string | null;
+}
+
+/**
  * All input for the `createComment` mutation.
  */
 export interface CreateCommentInput {
@@ -143,6 +150,15 @@ export interface QuestionPatchRecordInput {
 export interface QuestionToggleVoteInput {
   clientMutationId?: string | null;
   questionId: number;
+}
+
+/**
+ * All input for the `updateCommentById` mutation.
+ */
+export interface UpdateCommentByIdInput {
+  clientMutationId?: string | null;
+  patch: CommentPatch;
+  id: number;
 }
 
 /**

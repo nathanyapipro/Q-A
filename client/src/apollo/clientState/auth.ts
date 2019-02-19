@@ -51,5 +51,6 @@ export const Mutation = {
     } else {
       localStorage.removeItem("jwtToken");
     }
+    return null;
   }
 };
