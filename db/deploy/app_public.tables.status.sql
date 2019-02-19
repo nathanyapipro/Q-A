@@ -28,8 +28,8 @@ comment on column app_public.status.created_at is
 comment on column app_public.status.updated_at is
   E'@omit update\n timestamp of last update';
 
-create trigger _100_timestamps
-  after insert or update on app_public.status
+create trigger _100_status_timestamps
+  before insert or update on app_public.status
   for each row
   execute procedure app_private.tg__timestamps();
 

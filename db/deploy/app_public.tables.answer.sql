@@ -43,8 +43,8 @@ comment on column app_public.answer.updated_at is
   E'@omit update\n timestamp of last update';
 
 
-create trigger _100_timestamps
-  after insert or update on app_public.answer
+create trigger _100_answer_timestamps
+  before insert or update on app_public.answer
   for each row
   execute procedure app_private.tg__timestamps();
 

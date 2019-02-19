@@ -36,8 +36,8 @@ comment on column app_public.question_tag.created_at is
 comment on column app_public.question_tag.updated_at is
   E'@omit update\n timestamp of last update';
 
-create trigger _100_timestamps
-  after insert or update on app_public.question_tag
+create trigger _100_question_tag_timestamps
+  before insert or update on app_public.question_tag
   for each row
   execute procedure app_private.tg__timestamps();
 

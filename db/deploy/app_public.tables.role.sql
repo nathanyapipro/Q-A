@@ -28,8 +28,8 @@ comment on column app_public.role.created_at is
 comment on column app_public.role.updated_at is
   E'@omit update\n timestamp of last update';
 
-create trigger _100_timestamps
-  after insert or update on app_public.role
+create trigger _100_role_timestamps
+  before insert or update on app_public.role
   for each row
   execute procedure app_private.tg__timestamps();
 

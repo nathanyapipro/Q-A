@@ -39,8 +39,8 @@ comment on column app_public.user.created_at is
 comment on column app_public.user.updated_at is
   E'@omit update\n timestamp of last update';
 
-create trigger _100_timestamps
-  after insert or update on app_public.user
+create trigger _100_user_timestamps
+  before insert or update on app_public.user
   for each row
   execute procedure app_private.tg__timestamps();
 
