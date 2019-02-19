@@ -9,7 +9,7 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((_: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column"

@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { compose } from "react-apollo";
 import * as withAnswersQuery from "../../queries/withAnswersQuery";
 import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
-// import Comment from "./Comment";
+import Answer from "./Answer";
 // import Paper from "@material-ui/core/Paper";
 
 interface OwnProps {}
@@ -45,14 +45,11 @@ function ResponsesBase(props: Props) {
       );
     } else {
       return nodes.map(data => (
-        <Typography variant="subtitle1" component="p">
-          {data.content}
-        </Typography>
-        // <Comment
-        //   key={`comment-${data.id}`}
-        //   data={data}
-        //   currentUserId={currentUserId}
-        // />
+        <Answer
+          key={`answer-${data.id}`}
+          data={data}
+          currentUserId={currentUserId}
+        />
       ));
     }
   }

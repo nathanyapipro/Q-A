@@ -84,7 +84,7 @@ function CommentBase(props: Props) {
         disableFocusRipple
       >
         <DeleteIcon color="inherit" className={classes.icon} />
-        delete
+        Delete
       </Button>
     </div>
   );

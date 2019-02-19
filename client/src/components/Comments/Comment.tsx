@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "row"
   },
-  createdAt: {},
+  updatedAt: {},
   spacer: {
     flexGrow: 1
   }
@@ -64,7 +64,7 @@ function CommentBase(props: Props) {
 
   const { data, currentUserId } = props;
 
-  const { id: commentId, questionId, content, user, createdAt } = data;
+  const { id: commentId, questionId, content, user, updatedAt } = data;
 
   if (!user) {
     return <noscript />;
@@ -122,11 +122,11 @@ function CommentBase(props: Props) {
         </Paper>
         <div className={classes.footer}>
           <Typography
-            className={classes.createdAt}
+            className={classes.updatedAt}
             component="span"
             variant="caption"
           >
-            {fromNow(createdAt)}
+            {fromNow(updatedAt)}
           </Typography>
           <div className={classes.spacer} />
           <Actions
