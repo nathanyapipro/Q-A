@@ -99,8 +99,7 @@ function AppLayoutBase(props: Props) {
     handleNavClick(e);
     updateAuth({
       variables: {
-        jwtToken: null,
-        userId: null
+        jwtToken: null
       }
     });
   }

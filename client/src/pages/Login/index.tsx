@@ -43,8 +43,7 @@ function LoginBase({ loginAnonymous, updateAuth }: Props) {
           const { jwtToken } = response.data.loginAnonymous;
           updateAuth({
             variables: {
-              jwtToken,
-              userId: 1
+              jwtToken
             }
           });
         }

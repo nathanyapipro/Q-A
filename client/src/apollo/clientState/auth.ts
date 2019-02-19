@@ -3,13 +3,11 @@ import gql from "graphql-tag";
 export interface Auth {
   __typename: "Auth";
   jwtToken: string | null;
-  userId: number | null;
 }
 
 export const INITIAL_STATE: Auth = {
   __typename: "Auth",
-  jwtToken: localStorage.getItem("jwtToken"),
-  userId: null
+  jwtToken: localStorage.getItem("jwtToken")
 };
 
 export interface Defaults {
@@ -23,17 +21,17 @@ export const defaults = {
 export const AUTH_QUERY = gql`
   query Auth {
     auth @client {
+      __typename
       jwtToken
-      userId
     }
   }
 `;
 
-export type UpdateAuthVariables = Pick<Auth, "jwtToken" | "userId">;
+export type UpdateAuthVariables = Pick<Auth, "jwtToken">;
 
 export const UPDATE_AUTH_MUTATION = gql`
-  mutation UpdateAuthMutation($jwtToken: String, $userId: Int) {
-    updateAuth(jwtToken: $jwtToken, userId: $userId) @client
+  mutation UpdateAuthMutation($jwtToken: String) {
+    updateAuth(jwtToken: $jwtToken) @client
   }
 `;
 

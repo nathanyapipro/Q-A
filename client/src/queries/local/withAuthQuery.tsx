@@ -11,7 +11,7 @@ type Response = AuthResponse;
 
 type Variables = {};
 
-export type ChildProps = Pick<Auth, "jwtToken" | "userId">;
+export type ChildProps = Pick<Auth, "jwtToken">;
 
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
   AUTH_QUERY,
@@ -23,8 +23,7 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
       const { auth } = data;
 
       return {
-        jwtToken: auth ? auth.jwtToken : null,
-        userId: auth ? auth.userId : null
+        jwtToken: auth ? auth.jwtToken : null
       };
     }
   }
