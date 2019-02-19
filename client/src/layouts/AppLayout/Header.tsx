@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/styles";
 import { SIDEBAR_WIDTH } from "./Sidebar";
 import Typography from "@material-ui/core/Typography";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import { Theme } from "@material-ui/core/styles";
 import { QuestionRouteProps } from "../../pages/Question";
 
@@ -82,29 +82,21 @@ function HeaderBase(props: Props) {
             <Route
               path="/questions/:id"
               component={({
-                history,
                 match: {
                   params: { id }
                 }
-              }: QuestionRouteProps) => {
-                function handleBack() {
-                  history.push("/questions");
-                }
-                return (
-                  <React.Fragment>
-                    <IconButton
-                      className={classes.backButton}
-                      color="inherit"
-                      onClick={handleBack}
-                    >
+              }: QuestionRouteProps) => (
+                <React.Fragment>
+                  <Link to="/questions">
+                    <IconButton className={classes.backButton} color="inherit">
                       <ChevronLeftIcon color="inherit" />
                     </IconButton>
-                    <Typography variant="h6" color="inherit">
-                      {`Questions ${id}`}
-                    </Typography>
-                  </React.Fragment>
-                );
-              }}
+                  </Link>
+                  <Typography variant="h6" color="inherit">
+                    {`Questions ${id}`}
+                  </Typography>
+                </React.Fragment>
+              )}
             />
             <Route
               path="/profile"

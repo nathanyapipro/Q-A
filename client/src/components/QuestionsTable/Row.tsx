@@ -8,25 +8,28 @@ import Content from "../Question/Content";
 import Actions from "../Question/Actions";
 import Tags from "../Question/Tags";
 import Status from "../Question/Status";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 interface OwnProps {
   data: Questions_questions_nodes;
 }
 
-type Props = OwnProps & RouteComponentProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    cursor: "pointer",
     "&:nth-of-type(even)": {
       backgroundColor: theme.palette.grey[100]
     }
   },
-  tableCell: {
+  link: {
     padding: `${theme.spacing.unit * 2}px !important`,
     display: "flex",
     flexDirection: "column"
+  },
+  tableCell: {
+    display: "flex",
+    flexDirection: "column",
+    padding: 0
   },
   status: {
     display: "flex",
@@ -54,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function RowBase(props: Props) {
   const classes = useStyles();
-  const { data, history } = props;
+  const { data } = props;
 
   const {
     id,
@@ -74,34 +77,32 @@ function RowBase(props: Props) {
   const voteCount = data.voteCount ? data.voteCount : 0;
   const questionTags = data.questionTags.nodes;
 
-  function handleClick(_: React.MouseEvent<HTMLTableRowElement, MouseEvent>) {
-    history.push(`/questions/${id}`);
-  }
-
   return (
-    <TableRow className={classes.container} hover onClick={handleClick}>
+    <TableRow className={classes.container} hover>
       <TableCell className={classes.tableCell}>
-        <div className={classes.status}>
-          <Status status={status} />
-        </div>
-        <div className={classes.content}>
-          <Content content={content} createdAt={createdAt} />
-          <div className={classes.footer}>
-            <Actions
-              id={id}
-              voteCount={voteCount}
-              commentCount={commentCount}
-              hasVoted={hasVoted}
-            />
-            <div className={classes.spacer} />
-            <Tags questionTags={questionTags} />
+        <Link className={classes.link} to={`/questions/${id}`}>
+          <div className={classes.status}>
+            <Status status={status} />
           </div>
-        </div>
+          <div className={classes.content}>
+            <Content content={content} createdAt={createdAt} />
+            <div className={classes.footer}>
+              <Actions
+                id={id}
+                voteCount={voteCount}
+                commentCount={commentCount}
+                hasVoted={hasVoted}
+              />
+              <div className={classes.spacer} />
+              <Tags questionTags={questionTags} />
+            </div>
+          </div>
+        </Link>
       </TableCell>
     </TableRow>
   );
 }
 
-const Row = withRouter(RowBase);
+const Row = RowBase;
 
 export default Row;
