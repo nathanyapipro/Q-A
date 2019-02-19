@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth: "85%",
-    width: "max-content"
+    width: "100%"
   },
   paper: {
     display: "flex",

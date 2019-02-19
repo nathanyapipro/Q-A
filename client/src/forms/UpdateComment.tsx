@@ -17,9 +17,12 @@ type Props = OwnProps & withUpdateCommentByIdMutation.ChildProps;
 const useStyles = makeStyles((_: Theme) => ({
   form: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    flexGrow: 1
   },
   field: {
+    display: "flex",
+    flexDirection: "column",
     marginTop: 0,
     marginBottom: 0
   },
