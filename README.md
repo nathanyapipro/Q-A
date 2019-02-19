@@ -14,7 +14,12 @@ Database:
 Client:
 
 - [x] Typescript
-- [x] react-apollo GraphQL client setup
+- [x] Apollo
+  - [x] Basic Conguration
+  - [x] ClientState configuration
+  - [ ] Cache configuration (add cache resolvers to reduce queries executed if data is allready in cache)
+  - [ ] Handle Errors (Unauthorized)
+  - [ ] Reset Cache on Logout
 - [x] App Layout
   - [x] Header
   - [x] Sidebar
