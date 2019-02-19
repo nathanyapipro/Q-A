@@ -66,7 +66,7 @@ function AnswersBase(props: Props) {
           color="secondary"
           variant="caption"
         >
-          Ansers
+          Answers
         </Typography>
         {!isAdding && (
           <Button
