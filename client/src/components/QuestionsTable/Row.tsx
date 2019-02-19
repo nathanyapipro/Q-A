@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   tableCell: {
     display: "flex",
     flexDirection: "column",
-    padding: 0
+    padding: "0px !important"
   },
   status: {
     display: "flex",
