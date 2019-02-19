@@ -5,7 +5,9 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import classNames from "classnames";
 import { Answers_answers_nodes } from "../../types/apollo/Answers";
+import UpdateAnswerForm from "../../forms/UpdateAnswer";
 import { fromNow } from "../../helpers/date";
+import Actions from "./Actions";
 
 interface OwnProps {
   data: Answers_answers_nodes;
@@ -28,13 +30,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing.unit,
     backgroundColor: theme.palette.grey[200]
   },
+  content: {},
   answer: {
     wordWrap: "break-word",
     whiteSpace: "pre-wrap"
   },
-  updatedAt: {},
   author: {
     fontWeight: 600
+  },
+  footer: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  updatedAt: {},
+  spacer: {
+    flexGrow: 1
   }
 }));
 
@@ -55,11 +65,11 @@ function AnswerBase(props: Props) {
 
   console.log(answerId, questionId, content, username, isOwner, updatedAt);
 
-  // const [isEditing, setIsEditing] = React.useState<boolean>(false);
+  const [isEditing, setIsEditing] = React.useState<boolean>(false);
 
-  // function toggleEdit() {
-  //   setIsEditing(!isEditing);
-  // }
+  function toggleEdit() {
+    setIsEditing(!isEditing);
+  }
 
   return (
     <div className={classNames(classes.container)}>
@@ -72,21 +82,39 @@ function AnswerBase(props: Props) {
         {username}
       </Typography>
       <Paper elevation={0} className={classNames(classes.paper)}>
-        <Typography
-          variant="subtitle1"
-          component="pre"
-          className={classes.answer}
-        >
-          {content}
-        </Typography>
+        {isEditing ? (
+          <UpdateAnswerForm
+            answerId={answerId}
+            initialValue={content}
+            onExit={toggleEdit}
+          />
+        ) : (
+          <Typography
+            color="inherit"
+            variant="body2"
+            component="p"
+            className={classes.content}
+          >
+            {content}
+          </Typography>
+        )}
       </Paper>
-      <Typography
-        className={classes.updatedAt}
-        component="span"
-        variant="caption"
-      >
-        {fromNow(updatedAt)}
-      </Typography>
+      <div className={classes.footer}>
+        <Typography
+          className={classes.updatedAt}
+          component="span"
+          variant="caption"
+        >
+          {fromNow(updatedAt)}
+        </Typography>
+        <div className={classes.spacer} />
+        <Actions
+          isEditing={isEditing}
+          answerId={answerId}
+          questionId={questionId}
+          onEdit={toggleEdit}
+        />
+      </div>
     </div>
   );
 }

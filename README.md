@@ -34,9 +34,9 @@ Client:
   - [x] Question
     - [x] Static Render
     - [x] Inline Edit on Status, Content, TagIds
-    - [ ] Create Answer
-    - [ ] Inline Edit Answer
-    - [ ] Delete Answer
+    - [x] Create Answer
+    - [x] Inline Edit Answer
+    - [x] Delete Answer
     - [x] Delete Question
   - [x] Comments
     - [x] Conversation

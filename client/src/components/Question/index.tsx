@@ -114,10 +114,7 @@ function QuestionBase(props: Props) {
           />
         }
       />
-      <Field
-        label="Answers"
-        staticComponent={<Answers questionId={questionId} />}
-      />
+      <Answers questionId={questionId} />
       <Field
         label="Created"
         staticComponent={
