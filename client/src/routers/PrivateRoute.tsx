@@ -12,7 +12,6 @@ type Props = OwnProps & withAuthQuery.ChildProps;
 function PrivateRouteBase(props: Props) {
   const { component: Component, jwtToken, ...rest } = props;
   const isAuthenticated = Boolean(jwtToken);
-  // console.log(isAuthenticated);
   return (
     <Route
       {...rest}

@@ -64,6 +64,14 @@ export interface CreateQuestionInput {
 }
 
 /**
+ * All input for the `deleteCommentById` mutation.
+ */
+export interface DeleteCommentByIdInput {
+  clientMutationId?: string | null;
+  id: number;
+}
+
+/**
  * A filter to be used against Int fields. All fields are combined with a logical ‘and.’
  */
 export interface IntFilter {

@@ -27,9 +27,7 @@ export const UPDATE_COMMENT_BY_ID_MUTATION = gql`
   }
 `;
 
-export type InputProps = {
-  commentId: number;
-};
+export type InputProps = {};
 
 type Response = UpdateCommentById;
 

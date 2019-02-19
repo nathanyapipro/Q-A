@@ -1,29 +1,17 @@
 import { graphql, MutationFn } from "react-apollo";
+import gql from "graphql-tag";
 import {
-  CreateComment,
-  CreateCommentVariables
-} from "../types/apollo/CreateComment";
+  DeleteCommentByIdVariables,
+  DeleteCommentById
+} from "../types/apollo/DeleteCommentById";
 import { CommentsVariables, Comments } from "../types/apollo/Comments";
 import { COMMENTS_QUERY } from "./withCommentsQuery";
-import gql from "graphql-tag";
 
-export const CREATE_COMMENT_MUTATION = gql`
-  mutation CreateComment($createCommentInput: CreateCommentInput!) {
-    createComment(input: $createCommentInput) {
+export const DELETE_COMMENT_BY_ID_MUTATION = gql`
+  mutation DeleteCommentById($deleteCommentByIdInput: DeleteCommentByIdInput!) {
+    deleteCommentById(input: $deleteCommentByIdInput) {
       comment {
         id
-        questionId
-        user {
-          id
-          username
-          role {
-            id
-            role
-          }
-        }
-        content
-        updatedAt
-        createdAt
       }
     }
   }
@@ -33,16 +21,16 @@ export type InputProps = {
   questionId: number;
 };
 
-type Response = CreateComment;
+type Response = DeleteCommentById;
 
-type Variables = CreateCommentVariables;
+type Variables = DeleteCommentByIdVariables;
 
 export type ChildProps = {
-  createComment: MutationFn<Response, Variables>;
+  deleteComment: MutationFn<Response, Variables>;
 };
 
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
-  CREATE_COMMENT_MUTATION,
+  DELETE_COMMENT_BY_ID_MUTATION,
   {
     props: ({ mutate }) => {
       if (!mutate) {
@@ -50,13 +38,13 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
       }
 
       return {
-        createComment: mutate
+        deleteComment: mutate
       };
     },
     options: ({ questionId }) => ({
       update: (cache, { data }) => {
-        if (data && data.createComment && data.createComment.comment) {
-          const newComment = data.createComment.comment;
+        if (data && data.deleteCommentById && data.deleteCommentById.comment) {
+          const deletedComment = data.deleteCommentById.comment;
           const previousState = cache.readQuery<Comments, CommentsVariables>({
             query: COMMENTS_QUERY,
             variables: {
@@ -73,8 +61,10 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
               ...previousState,
               comments: {
                 ...previousState.comments,
-                nodes: [...previousState.comments.nodes, newComment],
-                totalCount: previousState.comments.totalCount + 1
+                nodes: previousState.comments.nodes.filter(
+                  comment => comment.id !== deletedComment.id
+                ),
+                totalCount: previousState.comments.totalCount - 1
               }
             };
             cache.writeQuery<Comments, CommentsVariables>({

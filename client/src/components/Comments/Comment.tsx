@@ -7,10 +7,8 @@ import classNames from "classnames";
 import { Comments_comments_nodes } from "../../types/apollo/Comments";
 import { RoleType } from "../../types/apollo";
 import { fromNow } from "../../helpers/date";
-import Button from "@material-ui/core/Button";
-import EditIcon from "@material-ui/icons/Create";
-import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateCommentForm from "../../forms/UpdateComment";
+import Actions from "./Actions";
 
 interface OwnProps {
   data: Comments_comments_nodes;
@@ -78,12 +76,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function ConversationBase(props: Props) {
+function CommentBase(props: Props) {
   const classes = useStyles();
 
   const { data, currentUserId } = props;
 
-  const { id, content, user, createdAt } = data;
+  const { id: commentId, questionId, content, user, createdAt } = data;
 
   if (!user) {
     return <noscript />;
@@ -106,18 +104,6 @@ function ConversationBase(props: Props) {
     setIsEditing(!isEditing);
   }
 
-  function handleEditClick(_: React.MouseEvent) {
-    if (!isEditing) {
-      toggleEdit();
-    }
-  }
-
-  function handleDeleteClick(_: React.MouseEvent) {
-    // if (!isEditing) {
-    //   toggleEdit();
-    // }
-  }
-
   return (
     <div className={classNames(classes.container)}>
       <div
@@ -136,7 +122,7 @@ function ConversationBase(props: Props) {
         <Paper elevation={0} className={classNames(classes.paper)}>
           {isEditing ? (
             <UpdateCommentForm
-              commentId={id}
+              commentId={commentId}
               initialValue={content}
               onExit={toggleEdit}
             />
@@ -159,34 +145,17 @@ function ConversationBase(props: Props) {
           >
             {fromNow(createdAt)}
           </Typography>
-          <Button
-            variant="text"
-            color="primary"
-            onClick={handleEditClick}
-            className={classes.button}
-            size="small"
-            disableFocusRipple
-          >
-            <EditIcon color="inherit" className={classes.icon} />
-            Edit
-          </Button>
-          <Button
-            variant="text"
-            color="secondary"
-            onClick={handleDeleteClick}
-            className={classes.button}
-            size="small"
-            disableFocusRipple
-          >
-            <DeleteIcon color="inherit" className={classes.icon} />
-            delete
-          </Button>
+          <Actions
+            commentId={commentId}
+            questionId={questionId}
+            onEdit={toggleEdit}
+          />
         </div>
       </div>
     </div>
   );
 }
 
-const Conversation = ConversationBase;
+const Comment = CommentBase;
 
-export default Conversation;
+export default Comment;
