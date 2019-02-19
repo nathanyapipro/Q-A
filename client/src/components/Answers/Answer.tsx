@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexGrow: 1,
     padding: theme.spacing.unit,
-    backgroundColor: theme.palette.grey[200]
+    backgroundColor: theme.palette.grey[200],
+    marginBottom: theme.spacing.unit / 4
   },
   content: {},
   answer: {

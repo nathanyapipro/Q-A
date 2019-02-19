@@ -35,7 +35,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     minHeight: "unset",
-    padding: 0,
+    minWidth: "unset",
+    padding: `0px ${theme.spacing.unit / 2}px`,
     marginLeft: theme.spacing.unit,
     textTransform: "unset"
   }
