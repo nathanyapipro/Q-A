@@ -4,6 +4,7 @@ BEGIN;
 
 create table app_public.question (
   id serial primary key,
+  workspace_id integer not null default 1 references app_public.workspace(id),
   content text not null,
   user_id integer not null references app_public.user(id),
   status_id integer not null references app_public.status(id) default 1,
@@ -12,6 +13,7 @@ create table app_public.question (
   updated_at timestamptz not null default now()
 );
 
+create index on "app_public"."question"("workspace_id");
 create index on "app_public"."question"("user_id");
 create index on "app_public"."question"("status_id");
 create index on "app_public"."question"("vote_count");
@@ -34,6 +36,8 @@ comment on table app_public.question is
 
 comment on column app_public.question.id is
   E'@omit update\n unique identifier for the question.';
+comment on column app_public.question.workspace_id is
+  E'@omit update\n workspace of the question.';
 comment on column app_public.question.content is
   E'content of the question.';
 comment on column app_public.question.user_id is
