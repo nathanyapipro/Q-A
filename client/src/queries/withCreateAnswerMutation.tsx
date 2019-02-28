@@ -17,6 +17,10 @@ export const CREATE_ANSWER_MUTATION = gql`
         user {
           id
           username
+          role {
+            id
+            role
+          }
         }
         createdAt
         updatedAt

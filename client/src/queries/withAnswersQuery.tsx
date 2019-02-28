@@ -17,6 +17,10 @@ export const ANSWERS_QUERY = gql`
         user {
           id
           username
+          role {
+            id
+            role
+          }
         }
         createdAt
         updatedAt

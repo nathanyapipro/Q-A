@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import classNames from "classnames";
 import { Answers_answers_nodes } from "../../types/apollo/Answers";
 import UpdateAnswerForm from "../../forms/UpdateAnswer";
+import { RoleType } from "../../types/apollo";
 import { fromNow } from "../../helpers/date";
 import Actions from "./Actions";
 
@@ -62,10 +63,17 @@ function AnswerBase(props: Props) {
   if (!user) {
     return <noscript />;
   }
+  if (!user.role) {
+    return <noscript />;
+  }
 
   // const isOwner = user.id === currentUserId;
 
-  const username = user.username;
+  let username = user.username;
+
+  if (user.role.role === RoleType.ANONYMOUS) {
+    username = username.slice(10, 18);
+  }
 
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
 

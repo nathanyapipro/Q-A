@@ -1,5 +1,4 @@
 /* tslint:disable */
-/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -129,6 +128,8 @@ export interface IntListFilter {
   notEqualTo?: (number | null)[] | null;
   distinctFrom?: (number | null)[] | null;
   notDistinctFrom?: (number | null)[] | null;
+  anyEqualTo?: number | null;
+  anyNotEqualTo?: number | null;
   lessThan?: (number | null)[] | null;
   lessThanOrEqualTo?: (number | null)[] | null;
   greaterThan?: (number | null)[] | null;
@@ -136,8 +137,6 @@ export interface IntListFilter {
   contains?: (number | null)[] | null;
   containedBy?: (number | null)[] | null;
   overlaps?: (number | null)[] | null;
-  anyEqualTo?: number | null;
-  anyNotEqualTo?: number | null;
   anyLessThan?: number | null;
   anyLessThanOrEqualTo?: number | null;
   anyGreaterThan?: number | null;

@@ -3683,6 +3683,26 @@
             "defaultValue": null
           },
           {
+            "name": "anyEqualTo",
+            "description": "Any array item is equal to the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "anyNotEqualTo",
+            "description": "Any array item is not equal to the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "lessThan",
             "description": "Less than the specified value.",
             "type": {
@@ -3777,26 +3797,6 @@
                 "name": "Int",
                 "ofType": null
               }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "anyEqualTo",
-            "description": "Any array item is equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "anyNotEqualTo",
-            "description": "Any array item is not equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
             },
             "defaultValue": null
           },
