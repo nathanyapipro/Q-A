@@ -20,10 +20,6 @@ export interface Tags_tags_nodes {
    * color of the tag.
    */
   color: string;
-  /**
-   * determines if the tag is available.
-   */
-  isEnabled: boolean;
 }
 
 export interface Tags_tags {

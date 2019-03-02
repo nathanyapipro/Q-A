@@ -982,6 +982,107 @@
             "deprecationReason": null
           },
           {
+            "name": "workspaceTags",
+            "description": "Reads and enables pagination through a set of `WorkspaceTag`.",
+            "args": [
+              {
+                "name": "first",
+                "description": "Only read the first `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "last",
+                "description": "Only read the last `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "offset",
+                "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor based pagination. May not be used with `last`.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "before",
+                "description": "Read all values in the set before (above) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "after",
+                "description": "Read all values in the set after (below) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `WorkspaceTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspaceTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              },
+              {
+                "name": "condition",
+                "description": "A condition to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagCondition",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "filter",
+                "description": "A filter to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagFilter",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTagsConnection",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "answerById",
             "description": null,
             "args": [
@@ -1360,6 +1461,74 @@
             "deprecationReason": null
           },
           {
+            "name": "workspaceTagById",
+            "description": null,
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTagByWorkspaceIdAndTagId",
+            "description": null,
+            "args": [
+              {
+                "name": "workspaceId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "tagId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "currentUser",
             "description": "Handy method to get the current user for use after authentication",
             "args": [],
@@ -1640,6 +1809,33 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "workspaceTag",
+            "description": "Reads a single `WorkspaceTag` using its globally unique `ID`.",
+            "args": [
+              {
+                "name": "nodeId",
+                "description": "The globally unique `ID` to be used in selecting a single `WorkspaceTag`.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -1711,12 +1907,12 @@
           },
           {
             "kind": "OBJECT",
-            "name": "Status",
+            "name": "WorkspaceTag",
             "ofType": null
           },
           {
             "kind": "OBJECT",
-            "name": "Vote",
+            "name": "Tag",
             "ofType": null
           },
           {
@@ -1726,7 +1922,12 @@
           },
           {
             "kind": "OBJECT",
-            "name": "Tag",
+            "name": "Status",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "Vote",
             "ofType": null
           },
           {
@@ -5388,6 +5589,111 @@
             "deprecationReason": null
           },
           {
+            "name": "workspaceTags",
+            "description": "Reads and enables pagination through a set of `WorkspaceTag`.",
+            "args": [
+              {
+                "name": "first",
+                "description": "Only read the first `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "last",
+                "description": "Only read the last `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "offset",
+                "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor based pagination. May not be used with `last`.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "before",
+                "description": "Read all values in the set before (above) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "after",
+                "description": "Read all values in the set after (below) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `WorkspaceTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspaceTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              },
+              {
+                "name": "condition",
+                "description": "A condition to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagCondition",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "filter",
+                "description": "A filter to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagFilter",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "WorkspaceTagsConnection",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "questions",
             "description": "Reads and enables pagination through a set of `Question`.",
             "args": [
@@ -5501,6 +5807,1257 @@
             "ofType": null
           }
         ],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "WorkspaceTagsOrderBy",
+        "description": "Methods to use when ordering `WorkspaceTag`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "NATURAL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WORKSPACE_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "WORKSPACE_ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TAG_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TAG_ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PRIMARY_KEY_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PRIMARY_KEY_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "WorkspaceTagCondition",
+        "description": "A condition to be used against `WorkspaceTag` object types. All fields are tested for equality and combined with a logical ‘and.’",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "Checks for equality with the object’s `id` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceId",
+            "description": "Checks for equality with the object’s `workspaceId` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": "Checks for equality with the object’s `tagId` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "WorkspaceTagFilter",
+        "description": "A filter to be used against `WorkspaceTag` object types. All fields are combined with a logical ‘and.’",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "Filter by the object’s `id` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceId",
+            "description": "Filter by the object’s `workspaceId` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": "Filter by the object’s `tagId` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "and",
+            "description": "Checks for all expressions in this list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagFilter",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "or",
+            "description": "Checks for any expressions in this list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagFilter",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "not",
+            "description": "Negates the expression.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "WorkspaceTagFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "WorkspaceTagsConnection",
+        "description": "A connection to a list of `WorkspaceTag` values.",
+        "fields": [
+          {
+            "name": "nodes",
+            "description": "A list of `WorkspaceTag` objects.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "WorkspaceTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "edges",
+            "description": "A list of edges which contains the `WorkspaceTag` and cursor to aid in pagination.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "WorkspaceTagsEdge",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pageInfo",
+            "description": "Information to aid in pagination.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "totalCount",
+            "description": "The count of *all* `WorkspaceTag` you could get from the connection.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "WorkspaceTag",
+        "description": "workspace_tag in the application.",
+        "fields": [
+          {
+            "name": "nodeId",
+            "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": " unique identifier for the workspace_tag.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceId",
+            "description": "id of the workspace.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tagId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "isEnabled",
+            "description": "determines if the workspace_tag is available.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": " timestamp of create",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": " timestamp of last update",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspace",
+            "description": "Reads a single `Workspace` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Workspace",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tag",
+            "description": "Reads a single `Tag` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Tag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [
+          {
+            "kind": "INTERFACE",
+            "name": "Node",
+            "ofType": null
+          }
+        ],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Tag",
+        "description": "tag of a question in the application.",
+        "fields": [
+          {
+            "name": "nodeId",
+            "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": " unique identifier for the tag.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "name",
+            "description": "name of the tag.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "color",
+            "description": "color of the tag.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": " timestamp of create",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": " timestamp of last update",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTags",
+            "description": "Reads and enables pagination through a set of `WorkspaceTag`.",
+            "args": [
+              {
+                "name": "first",
+                "description": "Only read the first `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "last",
+                "description": "Only read the last `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "offset",
+                "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor based pagination. May not be used with `last`.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "before",
+                "description": "Read all values in the set before (above) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "after",
+                "description": "Read all values in the set after (below) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `WorkspaceTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspaceTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              },
+              {
+                "name": "condition",
+                "description": "A condition to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagCondition",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "filter",
+                "description": "A filter to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "WorkspaceTagFilter",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "WorkspaceTagsConnection",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "questionTags",
+            "description": "Reads and enables pagination through a set of `QuestionTag`.",
+            "args": [
+              {
+                "name": "first",
+                "description": "Only read the first `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "last",
+                "description": "Only read the last `n` values of the set.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "offset",
+                "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor based pagination. May not be used with `last`.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "before",
+                "description": "Read all values in the set before (above) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "after",
+                "description": "Read all values in the set after (below) this cursor.",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Cursor",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `QuestionTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "QuestionTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              },
+              {
+                "name": "condition",
+                "description": "A condition to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "QuestionTagCondition",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "filter",
+                "description": "A filter to be used in determining which values should be returned by the collection.",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "QuestionTagFilter",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "QuestionTagsConnection",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [
+          {
+            "kind": "INTERFACE",
+            "name": "Node",
+            "ofType": null
+          }
+        ],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "QuestionTagsOrderBy",
+        "description": "Methods to use when ordering `QuestionTag`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "NATURAL",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "QUESTION_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "QUESTION_ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TAG_ID_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "TAG_ID_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PRIMARY_KEY_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "PRIMARY_KEY_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "QuestionTagCondition",
+        "description": "A condition to be used against `QuestionTag` object types. All fields are tested for equality and combined with a logical ‘and.’",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "Checks for equality with the object’s `id` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "questionId",
+            "description": "Checks for equality with the object’s `questionId` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": "Checks for equality with the object’s `tagId` field.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "QuestionTagFilter",
+        "description": "A filter to be used against `QuestionTag` object types. All fields are combined with a logical ‘and.’",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": "Filter by the object’s `id` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "questionId",
+            "description": "Filter by the object’s `questionId` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": "Filter by the object’s `tagId` field.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "IntFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "and",
+            "description": "Checks for all expressions in this list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "QuestionTagFilter",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "or",
+            "description": "Checks for any expressions in this list.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "QuestionTagFilter",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "not",
+            "description": "Negates the expression.",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "QuestionTagFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QuestionTagsConnection",
+        "description": "A connection to a list of `QuestionTag` values.",
+        "fields": [
+          {
+            "name": "nodes",
+            "description": "A list of `QuestionTag` objects.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "QuestionTag",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "edges",
+            "description": "A list of edges which contains the `QuestionTag` and cursor to aid in pagination.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "QuestionTagsEdge",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "pageInfo",
+            "description": "Information to aid in pagination.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PageInfo",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "totalCount",
+            "description": "The count of *all* `QuestionTag` you could get from the connection.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QuestionTag",
+        "description": " tags on a question in the application.",
+        "fields": [
+          {
+            "name": "nodeId",
+            "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": "unique identifier for the question_tag.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "questionId",
+            "description": "question being question_taged on.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tagId",
+            "description": "tag on the question",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": " timestamp of create",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": " timestamp of last update",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "question",
+            "description": "Reads a single `Question` that is related to this `QuestionTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Question",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tag",
+            "description": "Reads a single `Tag` that is related to this `QuestionTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Tag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [
+          {
+            "kind": "INTERFACE",
+            "name": "Node",
+            "ofType": null
+          }
+        ],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "QuestionTagsEdge",
+        "description": "A `QuestionTag` edge in the connection.",
+        "fields": [
+          {
+            "name": "cursor",
+            "description": "A cursor for use in pagination.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Cursor",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "node",
+            "description": "The `QuestionTag` at the end of the edge.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "QuestionTag",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "WorkspaceTagsEdge",
+        "description": "A `WorkspaceTag` edge in the connection.",
+        "fields": [
+          {
+            "name": "cursor",
+            "description": "A cursor for use in pagination.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Cursor",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "node",
+            "description": "The `WorkspaceTag` at the end of the edge.",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "WorkspaceTag",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },
@@ -6185,696 +7742,6 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Vote",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "QuestionTagsOrderBy",
-        "description": "Methods to use when ordering `QuestionTag`.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "NATURAL",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ID_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "ID_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "QUESTION_ID_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "QUESTION_ID_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "TAG_ID_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "TAG_ID_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "PRIMARY_KEY_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "PRIMARY_KEY_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "QuestionTagCondition",
-        "description": "A condition to be used against `QuestionTag` object types. All fields are tested for equality and combined with a logical ‘and.’",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": "Checks for equality with the object’s `id` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "questionId",
-            "description": "Checks for equality with the object’s `questionId` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "tagId",
-            "description": "Checks for equality with the object’s `tagId` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "QuestionTagFilter",
-        "description": "A filter to be used against `QuestionTag` object types. All fields are combined with a logical ‘and.’",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": "Filter by the object’s `id` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "questionId",
-            "description": "Filter by the object’s `questionId` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "tagId",
-            "description": "Filter by the object’s `tagId` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "and",
-            "description": "Checks for all expressions in this list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "QuestionTagFilter",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "or",
-            "description": "Checks for any expressions in this list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "QuestionTagFilter",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "not",
-            "description": "Negates the expression.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "QuestionTagFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "QuestionTagsConnection",
-        "description": "A connection to a list of `QuestionTag` values.",
-        "fields": [
-          {
-            "name": "nodes",
-            "description": "A list of `QuestionTag` objects.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "QuestionTag",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "edges",
-            "description": "A list of edges which contains the `QuestionTag` and cursor to aid in pagination.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "QuestionTagsEdge",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "pageInfo",
-            "description": "Information to aid in pagination.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "PageInfo",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "totalCount",
-            "description": "The count of *all* `QuestionTag` you could get from the connection.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "QuestionTag",
-        "description": " tags on a question in the application.",
-        "fields": [
-          {
-            "name": "nodeId",
-            "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": "unique identifier for the question_tag.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "questionId",
-            "description": "question being question_taged on.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tagId",
-            "description": "tag on the question",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": " timestamp of create",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Datetime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": " timestamp of last update",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Datetime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "question",
-            "description": "Reads a single `Question` that is related to this `QuestionTag`.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Question",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tag",
-            "description": "Reads a single `Tag` that is related to this `QuestionTag`.",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Tag",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [
-          {
-            "kind": "INTERFACE",
-            "name": "Node",
-            "ofType": null
-          }
-        ],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "Tag",
-        "description": "tag of a question in the application.",
-        "fields": [
-          {
-            "name": "nodeId",
-            "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": " unique identifier for the tag.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": "name of the tag.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "color",
-            "description": "color of the tag.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "isEnabled",
-            "description": "determines if the tag is available.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": " timestamp of create",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Datetime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": " timestamp of last update",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Datetime",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "questionTags",
-            "description": "Reads and enables pagination through a set of `QuestionTag`.",
-            "args": [
-              {
-                "name": "first",
-                "description": "Only read the first `n` values of the set.",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "last",
-                "description": "Only read the last `n` values of the set.",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "offset",
-                "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor based pagination. May not be used with `last`.",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "before",
-                "description": "Read all values in the set before (above) this cursor.",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Cursor",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "after",
-                "description": "Read all values in the set after (below) this cursor.",
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Cursor",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "orderBy",
-                "description": "The method to use when ordering `QuestionTag`.",
-                "type": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "ENUM",
-                      "name": "QuestionTagsOrderBy",
-                      "ofType": null
-                    }
-                  }
-                },
-                "defaultValue": "[PRIMARY_KEY_ASC]"
-              },
-              {
-                "name": "condition",
-                "description": "A condition to be used in determining which values should be returned by the collection.",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "QuestionTagCondition",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "filter",
-                "description": "A filter to be used in determining which values should be returned by the collection.",
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "QuestionTagFilter",
-                  "ofType": null
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "QuestionTagsConnection",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [
-          {
-            "kind": "INTERFACE",
-            "name": "Node",
-            "ofType": null
-          }
-        ],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "QuestionTagsEdge",
-        "description": "A `QuestionTag` edge in the connection.",
-        "fields": [
-          {
-            "name": "cursor",
-            "description": "A cursor for use in pagination.",
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "Cursor",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "node",
-            "description": "The `QuestionTag` at the end of the edge.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "QuestionTag",
                 "ofType": null
               }
             },
@@ -8955,6 +9822,33 @@
             "deprecationReason": null
           },
           {
+            "name": "createWorkspaceTag",
+            "description": "Creates a single `WorkspaceTag`.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CreateWorkspaceTagInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CreateWorkspaceTagPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updateAnswer",
             "description": "Updates a single `Answer` using its globally unique id and a patch.",
             "args": [
@@ -9300,6 +10194,87 @@
             "type": {
               "kind": "OBJECT",
               "name": "UpdateWorkspacePayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateWorkspaceTag",
+            "description": "Updates a single `WorkspaceTag` using its globally unique id and a patch.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpdateWorkspaceTagInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UpdateWorkspaceTagPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateWorkspaceTagById",
+            "description": "Updates a single `WorkspaceTag` using a unique key and a patch.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpdateWorkspaceTagByIdInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UpdateWorkspaceTagPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateWorkspaceTagByWorkspaceIdAndTagId",
+            "description": "Updates a single `WorkspaceTag` using a unique key and a patch.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpdateWorkspaceTagByWorkspaceIdAndTagIdInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UpdateWorkspaceTagPayload",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9765,6 +10740,87 @@
             "deprecationReason": null
           },
           {
+            "name": "deleteWorkspaceTag",
+            "description": "Deletes a single `WorkspaceTag` using its globally unique id.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DeleteWorkspaceTagInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "DeleteWorkspaceTagPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteWorkspaceTagById",
+            "description": "Deletes a single `WorkspaceTag` using a unique key.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DeleteWorkspaceTagByIdInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "DeleteWorkspaceTagPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteWorkspaceTagByWorkspaceIdAndTagId",
+            "description": "Deletes a single `WorkspaceTag` using a unique key.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DeleteWorkspaceTagByWorkspaceIdAndTagIdInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "DeleteWorkspaceTagPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createAnswer",
             "description": "Creates a answer.",
             "args": [
@@ -9867,6 +10923,33 @@
             "type": {
               "kind": "OBJECT",
               "name": "CreateUserPayload",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "enableAllTagsByWorkspaceId",
+            "description": "Creates all existing tags for given workspace.",
+            "args": [
+              {
+                "name": "input",
+                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "EnableAllTagsByWorkspaceIdInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "EnableAllTagsByWorkspaceIdPayload",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10272,16 +11355,6 @@
             "defaultValue": null
           },
           {
-            "name": "isEnabled",
-            "description": "determines if the tag is available.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "createdAt",
             "description": " timestamp of create",
             "type": {
@@ -10569,6 +11642,222 @@
             "type": {
               "kind": "OBJECT",
               "name": "WorkspacesEdge",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CreateWorkspaceTagInput",
+        "description": "All input for the create `WorkspaceTag` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceTag",
+            "description": "The `WorkspaceTag` to be created by this mutation.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "WorkspaceTagInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "WorkspaceTagInput",
+        "description": "An input for mutations affecting `WorkspaceTag`",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": " unique identifier for the workspace_tag.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceId",
+            "description": "id of the workspace.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "isEnabled",
+            "description": "determines if the workspace_tag is available.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": " timestamp of create",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Datetime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedAt",
+            "description": " timestamp of last update",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Datetime",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "CreateWorkspaceTagPayload",
+        "description": "The output of our create `WorkspaceTag` mutation.",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "description": "The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTag",
+            "description": "The `WorkspaceTag` that was created by this mutation.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "query",
+            "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Query",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspace",
+            "description": "Reads a single `Workspace` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Workspace",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tag",
+            "description": "Reads a single `Tag` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Tag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTagEdge",
+            "description": "An edge for our `WorkspaceTag`. May be used by Relay 1.",
+            "args": [
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `WorkspaceTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspaceTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTagsEdge",
               "ofType": null
             },
             "isDeprecated": false,
@@ -11093,16 +12382,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "isEnabled",
-            "description": "determines if the tag is available.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -11816,6 +13095,310 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UpdateWorkspaceTagInput",
+        "description": "All input for the `updateWorkspaceTag` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nodeId",
+            "description": "The globally unique `ID` which will identify a single `WorkspaceTag` to be updated.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "patch",
+            "description": "An object where the defined keys will be set on the `WorkspaceTag` being updated.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "WorkspaceTagPatch",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "WorkspaceTagPatch",
+        "description": "Represents an update to a `WorkspaceTag`. Fields that are set will be updated.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "workspaceId",
+            "description": "id of the workspace.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "isEnabled",
+            "description": "determines if the workspace_tag is available.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UpdateWorkspaceTagPayload",
+        "description": "The output of our update `WorkspaceTag` mutation.",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "description": "The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTag",
+            "description": "The `WorkspaceTag` that was updated by this mutation.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "query",
+            "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Query",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspace",
+            "description": "Reads a single `Workspace` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Workspace",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tag",
+            "description": "Reads a single `Tag` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Tag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTagEdge",
+            "description": "An edge for our `WorkspaceTag`. May be used by Relay 1.",
+            "args": [
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `WorkspaceTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspaceTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTagsEdge",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UpdateWorkspaceTagByIdInput",
+        "description": "All input for the `updateWorkspaceTagById` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "patch",
+            "description": "An object where the defined keys will be set on the `WorkspaceTag` being updated.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "WorkspaceTagPatch",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "id",
+            "description": " unique identifier for the workspace_tag.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UpdateWorkspaceTagByWorkspaceIdAndTagIdInput",
+        "description": "All input for the `updateWorkspaceTagByWorkspaceIdAndTagId` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "patch",
+            "description": "An object where the defined keys will be set on the `WorkspaceTag` being updated.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "WorkspaceTagPatch",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceId",
+            "description": "id of the workspace.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               }
             },
@@ -13173,6 +14756,239 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "DeleteWorkspaceTagInput",
+        "description": "All input for the `deleteWorkspaceTag` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nodeId",
+            "description": "The globally unique `ID` which will identify a single `WorkspaceTag` to be deleted.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "DeleteWorkspaceTagPayload",
+        "description": "The output of our delete `WorkspaceTag` mutation.",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "description": "The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTag",
+            "description": "The `WorkspaceTag` that was deleted by this mutation.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deletedWorkspaceTagId",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "query",
+            "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Query",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspace",
+            "description": "Reads a single `Workspace` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Workspace",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "tag",
+            "description": "Reads a single `Tag` that is related to this `WorkspaceTag`.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Tag",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceTagEdge",
+            "description": "An edge for our `WorkspaceTag`. May be used by Relay 1.",
+            "args": [
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `WorkspaceTag`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspaceTagsOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspaceTagsEdge",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "DeleteWorkspaceTagByIdInput",
+        "description": "All input for the `deleteWorkspaceTagById` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "id",
+            "description": " unique identifier for the workspace_tag.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "DeleteWorkspaceTagByWorkspaceIdAndTagIdInput",
+        "description": "All input for the `deleteWorkspaceTagByWorkspaceIdAndTagId` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceId",
+            "description": "id of the workspace.",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tagId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "CreateAnswerInput",
         "description": "All input for the `createAnswer` mutation.",
         "fields": null,
@@ -13784,6 +15600,119 @@
             "type": {
               "kind": "OBJECT",
               "name": "UsersEdge",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "EnableAllTagsByWorkspaceIdInput",
+        "description": "All input for the `enableAllTagsByWorkspaceId` mutation.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "clientMutationId",
+            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "workspaceId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "EnableAllTagsByWorkspaceIdPayload",
+        "description": "The output of our `enableAllTagsByWorkspaceId` mutation.",
+        "fields": [
+          {
+            "name": "clientMutationId",
+            "description": "The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspace",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Workspace",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "query",
+            "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Query",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "workspaceEdge",
+            "description": "An edge for our `Workspace`. May be used by Relay 1.",
+            "args": [
+              {
+                "name": "orderBy",
+                "description": "The method to use when ordering `Workspace`.",
+                "type": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "ENUM",
+                      "name": "WorkspacesOrderBy",
+                      "ofType": null
+                    }
+                  }
+                },
+                "defaultValue": "[PRIMARY_KEY_ASC]"
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "WorkspacesEdge",
               "ofType": null
             },
             "isDeprecated": false,

@@ -16,6 +16,7 @@ app_public.functions.create_user 2019-01-11T15:11:40Z Nathan Yapi <nathanyapi@Ma
 app_public.functions.login_anonymous 2019-01-11T15:21:37Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # function login_anonymous
 app_public.tables.workspace 2019-01-13T21:05:30Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # table workspace
 app_public.tables.tag 2019-01-13T21:05:38Z Nathan Yapi <nathanyapi.pro@gmail.com> # table tag
+app_public.tables.workspace_tag 2019-01-13T21:05:39Z Nathan Yapi <nathanyapi.pro@gmail.com> # table workspace_tag
 app_public.tables.status 2019-01-13T21:12:40Z Nathan Yapi <nathanyapi.pro@gmail.com> # table status
 app_public.tables.question 2019-01-13T21:12:48Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question
 app_public.tables.vote 2019-01-13T21:39:37Z Nathan Yapi <nathanyapi.pro@gmail.com> # table vote
@@ -30,3 +31,4 @@ app_public.functions.current_user 2019-02-17T04:21:00Z Nathan Yapi <nathanyapi.p
 app_public.functions.create_comment 2019-02-17T19:01:24Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_comment
 app_public.functions.update_question_by_id 2019-02-18T19:09:05Z Nathan Yapi <nathanyapi.pro@gmail.com> # function update_question_by_id
 app_public.functions.create_answer 2019-02-19T10:02:46Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_answer
+app_public.functions.enable_all_tags_by_workspace_id 2019-03-02T09:39:12Z Nathan Yapi <nathanyapi.pro@gmail.com> # function enable_all_tags_by_workspace_id

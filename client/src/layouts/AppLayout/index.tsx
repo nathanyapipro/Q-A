@@ -71,7 +71,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     flexShrink: 0,
     flexGrow: 1,
-    padding: theme.spacing.unit * 3
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`,
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing.unit * 3
+    }
   },
   navLink: {
     cursor: "pointer",

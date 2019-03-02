@@ -10,7 +10,6 @@ export const TAGS_QUERY = gql`
         id
         name
         color
-        isEnabled
       }
     }
   }
