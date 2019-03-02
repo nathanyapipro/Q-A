@@ -94,6 +94,7 @@ export interface CreateCommentInput {
  */
 export interface CreateQuestionInput {
   clientMutationId?: string | null;
+  workspaceId: number;
   content: string;
   tagIds: (number | null)[];
 }

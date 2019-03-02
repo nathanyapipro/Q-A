@@ -56,11 +56,6 @@ function UpdateQuestionTagsBase(props: Props) {
     }
   }
 
-  function handleBlur(e: React.FormEvent) {
-    e.stopPropagation();
-    handleSubmit(e);
-  }
-
   async function handleSubmit(e?: React.FormEvent) {
     e && e.preventDefault();
     if (!tagIds.error) {
@@ -96,7 +91,6 @@ function UpdateQuestionTagsBase(props: Props) {
         error={tagIds.touched && tagIds.error}
         onChange={handleSetTagIds}
         onKeyDown={handleKeyPress}
-        onBlur={handleBlur}
         isMulti={true}
       />
       <button type="submit" className={classes.button} />

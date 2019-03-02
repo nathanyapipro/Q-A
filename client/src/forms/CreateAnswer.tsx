@@ -57,15 +57,19 @@ function CreateAnswerBase(props: Props) {
   async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e && e.preventDefault();
     if (!content.error) {
-      const response = await createAnswer({
-        variables: {
-          createAnswerInput: {
-            questionId,
-            content: content.value
+      if (content.value !== "") {
+        const response = await createAnswer({
+          variables: {
+            createAnswerInput: {
+              questionId,
+              content: content.value
+            }
           }
+        });
+        if (response && response.data && response.data.createAnswer) {
+          onExit();
         }
-      });
-      if (response && response.data && response.data.createAnswer) {
+      } else {
         onExit();
       }
     }

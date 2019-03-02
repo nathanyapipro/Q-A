@@ -52,7 +52,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: theme.spacing.unit / 2
   },
   singleValue: {
-    fontSize: "1rem"
+    fontSize: "1rem",
+    paddingLeft: theme.spacing.unit / 2
   },
   noOptionsMessage: {
     padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`

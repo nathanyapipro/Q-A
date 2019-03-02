@@ -49,6 +49,7 @@ function OrderByAutocompleteBase(props: Props) {
   return (
     <Autocomplete
       {...rest}
+      isSearchable={false}
       options={options}
       value={valueToValueType(value)}
       onChange={handleChange}

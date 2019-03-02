@@ -3,7 +3,6 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 import { makeStyles } from "@material-ui/styles";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import Divider from "@material-ui/core/Divider";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import { SIDEBAR_WIDTH } from "./Sidebar";
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar
   },
   workspaceSelect: {
-    padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 1}px`,
+    padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 2}px`,
     color: theme.palette.primary.contrastText,
     "& input, p, svg, label": {
       color: `${theme.palette.primary.contrastText} !important`
@@ -122,10 +121,10 @@ function AppLayoutBase(props: Props) {
   }
 
   function handleSetWorkspace(item: number | Array<number>) {
-    const value = item ? (item instanceof Array ? item : [item]) : [];
+    const value = item ? (item instanceof Array ? item[0] : item) : 1;
     updateWorkspace({
       variables: {
-        workspaceId: value[0]
+        workspaceId: value
       }
     });
   }
@@ -139,7 +138,6 @@ function AppLayoutBase(props: Props) {
             <div className={classes.header}>
               <img className={classes.logo} src={logo} alt="Logo" />
             </div>
-            <Divider />
             <div className={classes.workspaceSelect}>
               <WorkspaceAutocomplete
                 value={[workspaceId]}

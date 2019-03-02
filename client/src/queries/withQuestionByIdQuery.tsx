@@ -11,6 +11,7 @@ export const QUESTION_BY_ID_QUERY = gql`
   query QuestionById($questionId: Int!) {
     questionById(id: $questionId) {
       id
+      workspaceId
       content
       userId
       status {

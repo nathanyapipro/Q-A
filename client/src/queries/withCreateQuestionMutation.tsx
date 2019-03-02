@@ -10,6 +10,7 @@ export const CREATE_QUESTION_MUTATION = gql`
     createQuestion(input: $createQuestionInput) {
       question {
         id
+        workspaceId
         content
         userId
         status {

@@ -12,7 +12,9 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { FormFieldMeta } from "../types";
 import Field from "../components/Field";
 
-interface OwnProps {}
+interface OwnProps {
+  workspaceId: number;
+}
 
 type Props = OwnProps &
   withCreateQuestionMutation.ChildProps &
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function CreateQuestionBase(props: Props) {
-  const { createQuestion, history } = props;
+  const { createQuestion, history, workspaceId } = props;
   const classes = useStyles();
 
   const [content, setContent] = React.useState<FormFieldMeta<string>>({
@@ -78,7 +80,8 @@ function CreateQuestionBase(props: Props) {
         variables: {
           createQuestionInput: {
             content: content.value,
-            tagIds: tagIds.value
+            tagIds: tagIds.value,
+            workspaceId
           }
         }
       });

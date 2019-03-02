@@ -56,11 +56,6 @@ function UpdateQuestionStatusBase(props: Props) {
     }
   }
 
-  function handleBlur(e: React.FormEvent) {
-    e.stopPropagation();
-    handleSubmit(e);
-  }
-
   async function handleSubmit(e?: React.FormEvent) {
     e && e.preventDefault();
     if (!statusId.error) {
@@ -96,7 +91,6 @@ function UpdateQuestionStatusBase(props: Props) {
         error={statusId.touched && statusId.error}
         onChange={handleSetStatusIds}
         onKeyDown={handleKeyPress}
-        onBlur={handleBlur}
         isMulti={false}
       />
       <button type="submit" className={classes.button} />

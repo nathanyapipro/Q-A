@@ -71,6 +71,10 @@ export interface Questions_questions_nodes {
    */
   id: number;
   /**
+   *  workspace of the question.
+   */
+  workspaceId: number;
+  /**
    * content of the question.
    */
   content: string;
@@ -132,5 +136,6 @@ export interface QuestionsVariables {
   first: number;
   offset: number;
   orderBy?: QuestionsOrderBy[] | null;
+  workspaceId: number;
   filter?: QuestionFilter | null;
 }

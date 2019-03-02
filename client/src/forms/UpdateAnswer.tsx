@@ -59,11 +59,6 @@ function UpdateAnswerBase(props: Props) {
     }
   }
 
-  function handleBlur(e: React.FormEvent<HTMLFormElement>) {
-    e.stopPropagation();
-    handleSubmit(e);
-  }
-
   async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e && e.preventDefault();
     if (!content.error) {
@@ -101,7 +96,6 @@ function UpdateAnswerBase(props: Props) {
         multiline
         placeholder="Write a Answer ... "
         value={content.value}
-        onBlur={handleBlur}
         onChange={handleContentChange}
         onKeyPress={handleKeyPress}
         margin="dense"

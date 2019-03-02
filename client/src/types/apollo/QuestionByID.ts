@@ -115,6 +115,10 @@ export interface QuestionById_questionById {
    */
   id: number;
   /**
+   *  workspace of the question.
+   */
+  workspaceId: number;
+  /**
    * content of the question.
    */
   content: string;

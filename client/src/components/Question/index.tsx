@@ -13,11 +13,16 @@ import Field from "../Field";
 import UpdateQuestionContentForm from "../../forms/UpdateQuestionContent";
 import UpdateQuestionStatusForm from "../../forms/UpdateQuestionStatus";
 import UpdateQuestionTagsForm from "../../forms/UpdateQuestionTags";
+import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
 import Answers from "../Answers";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 interface OwnProps {}
 
-type Props = OwnProps & withQuestionByIdQuery.ChildProps;
+type Props = OwnProps &
+  withQuestionByIdQuery.ChildProps &
+  withWorkspaceQuery.ChildProps &
+  RouteComponentProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -47,10 +52,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function QuestionBase(props: Props) {
   const classes = useStyles();
-  const { questionById } = props;
+  const { questionById, workspaceId, history } = props;
 
   if (!questionById) {
     return <noscript />;
+  }
+
+  if (workspaceId !== questionById.workspaceId) {
+    history.push("/questions");
   }
 
   const { id: questionId, content, createdAt, updatedAt } = questionById;
@@ -147,7 +156,11 @@ function QuestionBase(props: Props) {
 }
 
 const Question: React.ComponentType<
-  OwnProps & withQuestionByIdQuery.InputProps
-> = compose(withQuestionByIdQuery.hoc)(QuestionBase);
+  OwnProps & withQuestionByIdQuery.InputProps & withWorkspaceQuery.InputProps
+> = compose(
+  withQuestionByIdQuery.hoc,
+  withWorkspaceQuery.hoc,
+  withRouter
+)(QuestionBase);
 
 export default Question;

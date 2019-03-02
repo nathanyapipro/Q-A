@@ -71,6 +71,10 @@ export interface CreateQuestion_createQuestion_question {
    */
   id: number;
   /**
+   *  workspace of the question.
+   */
+  workspaceId: number;
+  /**
    * content of the question.
    */
   content: string;

@@ -13,10 +13,12 @@ import { QuestionsVariables } from "../../types/apollo/Questions";
 import Paper from "@material-ui/core/Paper";
 import { Theme } from "@material-ui/core/styles";
 import { QuestionsOrderBy } from "../../types/apollo";
+import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
+import { compose } from "react-apollo";
 
 interface OwnProps {}
 
-type Props = OwnProps;
+type Props = OwnProps & withWorkspaceQuery.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -62,8 +64,9 @@ export interface QueryType {
   first: number;
 }
 
-function QuestionsBase(_: Props) {
+function QuestionsBase(props: Props) {
   const classes = useStyles();
+  const { workspaceId } = props;
 
   const [isFiltersOpen, setIsFiltersOpen] = React.useState<boolean>(false);
   const [query, setQuery] = React.useState<QueryType>({
@@ -95,6 +98,7 @@ function QuestionsBase(_: Props) {
         in: query.statusIds.length > 0 ? query.statusIds : null
       }
     },
+    workspaceId,
     orderBy: query.orderBy
   };
 
@@ -151,6 +155,8 @@ function QuestionsBase(_: Props) {
   );
 }
 
-const Questions = QuestionsBase;
+const Questions: React.ComponentType<
+  OwnProps & withWorkspaceQuery.InputProps
+> = compose(withWorkspaceQuery.hoc)(QuestionsBase);
 
 export default Questions;

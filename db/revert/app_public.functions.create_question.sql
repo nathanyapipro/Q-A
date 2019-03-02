@@ -2,6 +2,6 @@
 
 BEGIN;
 
-drop function app_public.create_question(content text, tag_ids integer[]);
+drop function app_public.create_question(workspace_id integer, content text, tag_ids integer[]);
 
 COMMIT;

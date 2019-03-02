@@ -56,11 +56,6 @@ function UpdateQuestionContentBase(props: Props) {
     }
   }
 
-  function handleBlur(e: React.FormEvent<HTMLFormElement>) {
-    e.stopPropagation();
-    handleSubmit(e);
-  }
-
   async function handleSubmit(e?: React.FormEvent<HTMLFormElement>) {
     e && e.preventDefault();
     if (!content.error) {
@@ -98,7 +93,6 @@ function UpdateQuestionContentBase(props: Props) {
         multiline
         placeholder="Ask a Question ... "
         value={content.value}
-        onBlur={handleBlur}
         onChange={handleContentChange}
         onKeyPress={handleKeyPress}
         margin="dense"

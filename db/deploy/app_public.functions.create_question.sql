@@ -3,6 +3,7 @@
 BEGIN;
 
 create function app_public.create_question(
+  workspace_id integer,
   content text,
   tag_ids integer[]
 )
@@ -12,8 +13,8 @@ as $$
     question app_public.question;
     tag_id int;
   begin
-    insert into app_public.question(content, status_id, user_id)
-      values(content, 1, app_public.current_user_id())
+    insert into app_public.question(workspace_id, content, status_id, user_id)
+      values(workspace_id, content, 1, app_public.current_user_id())
       returning * into question;
 
     foreach tag_id in array tag_ids loop
@@ -25,7 +26,7 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
-comment on function app_public.create_question(content text, tag_ids integer[]) is
+comment on function app_public.create_question(workspace_id integer, content text, tag_ids integer[]) is
   E'Creates a question.';
 
 COMMIT;

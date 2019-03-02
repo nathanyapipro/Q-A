@@ -12,6 +12,7 @@ export const QUESTIONS_QUERY = gql`
     $first: Int!
     $offset: Int!
     $orderBy: [QuestionsOrderBy!]
+    $workspaceId: Int!
     $filter: QuestionFilter
   ) {
     questions(
@@ -19,9 +20,11 @@ export const QUESTIONS_QUERY = gql`
       offset: $offset
       orderBy: $orderBy
       filter: $filter
+      condition: { workspaceId: $workspaceId }
     ) {
       nodes {
         id
+        workspaceId
         content
         userId
         status {
@@ -72,12 +75,13 @@ export type ChildProps = {
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
   QUESTIONS_QUERY,
   {
-    options: ({ offset, first, filter, orderBy }) => ({
+    options: ({ offset, first, filter, orderBy, workspaceId }) => ({
       variables: {
         offset,
         first,
         filter,
-        orderBy
+        orderBy,
+        workspaceId
       },
       fetchPolicy: "cache-and-network"
     }),

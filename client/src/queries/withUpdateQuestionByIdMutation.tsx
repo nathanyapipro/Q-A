@@ -17,6 +17,7 @@ export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
     updateQuestionById(input: $updateQuestionByIdInput) {
       question {
         id
+        workspaceId
         content
         userId
         status {
