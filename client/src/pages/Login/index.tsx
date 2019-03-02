@@ -28,7 +28,8 @@ function LoginBase({ loginAnonymous, updateAuth }: Props) {
 
   async function handleSuccess({ googleId, profileObj }: any) {
     if (profileObj && profileObj.email) {
-      const isValid = profileObj.email.match(/@elementai.com/g).length === 1;
+      const { email } = profileObj;
+      const isValid = email.match(/@elementai.com/g).length === 1;
 
       if (isValid && googleId) {
         const response = await loginAnonymous({
@@ -43,7 +44,8 @@ function LoginBase({ loginAnonymous, updateAuth }: Props) {
           const { jwtToken } = response.data.loginAnonymous;
           updateAuth({
             variables: {
-              jwtToken
+              jwtToken,
+              email
             }
           });
         }

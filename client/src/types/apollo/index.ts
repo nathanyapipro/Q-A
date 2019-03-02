@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -21,7 +22,9 @@ export enum QuestionsOrderBy {
   USER_ID_ASC = "USER_ID_ASC",
   USER_ID_DESC = "USER_ID_DESC",
   VOTE_COUNT_ASC = "VOTE_COUNT_ASC",
-  VOTE_COUNT_DESC = "VOTE_COUNT_DESC"
+  VOTE_COUNT_DESC = "VOTE_COUNT_DESC",
+  WORKSPACE_ID_ASC = "WORKSPACE_ID_ASC",
+  WORKSPACE_ID_DESC = "WORKSPACE_ID_DESC"
 }
 
 export enum RoleType {
@@ -42,6 +45,23 @@ export enum StatusType {
  */
 export interface AnswerPatch {
   content?: string | null;
+}
+
+/**
+ * A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
+ */
+export interface BooleanFilter {
+  isNull?: boolean | null;
+  equalTo?: boolean | null;
+  notEqualTo?: boolean | null;
+  distinctFrom?: boolean | null;
+  notDistinctFrom?: boolean | null;
+  in?: boolean[] | null;
+  notIn?: boolean[] | null;
+  lessThan?: boolean | null;
+  lessThanOrEqualTo?: boolean | null;
+  greaterThan?: boolean | null;
+  greaterThanOrEqualTo?: boolean | null;
 }
 
 /**
@@ -128,8 +148,6 @@ export interface IntListFilter {
   notEqualTo?: (number | null)[] | null;
   distinctFrom?: (number | null)[] | null;
   notDistinctFrom?: (number | null)[] | null;
-  anyEqualTo?: number | null;
-  anyNotEqualTo?: number | null;
   lessThan?: (number | null)[] | null;
   lessThanOrEqualTo?: (number | null)[] | null;
   greaterThan?: (number | null)[] | null;
@@ -137,6 +155,8 @@ export interface IntListFilter {
   contains?: (number | null)[] | null;
   containedBy?: (number | null)[] | null;
   overlaps?: (number | null)[] | null;
+  anyEqualTo?: number | null;
+  anyNotEqualTo?: number | null;
   anyLessThan?: number | null;
   anyLessThanOrEqualTo?: number | null;
   anyGreaterThan?: number | null;
@@ -165,9 +185,11 @@ export interface LoginInput {
  */
 export interface QuestionFilter {
   id?: IntFilter | null;
+  workspaceId?: IntFilter | null;
   userId?: IntFilter | null;
   statusId?: IntFilter | null;
   voteCount?: IntFilter | null;
+  hasVoted?: BooleanFilter | null;
   tagIds?: IntListFilter | null;
   and?: QuestionFilter[] | null;
   or?: QuestionFilter[] | null;

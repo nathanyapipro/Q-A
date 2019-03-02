@@ -11,6 +11,9 @@ create table app_public.workspace (
   updated_at timestamptz not null default now()
 );
 
+create index on "app_public"."workspace"("is_public");
+create index on "app_public"."workspace"("users");
+
 alter table app_public.workspace enable row level security;
 
 create policy select_all on app_public.workspace for select using (true);

@@ -173,6 +173,7 @@ const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
 function Menu(props: MenuProps<OptionType>) {
   return (
     <Paper
+      id="autocomplete-menu"
       square
       className={props.selectProps.classes.paper}
       {...props.innerProps}

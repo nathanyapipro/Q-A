@@ -76,7 +76,7 @@ function postgraphileOptions() {
       // with non-database-owner privileges.
       pgSkipInstallingWatchFixtures: true,
       connectionFilterAllowNullInput: true,
-      connectionFilterAllowedFieldTypes: ["Int"]
+      connectionFilterAllowedFieldTypes: ["Int", "String", "Boolean"]
     },
 
     /*

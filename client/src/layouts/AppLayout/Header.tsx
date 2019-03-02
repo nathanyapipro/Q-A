@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   menuButton: {
-    marginRight: 20,
     [theme.breakpoints.up("sm")]: {
       display: "none"
     }

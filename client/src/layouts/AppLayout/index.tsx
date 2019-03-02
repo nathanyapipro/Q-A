@@ -17,6 +17,8 @@ import { compose } from "react-apollo";
 import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
 import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import { Theme } from "@material-ui/core/styles";
+import WorkspaceAutocomplete from "../../components/Autocomplete/Workspace";
+
 interface OwnProps {
   children: React.ReactChild;
 }
@@ -35,6 +37,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: "center",
     padding: `0px ${theme.spacing.unit * 3}px`,
     ...theme.mixins.toolbar
+  },
+  workspaceSelect: {
+    padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 2}px`,
+    color: theme.palette.primary.contrastText,
+    "& input, p, svg, label": {
+      color: `${theme.palette.primary.contrastText} !important`
+    },
+    "& fieldset": {
+      borderColor: `${theme.palette.primary.contrastText} !important`
+    }
   },
   logo: {
     height: theme.spacing.unit * 4
@@ -112,6 +124,13 @@ function AppLayoutBase(props: Props) {
           <React.Fragment>
             <div className={classes.header}>
               <img className={classes.logo} src={logo} alt="Logo" />
+            </div>
+            <div className={classes.workspaceSelect}>
+              <WorkspaceAutocomplete
+                value={1}
+                label="Workspace"
+                onChange={console.log}
+              />
             </div>
             <Divider />
             <NavLink

@@ -1,30 +1,29 @@
 import { graphql } from "react-apollo";
 import {
-  AUTH_QUERY,
-  Defaults as AuthResponse,
-  Auth
-} from "../../apollo/clientState/auth";
+  WORKSPACE_QUERY,
+  Defaults as WorkspaceResponse,
+  Workspace
+} from "../../apollo/clientState/workspace";
 
 export type InputProps = {};
 
-type Response = AuthResponse;
+type Response = WorkspaceResponse;
 
 type Variables = {};
 
-export type ChildProps = Pick<Auth, "jwtToken">;
+export type ChildProps = Pick<Workspace, "workspaceId">;
 
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
-  AUTH_QUERY,
+  WORKSPACE_QUERY,
   {
     props: ({ data }) => {
       if (!data) {
         throw new Error("No data prop found");
       }
-      const { auth } = data;
+      const { workspace } = data;
 
       return {
-        jwtToken: auth ? auth.jwtToken : null,
-        email: auth ? auth.email : null
+        workspaceId: workspace ? workspace.workspaceId : 1
       };
     }
   }
