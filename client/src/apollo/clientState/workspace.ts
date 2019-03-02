@@ -31,7 +31,7 @@ export type UpdateWorkspaceVariables = Pick<Workspace, "workspaceId">;
 
 export const UPDATE_WORKSPACE_MUTATION = gql`
   mutation UpdateWorkspaceMutation($workspaceId: Int!) {
-    updateWorkspace(workspaceId: workspaceId) @client
+    updateWorkspace(workspaceId: $workspaceId) @client
   }
 `;
 

@@ -16,6 +16,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { compose } from "react-apollo";
 import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
 import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
+import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
+import * as withUpdateWorkspaceMutation from "../../queries/local/withUpdateWorkspaceMutation";
 import { Theme } from "@material-ui/core/styles";
 import WorkspaceAutocomplete from "../../components/Autocomplete/Workspace";
 
@@ -23,7 +25,10 @@ interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = OwnProps & withUpdateAuthMutation.ChildProps;
+type Props = OwnProps &
+  withUpdateAuthMutation.ChildProps &
+  withWorkspaceQuery.ChildProps &
+  withUpdateWorkspaceMutation.ChildProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -39,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     ...theme.mixins.toolbar
   },
   workspaceSelect: {
-    padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 2}px`,
+    padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 1}px`,
     color: theme.palette.primary.contrastText,
     "& input, p, svg, label": {
       color: `${theme.palette.primary.contrastText} !important`
@@ -92,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function AppLayoutBase(props: Props) {
-  const { children, updateAuth } = props;
+  const { children, updateAuth, updateWorkspace, workspaceId } = props;
   const classes = useStyles();
 
   const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
@@ -116,6 +121,15 @@ function AppLayoutBase(props: Props) {
     });
   }
 
+  function handleSetWorkspace(item: number | Array<number>) {
+    const value = item ? (item instanceof Array ? item : [item]) : [];
+    updateWorkspace({
+      variables: {
+        workspaceId: value[0]
+      }
+    });
+  }
+
   return (
     <div className={classes.container}>
       <ErrorBoundary>
@@ -125,14 +139,14 @@ function AppLayoutBase(props: Props) {
             <div className={classes.header}>
               <img className={classes.logo} src={logo} alt="Logo" />
             </div>
+            <Divider />
             <div className={classes.workspaceSelect}>
               <WorkspaceAutocomplete
-                value={1}
+                value={[workspaceId]}
                 label="Workspace"
-                onChange={console.log}
+                onChange={handleSetWorkspace}
               />
             </div>
-            <Divider />
             <NavLink
               onClick={handleNavClick}
               exact
@@ -201,10 +215,16 @@ function AppLayoutBase(props: Props) {
 }
 
 const AppLayout: React.ComponentType<
-  OwnProps & withUpdateAuthMutation.InputProps & withCurrentUserQuery.InputProps
+  OwnProps &
+    withUpdateAuthMutation.InputProps &
+    withCurrentUserQuery.InputProps &
+    withWorkspaceQuery.InputProps &
+    withUpdateWorkspaceMutation.InputProps
 > = compose(
   withUpdateAuthMutation.hoc,
-  withCurrentUserQuery.hoc
+  withCurrentUserQuery.hoc,
+  withWorkspaceQuery.hoc,
+  withUpdateWorkspaceMutation.hoc
 )(AppLayoutBase);
 
 export default AppLayout;
