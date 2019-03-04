@@ -8,18 +8,6 @@ import { CreateCommentInput, RoleType } from "./index";
 // GraphQL mutation operation: CreateComment
 // ====================================================
 
-export interface CreateComment_createComment_comment_user_role {
-  __typename: "Role";
-  /**
-   * unique identifier for the role.
-   */
-  id: number;
-  /**
-   * role of the role.
-   */
-  role: RoleType;
-}
-
 export interface CreateComment_createComment_comment_user {
   __typename: "User";
   /**
@@ -31,9 +19,9 @@ export interface CreateComment_createComment_comment_user {
    */
   username: string;
   /**
-   * Reads a single `Role` that is related to this `User`.
+   * role of the user.
    */
-  role: CreateComment_createComment_comment_user_role | null;
+  role: RoleType;
 }
 
 export interface CreateComment_createComment_comment {

@@ -2,6 +2,6 @@
 
 BEGIN;
 
-drop function app_public.create_user(username text, password text, role_id integer);
+drop function app_public.create_user(username text, password text, role app_public.role_type);
 
 COMMIT;

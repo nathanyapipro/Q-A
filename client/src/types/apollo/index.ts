@@ -30,7 +30,7 @@ export enum QuestionsOrderBy {
 export enum RoleType {
   ADMIN = "ADMIN",
   ANONYMOUS = "ANONYMOUS",
-  RESPONDER = "RESPONDER"
+  MANAGER = "MANAGER"
 }
 
 export enum StatusType {

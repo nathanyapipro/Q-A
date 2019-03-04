@@ -15,10 +15,7 @@ export const UPDATE_ANSWER_BY_ID_MUTATION = gql`
         user {
           id
           username
-          role {
-            id
-            role
-          }
+          role
         }
         createdAt
         updatedAt

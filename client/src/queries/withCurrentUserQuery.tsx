@@ -11,10 +11,7 @@ export const CURRENT_USER_QUERY = gql`
     currentUser {
       id
       username
-      role {
-        id
-        role
-      }
+      role
     }
   }
 `;

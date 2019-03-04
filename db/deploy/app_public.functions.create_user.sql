@@ -5,15 +5,15 @@ BEGIN;
 create function app_public.create_user(
   username text,
   password text,
-  role_id integer
+  role app_public.role_type
 ) returns app_public.user as $$
 declare
   v_user app_public.user;
 begin
 
   -- Insert the new user
-  insert into app_public.user (username, role_id) values
-    (username, role_id)
+  insert into app_public.user (username, role) values
+    (username, role)
     returning * into v_user;
 
   -- Store the password
@@ -27,7 +27,7 @@ begin
 end;
 $$ language plpgsql volatile set search_path from current;
 
-comment on function app_public.create_user(username text, password text, role_id integer) is
+comment on function app_public.create_user(username text, password text, role app_public.role_type) is
   E'Creates a user account.';
 
 COMMIT;

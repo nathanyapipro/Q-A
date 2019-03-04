@@ -14,10 +14,7 @@ export const UPDATE_COMMENT_BY_ID_MUTATION = gql`
         user {
           id
           username
-          role {
-            id
-            role
-          }
+          role
         }
         content
         updatedAt

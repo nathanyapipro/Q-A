@@ -8,18 +8,6 @@ import { UpdateAnswerByIdInput, RoleType } from "./index";
 // GraphQL mutation operation: UpdateAnswerById
 // ====================================================
 
-export interface UpdateAnswerById_updateAnswerById_answer_user_role {
-  __typename: "Role";
-  /**
-   * unique identifier for the role.
-   */
-  id: number;
-  /**
-   * role of the role.
-   */
-  role: RoleType;
-}
-
 export interface UpdateAnswerById_updateAnswerById_answer_user {
   __typename: "User";
   /**
@@ -31,9 +19,9 @@ export interface UpdateAnswerById_updateAnswerById_answer_user {
    */
   username: string;
   /**
-   * Reads a single `Role` that is related to this `User`.
+   * role of the user.
    */
-  role: UpdateAnswerById_updateAnswerById_answer_user_role | null;
+  role: RoleType;
 }
 
 export interface UpdateAnswerById_updateAnswerById_answer {

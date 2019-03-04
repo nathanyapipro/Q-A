@@ -8,18 +8,6 @@ import { RoleType } from "./index";
 // GraphQL query operation: CurrentUser
 // ====================================================
 
-export interface CurrentUser_currentUser_role {
-  __typename: "Role";
-  /**
-   * unique identifier for the role.
-   */
-  id: number;
-  /**
-   * role of the role.
-   */
-  role: RoleType;
-}
-
 export interface CurrentUser_currentUser {
   __typename: "User";
   /**
@@ -31,9 +19,9 @@ export interface CurrentUser_currentUser {
    */
   username: string;
   /**
-   * Reads a single `Role` that is related to this `User`.
+   * role of the user.
    */
-  role: CurrentUser_currentUser_role | null;
+  role: RoleType;
 }
 
 export interface CurrentUser {

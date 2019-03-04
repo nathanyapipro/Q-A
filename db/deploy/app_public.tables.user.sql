@@ -2,16 +2,16 @@
 
 BEGIN;
 
+create type app_public.role_type as enum ('ADMIN', 'MANAGER', 'ANONYMOUS');
+
 create table app_public.user (
   id serial primary key,
   username text not null unique,
-  role_id integer not null references app_public.role(id),
+  role app_public.role_type not null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 alter table app_public.user enable row level security;
-
-create index on "app_public"."user"("role_id");
 
 create policy select_all on app_public.user for select using (true);
 create policy update_self on app_public.user for update using (id = app_public.current_user_id());
@@ -32,7 +32,7 @@ comment on column app_public.user.id is
   E'@omit update\n unique identifier for the user.';
 comment on column app_public.user.username is
   E'public-facing username (or ''handle'') of the user.';
-comment on column app_public.user.role_id is
+comment on column app_public.user.role is
   E'role of the user.';
 comment on column app_public.user.created_at is
   E'@omit update\n timestamp of create';

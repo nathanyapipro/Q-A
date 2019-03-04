@@ -21,10 +21,7 @@ export const COMMENTS_QUERY = gql`
         user {
           id
           username
-          role {
-            id
-            role
-          }
+          role
         }
         content
         updatedAt

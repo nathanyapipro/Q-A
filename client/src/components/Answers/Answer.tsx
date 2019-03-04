@@ -63,15 +63,12 @@ function AnswerBase(props: Props) {
   if (!user) {
     return <noscript />;
   }
-  if (!user.role) {
-    return <noscript />;
-  }
 
   // const isOwner = user.id === currentUserId;
 
   let username = user.username;
 
-  if (user.role.role === RoleType.ANONYMOUS) {
+  if (user.role === RoleType.ANONYMOUS) {
     username = username.slice(10, 18);
   }
 

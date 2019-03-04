@@ -89,6 +89,6 @@ insert into app_public.tag (id, name, color) values
   (78, '@Sabina Dessertine', '#3cbb53')
   ;
 
-alter sequence app_public.role_id_seq restart with 100;
+alter sequence app_public.tag_id_seq restart with 100;
 
 COMMIT;

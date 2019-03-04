@@ -8,18 +8,6 @@ import { RoleType } from "./index";
 // GraphQL query operation: Answers
 // ====================================================
 
-export interface Answers_answers_nodes_user_role {
-  __typename: "Role";
-  /**
-   * unique identifier for the role.
-   */
-  id: number;
-  /**
-   * role of the role.
-   */
-  role: RoleType;
-}
-
 export interface Answers_answers_nodes_user {
   __typename: "User";
   /**
@@ -31,9 +19,9 @@ export interface Answers_answers_nodes_user {
    */
   username: string;
   /**
-   * Reads a single `Role` that is related to this `User`.
+   * role of the user.
    */
-  role: Answers_answers_nodes_user_role | null;
+  role: RoleType;
 }
 
 export interface Answers_answers_nodes {

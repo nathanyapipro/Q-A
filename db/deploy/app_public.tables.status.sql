@@ -39,6 +39,6 @@ insert into app_public.status (id, status) values
   (3, 'ANSWERED'),
   (4, 'DISMISSED');
 
-alter sequence app_public.role_id_seq restart with 5;
+alter sequence app_public.status_id_seq restart with 5;
 
 COMMIT;
