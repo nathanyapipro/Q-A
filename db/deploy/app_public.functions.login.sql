@@ -21,7 +21,7 @@ begin
     where user_secret.user_id = v_user.id;
 
     if v_user_secret.password_hash = crypt(password, v_user_secret.password_hash) then
-      return (v_user.id)::app_private.jwt_token;
+      return (v_user.id, 'fundamental_visitor')::app_private.jwt_token;
     else
       return null;
     end if;
