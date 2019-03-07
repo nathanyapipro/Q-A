@@ -4,7 +4,7 @@ BEGIN;
 
 create table app_public.workspace_tag (
   id serial primary key,
-  workspace_id integer not null references app_public.workspace(id),
+  workspace_id integer not null references app_public.workspace(id) on delete cascade,
   tag_id integer not null references app_public.tag(id),
   is_enabled boolean not null default true,
   created_at timestamptz not null default now(),
