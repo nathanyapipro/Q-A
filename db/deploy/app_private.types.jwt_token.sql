@@ -4,7 +4,7 @@ BEGIN;
 
 create type app_private.jwt_token as (
   user_id integer,
-  role text
+  user_role text
 );
 
 COMMIT;

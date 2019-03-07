@@ -15,7 +15,8 @@ app_public.functions.create_user 2019-01-11T15:11:40Z Nathan Yapi <nathanyapi@Ma
 app_public.functions.login_anonymous 2019-01-11T15:21:37Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # function login_anonymous
 app_public.tables.workspace 2019-01-13T21:05:30Z Nathan Yapi <nathanyapi@MacBook-Pro-8.local> # table workspace
 app_public.tables.tag 2019-01-13T21:05:38Z Nathan Yapi <nathanyapi.pro@gmail.com> # table tag
-app_public.tables.workspace_tag 2019-01-13T21:05:39Z Nathan Yapi <nathanyapi.pro@gmail.com> # table workspace_tag
+app_public.workspace_user 2019-01-13T21:05:39Z Nathan Yapi <nathanyapi.pro@gmail.com> # table workspace_user
+app_public.tables.workspace_tag 2019-01-13T21:05:42Z Nathan Yapi <nathanyapi.pro@gmail.com> # table workspace_tag
 app_public.tables.status 2019-01-13T21:12:40Z Nathan Yapi <nathanyapi.pro@gmail.com> # table status
 app_public.tables.question 2019-01-13T21:12:48Z Nathan Yapi <nathanyapi.pro@gmail.com> # table question
 app_public.tables.vote 2019-01-13T21:39:37Z Nathan Yapi <nathanyapi.pro@gmail.com> # table vote

@@ -33,6 +33,8 @@ comment on column app_public.workspace_tag.id is
   E'@omit update\n unique identifier for the workspace_tag.';
 comment on column app_public.workspace_tag.workspace_id is
   E'id of the workspace.';
+comment on column app_public.workspace_tag.tag_id is
+  E'id of the tag.';
 comment on column app_public.workspace_tag.is_enabled is
   E'determines if the workspace_tag is available.';
 comment on column app_public.workspace_tag.created_at is
