@@ -4,15 +4,25 @@ import { Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "react-apollo";
 import * as withCommentsQuery from "../../queries/withCommentsQuery";
-import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import Comment from "./Comment";
 import Paper from "@material-ui/core/Paper";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { CurrentUser } from "../../states/global/reducer";
+import { $currentUser } from "../../states/global/selectors";
 
 interface OwnProps {}
 
+type ReduxStateProps = {
+  currentUser: CurrentUser | undefined;
+};
+
+interface ReduxDispatchProps {}
+
 type Props = OwnProps &
   withCommentsQuery.ChildProps &
-  withCurrentUserQuery.ChildProps;
+  ReduxStateProps &
+  ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -71,11 +81,20 @@ function ConversationBase(props: Props) {
   return <div className={classes.container}>{renderComments()}</div>;
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    currentUser: $currentUser(state)
+  };
+};
+
 const Conversation: React.ComponentType<
-  OwnProps & withCommentsQuery.InputProps & withCurrentUserQuery.InputProps
+  OwnProps & withCommentsQuery.InputProps
 > = compose(
   withCommentsQuery.hoc,
-  withCurrentUserQuery.hoc
+  connect(
+    mapStateToProps,
+    {}
+  )
 )(ConversationBase);
 
 export default Conversation;

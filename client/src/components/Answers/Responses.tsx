@@ -4,17 +4,27 @@ import { Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { compose } from "react-apollo";
 import * as withAnswersQuery from "../../queries/withAnswersQuery";
-import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
 import Answer from "./Answer";
 import Paper from "@material-ui/core/Paper";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { CurrentUser } from "../../states/global/reducer";
+import { $currentUser } from "../../states/global/selectors";
 
 interface OwnProps {
   isAdding: boolean;
 }
 
+type ReduxStateProps = {
+  currentUser: CurrentUser | undefined;
+};
+
+interface ReduxDispatchProps {}
+
 type Props = OwnProps &
   withAnswersQuery.ChildProps &
-  withCurrentUserQuery.ChildProps;
+  ReduxStateProps &
+  ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -77,11 +87,20 @@ function ResponsesBase(props: Props) {
   return <div className={classes.container}>{renderAnswers()}</div>;
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    currentUser: $currentUser(state)
+  };
+};
+
 const Responses: React.ComponentType<
-  OwnProps & withAnswersQuery.InputProps & withCurrentUserQuery.InputProps
+  OwnProps & withAnswersQuery.InputProps
 > = compose(
   withAnswersQuery.hoc,
-  withCurrentUserQuery.hoc
+  connect(
+    mapStateToProps,
+    {}
+  )
 )(ResponsesBase);
 
 export default Responses;
