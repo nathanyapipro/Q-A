@@ -12,7 +12,7 @@ import { Theme } from "@material-ui/core/styles";
 import { QuestionRouteProps } from "../../pages/Question";
 
 interface OwnProps {
-  toggleMenu: () => void;
+  toggleSiteMapOpen: () => void;
 }
 
 type Props = OwnProps;
@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function HeaderBase(props: Props) {
   const classes = useStyles();
-  const { toggleMenu } = props;
+  const { toggleSiteMapOpen } = props;
 
   function handleClick(_: React.MouseEvent<HTMLElement, MouseEvent>) {
-    toggleMenu();
+    toggleSiteMapOpen();
   }
 
   return (

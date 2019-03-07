@@ -13,16 +13,24 @@ import Field from "../Field";
 import UpdateQuestionContentForm from "../../forms/UpdateQuestionContent";
 import UpdateQuestionStatusForm from "../../forms/UpdateQuestionStatus";
 import UpdateQuestionTagsForm from "../../forms/UpdateQuestionTags";
-import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
 import Answers from "../Answers";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
 
 interface OwnProps {}
 
+type ReduxStateProps = {
+  workspaceId: number;
+};
+
+interface ReduxDispatchProps {}
+
 type Props = OwnProps &
   withQuestionByIdQuery.ChildProps &
-  withWorkspaceQuery.ChildProps &
-  RouteComponentProps;
+  RouteComponentProps &
+  ReduxStateProps &
+  ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -155,12 +163,21 @@ function QuestionBase(props: Props) {
   );
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    workspaceId: state.global.workspaceId
+  };
+};
+
 const Question: React.ComponentType<
-  OwnProps & withQuestionByIdQuery.InputProps & withWorkspaceQuery.InputProps
+  OwnProps & withQuestionByIdQuery.InputProps
 > = compose(
   withQuestionByIdQuery.hoc,
-  withWorkspaceQuery.hoc,
-  withRouter
+  withRouter,
+  connect(
+    mapStateToProps,
+    {}
+  )
 )(QuestionBase);
 
 export default Question;

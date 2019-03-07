@@ -1,12 +1,21 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { render } from "react-dom";
 import { install } from "@material-ui/styles";
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 install();
 
-ReactDOM.render(<App />, document.getElementById("root"));
+(async function() {
+  const statesModule = await import("./states");
+  const setupStore = statesModule.setupStore;
+  const setupStoreResponse = await setupStore();
+  const appModule = await import("./App");
+  const App = appModule.default;
+
+  render(<App {...setupStoreResponse} />, document.getElementById("root"));
+})();
+
+// ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

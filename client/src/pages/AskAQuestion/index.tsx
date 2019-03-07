@@ -2,12 +2,11 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import CreateQuestionForm from "../../forms/CreateQuestion";
-import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
 import { compose } from "react-apollo";
 
 interface OwnProps {}
 
-type Props = OwnProps & withWorkspaceQuery.ChildProps;
+type Props = OwnProps;
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
@@ -16,19 +15,15 @@ const useStyles = makeStyles((_: Theme) => ({
   }
 }));
 
-function AskAQuestionBase(props: Props) {
+function AskAQuestionBase(_: Props) {
   const classes = useStyles();
-
-  const { workspaceId } = props;
   return (
     <div className={classes.container}>
-      <CreateQuestionForm workspaceId={workspaceId} />
+      <CreateQuestionForm />
     </div>
   );
 }
 
-const AskAQuestion: React.ComponentType<
-  OwnProps & withWorkspaceQuery.InputProps
-> = compose(withWorkspaceQuery.hoc)(AskAQuestionBase);
+const AskAQuestion: React.ComponentType<OwnProps> = compose()(AskAQuestionBase);
 
 export default AskAQuestion;

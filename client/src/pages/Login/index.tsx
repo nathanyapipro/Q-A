@@ -4,14 +4,24 @@ import { compose } from "react-apollo";
 import GoogleLogin from "react-google-login";
 import Button from "@material-ui/core/Button";
 import * as withLoginAnonymousMutation from "../../queries/withLoginAnonymousMutation";
-import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
 import { Theme } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { globalActions } from "../../states/global";
+import { SetAuthPayload } from "../../states/global/actions";
 
 interface OwnProps {}
 
+type ReduxStateProps = {};
+
+interface ReduxDispatchProps {
+  setAuth: (params: SetAuthPayload) => void;
+}
+
 type Props = OwnProps &
   withLoginAnonymousMutation.ChildProps &
-  withUpdateAuthMutation.ChildProps;
+  ReduxStateProps &
+  ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -23,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-function LoginBase({ loginAnonymous, updateAuth }: Props) {
+function LoginBase({ loginAnonymous, setAuth }: Props) {
   const classes = useStyles();
 
   async function handleSuccess({ googleId, profileObj }: any) {
@@ -40,12 +50,31 @@ function LoginBase({ loginAnonymous, updateAuth }: Props) {
           }
         });
 
-        if (response && response.data && response.data.loginAnonymous) {
-          const { jwtToken } = response.data.loginAnonymous;
-          updateAuth({
-            variables: {
+        if (
+          response &&
+          response.data &&
+          response.data.loginAnonymous &&
+          response.data.loginAnonymous.auth &&
+          response.data.loginAnonymous.auth.jwtToken &&
+          response.data.loginAnonymous.auth.currentUser
+        ) {
+          const {
+            auth: {
               jwtToken,
-              email
+              currentUser: { id, username, role }
+            }
+          } = response.data.loginAnonymous;
+
+          const currentUser = {
+            id,
+            username,
+            role
+          };
+
+          setAuth({
+            auth: {
+              jwtToken,
+              currentUser
             }
           });
         }
@@ -75,13 +104,20 @@ function LoginBase({ loginAnonymous, updateAuth }: Props) {
   );
 }
 
+const mapStateToProps = (_: StoreState): ReduxStateProps => {
+  return {};
+};
+
 const Login: React.ComponentType<
-  OwnProps &
-    withUpdateAuthMutation.InputProps &
-    withLoginAnonymousMutation.InputProps
+  OwnProps & withLoginAnonymousMutation.InputProps
 > = compose(
-  withUpdateAuthMutation.hoc,
-  withLoginAnonymousMutation.hoc
+  withLoginAnonymousMutation.hoc,
+  connect(
+    mapStateToProps,
+    {
+      setAuth: globalActions.setAuth
+    }
+  )
 )(LoginBase);
 
 export default Login;

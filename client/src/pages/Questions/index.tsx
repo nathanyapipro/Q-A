@@ -13,12 +13,19 @@ import { QuestionsVariables } from "../../types/apollo/Questions";
 import Paper from "@material-ui/core/Paper";
 import { Theme } from "@material-ui/core/styles";
 import { QuestionsOrderBy } from "../../types/apollo";
-import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
 import { compose } from "react-apollo";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
 
 interface OwnProps {}
 
-type Props = OwnProps & withWorkspaceQuery.ChildProps;
+type ReduxStateProps = {
+  workspaceId: number;
+};
+
+interface ReduxDispatchProps {}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -155,8 +162,17 @@ function QuestionsBase(props: Props) {
   );
 }
 
-const Questions: React.ComponentType<
-  OwnProps & withWorkspaceQuery.InputProps
-> = compose(withWorkspaceQuery.hoc)(QuestionsBase);
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    workspaceId: state.global.workspaceId
+  };
+};
+
+const Questions: React.ComponentType<OwnProps> = compose(
+  connect(
+    mapStateToProps,
+    {}
+  )
+)(QuestionsBase);
 
 export default Questions;

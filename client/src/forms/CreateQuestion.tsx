@@ -7,16 +7,24 @@ import TextField from "@material-ui/core/TextField";
 import TagAutocomplete from "../components/Autocomplete/Tag";
 import { Button } from "@material-ui/core";
 import { compose } from "react-apollo";
-import * as withCreateQuestionMutation from "../queries/withCreateQuestionMutation";
-import { withRouter, RouteComponentProps } from "react-router-dom";
 import { FormFieldMeta } from "../types";
 import Field from "../components/Field";
+import * as withCreateQuestionMutation from "../queries/withCreateQuestionMutation";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { connect } from "react-redux";
+import { StoreState } from "../states";
 
-interface OwnProps {
+interface OwnProps {}
+
+type ReduxStateProps = {
   workspaceId: number;
-}
+};
+
+interface ReduxDispatchProps {}
 
 type Props = OwnProps &
+  ReduxStateProps &
+  ReduxDispatchProps &
   withCreateQuestionMutation.ChildProps &
   RouteComponentProps;
 
@@ -148,10 +156,21 @@ function CreateQuestionBase(props: Props) {
   );
 }
 
-const ComposedCreateQuestion: React.ComponentType<
-  OwnProps & RouteComponentProps & withCreateQuestionMutation.InputProps
-> = compose(withCreateQuestionMutation.hoc)(CreateQuestionBase);
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    workspaceId: state.global.workspaceId
+  };
+};
 
-const CreateQuestionFrom = withRouter(ComposedCreateQuestion);
+const CreateQuestion: React.ComponentType<
+  OwnProps & withCreateQuestionMutation.InputProps
+> = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    {}
+  ),
+  withCreateQuestionMutation.hoc
+)(CreateQuestionBase);
 
-export default CreateQuestionFrom;
+export default CreateQuestion;

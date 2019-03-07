@@ -13,21 +13,28 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { compose } from "react-apollo";
-import * as withUpdateAuthMutation from "../../queries/local/withUpdateAuthMutation";
-import * as withCurrentUserQuery from "../../queries/withCurrentUserQuery";
-import * as withWorkspaceQuery from "../../queries/local/withWorkspaceQuery";
-import * as withUpdateWorkspaceMutation from "../../queries/local/withUpdateWorkspaceMutation";
 import { Theme } from "@material-ui/core/styles";
 import WorkspaceAutocomplete from "../../components/Autocomplete/Workspace";
-
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { globalActions } from "../../states/global";
+import { SetAuthPayload } from "../../states/global/actions";
 interface OwnProps {
   children: React.ReactChild;
 }
 
-type Props = OwnProps &
-  withUpdateAuthMutation.ChildProps &
-  withWorkspaceQuery.ChildProps &
-  withUpdateWorkspaceMutation.ChildProps;
+type ReduxStateProps = {
+  workspaceId: number;
+  isSiteMapOpen: boolean;
+};
+
+interface ReduxDispatchProps {
+  setAuth: (params: SetAuthPayload) => void;
+  toggleSiteMapOpen: () => void;
+  setWorkspaceId: (id: number) => void;
+}
+
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -99,44 +106,40 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function AppLayoutBase(props: Props) {
-  const { children, updateAuth, updateWorkspace, workspaceId } = props;
+  const {
+    children,
+    setAuth,
+    setWorkspaceId,
+    workspaceId,
+    toggleSiteMapOpen,
+    isSiteMapOpen
+  } = props;
   const classes = useStyles();
 
-  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
-
-  function toggleMenu() {
-    setIsMenuOpen(!isMenuOpen);
-  }
-
   function handleNavClick(_: React.MouseEvent<HTMLElement, MouseEvent>) {
-    if (isMenuOpen) {
-      toggleMenu();
+    if (isSiteMapOpen) {
+      toggleSiteMapOpen();
     }
   }
 
   function handleLogOut(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     handleNavClick(e);
-    updateAuth({
-      variables: {
-        jwtToken: null
-      }
-    });
+    setAuth({});
   }
 
   function handleSetWorkspace(item: number | Array<number>) {
     const value = item ? (item instanceof Array ? item[0] : item) : 1;
-    updateWorkspace({
-      variables: {
-        workspaceId: value
-      }
-    });
+    setWorkspaceId(value);
   }
 
   return (
     <div className={classes.container}>
       <ErrorBoundary>
-        <Header toggleMenu={toggleMenu} />
-        <Sidebar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}>
+        <Header toggleSiteMapOpen={toggleSiteMapOpen} />
+        <Sidebar
+          isSiteMapOpen={isSiteMapOpen}
+          toggleSiteMapOpen={toggleSiteMapOpen}
+        >
           <React.Fragment>
             <div className={classes.header}>
               <img className={classes.logo} src={logo} alt="Logo" />
@@ -215,17 +218,22 @@ function AppLayoutBase(props: Props) {
   );
 }
 
-const AppLayout: React.ComponentType<
-  OwnProps &
-    withUpdateAuthMutation.InputProps &
-    withCurrentUserQuery.InputProps &
-    withWorkspaceQuery.InputProps &
-    withUpdateWorkspaceMutation.InputProps
-> = compose(
-  withUpdateAuthMutation.hoc,
-  withCurrentUserQuery.hoc,
-  withWorkspaceQuery.hoc,
-  withUpdateWorkspaceMutation.hoc
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    workspaceId: state.global.workspaceId,
+    isSiteMapOpen: state.global.isSiteMapOpen
+  };
+};
+
+const AppLayout: React.ComponentType<OwnProps> = compose(
+  connect(
+    mapStateToProps,
+    {
+      setAuth: globalActions.setAuth,
+      toggleSiteMapOpen: globalActions.toggleSiteMapOpen,
+      setWorkspaceId: globalActions.setWorkspaceId
+    }
+  )
 )(AppLayoutBase);
 
 export default AppLayout;

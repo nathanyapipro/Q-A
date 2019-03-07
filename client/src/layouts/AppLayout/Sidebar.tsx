@@ -7,8 +7,8 @@ import { Theme } from "@material-ui/core/styles";
 export const SIDEBAR_WIDTH = 260;
 
 interface OwnProps {
-  isMenuOpen: boolean;
-  toggleMenu: () => void;
+  isSiteMapOpen: boolean;
+  toggleSiteMapOpen: () => void;
   children: React.ReactChild;
 }
 
@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function SidebarBase(props: Props) {
-  const { children, isMenuOpen, toggleMenu } = props;
+  const { children, isSiteMapOpen, toggleSiteMapOpen } = props;
 
   const classes = useStyles();
 
   function handleClose(_: React.SyntheticEvent<{}, Event>) {
-    toggleMenu();
+    toggleSiteMapOpen();
   }
 
   return (
@@ -47,7 +47,7 @@ function SidebarBase(props: Props) {
       <Hidden smUp>
         <Drawer
           variant="temporary"
-          open={isMenuOpen}
+          open={isSiteMapOpen}
           onClose={handleClose}
           classes={{
             paper: classes.drawerPaper

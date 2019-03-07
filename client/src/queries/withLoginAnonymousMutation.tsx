@@ -8,7 +8,14 @@ import gql from "graphql-tag";
 export const LOGIN_ANONYMOUS_MUTATION = gql`
   mutation LoginAnonymous($loginAnonymousInput: LoginAnonymousInput!) {
     loginAnonymous(input: $loginAnonymousInput) {
-      jwtToken
+      auth {
+        jwtToken
+        currentUser {
+          id
+          username
+          role
+        }
+      }
     }
   }
 `;
