@@ -48,9 +48,4 @@ create trigger _100_workspace_timestamps
   for each row
   execute procedure app_private.tg__timestamps();
 
-insert into app_public.workspace (id, name, is_public) values
-  (1,'Fusion', true);
-
-alter sequence app_public.workspace_id_seq restart with 2;
-
 COMMIT;
