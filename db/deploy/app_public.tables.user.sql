@@ -8,6 +8,7 @@ create table app_public.user (
   id serial primary key,
   username text not null unique,
   role app_public.role_type not null,
+  is_enabled boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -34,6 +35,8 @@ comment on column app_public.user.username is
   E'public-facing username (or ''handle'') of the user.';
 comment on column app_public.user.role is
   E'role of the user.';
+comment on column app_public.user.is_enabled is
+  E'determines if the user is enabled';
 comment on column app_public.user.created_at is
   E'@omit update\n timestamp of create';
 comment on column app_public.user.updated_at is
