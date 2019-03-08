@@ -26,6 +26,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   expansionPanelSumaryContent: {
     alignItems: "center"
   },
+  expansionPanelSumaryRoot: {
+    "&$expansionPanelSumaryExpanded": {
+      borderBottom: `1px solid ${theme.palette.divider}`
+    }
+  },
+  expansionPanelSumaryExpanded: {},
   heading: {
     paddingRight: theme.spacing.unit * 2,
     flexShrink: 0
@@ -58,7 +64,11 @@ function SettingsBase(_: Props) {
           onChange={handleChange("general")}
         >
           <ExpansionPanelSummary
-            classes={{ content: classes.expansionPanelSumaryContent }}
+            classes={{
+              content: classes.expansionPanelSumaryContent,
+              expanded: classes.expansionPanelSumaryExpanded,
+              root: classes.expansionPanelSumaryRoot
+            }}
             expandIcon={<ExpandMoreIcon />}
           >
             <Typography noWrap variant="subheading" className={classes.heading}>
@@ -79,7 +89,11 @@ function SettingsBase(_: Props) {
           onChange={handleChange("users")}
         >
           <ExpansionPanelSummary
-            classes={{ content: classes.expansionPanelSumaryContent }}
+            classes={{
+              content: classes.expansionPanelSumaryContent,
+              expanded: classes.expansionPanelSumaryExpanded,
+              root: classes.expansionPanelSumaryRoot
+            }}
             expandIcon={<ExpandMoreIcon />}
           >
             <Typography noWrap variant="subheading" className={classes.heading}>
@@ -100,7 +114,11 @@ function SettingsBase(_: Props) {
           onChange={handleChange("workpace-configuration")}
         >
           <ExpansionPanelSummary
-            classes={{ content: classes.expansionPanelSumaryContent }}
+            classes={{
+              content: classes.expansionPanelSumaryContent,
+              expanded: classes.expansionPanelSumaryExpanded,
+              root: classes.expansionPanelSumaryRoot
+            }}
             expandIcon={<ExpandMoreIcon />}
           >
             <Typography noWrap variant="subheading" className={classes.heading}>
