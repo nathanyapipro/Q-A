@@ -7,6 +7,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Hidden from "@material-ui/core/Hidden";
 
 interface OwnProps {}
 
@@ -22,13 +23,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     marginBottom: theme.spacing.unit * 2
   },
+  expansionPanelSumaryContent: {
+    alignItems: "center"
+  },
   heading: {
-    flexGrow: 1,
     paddingRight: theme.spacing.unit * 2,
     flexShrink: 0
   },
-  secondaryHeading: {
-    color: theme.palette.text.secondary
+  addButton: {
+    paddingRight: `${theme.spacing.unit}px !important`,
+    marginRight: theme.spacing.unit * 4
   }
 }));
 
@@ -53,25 +57,20 @@ function SettingsBase(_: Props) {
           expanded={Boolean(panelExpanded === "general")}
           onChange={handleChange("general")}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary
+            classes={{ content: classes.expansionPanelSumaryContent }}
+            expandIcon={<ExpandMoreIcon />}
+          >
             <Typography noWrap variant="subheading" className={classes.heading}>
               General
             </Typography>
-            <Typography
-              noWrap
-              variant="subheading"
-              color="secondary"
-              className={classes.secondaryHeading}
-            >
-              App Level Configuration
-            </Typography>
+            <Hidden smDown>
+              <Typography noWrap variant="caption" color="secondary">
+                App Level Configuration
+              </Typography>
+            </Hidden>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-              feugiat. Aliquam eget maximus est, id dignissim quam.
-            </Typography>
-          </ExpansionPanelDetails>
+          <ExpansionPanelDetails />
         </ExpansionPanel>
       </div>
       <div className={classes.expansionPanel}>
@@ -79,26 +78,20 @@ function SettingsBase(_: Props) {
           expanded={Boolean(panelExpanded === "users")}
           onChange={handleChange("users")}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary
+            classes={{ content: classes.expansionPanelSumaryContent }}
+            expandIcon={<ExpandMoreIcon />}
+          >
             <Typography noWrap variant="subheading" className={classes.heading}>
               Users
             </Typography>
-            <Typography
-              noWrap
-              variant="subheading"
-              color="secondary"
-              className={classes.secondaryHeading}
-            >
-              Create/Update Non-Annonymous Users for the App
-            </Typography>
+            <Hidden smDown>
+              <Typography noWrap variant="caption" color="secondary">
+                Configure Users of the App
+              </Typography>
+            </Hidden>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat
-              lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-              laoreet laoreet.
-            </Typography>
-          </ExpansionPanelDetails>
+          <ExpansionPanelDetails />
         </ExpansionPanel>
       </div>
       <div className={classes.expansionPanel}>
@@ -106,25 +99,20 @@ function SettingsBase(_: Props) {
           expanded={Boolean(panelExpanded === "workpace-configuration")}
           onChange={handleChange("workpace-configuration")}
         >
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpansionPanelSummary
+            classes={{ content: classes.expansionPanelSumaryContent }}
+            expandIcon={<ExpandMoreIcon />}
+          >
             <Typography noWrap variant="subheading" className={classes.heading}>
               Workpace Configuration
             </Typography>
-            <Typography
-              noWrap
-              variant="subheading"
-              color="secondary"
-              className={classes.secondaryHeading}
-            >
-              Configure Manager, Tags, Access Restrictions
-            </Typography>
+            <Hidden smDown>
+              <Typography noWrap variant="caption" color="secondary">
+                Configure Workspace Access Restrictions and Tags
+              </Typography>
+            </Hidden>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-              sit amet egestas eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
-          </ExpansionPanelDetails>
+          <ExpansionPanelDetails />
         </ExpansionPanel>
       </div>
     </div>
