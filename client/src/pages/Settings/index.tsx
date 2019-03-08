@@ -23,12 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing.unit * 2
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: "33.33%",
+    flexGrow: 1,
+    paddingRight: theme.spacing.unit * 2,
     flexShrink: 0
   },
   secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary
   }
 }));
@@ -55,11 +54,16 @@ function SettingsBase(_: Props) {
           onChange={handleChange("general")}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography noWrap className={classes.heading}>
+            <Typography noWrap variant="subheading" className={classes.heading}>
               General
             </Typography>
-            <Typography noWrap className={classes.secondaryHeading}>
-              Global App Level Configuration
+            <Typography
+              noWrap
+              variant="subheading"
+              color="secondary"
+              className={classes.secondaryHeading}
+            >
+              App Level Configuration
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -76,11 +80,16 @@ function SettingsBase(_: Props) {
           onChange={handleChange("users")}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography noWrap className={classes.heading}>
+            <Typography noWrap variant="subheading" className={classes.heading}>
               Users
             </Typography>
-            <Typography noWrap className={classes.secondaryHeading}>
-              Create, Update Non-Annonymous Users for the App
+            <Typography
+              noWrap
+              variant="subheading"
+              color="secondary"
+              className={classes.secondaryHeading}
+            >
+              Create/Update Non-Annonymous Users for the App
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -98,11 +107,16 @@ function SettingsBase(_: Props) {
           onChange={handleChange("workpace-configuration")}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography noWrap className={classes.heading}>
+            <Typography noWrap variant="subheading" className={classes.heading}>
               Workpace Configuration
             </Typography>
-            <Typography noWrap className={classes.secondaryHeading}>
-              Filtering has been entirely disabled for whole web server
+            <Typography
+              noWrap
+              variant="subheading"
+              color="secondary"
+              className={classes.secondaryHeading}
+            >
+              Configure Manager, Tags, Access Restrictions
             </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
