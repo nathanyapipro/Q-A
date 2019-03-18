@@ -43,7 +43,7 @@ async function main() {
   await middleware.installLogging(app);
 
   // These are our assets: images/etc; served out of the /client/public folder
-  // await middleware.installSharedStatic(app);
+  await middleware.installSharedStatic(app);
 
   await middleware.installPostGraphile(app);
 
