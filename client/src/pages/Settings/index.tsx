@@ -7,7 +7,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Hidden from "@material-ui/core/Hidden";
+import Users from "./Users";
 
 interface OwnProps {}
 
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
   },
   expansionPanelSumaryExpanded: {},
+  expansionPanelDetailsRoot: {
+    padding: 0
+  },
   heading: {
     paddingRight: theme.spacing.unit * 2,
     flexShrink: 0
@@ -74,11 +77,9 @@ function SettingsBase(_: Props) {
             <Typography noWrap variant="subheading" className={classes.heading}>
               General
             </Typography>
-            <Hidden smDown>
-              <Typography noWrap variant="caption" color="secondary">
-                App Level Configuration
-              </Typography>
-            </Hidden>
+            <Typography noWrap variant="caption" color="secondary">
+              App Level Configuration
+            </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails />
         </ExpansionPanel>
@@ -99,13 +100,17 @@ function SettingsBase(_: Props) {
             <Typography noWrap variant="subheading" className={classes.heading}>
               Users
             </Typography>
-            <Hidden smDown>
-              <Typography noWrap variant="caption" color="secondary">
-                Configure Users of the App
-              </Typography>
-            </Hidden>
+            <Typography noWrap variant="caption" color="secondary">
+              Configure Users of the App
+            </Typography>
           </ExpansionPanelSummary>
-          <ExpansionPanelDetails />
+          <ExpansionPanelDetails
+            classes={{
+              root: classes.expansionPanelDetailsRoot
+            }}
+          >
+            <Users />
+          </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
       <div className={classes.expansionPanel}>
@@ -122,13 +127,11 @@ function SettingsBase(_: Props) {
             expandIcon={<ExpandMoreIcon />}
           >
             <Typography noWrap variant="subheading" className={classes.heading}>
-              Workpace Configuration
+              Workspace Configuration
             </Typography>
-            <Hidden smDown>
-              <Typography noWrap variant="caption" color="secondary">
-                Configure Workspace Access Restrictions and Tags
-              </Typography>
-            </Hidden>
+            <Typography noWrap variant="caption" color="secondary">
+              Configure Workspace Access Restrictions and Tags
+            </Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails />
         </ExpansionPanel>
