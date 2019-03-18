@@ -31,4 +31,3 @@ app_public.functions.current_user 2019-02-17T04:21:00Z Nathan Yapi <nathanyapi.p
 app_public.functions.create_comment 2019-02-17T19:01:24Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_comment
 app_public.functions.update_question_by_id 2019-02-18T19:09:05Z Nathan Yapi <nathanyapi.pro@gmail.com> # function update_question_by_id
 app_public.functions.create_answer 2019-02-19T10:02:46Z Nathan Yapi <nathanyapi.pro@gmail.com> # function create_answer
-app_private.functions.tg__workspace_setup 2019-03-07T15:23:03Z Nathan Yapi <nathanyapi.pro@gmail.com> # function tg__workspace_setup
