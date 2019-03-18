@@ -9,8 +9,8 @@ import { SIDEBAR_WIDTH } from "./Sidebar";
 import Typography from "@material-ui/core/Typography";
 import ContactSupportIcon from "@material-ui/icons/ContactSupport";
 import ListIcon from "@material-ui/icons/List";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import SettingsIcon from "@material-ui/icons/Settings";
+// import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+// import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { compose } from "react-apollo";
 import { Theme } from "@material-ui/core/styles";
@@ -19,6 +19,9 @@ import { connect } from "react-redux";
 import { StoreState } from "../../states";
 import { globalActions } from "../../states/global";
 import { SetAuthPayload } from "../../states/global/actions";
+import moment from "moment";
+import Tooltip from "@material-ui/core/Tooltip";
+
 interface OwnProps {
   children: React.ReactChild;
 }
@@ -102,6 +105,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   linkActive: {
     backgroundColor: theme.palette.action.selected
+  },
+  spacer: {
+    flexGrow: 1
+  },
+  footer: {
+    display: "flex",
+    flexDirection: "column",
+    flexShrink: 0,
+    alignItems: "center",
+    padding: theme.spacing.unit,
+    borderTop: `1px solid ${theme.palette.divider}`
+  },
+  externalLink: {
+    textDecoration: "underline"
   }
 }));
 
@@ -177,7 +194,7 @@ function AppLayoutBase(props: Props) {
                 Questions
               </Typography>
             </NavLink>
-            <NavLink
+            {/* <NavLink
               onClick={handleNavClick}
               exact
               to="/profile"
@@ -200,13 +217,42 @@ function AppLayoutBase(props: Props) {
               <Typography color="inherit" variant="body1">
                 Settings
               </Typography>
-            </NavLink>
+            </NavLink> */}
+            <div className={classes.spacer} />
             <div className={classes.navLink} onClick={handleLogOut}>
               <ArrowBackIcon className={classes.linkIcon} color="inherit" />
               <Typography color="inherit" variant="body1">
                 Log Out
               </Typography>
             </div>
+            <Tooltip
+              title="Created By Nathan Yapi & Matt Leus"
+              placement="right"
+            >
+              <div className={classes.footer}>
+                <a
+                  href="https://elementai.slack.com/messages/CAY6N2BJA/convo/CAY6N2BJA-1533151972.000154%23/#"
+                  target="_blank"
+                  className={classes.externalLink}
+                >
+                  <Typography color="inherit" variant="body1">
+                    Leave feedback
+                  </Typography>
+                </a>
+                <a
+                  href="https://github.com/ElementAI/fundamental"
+                  target="_blank"
+                  className={classes.externalLink}
+                >
+                  <Typography color="inherit" variant="body1">
+                    Look at the codebase
+                  </Typography>
+                </a>
+                <Typography color="inherit" variant="body1">
+                  {`© Element AI ${moment().year()}`}
+                </Typography>
+              </div>
+            </Tooltip>
           </React.Fragment>
         </Sidebar>
         <main className={classes.main}>
