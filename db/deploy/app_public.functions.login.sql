@@ -7,7 +7,7 @@ create type app_public.auth as (
   "current_user" app_public.user
 );
 
-create function app_public.login(username text, password text default null)
+create function app_public.login(username text, password text)
 returns app_public.auth
 as $$
   declare

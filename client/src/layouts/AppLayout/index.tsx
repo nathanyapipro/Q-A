@@ -19,8 +19,10 @@ import { connect } from "react-redux";
 import { StoreState } from "../../states";
 import { globalActions } from "../../states/global";
 import { SetAuthPayload } from "../../states/global/actions";
+import { CurrentUser } from "../../states/global/reducer";
 import moment from "moment";
 import Tooltip from "@material-ui/core/Tooltip";
+import { getUsername } from "../../helpers/user";
 
 interface OwnProps {
   children: React.ReactChild;
@@ -30,6 +32,7 @@ type ReduxStateProps = {
   email?: string;
   workspaceId: number;
   isSiteMapOpen: boolean;
+  currentUser?: CurrentUser;
 };
 
 interface ReduxDispatchProps {
@@ -131,7 +134,8 @@ function AppLayoutBase(props: Props) {
     workspaceId,
     toggleSiteMapOpen,
     isSiteMapOpen,
-    email
+    email,
+    currentUser
   } = props;
   const classes = useStyles();
 
@@ -149,6 +153,10 @@ function AppLayoutBase(props: Props) {
   function handleSetWorkspace(item: number | Array<number>) {
     const value = item ? (item instanceof Array ? item[0] : item) : 1;
     setWorkspaceId(value);
+  }
+
+  if (!currentUser) {
+    return <noscript />;
   }
 
   return (
@@ -224,8 +232,11 @@ function AppLayoutBase(props: Props) {
             <div className={classes.spacer} />
             <div className={classes.navLink} onClick={handleLogOut}>
               <ArrowBackIcon className={classes.linkIcon} color="inherit" />
-              <Typography color="inherit" variant="body1">
-                Log Out
+              <Typography color="inherit" variant="body1" noWrap>
+                {`Log Out (${getUsername(
+                  currentUser.username,
+                  currentUser.role
+                )})`}
               </Typography>
             </div>
             <Tooltip
@@ -271,7 +282,8 @@ const mapStateToProps = (state: StoreState): ReduxStateProps => {
   return {
     workspaceId: state.global.workspaceId,
     isSiteMapOpen: state.global.isSiteMapOpen,
-    email: state.global.auth.email
+    email: state.global.auth.email,
+    currentUser: state.global.auth.currentUser
   };
 };
 

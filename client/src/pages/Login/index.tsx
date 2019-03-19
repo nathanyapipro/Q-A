@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column"
   },
   button: {
-    width: theme.spacing.unit * 30
+    width: theme.spacing.unit * 30,
+    marginBottom: theme.spacing.unit * 2
   }
 }));
 

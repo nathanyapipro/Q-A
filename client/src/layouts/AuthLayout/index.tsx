@@ -14,9 +14,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    [theme.breakpoints.up("sm")]: {
+      alignItems: "center"
+    },
     flex: "1 0 auto",
-    width: "100vw"
+    width: "100vw",
+    marginTop: theme.spacing.unit * 2
   },
   content: {
     display: "flex",
@@ -27,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column",
     width: "60%",
+    flexShrink: 0,
     minWidth: theme.spacing.unit * 35,
     marginBottom: theme.spacing.unit * 3
   },
@@ -40,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   children: {
     display: "flex",
+    flexShrink: 0,
     flexDirection: "column"
   }
 }));
