@@ -7,14 +7,23 @@ import EditIcon from "@material-ui/icons/Create";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { compose } from "react-apollo";
 import * as withDeleteCommentByIdMutation from "../../queries/withDeleteCommentByIdMutation";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { CurrentUser } from "../../states/global/reducer";
 
+type ReduxStateProps = {
+  currentUser?: CurrentUser;
+};
 interface OwnProps {
+  userId: number;
   commentId: number;
   isEditing?: boolean;
   onEdit: () => void;
 }
 
-type Props = OwnProps & withDeleteCommentByIdMutation.ChildProps;
+type Props = OwnProps &
+  withDeleteCommentByIdMutation.ChildProps &
+  ReduxStateProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -43,7 +52,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 function CommentBase(props: Props) {
   const classes = useStyles();
 
-  const { commentId, deleteComment, onEdit, isEditing } = props;
+  const {
+    commentId,
+    deleteComment,
+    onEdit,
+    isEditing,
+    currentUser,
+    userId
+  } = props;
 
   function handleEditClick(_: React.MouseEvent) {
     onEdit();
@@ -59,40 +75,63 @@ function CommentBase(props: Props) {
     });
   }
 
+  if (!currentUser) {
+    return <noscript />;
+  }
+
+  const canEditComment = currentUser.id === userId;
+  const canDeleteComment = currentUser.id === userId;
+
   return (
     <div
       className={classNames(classes.container, {
         [classes.isEditing]: Boolean(isEditing)
       })}
     >
-      <Button
-        variant="text"
-        color="primary"
-        onClick={handleEditClick}
-        className={classes.button}
-        size="small"
-        disableFocusRipple
-      >
-        <EditIcon color="inherit" className={classes.icon} />
-        Edit
-      </Button>
-      <Button
-        variant="text"
-        color="secondary"
-        onClick={handleDeleteClick}
-        className={classes.button}
-        size="small"
-        disableFocusRipple
-      >
-        <DeleteIcon color="inherit" className={classes.icon} />
-        Delete
-      </Button>
+      {canEditComment && (
+        <Button
+          variant="text"
+          color="primary"
+          onClick={handleEditClick}
+          className={classes.button}
+          size="small"
+          disableFocusRipple
+        >
+          <EditIcon color="inherit" className={classes.icon} />
+          Edit
+        </Button>
+      )}
+      {canDeleteComment && (
+        <Button
+          variant="text"
+          color="secondary"
+          onClick={handleDeleteClick}
+          className={classes.button}
+          size="small"
+          disableFocusRipple
+        >
+          <DeleteIcon color="inherit" className={classes.icon} />
+          Delete
+        </Button>
+      )}
     </div>
   );
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    currentUser: state.global.auth.currentUser
+  };
+};
+
 const Comment: React.ComponentType<
   OwnProps & withDeleteCommentByIdMutation.InputProps
-> = compose(withDeleteCommentByIdMutation.hoc)(CommentBase);
+> = compose(
+  connect(
+    mapStateToProps,
+    {}
+  ),
+  withDeleteCommentByIdMutation.hoc
+)(CommentBase);
 
 export default Comment;

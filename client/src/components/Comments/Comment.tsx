@@ -127,6 +127,7 @@ function CommentBase(props: Props) {
             isEditing={isEditing}
             commentId={commentId}
             questionId={questionId}
+            userId={user.id}
             onEdit={toggleEdit}
           />
         </div>

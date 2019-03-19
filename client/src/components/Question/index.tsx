@@ -17,11 +17,14 @@ import Answers from "../Answers";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { StoreState } from "../../states";
+import { CurrentUser } from "../../states/global/reducer";
+import { RoleType } from "../../types/apollo";
 
 interface OwnProps {}
 
 type ReduxStateProps = {
   workspaceId: number;
+  currentUser?: CurrentUser;
 };
 
 interface ReduxDispatchProps {}
@@ -60,7 +63,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function QuestionBase(props: Props) {
   const classes = useStyles();
-  const { questionById, workspaceId, history } = props;
+  const { questionById, workspaceId, history, currentUser } = props;
+
+  if (!currentUser) {
+    return <noscript />;
+  }
 
   if (!questionById) {
     return <noscript />;
@@ -99,36 +106,57 @@ function QuestionBase(props: Props) {
         }, [])
       : [];
 
+  const canEditStatus = currentUser.role !== RoleType.ANONYMOUS;
+  const canEditContent =
+    currentUser.id === questionById.userId &&
+    questionById.voteCount === 0 &&
+    questionById.answers.nodes.length === 0;
+  const canEditTags =
+    currentUser.role !== RoleType.ANONYMOUS ||
+    currentUser.id === questionById.userId;
+
   return (
     <div className={classes.container}>
       <Field
         label="Status"
         staticComponent={<Status status={status} />}
         editComponent={
-          <UpdateQuestionStatusForm
-            questionId={questionId}
-            initialValue={statusId}
-          />
+          canEditStatus ? (
+            <UpdateQuestionStatusForm
+              questionId={questionId}
+              initialValue={statusId}
+            />
+          ) : (
+            undefined
+          )
         }
       />
       <Field
         label="Question"
         staticComponent={<Content content={content} />}
         editComponent={
-          <UpdateQuestionContentForm
-            questionId={questionId}
-            initialValue={content}
-          />
+          canEditContent ? (
+            <UpdateQuestionContentForm
+              questionId={questionId}
+              initialValue={content}
+            />
+          ) : (
+            undefined
+          )
         }
       />
       <Field
         label="Tags"
         staticComponent={<Tags questionTags={questionTags} />}
         editComponent={
-          <UpdateQuestionTagsForm
-            questionId={questionId}
-            initialValue={tagIds}
-          />
+          canEditTags ? (
+            <UpdateQuestionTagsForm
+              questionId={questionId}
+              initialValue={tagIds}
+            />
+          ) : (
+            undefined
+          )
         }
       />
       <Answers questionId={questionId} />
@@ -152,6 +180,7 @@ function QuestionBase(props: Props) {
         label="Actions"
         staticComponent={
           <Actions
+            userId={questionById.userId}
             questionId={questionId}
             voteCount={voteCount}
             commentCount={commentCount}
@@ -165,7 +194,8 @@ function QuestionBase(props: Props) {
 
 const mapStateToProps = (state: StoreState): ReduxStateProps => {
   return {
-    workspaceId: state.global.workspaceId
+    workspaceId: state.global.workspaceId,
+    currentUser: state.global.auth.currentUser
   };
 };
 

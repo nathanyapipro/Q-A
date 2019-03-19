@@ -10,9 +10,17 @@ import { compose } from "react-apollo";
 import * as withQuestionToggleVoteMutation from "../../queries/withQuestionToggleVoteMutation";
 import * as withDeleteQuestionByIdMutation from "../../queries/withDeleteQuestionByIdMutation";
 import { withRouter, RouteComponentProps } from "react-router-dom";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { CurrentUser } from "../../states/global/reducer";
+
+type ReduxStateProps = {
+  currentUser?: CurrentUser;
+};
 
 interface OwnProps {
   questionId: number;
+  userId?: number;
   hasVoted: boolean;
   voteCount: number;
   commentCount: number;
@@ -21,7 +29,8 @@ interface OwnProps {
 type Props = OwnProps &
   withQuestionToggleVoteMutation.ChildProps &
   withDeleteQuestionByIdMutation.ChildProps &
-  RouteComponentProps;
+  RouteComponentProps &
+  ReduxStateProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -51,12 +60,14 @@ function ActionsBase(props: Props) {
 
   const {
     questionId,
+    userId,
     hasVoted,
     voteCount,
     commentCount,
     questionToggleVote,
     deleteQuestion,
     history,
+    currentUser,
     location: { pathname }
   } = props;
 
@@ -91,6 +102,12 @@ function ActionsBase(props: Props) {
     }
   }
 
+  if (!currentUser) {
+    return <noscript />;
+  }
+
+  const canDeleteQuestion = currentUser.id === userId;
+
   return (
     <div className={classes.container}>
       <Button
@@ -120,28 +137,40 @@ function ActionsBase(props: Props) {
       {isQuestionByIdPage && (
         <React.Fragment>
           <div className={classes.spacer} />
-          <Button
-            variant="text"
-            color={"secondary"}
-            className={classes.button}
-            onClick={handleDeleteClick}
-          >
-            <DeleteIcon className={classes.buttonIcon} color="inherit" />
-            <Typography noWrap color="inherit" variant="body1">
-              Delete
-            </Typography>
-          </Button>
+          {canDeleteQuestion && (
+            <Button
+              variant="text"
+              color={"secondary"}
+              className={classes.button}
+              onClick={handleDeleteClick}
+            >
+              <DeleteIcon className={classes.buttonIcon} color="inherit" />
+              <Typography noWrap color="inherit" variant="body1">
+                Delete
+              </Typography>
+            </Button>
+          )}
         </React.Fragment>
       )}
     </div>
   );
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    currentUser: state.global.auth.currentUser
+  };
+};
+
 const Actions: React.ComponentType<
   OwnProps &
     withQuestionToggleVoteMutation.InputProps &
     withDeleteQuestionByIdMutation.InputProps
 > = compose(
+  connect(
+    mapStateToProps,
+    {}
+  ),
   withRouter,
   withQuestionToggleVoteMutation.hoc,
   withDeleteQuestionByIdMutation.hoc

@@ -6,12 +6,21 @@ import CreateAnswerForm from "../../forms/CreateAnswer";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { CurrentUser } from "../../states/global/reducer";
+import { RoleType } from "../../types/apollo";
+import { compose } from "react-apollo";
+
+type ReduxStateProps = {
+  currentUser?: CurrentUser;
+};
 
 interface OwnProps {
   questionId: number;
 }
 
-type Props = OwnProps;
+type Props = OwnProps & ReduxStateProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -43,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function AnswersBase(props: Props) {
-  const { questionId } = props;
+  const { questionId, currentUser } = props;
   const classes = useStyles();
 
   const [isAdding, setIsAdd] = React.useState<boolean>(false);
@@ -58,6 +67,12 @@ function AnswersBase(props: Props) {
     }
   }
 
+  if (!currentUser) {
+    return <noscript />;
+  }
+
+  const canAddAnswer = currentUser.role !== RoleType.ANONYMOUS;
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -68,7 +83,7 @@ function AnswersBase(props: Props) {
         >
           Answers
         </Typography>
-        {!isAdding && (
+        {canAddAnswer && !isAdding && (
           <Button
             variant="text"
             color="primary"
@@ -90,6 +105,17 @@ function AnswersBase(props: Props) {
   );
 }
 
-const Answers = AnswersBase;
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    currentUser: state.global.auth.currentUser
+  };
+};
+
+const Answers: React.ComponentType<OwnProps> = compose(
+  connect(
+    mapStateToProps,
+    {}
+  )
+)(AnswersBase);
 
 export default Answers;
