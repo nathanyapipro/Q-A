@@ -17,7 +17,7 @@ Client:
 - [x] Apollo
   - [x] Basic Conguration
   - [x] ClientState configuration
-  - [ ] Cache configuration (add cache resolvers to reduce queries executed if data is allready in cache)
+  - [x] Cache configuration (add cache resolvers to reduce queries executed if data is allready in cache)
   - [ ] Handle Errors (Unauthorized)
   - [ ] Reset Cache on Logout
 - [x] App Layout
@@ -25,11 +25,11 @@ Client:
   - [x] Sidebar
 - [x] Anonymous Login Page
   - [x] Google Auth Button
-- [ ] User Login Page
-  - [ ] Standard Username/Password Form
+- [x] User Login Page
+  - [x] Standard Username/Password Form
 - [x] Ask a Question Page
   - [x] Basic Form
-  - [ ] Related Questions
+  - [ ] Related Questions (WISHLIST)
 - [x] Questions Page
   - [x] Filters (status, tags, sortBy)
   - [x] Questions Table
@@ -51,9 +51,9 @@ Client:
 - [ ] Profile Page
   - [ ] User Info
   - [ ] Edit Username/Password
-  - [ ] News Feed
+  - [ ] News Feed (WISHLIST)
     - [ ] Curated list of recent activity on questions the User is "watching" (Asked, CommentedOn, Answered)
-- [ ] Settings Page
+- [ ] Settings Page (WISHLIST)
   - [ ] CRUD Users
   - [ ] CRUD Tags
 - [ ] User Roles
@@ -71,9 +71,9 @@ Client:
     - [ ] Can ask a question
     - [ ] Can Update/Delete his question (Update only if no Votes)
     - [ ] Can Create/Update/Delete his comments on any question
-- [ ] Responsive Design
+- [ ] Responsive Design (WISHLIST)
   - [ ] Support small layout (phones)
-- [ ] PWA Setup
+- [ ] PWA Setup (WISHLIST)
   - [ ] Download as APP
 - [ ] Test Suite
 
