@@ -20,7 +20,7 @@ function TagAutocompleteBase(props: Props) {
   const { onChange, workspaceTags } = props;
 
   const options: OptionsType = workspaceTags.map(workspaceTag => ({
-    value: workspaceTag.id,
+    value: workspaceTag.tag ? workspaceTag.tag.id : 0,
     label: workspaceTag.tag ? workspaceTag.tag.name : "N/A"
   }));
 
