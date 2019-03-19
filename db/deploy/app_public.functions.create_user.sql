@@ -19,7 +19,7 @@ begin
   -- Store the password
   if password is not null then
     update app_private.user_secret
-    set password_hash = crypt(password, gen_salt('bf'))
+    set password_hash = crypt(password, gen_salt('bf', 8))
     where user_id = v_user.id;
   end if;
 
