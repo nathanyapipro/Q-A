@@ -5,6 +5,7 @@ export type SetAuthPayload = {
   auth?: {
     currentUser: CurrentUser;
     jwtToken: string;
+    email: string;
   };
 };
 

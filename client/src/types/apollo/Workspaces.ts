@@ -28,9 +28,9 @@ export interface Workspaces_workspaces {
 
 export interface Workspaces {
   /**
-   * Reads and enables pagination through a set of `Workspace`.
+   * Queries workspaces
    */
-  workspaces: Workspaces_workspaces | null;
+  workspaces: Workspaces_workspaces;
 }
 
 export interface WorkspacesVariables {

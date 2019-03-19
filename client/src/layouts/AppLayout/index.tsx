@@ -27,6 +27,7 @@ interface OwnProps {
 }
 
 type ReduxStateProps = {
+  email?: string;
   workspaceId: number;
   isSiteMapOpen: boolean;
 };
@@ -129,7 +130,8 @@ function AppLayoutBase(props: Props) {
     setWorkspaceId,
     workspaceId,
     toggleSiteMapOpen,
-    isSiteMapOpen
+    isSiteMapOpen,
+    email
   } = props;
   const classes = useStyles();
 
@@ -163,6 +165,7 @@ function AppLayoutBase(props: Props) {
             </div>
             <div className={classes.workspaceSelect}>
               <WorkspaceAutocomplete
+                email={email}
                 value={[workspaceId]}
                 label="Workspace"
                 onChange={handleSetWorkspace}
@@ -267,7 +270,8 @@ function AppLayoutBase(props: Props) {
 const mapStateToProps = (state: StoreState): ReduxStateProps => {
   return {
     workspaceId: state.global.workspaceId,
-    isSiteMapOpen: state.global.isSiteMapOpen
+    isSiteMapOpen: state.global.isSiteMapOpen,
+    email: state.global.auth.email
   };
 };
 

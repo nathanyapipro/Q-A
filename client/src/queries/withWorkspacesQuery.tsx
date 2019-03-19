@@ -9,11 +9,7 @@ import {
 
 export const WORKSPACE_QUERY = gql`
   query Workspaces($email: String) {
-    workspaces(
-      filter: {
-        or: [{ isPublic: { equalTo: true } }, { users: { contains: [$email] } }]
-      }
-    ) {
+    workspaces(email: $email) {
       nodes {
         id
         name
@@ -22,7 +18,7 @@ export const WORKSPACE_QUERY = gql`
   }
 `;
 
-export type InputProps = {};
+export type InputProps = WorkspacesVariables;
 
 type Response = Workspaces;
 
@@ -37,9 +33,9 @@ export type ChildProps = {
 export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
   WORKSPACE_QUERY,
   {
-    options: () => ({
+    options: ({ email }) => ({
       variables: {
-        email: localStorage.getItem("email")
+        email
       },
       fetchPolicy: "cache-and-network"
     }),

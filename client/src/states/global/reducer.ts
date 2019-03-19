@@ -12,6 +12,7 @@ export interface State {
   auth: {
     readonly currentUser?: CurrentUser;
     readonly jwtToken?: string;
+    readonly email?: string;
   };
   readonly isSiteMapOpen: boolean;
   readonly workspaceId: number;
@@ -19,7 +20,8 @@ export interface State {
 
 const AUTH_INITIAL_STATE = {
   currentUser: undefined,
-  jwtToken: undefined
+  jwtToken: undefined,
+  email: undefined
 };
 
 const INITIAL_STATE = {

@@ -74,7 +74,8 @@ function LoginBase({ loginAnonymous, setAuth }: Props) {
           setAuth({
             auth: {
               jwtToken,
-              currentUser
+              currentUser,
+              email
             }
           });
         }

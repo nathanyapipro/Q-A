@@ -27,7 +27,7 @@ grant update(name, is_public, users) on app_public.workspace to fundamental_visi
 grant delete on app_public.workspace to fundamental_visitor;
 
 comment on table app_public.workspace is
-  E'A workspace in the application.';
+  E'@omit all\nA workspace in the application.';
 
 comment on column app_public.workspace.id is
   E'@omit update\n unique identifier for the workspace.';
