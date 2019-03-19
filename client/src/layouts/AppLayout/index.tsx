@@ -12,7 +12,7 @@ import ListIcon from "@material-ui/icons/List";
 // import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 // import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { compose } from "react-apollo";
+import { compose, withApollo, WithApolloClient } from "react-apollo";
 import { Theme } from "@material-ui/core/styles";
 import WorkspaceAutocomplete from "../../components/Autocomplete/Workspace";
 import { connect } from "react-redux";
@@ -41,7 +41,7 @@ interface ReduxDispatchProps {
   setWorkspaceId: (id: number) => void;
 }
 
-type Props = OwnProps & ReduxStateProps & ReduxDispatchProps;
+type Props = WithApolloClient<OwnProps> & ReduxStateProps & ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -135,7 +135,8 @@ function AppLayoutBase(props: Props) {
     toggleSiteMapOpen,
     isSiteMapOpen,
     email,
-    currentUser
+    currentUser,
+    client
   } = props;
   const classes = useStyles();
 
@@ -148,6 +149,7 @@ function AppLayoutBase(props: Props) {
   function handleLogOut(e: React.MouseEvent<HTMLElement, MouseEvent>) {
     handleNavClick(e);
     setAuth({});
+    client.resetStore();
   }
 
   function handleSetWorkspace(item: number | Array<number>) {
@@ -288,6 +290,7 @@ const mapStateToProps = (state: StoreState): ReduxStateProps => {
 };
 
 const AppLayout: React.ComponentType<OwnProps> = compose(
+  withApollo,
   connect(
     mapStateToProps,
     {

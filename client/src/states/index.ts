@@ -3,7 +3,6 @@ import { combineReducers, compose, createStore, Store } from "redux";
 import { ActionType } from "typesafe-actions";
 import { persistReducer, persistStore, Persistor } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
 import { GlobalState, globalReducer, globalActions } from "./global";
 
 declare global {
@@ -64,6 +63,10 @@ export async function setupStore(): Promise<SetupStoreResponse> {
           headers: { Authorization: `Bearer ${jwtToken}` }
         });
       }
+    },
+    onError: () => {
+      store.dispatch(globalActions.setAuth({}));
+      client.resetStore();
     }
   });
 
