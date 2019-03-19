@@ -3,7 +3,7 @@ import Autocomplete, { AutocompleteProps, ValueType, OptionsType } from ".";
 import { Omit } from "../../types";
 import * as autocompleteHelper from "../../helpers/autocomplete";
 import { compose } from "react-apollo";
-import * as withTagsQuery from "../../queries/withTagsQuery";
+import * as withWorkspaceTagsQuery from "../../queries/withWorkspaceTagsQuery";
 interface OwnProps
   extends Omit<
     AutocompleteProps,
@@ -14,14 +14,14 @@ interface OwnProps
   onChange: (value: number | Array<number>) => void;
 }
 
-type Props = OwnProps & withTagsQuery.ChildProps;
+type Props = OwnProps & withWorkspaceTagsQuery.ChildProps;
 
 function TagAutocompleteBase(props: Props) {
-  const { onChange, tags } = props;
+  const { onChange, workspaceTags } = props;
 
-  const options: OptionsType = tags.map(tag => ({
-    value: tag.id,
-    label: tag.name
+  const options: OptionsType = workspaceTags.map(workspaceTag => ({
+    value: workspaceTag.id,
+    label: workspaceTag.tag ? workspaceTag.tag.name : "N/A"
   }));
 
   const valueToValueType = (value?: number | Array<number>): ValueType => {
@@ -56,7 +56,7 @@ function TagAutocompleteBase(props: Props) {
 }
 
 const TagsAutocomplete: React.ComponentType<
-  OwnProps & withTagsQuery.InputProps
-> = compose(withTagsQuery.hoc)(TagAutocompleteBase);
+  OwnProps & withWorkspaceTagsQuery.InputProps
+> = compose(withWorkspaceTagsQuery.hoc)(TagAutocompleteBase);
 
 export default TagsAutocomplete;

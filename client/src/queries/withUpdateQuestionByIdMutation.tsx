@@ -4,11 +4,6 @@ import {
   UpdateQuestionByIdVariables,
   UpdateQuestionById
 } from "../types/apollo/UpdateQuestionById";
-// import {
-//   QuestionByIdVariables,
-//   QuestionById
-// } from "../types/apollo/QuestionById";
-// import { QUESTION_BY_ID_QUERY } from "./withQuestionByIdQuery";
 
 export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
   mutation UpdateQuestionById(

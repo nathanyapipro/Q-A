@@ -1,6 +1,6 @@
 BEGIN;
 
-select * from app_public.create_user('admin', '12345678', 'ADMIN');
+select * from app_public.create_user('Admin', '12345678', 'ADMIN');
 
 insert into app_public.tag (id, name, color) values
   (1, 'Culture', '#FF7F41'),

@@ -15,6 +15,7 @@ alter table app_public.workspace_tag enable row level security;
 
 create index on "app_public"."workspace_tag"("workspace_id");
 create index on "app_public"."workspace_tag"("tag_id");
+create index on "app_public"."workspace_tag"("is_enabled");
 
 create policy select_all on app_public.workspace_tag for select using (true);
 create policy create_all on app_public.workspace_tag for insert with check (true);

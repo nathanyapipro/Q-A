@@ -5,6 +5,12 @@ import { Theme } from "@material-ui/core/styles";
 import { FormFieldMeta } from "../types";
 import { compose } from "react-apollo";
 import * as withUpdateQuestionByIdMutation from "../queries/withUpdateQuestionByIdMutation";
+import { connect } from "react-redux";
+import { StoreState } from "../states";
+
+type ReduxStateProps = {
+  workspaceId: number;
+};
 
 interface OwnProps {
   questionId: number;
@@ -12,7 +18,9 @@ interface OwnProps {
   onExit?: () => void;
 }
 
-type Props = OwnProps & withUpdateQuestionByIdMutation.ChildProps;
+type Props = OwnProps &
+  withUpdateQuestionByIdMutation.ChildProps &
+  ReduxStateProps;
 
 const useStyles = makeStyles((_: Theme) => ({
   form: {
@@ -31,7 +39,13 @@ const useStyles = makeStyles((_: Theme) => ({
 function UpdateQuestionTagsBase(props: Props) {
   const classes = useStyles();
 
-  const { questionId, initialValue, updateQuestion, onExit } = props;
+  const {
+    questionId,
+    initialValue,
+    updateQuestion,
+    onExit,
+    workspaceId
+  } = props;
 
   const [tagIds, setTagIds] = React.useState<FormFieldMeta<Array<number>>>({
     value: initialValue,
@@ -86,6 +100,7 @@ function UpdateQuestionTagsBase(props: Props) {
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <TagAutocomplete
+        workspaceId={workspaceId}
         autoFocus
         value={tagIds.value}
         error={tagIds.touched && tagIds.error}
@@ -98,8 +113,20 @@ function UpdateQuestionTagsBase(props: Props) {
   );
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    workspaceId: state.global.workspaceId
+  };
+};
+
 const UpdateQuestionTags: React.ComponentType<
   OwnProps & withUpdateQuestionByIdMutation.InputProps
-> = compose(withUpdateQuestionByIdMutation.hoc)(UpdateQuestionTagsBase);
+> = compose(
+  connect(
+    mapStateToProps,
+    {}
+  ),
+  withUpdateQuestionByIdMutation.hoc
+)(UpdateQuestionTagsBase);
 
 export default UpdateQuestionTags;

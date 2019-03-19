@@ -135,6 +135,8 @@ function CreateQuestionBase(props: Props) {
           label="Tags"
           editComponent={
             <TagAutocomplete
+              workspaceId={workspaceId}
+              onlyEnabled
               value={tagIds.value}
               error={tagIds.touched && tagIds.error}
               onChange={handleSetTagIds}
