@@ -10,7 +10,7 @@ declare
   v_username text;
 begin
   -- Crypt username
-  v_username = crypt(username, gen_salt('bf'));
+  v_username = crypt(username, gen_salt('bf', 8));
 
   -- Insert the new user
   insert into app_public.user (username, role) values
