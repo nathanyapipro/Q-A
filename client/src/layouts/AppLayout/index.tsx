@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     flexShrink: 0,
     width: "100vw",
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: `calc(100vw - ${SIDEBAR_WIDTH}px)`
     }
   },
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0,
     flexGrow: 1,
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       padding: theme.spacing.unit * 3
     }
   },

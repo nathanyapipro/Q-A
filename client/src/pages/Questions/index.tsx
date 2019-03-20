@@ -5,9 +5,7 @@ import Hidden from "@material-ui/core/Hidden";
 import Filters from "./Filters";
 import QuestionsTable from "../../components/QuestionsTable";
 import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import CloseIcon from "@material-ui/icons/Close";
 import Typography from "@material-ui/core/Typography";
 import { QuestionsVariables } from "../../types/apollo/Questions";
 import Paper from "@material-ui/core/Paper";
@@ -32,22 +30,24 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexDirection: "column"
   },
+  content: {
+    display: "flex",
+    flexDirection: "row",
+    position: "relative"
+  },
   fullWidth: {
     width: "100%"
   },
-  header: {
+  filters: {
     display: "flex",
-    flexDirection: "row",
-    flexGrow: 1,
-    padding: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2
+    flexDirection: "column",
+    flexShrink: 0,
+    height: "min-content",
+    width: theme.spacing.unit * 40,
+    marginLeft: theme.spacing.unit * 2
   },
   drawerPaper: {
     height: "100%"
-  },
-  drawerHeader: {},
-  drawerContent: {
-    padding: theme.spacing.unit * 2
   },
   closeButton: {
     width: theme.spacing.unit * 8,
@@ -124,40 +124,35 @@ function QuestionsBase(props: Props) {
           />
           <Typography color="inherit">Filters</Typography>
         </Button>
-        <Drawer
-          variant="temporary"
-          anchor="bottom"
-          open={isFiltersOpen}
-          onClose={toggleFilters}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          ModalProps={{
-            keepMounted: true
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <Button
-              color="primary"
-              disableRipple
-              className={classes.closeButton}
-              onClick={toggleFilters}
-            >
-              <CloseIcon color="inherit" />
-            </Button>
-          </div>
-          <Divider />
-          <div className={classes.drawerContent}>
+      </Hidden>
+      <div className={classes.content}>
+        <QuestionsTable {...queryParams} handleChangePage={handleChangePage} />
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            anchor="bottom"
+            open={isFiltersOpen}
+            onClose={toggleFilters}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true
+            }}
+          >
+            <Filters
+              query={query}
+              setQuery={setQuery}
+              toggleFilters={toggleFilters}
+            />
+          </Drawer>
+        </Hidden>
+        <Hidden className={classes.fullWidth} smDown>
+          <Paper elevation={1} className={classes.filters}>
             <Filters query={query} setQuery={setQuery} />
-          </div>
-        </Drawer>
-      </Hidden>
-      <Hidden className={classes.fullWidth} xsDown>
-        <Paper elevation={1} className={classes.header}>
-          <Filters query={query} setQuery={setQuery} />
-        </Paper>
-      </Hidden>
-      <QuestionsTable {...queryParams} handleChangePage={handleChangePage} />
+          </Paper>
+        </Hidden>
+      </div>
     </div>
   );
 }

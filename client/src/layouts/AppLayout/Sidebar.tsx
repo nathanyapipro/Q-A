@@ -16,7 +16,7 @@ type Props = OwnProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: SIDEBAR_WIDTH,
       flexShrink: 0
     }
@@ -44,7 +44,7 @@ function SidebarBase(props: Props) {
   return (
     <nav className={classes.drawer}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden smUp>
+      <Hidden mdUp>
         <Drawer
           variant="temporary"
           open={isSiteMapOpen}
@@ -59,7 +59,7 @@ function SidebarBase(props: Props) {
           {children}
         </Drawer>
       </Hidden>
-      <Hidden xsDown>
+      <Hidden smDown>
         <Drawer
           classes={{
             paper: classes.drawerPaper

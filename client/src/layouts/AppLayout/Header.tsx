@@ -20,12 +20,12 @@ type Props = OwnProps;
 const useStyles = makeStyles((theme: Theme) => ({
   appBar: {
     marginLeft: SIDEBAR_WIDTH,
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${SIDEBAR_WIDTH}px)`
     }
   },
   menuButton: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       display: "none"
     }
   },
