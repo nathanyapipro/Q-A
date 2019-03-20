@@ -125,13 +125,13 @@ function ActionsBase(props: Props) {
           color={hasVoted ? "primary" : "secondary"}
           variant="body1"
         >
-          {`${voteCount} Like`}
+          {`${voteCount} Like${voteCount > 1 ? "s" : ""}`}
         </Typography>
       </Button>
       <Button variant="text" color="secondary" className={classes.button}>
         <CommentIcon className={classes.buttonIcon} color="inherit" />
         <Typography noWrap color="secondary" variant="body1">
-          {`${commentCount} Comment`}
+          {`${commentCount} Comment${commentCount > 1 ? "s" : ""}`}
         </Typography>
       </Button>
       {isQuestionByIdPage && (

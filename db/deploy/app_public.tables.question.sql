@@ -28,7 +28,7 @@ create policy delete_all on app_public.question for delete using (true);
 
 grant select on app_public.question to fundamental_authenticated;
 grant insert on app_public.question to fundamental_authenticated;
-grant update(content, status_id) on app_public.question to fundamental_authenticated;
+grant update(vote_count, content, status_id) on app_public.question to fundamental_authenticated;
 grant delete on app_public.question to fundamental_authenticated;
 
 comment on table app_public.question is
