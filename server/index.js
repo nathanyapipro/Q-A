@@ -42,10 +42,10 @@ async function main() {
 
   await middleware.installLogging(app);
 
+  await middleware.installPostGraphile(app);
+
   // These are our assets: images/etc; served out of the /client/public folder
   await middleware.installSharedStatic(app);
-
-  await middleware.installPostGraphile(app);
 
   // And finally, we open the listen port
   httpServer.listen(PORT, () => {

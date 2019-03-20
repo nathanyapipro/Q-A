@@ -22,10 +22,10 @@ create policy create_all on app_public.workspace_tag for insert with check (true
 create policy update_all on app_public.workspace_tag for update using (true);
 create policy delete_all on app_public.workspace_tag for delete using (true);
 
-grant select on app_public.workspace_tag to fundamental_visitor;
-grant insert on app_public.workspace_tag to fundamental_visitor;
-grant update(is_enabled) on app_public.workspace_tag to fundamental_visitor;
-grant delete on app_public.workspace_tag to fundamental_visitor;
+grant select on app_public.workspace_tag to fundamental_authenticated;
+grant insert on app_public.workspace_tag to fundamental_authenticated;
+grant update(is_enabled) on app_public.workspace_tag to fundamental_authenticated;
+grant delete on app_public.workspace_tag to fundamental_authenticated;
 
 comment on table app_public.workspace_tag is
   E'workspace_tag in the application.';

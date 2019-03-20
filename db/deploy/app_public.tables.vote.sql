@@ -17,7 +17,7 @@ alter table app_public.vote enable row level security;
 
 create policy select_all on app_public.vote for select using (true);
 
-grant select on app_public.vote to fundamental_visitor;
+grant select on app_public.vote to fundamental_authenticated;
 
 comment on table app_public.vote is
   E'@omit create,delete,update\n  vote on a question in the application.';

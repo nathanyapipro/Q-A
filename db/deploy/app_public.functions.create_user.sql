@@ -27,6 +27,8 @@ begin
 end;
 $$ language plpgsql volatile set search_path from current;
 
+grant execute on function app_public.create_user(username text, password text, role app_public.role_type) to fundamental_authenticated;
+
 comment on function app_public.create_user(username text, password text, role app_public.role_type) is
   E'Creates a user account.';
 

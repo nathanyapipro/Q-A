@@ -15,7 +15,10 @@ returns boolean as $$
   )
 $$ language sql stable;
 
+grant execute on function app_public.question_has_voted(q app_public.question) to fundamental_authenticated;
+
 comment on function app_public.question_has_voted(q app_public.question) is
   E'indicates if the user has voted';
+  
 
 COMMIT;

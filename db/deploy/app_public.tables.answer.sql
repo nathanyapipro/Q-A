@@ -22,10 +22,10 @@ create policy insert_all on app_public.answer for insert with check (true);
 create policy update_all on app_public.answer for update using (true);
 create policy delete_all on app_public.answer for delete using (true);
 
-grant select on app_public.answer to fundamental_visitor;
-grant insert on app_public.answer to fundamental_visitor;
-grant update(content) on app_public.answer to fundamental_visitor;
-grant delete on app_public.answer to fundamental_visitor;
+grant select on app_public.answer to fundamental_authenticated;
+grant insert on app_public.answer to fundamental_authenticated;
+grant update(content) on app_public.answer to fundamental_authenticated;
+grant delete on app_public.answer to fundamental_authenticated;
 
 comment on table app_public.answer is
   E'@omit create\n answer in the application.';

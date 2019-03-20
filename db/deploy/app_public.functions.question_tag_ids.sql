@@ -13,4 +13,6 @@ returns integer[] as $$
   )::integer[]
 $$ language sql stable;
 
+grant execute on function app_public.question_tag_ids(q app_public.question) to fundamental_authenticated;
+
 COMMIT;

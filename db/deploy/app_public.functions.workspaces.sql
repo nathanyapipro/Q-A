@@ -42,6 +42,8 @@ as $$
   end;
 $$ language plpgsql stable;
 
+grant execute on function app_public.workspaces(email text) to fundamental_authenticated;
+
 comment on function app_public.workspaces(email text) is
   E'Queries workspaces';
 

@@ -26,6 +26,8 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
+grant execute on function app_public.create_question(workspace_id integer, content text, tag_ids integer[]) to fundamental_authenticated;
+
 comment on function app_public.create_question(workspace_id integer, content text, tag_ids integer[]) is
   E'Creates a question.';
 

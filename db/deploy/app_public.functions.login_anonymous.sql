@@ -26,10 +26,12 @@ as $$
       v_user = app_private.create_anonymous_user(v_username);
     end if;
 
-    jwt_token = (v_user.id, v_user.role)::app_private.jwt_token;
+    jwt_token = (v_user.id, v_user.role, 'fundamental_authenticated')::app_private.jwt_token;
     return (jwt_token, v_user)::app_public.auth;
   end;
 $$ language plpgsql strict security definer volatile set search_path from current;
+
+grant execute on function app_public.login_anonymous(username text) to fundamental_unauthenticated;
 
 comment on function app_public.login_anonymous(username text) is
   E'Returns a user that matches the crypt username, or null on failure.';

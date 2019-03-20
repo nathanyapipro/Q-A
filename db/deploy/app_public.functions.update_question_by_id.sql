@@ -45,6 +45,8 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
+grant execute on function app_public.update_question_by_id(id integer, patch app_public.question_patch) to fundamental_authenticated;
+
 comment on function app_public.update_question_by_id(id integer, patch app_public.question_patch) is
   E'Update a question by Id.';
 
