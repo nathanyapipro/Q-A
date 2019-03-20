@@ -59,7 +59,7 @@ function UpdateQuestionContentBase(props: Props) {
     setContent({
       value,
       touched: true,
-      error: !(value && value !== "" && value.length < 500)
+      error: !(value && value !== "" && value.length <= 500)
     });
   }
 

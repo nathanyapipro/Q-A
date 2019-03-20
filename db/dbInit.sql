@@ -3,7 +3,7 @@ create database fundamental;
 create role fundamental_admin with login superuser password '12345678';
 grant all privileges on database fundamental to fundamental_admin;
 
-create role fundamental_visitor with login superuser password '12345678';
+create role fundamental_visitor with login password '12345678';
 
 create role fundamental_unauthenticated;
 create role fundamental_authenticated;
