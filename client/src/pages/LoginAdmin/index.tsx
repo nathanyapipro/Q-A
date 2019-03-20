@@ -9,6 +9,7 @@ import { StoreState } from "../../states";
 import { globalActions } from "../../states/global";
 import { SetAuthPayload } from "../../states/global/actions";
 import TextField from "@material-ui/core/TextField";
+import Field from "../../components/Field";
 import { FormFieldMeta } from "../../types";
 
 interface OwnProps {}
@@ -32,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   field: {
     width: theme.spacing.unit * 35,
-    marginBottom: theme.spacing.unit * 1
+    marginTop: 0,
+    marginBottom: 0
   },
   button: {
     marginTop: theme.spacing.unit * 1,
@@ -119,32 +121,34 @@ function LoginAdminBase({ login, setAuth }: Props) {
 
   return (
     <form className={classes.container} onSubmit={handleSubmit}>
-      <TextField
-        className={classes.field}
-        variant="outlined"
-        fullWidth
+      <Field
         label="Username"
-        InputLabelProps={{
-          shrink: true
-        }}
-        error={username.error}
-        margin="dense"
-        value={username.value}
-        onChange={handleUsernameChange}
+        editComponent={
+          <TextField
+            className={classes.field}
+            variant="outlined"
+            fullWidth
+            error={username.error}
+            margin="dense"
+            value={username.value}
+            onChange={handleUsernameChange}
+          />
+        }
       />
-      <TextField
-        className={classes.field}
-        variant="outlined"
-        fullWidth
-        type="password"
+      <Field
         label="Password"
-        InputLabelProps={{
-          shrink: true
-        }}
-        error={password.error}
-        margin="dense"
-        value={password.value}
-        onChange={handlePasswordChange}
+        editComponent={
+          <TextField
+            className={classes.field}
+            variant="outlined"
+            fullWidth
+            type="password"
+            error={password.error}
+            margin="dense"
+            value={password.value}
+            onChange={handlePasswordChange}
+          />
+        }
       />
       <Button
         color="primary"
