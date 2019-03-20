@@ -21,7 +21,8 @@ type Props = OwnProps & withQuestionsQuery.ChildProps;
 const useStyles = makeStyles((_: Theme) => ({
   container: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    height: "min-content"
   },
   table: {
     tableLayout: "fixed"
