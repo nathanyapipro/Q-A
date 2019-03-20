@@ -5,6 +5,8 @@ import { Theme } from "@material-ui/core/styles";
 import { FormFieldMeta } from "../types";
 import { compose } from "react-apollo";
 import * as withUpdateQuestionByIdMutation from "../queries/withUpdateQuestionByIdMutation";
+import classNames from "classnames";
+import Typography from "@material-ui/core/Typography";
 
 interface OwnProps {
   questionId: number;
@@ -14,7 +16,7 @@ interface OwnProps {
 
 type Props = OwnProps & withUpdateQuestionByIdMutation.ChildProps;
 
-const useStyles = makeStyles((_: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   form: {
     display: "flex",
     flexDirection: "column"
@@ -22,6 +24,19 @@ const useStyles = makeStyles((_: Theme) => ({
   field: {
     marginTop: 0,
     marginBottom: 0
+  },
+  helper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    marginTop: -theme.spacing.unit,
+    marginRight: -theme.spacing.unit * 1.5
+  },
+  helperText: {
+    alignSelf: "flex-end"
+  },
+  error: {
+    color: theme.palette.error.main
   },
   button: {
     display: "none"
@@ -44,7 +59,7 @@ function UpdateQuestionContentBase(props: Props) {
     setContent({
       value,
       touched: true,
-      error: !(value && value !== "")
+      error: !(value && value !== "" && value.length < 500)
     });
   }
 
@@ -92,6 +107,19 @@ function UpdateQuestionContentBase(props: Props) {
         autoFocus
         multiline
         placeholder="Ask a Question ... "
+        helperText={
+          <div className={classes.helper}>
+            <Typography
+              variant="caption"
+              color="secondary"
+              className={classNames(classes.helperText, {
+                [classes.error]: content.error
+              })}
+            >
+              {`${content.value.length}/500`}
+            </Typography>
+          </div>
+        }
         value={content.value}
         onChange={handleContentChange}
         onKeyPress={handleKeyPress}

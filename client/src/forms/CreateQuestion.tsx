@@ -13,6 +13,7 @@ import * as withCreateQuestionMutation from "../queries/withCreateQuestionMutati
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { StoreState } from "../states";
+import classNames from "classnames";
 
 interface OwnProps {}
 
@@ -41,9 +42,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   note: {
     marginBottom: theme.spacing.unit * 2
   },
-  field: {
+  contentField: {
     marginTop: 0,
-    marginBottom: 0
+    marginBottom: -theme.spacing.unit * 2
+  },
+  helper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end",
+    marginTop: -theme.spacing.unit,
+    marginRight: -theme.spacing.unit * 1.5
+  },
+  helperText: {
+    alignSelf: "flex-end"
+  },
+  error: {
+    color: theme.palette.error.main
   },
   submitButton: {}
 }));
@@ -68,7 +82,7 @@ function CreateQuestionBase(props: Props) {
     setContent({
       value,
       touched: true,
-      error: !(value && value !== "")
+      error: !(value && value !== "" && value.length < 500)
     });
   }
 
@@ -121,11 +135,24 @@ function CreateQuestionBase(props: Props) {
               error={content.touched && content.error}
               autoFocus
               multiline
-              rows="8"
+              rows="6"
+              helperText={
+                <div className={classes.helper}>
+                  <Typography
+                    variant="caption"
+                    color="secondary"
+                    className={classNames(classes.helperText, {
+                      [classes.error]: content.error
+                    })}
+                  >
+                    {`${content.value.length}/500`}
+                  </Typography>
+                </div>
+              }
               placeholder="Ask a Question ... "
               value={content.value}
               onChange={handleContentChange}
-              className={classes.field}
+              className={classes.contentField}
               margin="dense"
               variant="outlined"
             />
