@@ -58,7 +58,7 @@ function UpdateQuestionTagsBase(props: Props) {
     setTagIds({
       value,
       touched: true,
-      error: !(value instanceof Array && value.length > 0)
+      error: false
     });
   }
 

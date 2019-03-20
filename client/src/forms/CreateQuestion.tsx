@@ -77,7 +77,7 @@ function CreateQuestionBase(props: Props) {
     setTagIds({
       value,
       touched: true,
-      error: !(value instanceof Array && value.length > 0)
+      error: false
     });
   }
 
@@ -146,7 +146,7 @@ function CreateQuestionBase(props: Props) {
         />
         <Button
           className={classes.submitButton}
-          disabled={!(content.touched && tagIds.touched)}
+          disabled={!content.touched}
           type="submit"
           variant="contained"
           color="primary"

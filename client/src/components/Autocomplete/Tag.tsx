@@ -21,7 +21,7 @@ function TagAutocompleteBase(props: Props) {
 
   const options: OptionsType = workspaceTags.map(workspaceTag => ({
     value: workspaceTag.tag ? workspaceTag.tag.id : 0,
-    label: workspaceTag.tag ? workspaceTag.tag.name : "N/A"
+    label: workspaceTag.tag ? workspaceTag.tag.name : "None"
   }));
 
   const valueToValueType = (value?: number | Array<number>): ValueType => {
