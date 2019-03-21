@@ -65,8 +65,6 @@ export type ChildProps = {
   data: {
     nodes: Array<Questions_questions_nodes>;
     totalCount: number;
-    offset: number;
-    first: number;
   };
   loading: boolean;
   error?: ApolloError;
@@ -85,7 +83,7 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
       },
       fetchPolicy: "cache-and-network"
     }),
-    props: ({ data, ownProps: { offset, first } }) => {
+    props: ({ data }) => {
       if (!data) {
         throw new Error("No data prop found");
       }
@@ -97,9 +95,7 @@ export const hoc = graphql<InputProps, Response, Variables, ChildProps>(
           totalCount:
             data.questions && data.questions.totalCount
               ? data.questions.totalCount
-              : 0,
-          offset,
-          first
+              : 0
         },
         loading: loading,
         error: error

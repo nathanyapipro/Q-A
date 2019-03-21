@@ -1,6 +1,5 @@
 import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { QueryType } from ".";
 import CloseIcon from "@material-ui/icons/Close";
 import Button from "@material-ui/core/Button";
 import StatusAutocomplete from "../../components/Autocomplete/Status";
@@ -11,17 +10,26 @@ import { QuestionsOrderBy } from "../../types/apollo";
 import { connect } from "react-redux";
 import { StoreState } from "../../states";
 import { compose } from "react-apollo";
+import { questionsActions } from "../../states/questions";
 
 type ReduxStateProps = {
   workspaceId: number;
+  tagIds: Array<number>;
+  statusIds: Array<number>;
+  orderBy: Array<QuestionsOrderBy>;
 };
+
+interface ReduxDispatchProps {
+  setFiltersStatusIds: (statusIds: Array<number>) => void;
+  setFiltersTagIds: (statusIds: Array<number>) => void;
+  setFiltersOrderBy: (statusIds: Array<QuestionsOrderBy>) => void;
+  resetFilters: () => void;
+}
 interface OwnProps {
   toggleFilters?: (e: React.SyntheticEvent<{}, Event>) => void;
-  query: QueryType;
-  setQuery: React.Dispatch<React.SetStateAction<QueryType>>;
 }
 
-type Props = OwnProps & ReduxStateProps;
+type Props = OwnProps & ReduxStateProps & ReduxDispatchProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -63,46 +71,51 @@ const useStyles = makeStyles((theme: Theme) => ({
     "&:first-child": {
       marginTop: 0
     }
+  },
+  resetButton: {
+    marginTop: theme.spacing.unit * 1.5
   }
 }));
 
 function FiltersBase(props: Props) {
   const classes = useStyles();
-  const { query, setQuery, workspaceId, toggleFilters } = props;
+  const {
+    statusIds,
+    tagIds,
+    orderBy,
+    workspaceId,
+    toggleFilters,
+    setFiltersStatusIds,
+    setFiltersTagIds,
+    setFiltersOrderBy,
+    resetFilters
+  } = props;
 
   function handleSetStatusIds(item: number | Array<number>) {
     const value = item ? (item instanceof Array ? item : [item]) : [];
-    setQuery({
-      ...query,
-      offset: 0,
-      statusIds: value
-    });
+    setFiltersStatusIds(value);
   }
 
   function handleSetTagIds(item: number | Array<number>) {
     const value = item instanceof Array ? item : [item];
-    setQuery({
-      ...query,
-      offset: 0,
-      tagIds: value
-    });
+    setFiltersTagIds(value);
   }
 
   function handleSetOrderBy(item: QuestionsOrderBy | Array<QuestionsOrderBy>) {
     const value = item instanceof Array ? item : [item];
-    setQuery({
-      ...query,
-      offset: 0,
-      orderBy: value
-    });
+    setFiltersOrderBy(value);
   }
+
+  function handleResetFilters(_: React.MouseEvent<HTMLElement, MouseEvent>) {
+    resetFilters();
+  }
+
   return (
     <div className={classes.container}>
       {toggleFilters && (
         <div className={classes.header}>
           <Button
             color="primary"
-            disableRipple
             className={classes.closeButton}
             onClick={toggleFilters}
           >
@@ -113,7 +126,7 @@ function FiltersBase(props: Props) {
       <div className={classes.content}>
         <div className={classes.field}>
           <StatusAutocomplete
-            value={query.statusIds}
+            value={statusIds}
             label="Status Filter"
             isClearable
             onChange={handleSetStatusIds}
@@ -122,18 +135,26 @@ function FiltersBase(props: Props) {
         <div className={classes.field}>
           <TagAutocomplete
             workspaceId={workspaceId}
-            value={query.tagIds}
+            value={tagIds}
             label="Tag Filter"
             onChange={handleSetTagIds}
           />
         </div>
         <div className={classes.field}>
           <OrderByAutocomplete
-            value={query.orderBy}
+            value={orderBy}
             label="Order By"
             onChange={handleSetOrderBy}
           />
         </div>
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.resetButton}
+          onClick={handleResetFilters}
+        >
+          Reset Filters
+        </Button>
       </div>
     </div>
   );
@@ -141,14 +162,20 @@ function FiltersBase(props: Props) {
 
 const mapStateToProps = (state: StoreState): ReduxStateProps => {
   return {
-    workspaceId: state.global.workspaceId
+    workspaceId: state.global.workspaceId,
+    ...state.questions.filters
   };
 };
 
 const Filters: React.ComponentType<OwnProps> = compose(
   connect(
     mapStateToProps,
-    {}
+    {
+      setFiltersStatusIds: questionsActions.setFiltersStatusIds,
+      setFiltersTagIds: questionsActions.setFiltersTagIds,
+      setFiltersOrderBy: questionsActions.setFiltersOrderBy,
+      resetFilters: questionsActions.resetFilters
+    }
   )
 )(FiltersBase);
 

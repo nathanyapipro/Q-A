@@ -53,18 +53,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 function AnswerBase(props: Props) {
   const classes = useStyles();
 
-  const {
-    data
-    // currentUserId
-  } = props;
+  const { data } = props;
 
   const { id: answerId, questionId, content, user, updatedAt } = data;
 
   if (!user) {
     return <noscript />;
   }
-
-  // const isOwner = user.id === currentUserId;
 
   const username = getUsername(user.username, user.role);
 

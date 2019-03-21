@@ -14,14 +14,23 @@ import { QuestionsOrderBy } from "../../types/apollo";
 import { compose } from "react-apollo";
 import { connect } from "react-redux";
 import { StoreState } from "../../states";
+import { questionsActions } from "../../states/questions";
 
 interface OwnProps {}
 
 type ReduxStateProps = {
   workspaceId: number;
+  tagIds: Array<number>;
+  statusIds: Array<number>;
+  orderBy: Array<QuestionsOrderBy>;
+  offset: number;
+  first: number;
+  isFiltersOpen: boolean;
 };
 
-interface ReduxDispatchProps {}
+interface ReduxDispatchProps {
+  toggleFiltersOpen: () => void;
+}
 
 type Props = OwnProps & ReduxStateProps & ReduxDispatchProps;
 
@@ -63,50 +72,36 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export interface QueryType {
-  tagIds: Array<number>;
-  statusIds: Array<number>;
-  orderBy: Array<QuestionsOrderBy>;
-  offset: number;
-  first: number;
-}
-
 function QuestionsBase(props: Props) {
   const classes = useStyles();
-  const { workspaceId } = props;
-
-  const [isFiltersOpen, setIsFiltersOpen] = React.useState<boolean>(false);
-  const [query, setQuery] = React.useState<QueryType>({
-    tagIds: [],
-    statusIds: [],
-    orderBy: [QuestionsOrderBy.VOTE_COUNT_DESC],
-    offset: 0,
-    first: 10
-  });
+  const {
+    workspaceId,
+    tagIds,
+    statusIds,
+    orderBy,
+    offset,
+    first,
+    isFiltersOpen,
+    toggleFiltersOpen
+  } = props;
 
   function toggleFilters(_: React.SyntheticEvent<{}, Event>) {
-    setIsFiltersOpen(!isFiltersOpen);
+    toggleFiltersOpen();
   }
 
-  const handleChangePage = (page: number) =>
-    setQuery({
-      ...query,
-      offset: page * query.first
-    });
-
   const queryParams: QuestionsVariables = {
-    first: query.first,
-    offset: query.offset,
+    first: first,
+    offset: offset,
     filter: {
       tagIds: {
-        contains: query.tagIds.length > 0 ? query.tagIds : null
+        contains: tagIds.length > 0 ? tagIds : null
       },
       statusId: {
-        in: query.statusIds.length > 0 ? query.statusIds : null
+        in: statusIds.length > 0 ? statusIds : null
       }
     },
     workspaceId,
-    orderBy: query.orderBy
+    orderBy: orderBy
   };
 
   return (
@@ -126,7 +121,7 @@ function QuestionsBase(props: Props) {
         </Button>
       </Hidden>
       <div className={classes.content}>
-        <QuestionsTable {...queryParams} handleChangePage={handleChangePage} />
+        <QuestionsTable {...queryParams} />
         <Hidden mdUp>
           <Drawer
             variant="temporary"
@@ -140,16 +135,12 @@ function QuestionsBase(props: Props) {
               keepMounted: true
             }}
           >
-            <Filters
-              query={query}
-              setQuery={setQuery}
-              toggleFilters={toggleFilters}
-            />
+            <Filters toggleFilters={toggleFilters} />
           </Drawer>
         </Hidden>
         <Hidden className={classes.fullWidth} smDown>
           <Paper elevation={1} className={classes.filters}>
-            <Filters query={query} setQuery={setQuery} />
+            <Filters />
           </Paper>
         </Hidden>
       </div>
@@ -159,14 +150,19 @@ function QuestionsBase(props: Props) {
 
 const mapStateToProps = (state: StoreState): ReduxStateProps => {
   return {
-    workspaceId: state.global.workspaceId
+    workspaceId: state.global.workspaceId,
+    ...state.questions.filters,
+    ...state.questions.pagination,
+    isFiltersOpen: state.questions.isFiltersOpen
   };
 };
 
 const Questions: React.ComponentType<OwnProps> = compose(
   connect(
     mapStateToProps,
-    {}
+    {
+      toggleFiltersOpen: questionsActions.toggleFiltersOpen
+    }
   )
 )(QuestionsBase);
 

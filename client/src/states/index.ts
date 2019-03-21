@@ -4,6 +4,11 @@ import { ActionType } from "typesafe-actions";
 import { persistReducer, persistStore, Persistor } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { GlobalState, globalReducer, globalActions } from "./global";
+import {
+  QuestionsState,
+  questionsReducer,
+  questionsActions
+} from "./questions";
 
 declare global {
   interface Window {
@@ -11,10 +16,13 @@ declare global {
   }
 }
 
-export type Actions = ActionType<typeof globalActions>;
+export type Actions = ActionType<
+  typeof globalActions | typeof questionsActions
+>;
 
 export interface StoreState {
   global: GlobalState;
+  questions: QuestionsState;
 }
 
 export interface SetupStoreResponse {
@@ -25,7 +33,8 @@ export interface SetupStoreResponse {
 
 export async function setupStore(): Promise<SetupStoreResponse> {
   const rootReducer = combineReducers({
-    global: globalReducer
+    global: globalReducer,
+    questions: questionsReducer
   });
 
   const enhancers = [];

@@ -11,12 +11,24 @@ import Typography from "@material-ui/core/Typography";
 import Row from "./Row";
 import { Theme } from "@material-ui/core/styles";
 import * as withQuestionsQuery from "../../queries/withQuestionsQuery";
+import { connect } from "react-redux";
+import { StoreState } from "../../states";
+import { questionsActions } from "../../states/questions";
 
-interface OwnProps {
-  handleChangePage: (page: number) => void;
+type ReduxStateProps = {
+  offset: number;
+  first: number;
+};
+
+interface ReduxDispatchProps {
+  setPaginationOffset: (offset: number) => void;
 }
+interface OwnProps {}
 
-type Props = OwnProps & withQuestionsQuery.ChildProps;
+type Props = OwnProps &
+  withQuestionsQuery.ChildProps &
+  ReduxStateProps &
+  ReduxDispatchProps;
 
 const useStyles = makeStyles((_: Theme) => ({
   container: {
@@ -33,8 +45,10 @@ const useStyles = makeStyles((_: Theme) => ({
 function QuestionsTableBase(props: Props) {
   const classes = useStyles();
   const {
-    data: { nodes, totalCount, offset, first },
-    handleChangePage
+    data: { nodes, totalCount },
+    first,
+    offset,
+    setPaginationOffset
   } = props;
 
   function renderRows() {
@@ -57,7 +71,7 @@ function QuestionsTableBase(props: Props) {
     _: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
     page: number
   ) {
-    handleChangePage(page);
+    setPaginationOffset(page * first);
   }
 
   return (
@@ -83,8 +97,22 @@ function QuestionsTableBase(props: Props) {
   );
 }
 
+const mapStateToProps = (state: StoreState): ReduxStateProps => {
+  return {
+    ...state.questions.pagination
+  };
+};
+
 const QuestionsTable: React.ComponentType<
   OwnProps & withQuestionsQuery.InputProps
-> = compose(withQuestionsQuery.hoc)(QuestionsTableBase);
+> = compose(
+  connect(
+    mapStateToProps,
+    {
+      setPaginationOffset: questionsActions.setPaginationOffset
+    }
+  ),
+  withQuestionsQuery.hoc
+)(QuestionsTableBase);
 
 export default QuestionsTable;

@@ -2,7 +2,6 @@ import * as React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Theme } from "@material-ui/core/styles";
 import { compose } from "react-apollo";
-// import Typography from "@material-ui/core/Typography";
 
 interface OwnProps {}
 
