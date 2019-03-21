@@ -18,11 +18,15 @@ Client:
   - [x] Basic Conguration
   - [x] ClientState configuration
   - [x] Cache configuration (add cache resolvers to reduce queries executed if data is allready in cache)
-  - [ ] Handle Errors (Unauthorized)
-  - [ ] Reset Cache on Logout
+  - [x] Handle Errors (Unauthorized)
+  - [x] Reset Cache on Logout
 - [x] App Layout
   - [x] Header
   - [x] Sidebar
+    - [x] App logo
+    - [x] Page Navigation
+    - [x] Change Workscaces
+    - [x] Footer (Creds ect..)
 - [x] Anonymous Login Page
   - [x] Google Auth Button
 - [x] User Login Page
@@ -31,7 +35,13 @@ Client:
   - [x] Basic Form
   - [ ] Related Questions (WISHLIST)
 - [x] Questions Page
-  - [x] Filters (status, tags, sortBy)
+  - [x] Filters
+    - [ ] Fuzzy search (WISHLIST)
+    - [x] Status
+    - [x] Tags
+    - [x] OrderBy
+    - [ ] Vote Count (WISHLIST)
+    - [x] Reset Filters
   - [x] Questions Table
     - [x] Pagination
     - [x] Toggle Vote
@@ -62,17 +72,20 @@ Client:
     - [ ] Can CRUD Users
     - [ ] Can CRUD Tags
   - [ ] Responder
-    - [ ] Can Update username/password
-    - [ ] Can Update Status on any question
-    - [ ] Can Update Tags on any question
-    - [ ] Can Update Answer on any question
-    - [ ] Can Create/Update(his) Comments on any question
+    - [x] Can Update username/password
+    - [x] Can Update Status on any question
+    - [x] Can Update Tags on any question
+    - [x] Can Update Answer on any question
+    - [x] Can Create/Update(his) Comments on any question
   - [ ] Anonymous
-    - [ ] Can ask a question
-    - [ ] Can Update/Delete his question (Update only if no Votes)
-    - [ ] Can Create/Update/Delete his comments on any question
-- [ ] Responsive Design (WISHLIST)
-  - [ ] Support small layout (phones)
+    - [x] Can ask a question
+    - [x] Can Update his question (Update only if no Votes)
+    - [x] Can Delete his question
+    - [x] Can Create/Update/Delete his comments on any question
+- [ ] Responsive Design
+  - [x] Support small layout (sm/md)
+  - [x] Support lg layout
+  - [ ] Support xxl layout
 - [ ] PWA Setup (WISHLIST)
   - [ ] Download as APP
 - [ ] Test Suite
