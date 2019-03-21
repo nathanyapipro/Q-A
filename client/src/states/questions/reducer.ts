@@ -1,6 +1,7 @@
 import { ActionType, getType } from "typesafe-actions";
 import { actions } from "./actions";
 import { QuestionsOrderBy } from "../../types/apollo";
+import { actions as globalActions } from "../global/actions";
 
 export type Filters = {
   tagIds: Array<number>;
@@ -38,9 +39,10 @@ const INITIAL_STATE = {
 
 export function reducer(
   state: State = INITIAL_STATE,
-  action: ActionType<typeof actions>
+  action: ActionType<typeof actions | typeof globalActions>
 ): State {
   switch (action.type) {
+    case getType(globalActions.setAuth):
     case getType(actions.reset): {
       return INITIAL_STATE;
     }
