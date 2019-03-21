@@ -136,7 +136,7 @@ function FiltersBase(props: Props) {
           <TagAutocomplete
             workspaceId={workspaceId}
             value={tagIds}
-            label="Tag Filter"
+            label="Tags Filter"
             onChange={handleSetTagIds}
           />
         </div>
