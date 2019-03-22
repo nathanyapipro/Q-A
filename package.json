@@ -7,9 +7,10 @@
   "license": "ISC",
   "scripts": {
     "dev": "nodemon ./server/index.js",
+    "ebSetup": "npm install && cd ./client && npm install",
     "build:client": "cd ./client && npm run build",
     "start": "node ./server/index.js",
-    "prod": "npm run build:client && npm run start",
+    "prod": "npm run ebSetup && npm run build:client && npm run start",
     "precommit": "pretty-quick --staged",
     "cz": "npm run precommit && git cz"
   },
