@@ -60,17 +60,18 @@ function AuthLayoutBase(props: Props) {
           <img className={classes.logo} src={logo} alt="Logo" />
           <div className={classes.description}>
             <Typography align="center" variant="body1" gutterBottom>
-              Welcome to Element AI’s anonymous Q&A app. We can use this as a
-              way to ask or upvote questions that you think are important at
-              Fusion or other similar events (all hands, end of iteration demos,
-              etc.). Let’s use this app to ask relevant, useful, and
-              constructive questions. All questions are completely anonymous, we
-              do not retain your identity.
+              Welcome to Fundamental! This is your internal portal for asking
+              questions, making statements and upvoting others’ questions and
+              statements about Element AI.
             </Typography>
-            <Typography align="center">
-              Note: Questions posted here should promote open and transparent
-              communication for all Elementals. Please be respectful of others
-              and constructive when posting questions.
+            <Typography align="center" variant="body1" gutterBottom>
+              The conditions for using this tool are to: (1) operate on a basis
+              of assuming positive intentions, (2) be respectful of one another,
+              and (3) take the time to ensure that questions and answers are
+              relevant, useful and constructive.
+            </Typography>
+            <Typography align="center" variant="body1">
+              The portal is anonymous.
             </Typography>
           </div>
         </div>

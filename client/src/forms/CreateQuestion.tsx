@@ -122,10 +122,14 @@ function CreateQuestionBase(props: Props) {
   return (
     <Paper elevation={1} className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Typography variant="body2" className={classes.note}>
-          Note: Questions posted here should promote open and transparent
-          communication for all Elementals. Please be respectful of others and
-          constructive when posting questions.
+        <Typography variant="body1" className={classes.note}>
+          Tips for getting a satisfactory answer: (1) Do assume positive
+          intentions first. We’re all building this company together! (2) Don’t
+          assume anything else. Keep your question as precise and concise as
+          possible. (3) One question per question! Don’t mix issues, please. (4)
+          Compose your question by thinking about what a satisfactory answer
+          would be. (5) And finally… reread yourself before hitting send,
+          because once it’s submitted and upvoted, that’s it!
         </Typography>
         <Field
           label="Question"

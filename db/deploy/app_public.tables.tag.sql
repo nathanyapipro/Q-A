@@ -5,6 +5,7 @@ BEGIN;
 create table app_public.tag (
   id serial primary key,
   name text not null unique,
+  description text,
   color text not null,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -18,7 +19,7 @@ create policy delete_all on app_public.tag for delete using (true);
 
 grant select on app_public.tag to fundamental_authenticated;
 grant insert on app_public.tag to fundamental_authenticated;
-grant update(name, color) on app_public.tag to fundamental_authenticated;
+grant update(name, description, color) on app_public.tag to fundamental_authenticated;
 grant delete on app_public.tag to fundamental_authenticated;
 
 comment on table app_public.tag is
@@ -28,6 +29,8 @@ comment on column app_public.tag.id is
   E'@omit update\n unique identifier for the tag.';
 comment on column app_public.tag.name is
   E'name of the tag.';
+comment on column app_public.tag.description is
+  E'description of the tag.';
 comment on column app_public.tag.color is
   E'color of the tag.';
 comment on column app_public.tag.created_at is
