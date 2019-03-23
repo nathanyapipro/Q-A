@@ -4,7 +4,7 @@ BEGIN;
 
 create table app_public.tag (
   id serial primary key,
-  name text not null unique,
+  name text not null,
   description text,
   color text not null,
   created_at timestamptz not null default now(),

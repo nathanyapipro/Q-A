@@ -22,8 +22,6 @@ import { OptionProps } from "react-select/lib/components/Option";
 import { debounce } from "../../helpers/functional";
 import { Theme } from "@material-ui/core/styles";
 
-const DROPDOWN_HEIGHT = 250;
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flex: "1 1 auto"
@@ -65,8 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     position: "absolute",
     zIndex: theme.zIndex.modal,
-    maxHeight: DROPDOWN_HEIGHT,
-    overflow: "auto",
+    overflowY: "auto",
     left: 0,
     right: 0
   }

@@ -106,7 +106,7 @@ function QuestionsBase(props: Props) {
 
   return (
     <div className={classes.container}>
-      <Hidden smUp>
+      <Hidden mdUp>
         <Button
           color="primary"
           variant="contained"
