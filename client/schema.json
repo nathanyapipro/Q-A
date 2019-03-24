@@ -1144,33 +1144,6 @@
             "deprecationReason": null
           },
           {
-            "name": "tagByName",
-            "description": null,
-            "args": [
-              {
-                "name": "name",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Tag",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "userById",
             "description": null,
             "args": [
@@ -4439,6 +4412,46 @@
               }
             },
             "defaultValue": null
+          },
+          {
+            "name": "lessThan",
+            "description": "Less than the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lessThanOrEqualTo",
+            "description": "Less than or equal to the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "greaterThan",
+            "description": "Greater than the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "greaterThanOrEqualTo",
+            "description": "Greater than or equal to the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -4734,6 +4747,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "description",
+            "description": "description of the tag.",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -6293,7 +6318,7 @@
             "deprecationReason": null
           },
           {
-            "name": "ANSWERED",
+            "name": "ADDRESSED",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -6679,26 +6704,6 @@
             "defaultValue": null
           },
           {
-            "name": "anyEqualTo",
-            "description": "Any array item is equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "anyNotEqualTo",
-            "description": "Any array item is not equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "lessThan",
             "description": "Less than the specified value.",
             "type": {
@@ -6793,6 +6798,26 @@
                 "name": "Int",
                 "ofType": null
               }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "anyEqualTo",
+            "description": "Any array item is equal to the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "anyNotEqualTo",
+            "description": "Any array item is not equal to the specified value.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "defaultValue": null
           },
@@ -8422,18 +8447,6 @@
             "deprecationReason": null
           },
           {
-            "name": "NAME_ASC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "NAME_DESC",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "PRIMARY_KEY_ASC",
             "description": null,
             "isDeprecated": false,
@@ -8463,16 +8476,6 @@
               "ofType": null
             },
             "defaultValue": null
-          },
-          {
-            "name": "name",
-            "description": "Checks for equality with the object’s `name` field.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -8491,16 +8494,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "IntFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "name",
-            "description": "Filter by the object’s `name` field.",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -8547,323 +8540,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TagFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "StringFilter",
-        "description": "A filter to be used against String fields. All fields are combined with a logical ‘and.’",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "isNull",
-            "description": "Is null (if `true` is specified) or is not null (if `false` is specified).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "equalTo",
-            "description": "Equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEqualTo",
-            "description": "Not equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "distinctFrom",
-            "description": "Not equal to the specified value, treating null like an ordinary value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notDistinctFrom",
-            "description": "Equal to the specified value, treating null like an ordinary value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": "Included in the specified list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": "Not included in the specified list.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lessThan",
-            "description": "Less than the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lessThanOrEqualTo",
-            "description": "Less than or equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "greaterThan",
-            "description": "Greater than the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "greaterThanOrEqualTo",
-            "description": "Greater than or equal to the specified value.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "includes",
-            "description": "Contains the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIncludes",
-            "description": "Does not contain the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "includesInsensitive",
-            "description": "Contains the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIncludesInsensitive",
-            "description": "Does not contain the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWith",
-            "description": "Starts with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notStartsWith",
-            "description": "Does not start with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWithInsensitive",
-            "description": "Starts with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notStartsWithInsensitive",
-            "description": "Does not start with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWith",
-            "description": "Ends with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEndsWith",
-            "description": "Does not end with the specified string (case-sensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWithInsensitive",
-            "description": "Ends with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notEndsWithInsensitive",
-            "description": "Does not end with the specified string (case-insensitive).",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "like",
-            "description": "Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notLike",
-            "description": "Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "likeInsensitive",
-            "description": "Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notLikeInsensitive",
-            "description": "Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "similarTo",
-            "description": "Matches the specified pattern using the SQL standard's definition of a regular expression.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notSimilarTo",
-            "description": "Does not match the specified pattern using the SQL standard's definition of a regular expression.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -9428,33 +9104,6 @@
             "deprecationReason": null
           },
           {
-            "name": "updateTagByName",
-            "description": "Updates a single `Tag` using a unique key and a patch.",
-            "args": [
-              {
-                "name": "input",
-                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UpdateTagByNameInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "UpdateTagPayload",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "updateUser",
             "description": "Updates a single `User` using its globally unique id and a patch.",
             "args": [
@@ -9953,33 +9602,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DeleteTagByIdInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "DeleteTagPayload",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "deleteTagByName",
-            "description": "Deletes a single `Tag` using a unique key.",
-            "args": [
-              {
-                "name": "input",
-                "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "DeleteTagByNameInput",
                     "ofType": null
                   }
                 },
@@ -10808,6 +10430,16 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "description",
+            "description": "description of the tag.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null
           },
@@ -12131,6 +11763,16 @@
             "defaultValue": null
           },
           {
+            "name": "description",
+            "description": "description of the tag.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "color",
             "description": "color of the tag.",
             "type": {
@@ -12274,55 +11916,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UpdateTagByNameInput",
-        "description": "All input for the `updateTagByName` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "patch",
-            "description": "An object where the defined keys will be set on the `Tag` being updated.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "TagPatch",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "name",
-            "description": "name of the tag.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UpdateUserInput",
         "description": "All input for the `updateUser` mutation.",
         "fields": null,
@@ -12382,26 +11975,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "role",
-            "description": "role of the user.",
-            "type": {
-              "kind": "ENUM",
-              "name": "RoleType",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "isEnabled",
-            "description": "determines if the user is enabled",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -13004,26 +12577,6 @@
         "description": "Represents an update to a `WorkspaceTag`. Fields that are set will be updated.",
         "fields": null,
         "inputFields": [
-          {
-            "name": "workspaceId",
-            "description": "id of the workspace.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "tagId",
-            "description": "id of the tag.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
           {
             "name": "isEnabled",
             "description": "determines if the workspace_tag is available.",
@@ -14151,41 +13704,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Int",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "DeleteTagByNameInput",
-        "description": "All input for the `deleteTagByName` mutation.",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "clientMutationId",
-            "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "name",
-            "description": "name of the tag.",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },

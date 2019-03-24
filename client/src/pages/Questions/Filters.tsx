@@ -153,7 +153,7 @@ function FiltersBase(props: Props) {
           className={classes.resetButton}
           onClick={handleResetFilters}
         >
-          Reset Filters
+          Reset
         </Button>
       </div>
     </div>
