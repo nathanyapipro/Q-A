@@ -41,6 +41,11 @@ async function main() {
   }
 
   await middleware.installLogging(app);
+  if(!isDev) {
+    app.get("/graphql", function(req, res) {
+      res.status(403).send(err);
+    });
+  }
 
   await middleware.installPostGraphile(app);
 
