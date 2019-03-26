@@ -24,6 +24,7 @@ export const CREATE_QUESTION_MUTATION = gql`
             tag {
               name
               color
+              description
             }
           }
           totalCount

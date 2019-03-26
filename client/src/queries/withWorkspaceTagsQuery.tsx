@@ -21,6 +21,7 @@ export const WORKSPACE_TAGS_QUERY = gql`
           id
           name
           color
+          description
         }
         isEnabled
       }

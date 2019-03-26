@@ -38,6 +38,7 @@ export const QUESTIONS_QUERY = gql`
             tag {
               name
               color
+              description
             }
           }
           totalCount

@@ -21,6 +21,7 @@ import { ValueContainerProps } from "react-select/lib/components/containers";
 import { OptionProps } from "react-select/lib/components/Option";
 import { debounce } from "../../helpers/functional";
 import { Theme } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -47,7 +48,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   multiValueContainer: {
     display: "flex",
     flexDirection: "row",
-    margin: theme.spacing.unit / 2
+    margin: theme.spacing.unit / 2,
+    "&>:first-child": {
+      color: "inherit !important"
+    }
+  },
+  valueColor: {
+    flexShrink: 0,
+    height: theme.spacing.unit,
+    width: theme.spacing.unit,
+    borderRadius: "100%",
+    marginRight: theme.spacing.unit
+  },
+  valueDescription: {
+    marginLeft: theme.spacing.unit
   },
   singleValue: {
     fontSize: "1rem",
@@ -111,6 +125,7 @@ function Control(props: ControlProps<OptionType>) {
 }
 
 function Option(props: OptionProps<OptionType>) {
+  const { data } = props;
   return (
     <MenuItem
       buttonRef={props.innerRef}
@@ -121,7 +136,23 @@ function Option(props: OptionProps<OptionType>) {
       }}
       {...props.innerProps}
     >
+      {data.color && (
+        <div
+          className={props.selectProps.classes.valueColor}
+          style={{ backgroundColor: data.color }}
+        />
+      )}
       {props.children}
+      {data.description && (
+        <Typography
+          className={props.selectProps.classes.valueDescription}
+          variant="caption"
+          color="secondary"
+          noWrap
+        >
+          — &nbsp; {data.description}
+        </Typography>
+      )}
     </MenuItem>
   );
 }
@@ -158,13 +189,26 @@ function ValueContainer(props: ValueContainerProps<OptionType>) {
 }
 
 const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
+  const { data } = props as any;
+  console.log(data);
+  let style = {} as any;
+  if (data.color) {
+    style = {
+      backgroundColor: data.color,
+      color: "white"
+    };
+  }
+
   return (
-    <Paper
-      elevation={1}
-      className={classNames(props.selectProps.classes.multiValueContainer)}
-    >
-      {props.children}
-    </Paper>
+    <Tooltip title={data.description} placement="bottom">
+      <Paper
+        elevation={1}
+        className={classNames(props.selectProps.classes.multiValueContainer)}
+        style={style}
+      >
+        {props.children}
+      </Paper>
+    </Tooltip>
   );
 };
 

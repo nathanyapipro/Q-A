@@ -30,6 +30,10 @@ export interface CreateQuestion_createQuestion_question_questionTags_nodes_tag {
    * color of the tag.
    */
   color: string;
+  /**
+   * description of the tag.
+   */
+  description: string | null;
 }
 
 export interface CreateQuestion_createQuestion_question_questionTags_nodes {

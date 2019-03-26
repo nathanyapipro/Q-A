@@ -13,6 +13,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { StoreState } from "../../states";
 import { CurrentUser } from "../../states/global/reducer";
+import { StatusType } from "../../types/apollo";
 
 type ReduxStateProps = {
   currentUser?: CurrentUser;
@@ -20,6 +21,7 @@ type ReduxStateProps = {
 
 interface OwnProps {
   questionId: number;
+  status: StatusType;
   userId?: number;
   hasVoted: boolean;
   voteCount: number;
@@ -60,6 +62,7 @@ function ActionsBase(props: Props) {
 
   const {
     questionId,
+    status,
     userId,
     hasVoted,
     voteCount,
@@ -107,24 +110,19 @@ function ActionsBase(props: Props) {
   }
 
   const canDeleteQuestion = currentUser.id === userId;
+  const canBeVotedOn = status === StatusType.NEW;
 
   return (
     <div className={classes.container}>
       <Button
         variant="text"
-        color="primary"
+        color={hasVoted ? "primary" : "secondary"}
         className={classes.button}
         onClick={handleVoteClick}
+        disabled={!canBeVotedOn}
       >
-        <VoteIcon
-          className={classes.buttonIcon}
-          color={hasVoted ? "primary" : "secondary"}
-        />
-        <Typography
-          noWrap
-          color={hasVoted ? "primary" : "secondary"}
-          variant="body1"
-        >
+        <VoteIcon className={classes.buttonIcon} color="inherit" />
+        <Typography noWrap color="inherit" variant="body1">
           {`${voteCount} Like${voteCount > 1 ? "s" : ""}`}
         </Typography>
       </Button>

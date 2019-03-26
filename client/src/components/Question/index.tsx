@@ -181,6 +181,7 @@ function QuestionBase(props: Props) {
         staticComponent={
           <Actions
             userId={questionById.userId}
+            status={status}
             questionId={questionId}
             voteCount={voteCount}
             commentCount={commentCount}

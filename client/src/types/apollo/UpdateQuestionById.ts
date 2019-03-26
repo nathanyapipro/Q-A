@@ -30,6 +30,10 @@ export interface UpdateQuestionById_updateQuestionById_question_questionTags_nod
    * color of the tag.
    */
   color: string;
+  /**
+   * description of the tag.
+   */
+  description: string | null;
 }
 
 export interface UpdateQuestionById_updateQuestionById_question_questionTags_nodes {

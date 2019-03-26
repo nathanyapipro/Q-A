@@ -25,6 +25,7 @@ export const QUESTION_TOGGLE_VOTE_MUTATION = gql`
             tag {
               name
               color
+              description
             }
           }
           totalCount

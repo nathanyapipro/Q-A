@@ -88,6 +88,7 @@ function RowBase(props: Props) {
             <Content content={content} createdAt={createdAt} />
             <div className={classes.footer}>
               <Actions
+                status={status}
                 questionId={questionId}
                 voteCount={voteCount}
                 commentCount={commentCount}

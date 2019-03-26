@@ -20,6 +20,10 @@ export interface WorkspaceTags_workspaceTags_nodes_tag {
    * color of the tag.
    */
   color: string;
+  /**
+   * description of the tag.
+   */
+  description: string | null;
 }
 
 export interface WorkspaceTags_workspaceTags_nodes {

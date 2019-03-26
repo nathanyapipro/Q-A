@@ -3,10 +3,12 @@ import { makeStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Theme } from "@material-ui/core/styles";
+import Tooltip from "@material-ui/core/Tooltip";
 
 interface OwnProps {
   name: string;
   color: string;
+  description: string | null;
 }
 
 type Props = OwnProps;
@@ -24,18 +26,20 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function TagBase(props: Props) {
   const classes = useStyles();
-  const { name, color } = props;
+  const { name, color, description } = props;
 
   return (
-    <Paper
-      elevation={1}
-      style={{ backgroundColor: color }}
-      className={classes.container}
-    >
-      <Typography className={classes.text} color="inherit" noWrap>
-        {name}
-      </Typography>
-    </Paper>
+    <Tooltip title={description} placement="bottom">
+      <Paper
+        elevation={1}
+        style={{ backgroundColor: color }}
+        className={classes.container}
+      >
+        <Typography className={classes.text} color="inherit" noWrap>
+          {name}
+        </Typography>
+      </Paper>
+    </Tooltip>
   );
 }
 

@@ -25,6 +25,7 @@ export const QUESTION_BY_ID_QUERY = gql`
           tag {
             name
             color
+            description
           }
         }
         totalCount

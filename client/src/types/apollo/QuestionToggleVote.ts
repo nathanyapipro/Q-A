@@ -30,6 +30,10 @@ export interface QuestionToggleVote_questionToggleVote_question_questionTags_nod
    * color of the tag.
    */
   color: string;
+  /**
+   * description of the tag.
+   */
+  description: string | null;
 }
 
 export interface QuestionToggleVote_questionToggleVote_question_questionTags_nodes {

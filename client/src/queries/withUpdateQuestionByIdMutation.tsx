@@ -26,6 +26,7 @@ export const UPDATE_QUESTION_BY_ID_MUTATION = gql`
             tag {
               name
               color
+              description
             }
           }
           totalCount
