@@ -190,7 +190,6 @@ function ValueContainer(props: ValueContainerProps<OptionType>) {
 
 const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
   const { data } = props as any;
-  console.log(data);
   let style = {} as any;
   if (data.color) {
     style = {
