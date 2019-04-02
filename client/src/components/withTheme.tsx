@@ -44,8 +44,7 @@ const theme = createMuiTheme({
     },
     MuiInputBase: {
       root: {
-        ...defaultTheme.typography.body1,
-        padding: `${defaultTheme.spacing.unit * 1.5}px`
+        ...defaultTheme.typography.body1
       },
       multiline: {
         padding: `${defaultTheme.spacing.unit * 1.5}px`
