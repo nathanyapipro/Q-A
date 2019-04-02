@@ -83,7 +83,7 @@ function FieldBase(props: Props) {
       <div className={classes.header}>
         <Typography
           className={classes.label}
-          color="secondary"
+          color="textPrimary"
           variant="caption"
         >
           {label}

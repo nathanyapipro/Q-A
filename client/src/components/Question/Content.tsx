@@ -29,13 +29,15 @@ function ContentBase(props: Props) {
 
   return (
     <Typography
-      variant="subtitle1"
+      variant="body1"
       component="pre"
+      color="textPrimary"
       className={classes.container}
     >
       {content}
       {createdAt && (
         <Typography
+          color="textSecondary"
           className={classes.createdAt}
           component="span"
           variant="caption"

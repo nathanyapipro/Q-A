@@ -111,7 +111,7 @@ function UpdateQuestionContentBase(props: Props) {
           <div className={classes.helper}>
             <Typography
               variant="caption"
-              color="secondary"
+              color="textSecondary"
               className={classNames(classes.helperText, {
                 [classes.error]: content.error
               })}

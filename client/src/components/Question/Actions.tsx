@@ -128,7 +128,7 @@ function ActionsBase(props: Props) {
       </Button>
       <Button variant="text" color="secondary" className={classes.button}>
         <CommentIcon className={classes.buttonIcon} color="inherit" />
-        <Typography noWrap color="secondary" variant="body1">
+        <Typography noWrap color="textSecondary" variant="body1">
           {`${commentCount} Comment${commentCount > 1 ? "s" : ""}`}
         </Typography>
       </Button>

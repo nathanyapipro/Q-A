@@ -155,8 +155,8 @@ function Option(props: OptionProps<OptionType>) {
         />
       )}
       <Typography
-        variant="body2"
-        color="textPrimary"
+        variant="body1"
+        color="textSecondary"
         className={props.selectProps.classes.valueLabel}
       >
         {data.label}
@@ -179,7 +179,7 @@ function Placeholder(props: PlaceholderProps<OptionType>) {
   return (
     <Typography
       color="textSecondary"
-      variant="body2"
+      variant="body1"
       className={props.selectProps.classes.placeholder}
       {...props.innerProps}
     >
@@ -191,8 +191,9 @@ function Placeholder(props: PlaceholderProps<OptionType>) {
 function SingleValue(props: SingleValueProps<OptionType>) {
   return (
     <Typography
+      color="textSecondary"
       className={props.selectProps.classes.singleValue}
-      variant="body2"
+      variant="body1"
       {...props.innerProps}
     >
       {props.children}
@@ -221,7 +222,7 @@ const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
   return (
     <Tooltip
       title={
-        <Typography variant="caption" color="inherit">
+        <Typography color="textSecondary" variant="caption">
           {data.description}
         </Typography>
       }
@@ -233,8 +234,8 @@ const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
         style={style}
       >
         <Typography
-          variant="body2"
-          color="inherit"
+          variant="body1"
+          color="textPrimary"
           className={props.selectProps.classes.multiValueContainerLabel}
         >
           {data.label}

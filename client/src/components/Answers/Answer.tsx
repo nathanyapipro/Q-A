@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexShrink: 0,
-    flexDirection: "column",
-    padding: `${theme.spacing.unit / 2}px 0px`,
-    margin: `0px ${theme.spacing.unit}px`
+    flexDirection: "column"
   },
   paper: {
     display: "flex",
@@ -42,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     whiteSpace: "pre-wrap"
   },
   author: {
-    fontWeight: 600
+    fontWeight: theme.typography.fontWeightRegular
   },
   footer: {
     display: "flex",
@@ -102,8 +100,8 @@ function AnswerBase(props: Props) {
           />
         ) : (
           <Typography
-            color="inherit"
-            variant="body2"
+            color="textPrimary"
+            variant="body1"
             component="p"
             className={classes.content}
           >
@@ -115,7 +113,7 @@ function AnswerBase(props: Props) {
         {isEditing ? (
           <Typography
             className={classes.tip}
-            color="secondary"
+            color="textPrimary"
             variant="caption"
           >
             (Press Enter to Save)
@@ -124,6 +122,7 @@ function AnswerBase(props: Props) {
           <Typography
             className={classes.updatedAt}
             component="span"
+            color="textPrimary"
             variant="caption"
           >
             {fromNow(updatedAt)}

@@ -122,7 +122,11 @@ function CreateQuestionBase(props: Props) {
   return (
     <Paper elevation={1} className={classes.container}>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Typography variant="body1" className={classes.note}>
+        <Typography
+          color="textSecondary"
+          variant="body1"
+          className={classes.note}
+        >
           Tips for getting a satisfactory answer: (1) Do assume positive
           intentions first. We’re all building this company together! (2) Don’t
           assume anything else. Keep your question as precise and concise as
@@ -144,7 +148,7 @@ function CreateQuestionBase(props: Props) {
                 <div className={classes.helper}>
                   <Typography
                     variant="caption"
-                    color="secondary"
+                    color="textSecondary"
                     className={classNames(classes.helperText, {
                       [classes.error]: content.error
                     })}

@@ -59,18 +59,28 @@ function AuthLayoutBase(props: Props) {
         <div className={classes.header}>
           <img className={classes.logo} src={logo} alt="Logo" />
           <div className={classes.description}>
-            <Typography align="center" variant="body1" gutterBottom>
+            <Typography
+              align="center"
+              variant="body1"
+              color="textSecondary"
+              gutterBottom
+            >
               Welcome to Fundamental! This is your internal portal for asking
               questions, making statements and upvoting others’ questions and
               statements about Element AI.
             </Typography>
-            <Typography align="center" variant="body1" gutterBottom>
+            <Typography
+              align="center"
+              variant="body1"
+              color="textSecondary"
+              gutterBottom
+            >
               The conditions for using this tool are to: (1) operate on a basis
               of assuming positive intentions, (2) be respectful of one another,
               and (3) take the time to ensure that questions and answers are
               relevant, useful and constructive.
             </Typography>
-            <Typography align="center" variant="body1">
+            <Typography align="center" color="textSecondary" variant="body1">
               The portal is anonymous.
             </Typography>
           </div>

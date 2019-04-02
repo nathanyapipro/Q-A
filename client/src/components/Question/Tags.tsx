@@ -48,7 +48,8 @@ function TagsBase(props: Props) {
         )
       : isQuestionByIdPage && (
           <Typography
-            variant="subtitle1"
+            variant="body1"
+            color="textPrimary"
             component="p"
             className={classes.empty}
           >

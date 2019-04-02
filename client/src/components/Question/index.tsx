@@ -163,7 +163,7 @@ function QuestionBase(props: Props) {
       <Field
         label="Created"
         staticComponent={
-          <Typography variant="subtitle1" component="p">
+          <Typography color="textPrimary" variant="body1" component="p">
             {fromNow(createdAt)}
           </Typography>
         }
@@ -171,7 +171,7 @@ function QuestionBase(props: Props) {
       <Field
         label="Updated"
         staticComponent={
-          <Typography variant="subtitle1" component="p">
+          <Typography color="textPrimary" variant="body1" component="p">
             {fromNow(updatedAt)}
           </Typography>
         }

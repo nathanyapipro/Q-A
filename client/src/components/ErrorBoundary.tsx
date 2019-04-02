@@ -29,7 +29,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
       return (
         <Card>
           <CardContent>
-            <Typography>Something went wrong.</Typography>
+            <Typography color="textSecondary">Something went wrong.</Typography>
           </CardContent>
         </Card>
       );

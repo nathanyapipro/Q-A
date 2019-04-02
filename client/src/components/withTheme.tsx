@@ -21,6 +21,9 @@ const theme = createMuiTheme({
   },
   typography: {
     ...defaultTheme.typography,
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 700,
     caption: {
       ...defaultTheme.typography.caption,
       fontWeight: defaultTheme.typography.fontWeightLight
@@ -41,15 +44,16 @@ const theme = createMuiTheme({
     },
     MuiInputBase: {
       root: {
-        ...defaultTheme.typography.body1
+        ...defaultTheme.typography.body1,
+        padding: `${defaultTheme.spacing.unit * 1.5}px`
       },
       multiline: {
-        padding: `${defaultTheme.spacing.unit}px`
+        padding: `${defaultTheme.spacing.unit * 1.5}px`
       }
     },
     MuiOutlinedInput: {
       multiline: {
-        padding: `${defaultTheme.spacing.unit}px`
+        padding: `${defaultTheme.spacing.unit * 1.5}px`
       }
     },
     MuiTable: {

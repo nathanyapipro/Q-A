@@ -77,7 +77,7 @@ function SettingsBase(_: Props) {
             <Typography noWrap variant="subheading" className={classes.heading}>
               General
             </Typography>
-            <Typography noWrap variant="caption" color="secondary">
+            <Typography noWrap variant="caption" color="textSecondary">
               App Level Configuration
             </Typography>
           </ExpansionPanelSummary>
@@ -100,7 +100,7 @@ function SettingsBase(_: Props) {
             <Typography noWrap variant="subheading" className={classes.heading}>
               Users
             </Typography>
-            <Typography noWrap variant="caption" color="secondary">
+            <Typography noWrap variant="caption" color="textSecondary">
               Configure Users of the App
             </Typography>
           </ExpansionPanelSummary>
@@ -129,7 +129,7 @@ function SettingsBase(_: Props) {
             <Typography noWrap variant="subheading" className={classes.heading}>
               Workspace Configuration
             </Typography>
-            <Typography noWrap variant="caption" color="secondary">
+            <Typography noWrap variant="caption" color="textSecondary">
               Configure Workspace Access Restrictions and Tags
             </Typography>
           </ExpansionPanelSummary>

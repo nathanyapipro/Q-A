@@ -67,7 +67,7 @@ function ResponsesBase(props: Props) {
       return (
         <div className={classes.noAnswers}>
           <Paper elevation={0} className={classes.paper}>
-            <Typography variant="subtitle1" component="p">
+            <Typography color="textPrimary" variant="body1" component="p">
               None
             </Typography>
           </Paper>

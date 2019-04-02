@@ -16,8 +16,7 @@ type Props = OwnProps & withCreateAnswerMutation.ChildProps;
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
-    flexDirection: "column",
-    margin: `0px ${theme.spacing.unit}px`
+    flexDirection: "column"
   },
   field: {
     paddingBottom: theme.spacing.unit

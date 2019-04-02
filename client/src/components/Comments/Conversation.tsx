@@ -62,7 +62,7 @@ function ConversationBase(props: Props) {
     if (nodes.length === 0) {
       return (
         <Paper elevation={0} className={classes.none}>
-          <Typography variant="subtitle1" component="p">
+          <Typography color="textSecondary" variant="body1" component="p">
             No Comments found ...
           </Typography>
         </Paper>

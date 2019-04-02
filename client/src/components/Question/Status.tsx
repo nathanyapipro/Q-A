@@ -19,12 +19,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "row",
     alignItems: "center",
     color: theme.palette.primary.contrastText,
-    padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit}px`,
+    padding: `${theme.spacing.unit / 4}px ${theme.spacing.unit}px`,
     width: "max-content"
   },
   label: {
     display: "flex",
     flexShrink: 0,
+    fontWeight: theme.typography.fontWeightMedium,
     marginLeft: theme.spacing.unit
   }
 }));
@@ -40,7 +41,7 @@ function StatusBase(props: Props) {
       className={classes.container}
     >
       <StatusIcon status={status} />
-      <Typography className={classes.label} color="inherit" variant="button">
+      <Typography className={classes.label} color="inherit" variant="body1">
         {getStatusLabel(status)}
       </Typography>
     </Paper>

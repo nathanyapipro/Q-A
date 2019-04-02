@@ -56,7 +56,7 @@ function QuestionsTableBase(props: Props) {
       return (
         <TableRow className={classes.emptyRow}>
           <TableCell>
-            <Typography variant="subtitle1" component="p">
+            <Typography color="textSecondary" variant="body1" component="p">
               No Questions found ...
             </Typography>
           </TableCell>

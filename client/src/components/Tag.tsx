@@ -31,7 +31,7 @@ function TagBase(props: Props) {
   return (
     <Tooltip
       title={
-        <Typography variant="caption" color="inherit">
+        <Typography color="textSecondary" variant="caption">
           {description}
         </Typography>
       }

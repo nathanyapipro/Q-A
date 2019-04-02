@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
-    flexShrink: 0
+    flexShrink: 0,
+    marginBottom: theme.spacing.unit
   },
   header: {
     display: "flex",
@@ -78,7 +79,7 @@ function AnswersBase(props: Props) {
       <div className={classes.header}>
         <Typography
           className={classes.label}
-          color="secondary"
+          color="textPrimary"
           variant="caption"
         >
           Answers

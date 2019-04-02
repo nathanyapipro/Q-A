@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignSelf: "flex-end"
   },
   author: {
-    fontWeight: 600
+    fontWeight: theme.typography.fontWeightRegular
   },
   footer: {
     display: "flex",
@@ -119,8 +119,8 @@ function CommentBase(props: Props) {
             />
           ) : (
             <Typography
-              color="inherit"
-              variant="body2"
+              color="textPrimary"
+              variant="body1"
               component="p"
               className={classes.content}
             >
@@ -132,7 +132,7 @@ function CommentBase(props: Props) {
           {isEditing ? (
             <Typography
               className={classes.tip}
-              color="secondary"
+              color="textPrimary"
               variant="caption"
             >
               (Press Enter to Save)
@@ -140,6 +140,7 @@ function CommentBase(props: Props) {
           ) : (
             <Typography
               className={classes.updatedAt}
+              color="textPrimary"
               component="span"
               variant="caption"
             >
