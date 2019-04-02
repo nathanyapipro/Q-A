@@ -19,7 +19,7 @@ async function main() {
   const app = express();
 
   app.use(cors());
-  app.use(bodyParser());
+  app.use(bodyParser.json());
 
   /*
    * Getting access to the HTTP server directly means that we can do things
