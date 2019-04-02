@@ -3,6 +3,7 @@ const { createServer } = require("http");
 const chalk = require("chalk");
 const middleware = require("./middleware");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").load();
@@ -18,6 +19,7 @@ async function main() {
   const app = express();
 
   app.use(cors());
+  app.use(bodyParser());
 
   /*
    * Getting access to the HTTP server directly means that we can do things
@@ -41,10 +43,13 @@ async function main() {
   }
 
   await middleware.installLogging(app);
-  if(!isDev) {
+
+  // Disable get requests and whilelist queries in production
+  if (!isDev) {
     app.get("/graphql", function(req, res) {
       res.status(403).send(err);
     });
+    await middleware.installWhitelist(app);
   }
 
   await middleware.installPostGraphile(app);

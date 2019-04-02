@@ -1,5 +1,19 @@
 # Fundamental - Server
 
+# Generate while list (incomplete --> WIP)
+
+Go to /client/src/queries and run
+`` awk '/gql\`/,/\`;/' ./*.tsx > queries.graphql ``
+
+Copy queries.graphql to server/utils
+Remove first and last line of each query (export... and };)
+
+Run CMD to gen queryMap.json:
+
+```
+persistgraphql server/queries/queries.graphql --add_typename
+```
+
 # Graphiql
 
 Explore the graphQL routes in the graphiQL playground exposed in dev mode [http://localhost:5000/graphiql](https://www.postgresql.org/docs/10/index.html)
