@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: `${theme.spacing.unit * 2}px 0px`,
     [theme.breakpoints.up("sm")]: {
       maxHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - ${theme
-        .spacing.unit * 6}px - 56px)`,
+        .spacing.unit * 4}px - 56px)`,
       overflowY: "auto"
     }
   },

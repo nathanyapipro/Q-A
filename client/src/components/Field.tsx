@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   header: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
     color: "inherit"
   },
   label: {

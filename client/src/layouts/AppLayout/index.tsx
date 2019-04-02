@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   workspaceSelect: {
     padding: `${theme.spacing.unit * 1}px ${theme.spacing.unit * 2}px`,
     color: theme.palette.primary.contrastText,
-    "& input, p, svg, label": {
+    "& >div>div>div>div>div>div>p, input, svg, label": {
       color: `${theme.palette.primary.contrastText} !important`
     },
     "& fieldset": {
@@ -86,6 +86,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0,
     flexGrow: 1,
     padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`,
+    [theme.breakpoints.up("sm")]: {
+      padding: theme.spacing.unit * 2
+    },
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing.unit * 3
     }

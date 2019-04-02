@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   input: {
     display: "flex",
     flex: "1 1 auto",
-    paddingRight: theme.spacing.unit * 0.5,
+    paddingRight: theme.spacing.unit / 2,
     paddingTop: theme.spacing.unit,
     paddingBottom: theme.spacing.unit
   },
@@ -42,16 +42,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     flexWrap: "wrap",
     flex: "1 1 auto",
-    alignItems: "center",
-    margin: -theme.spacing.unit / 2
+    alignItems: "center"
   },
   multiValueContainer: {
     display: "flex",
     flexDirection: "row",
     margin: theme.spacing.unit / 2,
+    "&>:nth-child(2)": {
+      display: "none"
+    },
+    fontWeight: theme.typography.fontWeightMedium,
     "&>:first-child": {
       color: "inherit !important"
     }
+  },
+  multiValueContainerLabel: {
+    padding: `${theme.spacing.unit / 4}px ${theme.spacing.unit / 4}px ${theme
+      .spacing.unit / 4}px ${theme.spacing.unit}px`
   },
   valueColor: {
     flexShrink: 0,
@@ -61,7 +68,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing.unit
   },
   valueDescription: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
+    color: `${theme.palette.text.secondary} !important`
+  },
+  valueLabel: {
+    color: `${theme.palette.text.primary} !important`
   },
   singleValue: {
     fontSize: "1rem",
@@ -78,6 +89,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: "absolute",
     zIndex: theme.zIndex.modal,
     overflowY: "auto",
+    color: `${theme.palette.text.primary} !important`,
     left: 0,
     right: 0
   }
@@ -142,12 +154,18 @@ function Option(props: OptionProps<OptionType>) {
           style={{ backgroundColor: data.color }}
         />
       )}
-      {props.children}
+      <Typography
+        variant="body2"
+        color="textPrimary"
+        className={props.selectProps.classes.valueLabel}
+      >
+        {data.label}
+      </Typography>
       {data.description && (
         <Typography
           className={props.selectProps.classes.valueDescription}
           variant="caption"
-          color="secondary"
+          color="textSecondary"
           noWrap
         >
           — &nbsp; {data.description}
@@ -161,6 +179,7 @@ function Placeholder(props: PlaceholderProps<OptionType>) {
   return (
     <Typography
       color="textSecondary"
+      variant="body2"
       className={props.selectProps.classes.placeholder}
       {...props.innerProps}
     >
@@ -173,6 +192,7 @@ function SingleValue(props: SingleValueProps<OptionType>) {
   return (
     <Typography
       className={props.selectProps.classes.singleValue}
+      variant="body2"
       {...props.innerProps}
     >
       {props.children}
@@ -199,12 +219,26 @@ const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
   }
 
   return (
-    <Tooltip title={data.description} placement="bottom">
+    <Tooltip
+      title={
+        <Typography variant="caption" color="inherit">
+          {data.description}
+        </Typography>
+      }
+      placement="bottom"
+    >
       <Paper
         elevation={1}
         className={classNames(props.selectProps.classes.multiValueContainer)}
         style={style}
       >
+        <Typography
+          variant="body2"
+          color="inherit"
+          className={props.selectProps.classes.multiValueContainerLabel}
+        >
+          {data.label}
+        </Typography>
         {props.children}
       </Paper>
     </Tooltip>

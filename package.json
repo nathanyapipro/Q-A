@@ -12,7 +12,10 @@
     "start": "node ./server/index.js",
     "prod": "npm run ebSetup && npm run build:client && npm run start",
     "precommit": "pretty-quick --staged",
-    "cz": "npm run precommit && git cz"
+    "cz": "npm run precommit && git cz",
+    "extractClientQueries": "./scripts/extractClientQueries.sh",
+    "genQueryMap": "persistgraphql ./server/utils/queries.graphql --add_typename ./server/utils/queryMap.json --js && rm ./server/utils/queries.graphql && mv ./extracted_queries.json ./server/utils/queryMap.json",
+    "prebuild": "npm run extractClientQueries && npm run genQueryMap"
   },
   "config": {
     "commitizen": {

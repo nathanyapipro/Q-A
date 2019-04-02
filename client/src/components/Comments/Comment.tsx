@@ -43,6 +43,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.grey[200],
     marginBottom: theme.spacing.unit / 4
   },
+  isEditing: {
+    padding: 0,
+    backgroundColor: "transparent"
+  },
   content: {},
   isOwner: {
     alignSelf: "flex-end"
@@ -57,6 +61,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   updatedAt: {},
   spacer: {
     flexGrow: 1
+  },
+  tip: {
+    marginLeft: theme.spacing.unit / 2,
+    fontSize: theme.spacing.unit * 1.5,
+    marginTop: `-${theme.spacing.unit / 2}px`
   }
 }));
 
@@ -96,7 +105,12 @@ function CommentBase(props: Props) {
         >
           {username}
         </Typography>
-        <Paper elevation={0} className={classNames(classes.paper)}>
+        <Paper
+          elevation={0}
+          className={classNames(classes.paper, {
+            [classes.isEditing]: isEditing
+          })}
+        >
           {isEditing ? (
             <UpdateCommentForm
               commentId={commentId}
@@ -115,13 +129,23 @@ function CommentBase(props: Props) {
           )}
         </Paper>
         <div className={classes.footer}>
-          <Typography
-            className={classes.updatedAt}
-            component="span"
-            variant="caption"
-          >
-            {fromNow(updatedAt)}
-          </Typography>
+          {isEditing ? (
+            <Typography
+              className={classes.tip}
+              color="secondary"
+              variant="caption"
+            >
+              (Press Enter to Save)
+            </Typography>
+          ) : (
+            <Typography
+              className={classes.updatedAt}
+              component="span"
+              variant="caption"
+            >
+              {fromNow(updatedAt)}
+            </Typography>
+          )}
           <div className={classes.spacer} />
           <Actions
             isEditing={isEditing}

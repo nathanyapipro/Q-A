@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     flexShrink: 0,
     height: "min-content",
-    width: theme.spacing.unit * 40,
+    width: theme.spacing.unit * 48,
     marginLeft: theme.spacing.unit * 2
   },
   drawerPaper: {

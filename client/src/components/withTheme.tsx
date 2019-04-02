@@ -1,39 +1,16 @@
 import * as React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider, makeStyles } from "@material-ui/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import deepPurple from "@material-ui/core/colors/deepPurple";
 import grey from "@material-ui/core/colors/grey";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import spacing from "@material-ui/core/styles/spacing";
+import { theme as defaultTheme, useGlobalStyles } from "@eai-material-ui/theme";
 
 const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-    fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"'
-    ].join(",")
-  },
-  mixins: {
-    toolbar: {
-      minHeight: 56,
-      "@media (min-width:0px) and (orientation: landscape)": {
-        minHeight: 56
-      },
-      "@media (min-width:600px)": {
-        minHeight: 56
-      }
-    }
-  },
+  ...defaultTheme,
   palette: {
+    ...defaultTheme.palette,
     primary: deepPurple,
     secondary: {
       light: grey[600],
@@ -42,12 +19,37 @@ const theme = createMuiTheme({
       contrastText: "white"
     }
   },
+  typography: {
+    ...defaultTheme.typography,
+    caption: {
+      ...defaultTheme.typography.caption,
+      fontWeight: defaultTheme.typography.fontWeightLight
+    }
+  },
   overrides: {
     MuiAppBar: {
       root: {},
       colorDefault: {
         backgroundColor: grey[900],
         color: "white"
+      }
+    },
+    MuiPaper: {
+      root: {
+        color: "inherit"
+      }
+    },
+    MuiInputBase: {
+      root: {
+        ...defaultTheme.typography.body1
+      },
+      multiline: {
+        padding: `${defaultTheme.spacing.unit}px`
+      }
+    },
+    MuiOutlinedInput: {
+      multiline: {
+        padding: `${defaultTheme.spacing.unit}px`
       }
     },
     MuiTable: {
@@ -68,35 +70,13 @@ const theme = createMuiTheme({
   }
 });
 
-const useStyles = makeStyles({
-  "@global": {
-    html: {
-      display: "flex",
-      flex: "1 0 auto",
-      height: "100%"
-    },
-    body: {
-      display: "flex",
-      flex: "1 0 auto"
-    },
-    "#root": {
-      display: "flex",
-      flex: "1 0 auto"
-    },
-    a: {
-      color: "inherit",
-      textDecoration: "inherit"
-    }
-  }
-});
-
 interface WrappedComponentProps {}
 
 function withTheme<P extends WrappedComponentProps>(
   Component: React.ComponentType<P>
 ) {
   function WithTheme(props: P) {
-    useStyles();
+    useGlobalStyles();
 
     return (
       <MuiThemeProvider theme={theme}>

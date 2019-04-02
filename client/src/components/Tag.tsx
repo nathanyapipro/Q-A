@@ -29,7 +29,14 @@ function TagBase(props: Props) {
   const { name, color, description } = props;
 
   return (
-    <Tooltip title={description} placement="bottom">
+    <Tooltip
+      title={
+        <Typography variant="caption" color="inherit">
+          {description}
+        </Typography>
+      }
+      placement="bottom"
+    >
       <Paper
         elevation={1}
         style={{ backgroundColor: color }}
