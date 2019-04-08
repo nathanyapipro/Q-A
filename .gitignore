@@ -1,4 +1,5 @@
 .env
 /db/sqitch.conf
+/db/db_unit_up.sql
 /node_modules
 /client/node_modules
