@@ -1,7 +1,5 @@
 BEGIN;
 
-select * from app_public.create_user('Admin', '12345678', 'ADMIN');
-
 insert into app_public.tag (id, name, description, color) values
   (1, 'Question', 'This is a question I’ve tried asking my manager, colleagues or Talent partner, but we couldn’t figure it out together', '#3CBB53'),
   (2, 'Statement', 'I’m not expecting an answer to this, it’s just what I’m experiencing or feeling, or something I came across that I think is interesting for execs', '#3CBB53'),
