@@ -5,7 +5,7 @@ BEGIN;
 create table app_public.question (
   id serial primary key,
   workspace_id integer not null references app_public.workspace(id),
-  content text not null,
+  content text not null check (char_length(content) < 501),
   user_id integer not null references app_public.user(id),
   status_id integer not null references app_public.status(id) default 1,
   vote_count integer not null default 0,
