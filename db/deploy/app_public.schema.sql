@@ -7,7 +7,7 @@ create extension if not exists "pgcrypto";
 create extension if not exists "uuid-ossp";
 
 create schema app_public;
-grant usage on schema app_public to fundamental_unauthenticated, fundamental_authenticated;
-alter default privileges in schema app_public grant usage, select on sequences to fundamental_unauthenticated, fundamental_authenticated;
+grant usage on schema app_public to fundamental_unauthenticated, fundamental_anonymous, fundamental_master;
+alter default privileges in schema app_public grant usage, select on sequences to fundamental_unauthenticated, fundamental_anonymous, fundamental_master;
 
 COMMIT;

@@ -19,9 +19,9 @@ create policy select_all on app_public.workspace_user for select using (true);
 create policy create_all on app_public.workspace_user for insert with check (true);
 create policy delete_all on app_public.workspace_user for delete using (true);
 
-grant select on app_public.workspace_user to fundamental_authenticated;
-grant insert on app_public.workspace_user to fundamental_authenticated;
-grant delete on app_public.workspace_user to fundamental_authenticated;
+grant select on app_public.workspace_user to fundamental_master;
+grant insert on app_public.workspace_user to fundamental_master;
+grant delete on app_public.workspace_user to fundamental_master;
 
 comment on table app_public.workspace_user is
   E'@omit update\n workspace_user in the application.';

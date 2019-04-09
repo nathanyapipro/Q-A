@@ -21,10 +21,10 @@ create policy insert_all on app_public.workspace for insert with check (true);
 create policy update_all on app_public.workspace for update using (true);
 create policy delete_all on app_public.workspace for delete using (true);
 
-grant select on app_public.workspace to fundamental_authenticated;
-grant insert on app_public.workspace to fundamental_authenticated;
-grant update(name, is_public, users) on app_public.workspace to fundamental_authenticated;
-grant delete on app_public.workspace to fundamental_authenticated;
+grant select on app_public.workspace to fundamental_anonymous, fundamental_master;
+grant insert on app_public.workspace to fundamental_master;
+grant update(name, is_public, users) on app_public.workspace to fundamental_master;
+grant delete on app_public.workspace to fundamental_master;
 
 comment on table app_public.workspace is
   E'@omit all\nA workspace in the application.';

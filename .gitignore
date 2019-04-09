@@ -1,4 +1,1 @@
-
-/node_modules
-/client/node_modules
-/db/sqitch.conf
+**/node_modules

@@ -5,7 +5,7 @@ BEGIN;
 create table app_public.question (
   id serial primary key,
   workspace_id integer not null references app_public.workspace(id),
-  content text not null,
+  content text not null check (char_length(content) < 501),
   user_id integer not null references app_public.user(id),
   status_id integer not null references app_public.status(id) default 1,
   vote_count integer not null default 0,
@@ -26,10 +26,10 @@ create policy insert_all on app_public.question for insert with check (true);
 create policy update_all on app_public.question for update using (true);
 create policy delete_all on app_public.question for delete using (true);
 
-grant select on app_public.question to fundamental_authenticated;
-grant insert on app_public.question to fundamental_authenticated;
-grant update(vote_count, content, status_id) on app_public.question to fundamental_authenticated;
-grant delete on app_public.question to fundamental_authenticated;
+grant select on app_public.question to fundamental_anonymous, fundamental_master;
+grant insert on app_public.question to fundamental_anonymous, fundamental_master;
+grant update(vote_count, status_id, content) on app_public.question to fundamental_anonymous, fundamental_master;
+grant delete on app_public.question to fundamental_anonymous;
 
 comment on table app_public.question is
   E'@omit create,update\nA question in the application.';

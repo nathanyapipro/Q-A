@@ -12,7 +12,7 @@ as $$
   limit 1;
 $$ language sql stable set search_path from current;
 
-grant execute on function app_public.current_user() to fundamental_authenticated;
+grant execute on function app_public.current_user() to fundamental_anonymous, fundamental_master;
 
 comment on function  app_public.current_user() is
   E'Handy method to get the current user for use after authentication';

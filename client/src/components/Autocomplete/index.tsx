@@ -191,7 +191,7 @@ function Placeholder(props: PlaceholderProps<OptionType>) {
 function SingleValue(props: SingleValueProps<OptionType>) {
   return (
     <Typography
-      color="textSecondary"
+      color="textPrimary"
       className={props.selectProps.classes.singleValue}
       variant="body1"
       {...props.innerProps}
@@ -222,7 +222,7 @@ const MultiValueContainer = (props: MultiValueGenericProps<OptionType>) => {
   return (
     <Tooltip
       title={
-        <Typography color="textSecondary" variant="caption">
+        <Typography color="inherit" variant="caption">
           {data.description}
         </Typography>
       }
@@ -330,6 +330,7 @@ const AutocompleteBase = React.memo(function AutocompleteBase(props: Props) {
           styles={styles}
           // @ts-ignore
           classes={classes}
+          placeholder=""
           onInputChange={handleInputChange}
           textFieldProps={{
             label

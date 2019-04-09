@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { StoreState } from "../../states";
 import { globalActions } from "../../states/global";
 import { SetAuthPayload } from "../../states/global/actions";
+import * as CryptoJS from "crypto-js";
 
 interface OwnProps {}
 
@@ -66,9 +67,14 @@ function LoginBase({ loginAnonymous, setAuth }: Props) {
             }
           } = response.data.loginAnonymous;
 
+          const cryptedUsername = CryptoJS.AES.encrypt(
+            role,
+            Date.now().toString()
+          ).toString();
+
           const currentUser = {
             id,
-            username,
+            username: cryptedUsername ? cryptedUsername : username,
             role
           };
 

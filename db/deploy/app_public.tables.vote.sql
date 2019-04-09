@@ -20,10 +20,10 @@ create policy delete_all on app_public.vote for delete using (true);
 
 create policy select_all on app_public.vote for select using (true);
 
-grant select on app_public.vote to fundamental_authenticated;
-grant insert on app_public.vote to fundamental_authenticated;
-grant update on app_public.vote to fundamental_authenticated;
-grant delete on app_public.vote to fundamental_authenticated;
+grant select on app_public.vote to fundamental_anonymous, fundamental_master;
+grant insert on app_public.vote to fundamental_anonymous, fundamental_master;
+grant update on app_public.vote to fundamental_anonymous, fundamental_master;
+grant delete on app_public.vote to fundamental_anonymous, fundamental_master;
 
 comment on table app_public.vote is
   E'@omit create,delete,update\n  vote on a question in the application.';

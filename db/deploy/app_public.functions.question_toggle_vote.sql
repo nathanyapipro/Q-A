@@ -40,7 +40,7 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
-grant execute on function app_public.question_toggle_vote(question_id integer) to fundamental_authenticated;
+grant execute on function app_public.question_toggle_vote(question_id integer) to fundamental_anonymous, fundamental_master;
 
 comment on function app_public.question_toggle_vote(question_id integer) is
   E'Toggles User vote on a question.';
