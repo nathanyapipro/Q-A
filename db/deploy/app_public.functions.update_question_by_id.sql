@@ -19,12 +19,21 @@ as $$
     tag_id int;
   begin
 
-    update app_public.question as q
+    if current_setting('jwt.claims.user_role', true)::text = 'ADMIN' then
+      update app_public.question as q
       set 
-        status_id = COALESCE(patch.status_id, q.status_id),
-        content = COALESCE(patch.content, q.content)
+        status_id = COALESCE(patch.status_id, q.status_id)
       where q.id = $1
       returning * into question;
+
+    else
+      update app_public.question as q
+      set 
+        content = COALESCE(patch.content, q.content)
+      where q.id = $1 AND q.user_id = app_public.current_user_id()
+      returning * into question;
+
+    end if;
 
     if not (patch.tag_ids is null) then
 
@@ -45,7 +54,7 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
-grant execute on function app_public.update_question_by_id(id integer, patch app_public.question_patch) to fundamental_authenticated;
+grant execute on function app_public.update_question_by_id(id integer, patch app_public.question_patch) to fundamental_anonymous, fundamental_master;
 
 comment on function app_public.update_question_by_id(id integer, patch app_public.question_patch) is
   E'Update a question by Id.';

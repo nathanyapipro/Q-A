@@ -29,7 +29,7 @@ as $$
       where user_secret.user_id = v_user.id;
 
       if v_user_secret.password_hash = crypt(password, v_user_secret.password_hash) then
-        jwt_token = (v_user.id, v_user.role, 'fundamental_authenticated')::app_private.jwt_token;
+        jwt_token = (v_user.id, v_user.role, 'fundamental_master')::app_private.jwt_token;
         return (jwt_token, v_user)::app_public.auth;
       else
         return null;

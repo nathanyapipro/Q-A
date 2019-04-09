@@ -19,7 +19,7 @@ as $$
   end;
 $$ language plpgsql volatile strict set search_path from current;
 
-grant execute on function app_public.create_comment(question_id integer, content text) to fundamental_authenticated;
+grant execute on function app_public.create_comment(question_id integer, content text) to fundamental_anonymous, fundamental_master;
 
 comment on function app_public.create_comment(question_id integer, content text) is
   E'Creates a comment.';

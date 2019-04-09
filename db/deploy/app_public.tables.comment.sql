@@ -22,10 +22,10 @@ create policy insert_all on app_public.comment for insert with check (true);
 create policy update_all on app_public.comment for update using (true);
 create policy delete_all on app_public.comment for delete using (true);
 
-grant select on app_public.comment to fundamental_authenticated;
-grant insert on app_public.comment to fundamental_authenticated;
-grant update(content) on app_public.comment to fundamental_authenticated;
-grant delete on app_public.comment to fundamental_authenticated;
+grant select on app_public.comment to fundamental_anonymous, fundamental_master;
+grant insert on app_public.comment to fundamental_anonymous, fundamental_master;
+grant update(content) on app_public.comment to fundamental_anonymous, fundamental_master;
+grant delete on app_public.comment to fundamental_anonymous, fundamental_master;
 
 comment on table app_public.comment is
   E'@omit create\nA comment in the application.';

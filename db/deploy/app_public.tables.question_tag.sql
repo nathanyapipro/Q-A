@@ -19,9 +19,9 @@ create policy select_all on app_public.question_tag for select using (true);
 create policy insert_all on app_public.question_tag for insert with check (true);
 create policy delete_all on app_public.question_tag for delete using (true);
 
-grant select on app_public.question_tag to fundamental_authenticated;
-grant insert on app_public.question_tag to fundamental_authenticated;
-grant delete on app_public.question_tag to fundamental_authenticated;
+grant select on app_public.question_tag to fundamental_anonymous, fundamental_master;
+grant insert on app_public.question_tag to fundamental_anonymous, fundamental_master;
+grant delete on app_public.question_tag to fundamental_anonymous, fundamental_master;
 
 comment on table app_public.question_tag is
   E'@omit update\n tags on a question in the application.';

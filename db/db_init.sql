@@ -6,9 +6,9 @@ grant all privileges on database fundamental to fundamental_admin;
 create role fundamental_visitor with login password 'xxx';
 
 create role fundamental_unauthenticated;
-create role fundamental_authenticated;
+create role fundamental_anonymous;
+create role fundamental_master;
 
-grant fundamental_unauthenticated to fundamental_visitor;
-grant fundamental_authenticated to fundamental_visitor;
+grant fundamental_unauthenticated ,fundamental_anonymous, fundamental_master to fundamental_visitor;
 
 alter default privileges revoke execute on functions from public;

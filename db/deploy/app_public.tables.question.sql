@@ -26,10 +26,10 @@ create policy insert_all on app_public.question for insert with check (true);
 create policy update_all on app_public.question for update using (true);
 create policy delete_all on app_public.question for delete using (true);
 
-grant select on app_public.question to fundamental_authenticated;
-grant insert on app_public.question to fundamental_authenticated;
-grant update(vote_count, content, status_id) on app_public.question to fundamental_authenticated;
-grant delete on app_public.question to fundamental_authenticated;
+grant select on app_public.question to fundamental_anonymous, fundamental_master;
+grant insert on app_public.question to fundamental_anonymous, fundamental_master;
+grant update(vote_count, status_id, content) on app_public.question to fundamental_anonymous, fundamental_master;
+grant delete on app_public.question to fundamental_anonymous;
 
 comment on table app_public.question is
   E'@omit create,update\nA question in the application.';

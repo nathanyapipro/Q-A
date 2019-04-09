@@ -14,7 +14,7 @@ alter table app_public.status enable row level security;
 
 create policy select_all on app_public.status for select using (true);
 
-grant select on app_public.status to fundamental_authenticated;
+grant select on app_public.status to fundamental_anonymous, fundamental_master;
 
 comment on table app_public.status is
   E'@omit create,update,delete\nA status of a question in the application.';
