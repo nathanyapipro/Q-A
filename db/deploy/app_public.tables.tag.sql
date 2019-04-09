@@ -18,9 +18,9 @@ create policy update_all on app_public.tag for update using (true);
 create policy delete_all on app_public.tag for delete using (true);
 
 grant select on app_public.tag to fundamental_anonymous, fundamental_master;
-grant insert on app_public.tag to fundamental_anonymous, fundamental_master;
-grant update(name, description, color) on app_public.tag to fundamental_anonymous, fundamental_master;
-grant delete on app_public.tag to fundamental_anonymous, fundamental_master;
+grant insert on app_public.tag to fundamental_master;
+grant update(name, description, color) on app_public.tag to fundamental_master;
+grant delete on app_public.tag to fundamental_master;
 
 comment on table app_public.tag is
   E'tag of a question in the application.';
