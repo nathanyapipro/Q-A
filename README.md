@@ -1,6 +1,4 @@
-# Fundamental
-
-Source code of the ElementAI's anonymous Q/A Application [go/fundamental]()
+# QA
 
 # Goals
 
